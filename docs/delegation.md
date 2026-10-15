@@ -75,7 +75,7 @@ Local src/server.ts already has GET /health. If the live URL is not known, stop 
 
 Done when: The deployed URL's GET /health returns {"ok":true}.
 
-When the done-when line is true, run npm run check. Open a pull request into main. Append one line to docs/bob-log.md with this task id, the branch, and the PR link. Create docs/bob-log.md if it is missing. Then run: gh pr merge --auto --squash --delete-branch.
+When the done-when line is true, run npm run check. Open a pull request into main. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### RT1. Clean floor images
@@ -84,7 +84,7 @@ When the done-when line is true, run npm run check. Open a pull request into mai
 - Depends on: none
 - Done when: public/maps/ has a cleaned lobby image from IBM_7739, a straightened and cropped Main 4F image from IBM_7741, and a Main 5F image from IBM_7742.
 - Branch: `troy/rt1-clean-images`
-- Owner: Troy, taken from Viv. Do not append a bob-log line.
+- Owner: Troy, taken from Viv.
 
 ```
 Branch from a fresh main using `troy/rt1-clean-images`.
@@ -93,8 +93,8 @@ public/maps/ does not exist yet. Copy from docs/floorplans/IBM_7739.JPG, IBM_774
 Do not edit src/contract.ts.
 Run npm run check.
 Open a pull request into main.
-Do not append a bob-log line. Troy took this task from Viv.
-Then run gh pr merge --auto --squash --delete-branch.
+Troy took this task from Viv.
+Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### RT2. Write the floors file
@@ -123,7 +123,7 @@ Do not edit src/contract.ts. Do not change queue logic except where this task sa
 
 Done when: The file has three rows (IBM_7739 lobby, IBM_7741 Main 4F, IBM_7742 Main 5F) with id, building, floor, label, image, approximate. The lobby row has approximate true. No IBM_7721, no library-3F.png, no IBM_7734.
 
-When the done-when line is true, run npm run check. Open a pull request into main. Append one line to docs/bob-log.md with this task id, the branch, and the PR link. Create docs/bob-log.md if it is missing. Then run: gh pr merge --auto --squash --delete-branch.
+When the done-when line is true, run npm run check. Open a pull request into main. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ## Tomorrow AM
@@ -152,7 +152,7 @@ You may edit src/contract.ts. Do not change src/server.ts or queue behavior. Do 
 
 Done when: The contract documents GET /api/guardian/:code returning the existing GuardianStatus, a source field whose values are hub or online, and the sync fields this PR names for the offline staff queue. No other contract edits.
 
-When the done-when line is true, run npm run check. Open a pull request into main. Append one line to docs/bob-log.md with this task id, the branch, and the PR link. Create docs/bob-log.md if it is missing. Then run: gh pr merge --auto --squash --delete-branch.
+When the done-when line is true, run npm run check. Open a pull request into main. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### O1. Wake before demos
@@ -181,7 +181,7 @@ Do not edit src/contract.ts. Do not change queue logic except where this task sa
 
 Done when: README says to open the public URL before a demo, and that URL is the one T4 recorded. No new service. The Express app still makes no outbound call.
 
-When the done-when line is true, run npm run check. Open a pull request into main. Append one line to docs/bob-log.md with this task id, the branch, and the PR link. Create docs/bob-log.md if it is missing. Then run: gh pr merge --auto --squash --delete-branch.
+When the done-when line is true, run npm run check. Open a pull request into main. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### O2. Public URL in README
@@ -210,7 +210,7 @@ Do not edit src/contract.ts. Do not change queue logic except where this task sa
 
 Done when: README contains the real public URL from T4 and no guessed host.
 
-When the done-when line is true, run npm run check. Open a pull request into main. Append one line to docs/bob-log.md with this task id, the branch, and the PR link. Create docs/bob-log.md if it is missing. Then run: gh pr merge --auto --squash --delete-branch.
+When the done-when line is true, run npm run check. Open a pull request into main. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### UP1. Health pinger
@@ -239,7 +239,7 @@ Do not edit src/contract.ts. Do not change queue logic except where this task sa
 
 Done when: The workflow GETs the real public /health on a schedule. src/server.ts does not gain an outbound fetch. ADR 001 and ADR 005 still hold.
 
-When the done-when line is true, run npm run check. Open a pull request into main. Append one line to docs/bob-log.md with this task id, the branch, and the PR link. Create docs/bob-log.md if it is missing. Then run: gh pr merge --auto --squash --delete-branch.
+When the done-when line is true, run npm run check. Open a pull request into main. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### RT7. Map check
@@ -268,7 +268,7 @@ Do not edit src/contract.ts. Do not change queue logic except where this task sa
 
 Done when: check fails on a duplicate id, an unknown floorId, an x or y outside 0..1, an unknown kind, or a missing image file. It prints the count of verified false rows and the count of labels that contain ?. Known kinds: room, office, cr, stairs, exit, elevator, assembly, other.
 
-When the done-when line is true, run npm run check. Open a pull request into main. Append one line to docs/bob-log.md with this task id, the branch, and the PR link. Create docs/bob-log.md if it is missing. Then run: gh pr merge --auto --squash --delete-branch.
+When the done-when line is true, run npm run check. Open a pull request into main. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### X2. Online guardian test
@@ -297,7 +297,7 @@ Do not edit src/contract.ts. Do not change queue logic except where this task sa
 
 Done when: GET the public guardian URL for a seeded ticket code returns the guardian payload. Record the result.
 
-Open a pull request only if a fix was required. When the done-when line is true, run npm run check. Open a pull request into main only if a fix was required. Append one line to docs/bob-log.md with this task id, the branch, and the PR link. Create docs/bob-log.md if it is missing. Still append the bob-log line if no pull request was opened. Then run: gh pr merge --auto --squash --delete-branch. Run that merge command only if a pull request was opened.
+Open a pull request only if a fix was required. When the done-when line is true, run npm run check. Open a pull request into main only if a fix was required. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### RT12. Map cut
@@ -326,7 +326,7 @@ Do not edit src/contract.ts. Do not change queue logic except where this task sa
 
 Done when: Either the search lands on a pin and the link stays, or the map link and map files are removed and queue behavior is unchanged.
 
-When the done-when line is true, run npm run check. Open a pull request into main only if you removed the map. Append one line to docs/bob-log.md with this task id, the branch, and the PR link. Create docs/bob-log.md if it is missing. Then run: gh pr merge --auto --squash --delete-branch. Run that merge command only if a pull request was opened.
+When the done-when line is true, run npm run check. Open a pull request into main only if you removed the map. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### S4. Submit
@@ -357,7 +357,7 @@ Do not edit src/contract.ts. Do not change queue logic except where this task sa
 
 Done when: main is what the team submits at 2:00 PM.
 
-Open a pull request only if a fix was required. When the done-when line is true, run npm run check. Open a pull request into main only if a fix was required. Append one line to docs/bob-log.md with this task id, the branch, and the PR link. Create docs/bob-log.md if it is missing. Then run: gh pr merge --auto --squash --delete-branch. Run that merge command only if a pull request was opened.
+Open a pull request only if a fix was required. When the done-when line is true, run npm run check. Open a pull request into main only if a fix was required. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### R2. Full dry run
@@ -386,7 +386,7 @@ Do not edit src/contract.ts. Do not change queue logic except where this task sa
 
 Done when: Staff Call next on the hub LAN updates the phone banner within 2 seconds and the board now-serving line.
 
-Open a pull request only if a fix was required. When the done-when line is true, run npm run check. Open a pull request into main only if a fix was required. Append one line to docs/bob-log.md with this task id, the branch, and the PR link. Create docs/bob-log.md if it is missing. Then run: gh pr merge --auto --squash --delete-branch. Run that merge command only if a pull request was opened.
+Open a pull request only if a fix was required. When the done-when line is true, run npm run check. Open a pull request into main only if a fix was required. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 Held, do not start: RT11 library 2F waits until the team confirms IBM_7721 is the library. Catalog titles it PUP ICT Office 2F.
@@ -448,7 +448,7 @@ Staff tablet, the hub laptop, and tomorrow's offline queue. Floor images are Tro
 Read docs/delegation.md task H0 and README.md.
 Branch from a fresh main: donita/h0-hub.
 On the hub laptop run npm run dev. From a phone on the same LAN, open http://<hub-ip>:3000/health. The page must show {"ok":true}. If the phone cannot reach it, switch the laptop to a phone hotspot and try once more. Fix only the one blocker that stopped the phone. Do not edit src/contract.ts. Do not change queue logic. Do not invent a public URL.
-When the phone shows ok, run npm run check if you changed files. Open a pull request into main only if files changed. Append one line to docs/bob-log.md with this task id, the branch, and the result (PR link if any). Create docs/bob-log.md if it is missing. If you opened a PR, run: gh pr merge --auto --squash --delete-branch.
+When the phone shows ok, run npm run check if you changed files. Open a pull request into main only if files changed. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### D1. Call next and Mark done
@@ -463,7 +463,7 @@ When the phone shows ok, run npm run check if you changed files. Open a pull req
 Read docs/delegation.md task D1, docs/product.md, and docs/architecture.md.
 Branch from a fresh main: donita/d1-staff-tablet.
 Build public/staff.html?stall= so staff can tap Call next and Mark done. Call next is POST /api/stalls/:stall/next. Mark done is POST /api/tickets/:id/done. Poll with public/poll.js. Do not edit src/contract.ts. Do not edit src/server.ts. Do not invent a station.
-When Call next updates GET /api/stalls, run npm run check. Open a pull request into main. Append one line to docs/bob-log.md with this task id, the branch, and the PR link. Create docs/bob-log.md if it is missing. Then run: gh pr merge --auto --squash --delete-branch.
+When Call next updates GET /api/stalls, run npm run check. Open a pull request into main. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### D3. Lookup and undo
@@ -478,7 +478,7 @@ When Call next updates GET /api/stalls, run npm run check. Open a pull request i
 Read docs/delegation.md task D3. Start from a fresh main after donita/d1-staff-tablet has merged.
 Branch: donita/d3-staff-undo.
 On public/staff.html, match the typed code against tickets from GET /api/stalls/:stall/queue. Those tickets include code. Then call POST /api/tickets/:id/undo with that ticket's id. GET /api/tickets/:id is by id, not by code. Do not add a route. Do not edit src/contract.ts. Do not change server queue logic.
-When Undo restores the previous ticket, run npm run check. Open a pull request into main. Append one line to docs/bob-log.md with this task id, the branch, and the PR link. Create docs/bob-log.md if it is missing. Then run: gh pr merge --auto --squash --delete-branch.
+When Undo restores the previous ticket, run npm run check. Open a pull request into main. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ## Tomorrow AM
@@ -495,7 +495,7 @@ When Undo restores the previous ticket, run npm run check. Open a pull request i
 Read docs/delegation.md task D2 and Appendix A of docs/DESIGN-PUP-Enrollment-Queue.md. Do not edit the design doc.
 Branch from a fresh main after D1, A1, and V1 have merged: donita/d2-tokens.
 Add public/tokens.css using the tokens in that appendix. Link it from public/board.html, public/staff.html, and public/phone.html. Show LiveStatus from the poller's last-updated state. Do not edit src/contract.ts. Do not add a colour the appendix does not define.
-When all three pages load the file, run npm run check. Open a pull request into main. Append one line to docs/bob-log.md with this task id, the branch, and the PR link. Create docs/bob-log.md if it is missing. Then run: gh pr merge --auto --squash --delete-branch.
+When all three pages load the file, run npm run check. Open a pull request into main. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### H1. Hub file
@@ -510,7 +510,7 @@ When all three pages load the file, run npm run check. Open a pull request into 
 Read docs/delegation.md task H1, docs/architecture.md, and docs/decisions/005-online-on-render.md.
 Branch from a fresh main: donita/h1-hub-file.
 Snapshot store state to a JSON file on every change and reload that file when the hub process starts. Keep Render on MemoryStore with no file. Update the state section in docs/architecture.md. Do not edit src/contract.ts. Do not change ticket status rules.
-When a restart restores the tickets, run npm run check. Open a pull request into main. Append one line to docs/bob-log.md with this task id, the branch, and the PR link. Create docs/bob-log.md if it is missing. Then run: gh pr merge --auto --squash --delete-branch.
+When a restart restores the tickets, run npm run check. Open a pull request into main. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### H2. Offline staff queue
@@ -525,7 +525,7 @@ When a restart restores the tickets, run npm run check. Open a pull request into
 Read docs/delegation.md task H2. Wait until troy/l2-contract has merged. Use only the sync fields L2 added. Do not edit src/contract.ts.
 Branch from a fresh main: donita/h2-offline-queue.
 While the hub is unreachable, save Call next and Mark done on the staff tablet and replay them when the hub returns. Show a synced-later mark. Do not change queue rules on the server beyond what L2's fields require.
-When replay works, run npm run check. Open a pull request into main. Append one line to docs/bob-log.md with this task id, the branch, and the PR link. Create docs/bob-log.md if it is missing. Then run: gh pr merge --auto --squash --delete-branch.
+When replay works, run npm run check. Open a pull request into main. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### W1. LAN integration
@@ -540,7 +540,7 @@ When replay works, run npm run check. Open a pull request into main. Append one 
 Read docs/delegation.md task W1.
 Branch from a fresh main: donita/w1-lan-check.
 On the hub LAN, open the board, the staff tablet, and a phone. Staff tap Call next. The phone banner and the board now-serving line must change within 2 seconds. If they do, do not change product code. If they do not, fix the one bug. Do not edit src/contract.ts.
-Run npm run check if you changed files. Open a pull request only if files changed. Append one line to docs/bob-log.md with this task id, the branch, and the result. Create docs/bob-log.md if it is missing. If you opened a PR, run: gh pr merge --auto --squash --delete-branch.
+Run npm run check if you changed files. Open a pull request only if files changed. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### X1. Offline test
@@ -555,7 +555,7 @@ Run npm run check if you changed files. Open a pull request only if files change
 Read docs/delegation.md task X1.
 Branch from a fresh main: donita/x1-offline-test.
 Unplug the router while the staff tablet is open. Call next and Mark done must still work. Reconnect. The hub must show those actions. Open a pull request only if a fix was required. Do not edit src/contract.ts.
-Append one line to docs/bob-log.md with this task id and the result. Create docs/bob-log.md if it is missing. If you opened a PR, run npm run check first, then gh pr merge --auto --squash --delete-branch.
+If you opened a PR, run npm run check first. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### S5. Backup demo
@@ -568,7 +568,7 @@ Append one line to docs/bob-log.md with this task id and the result. Create docs
 
 ```
 Read docs/delegation.md task S5.
-Do not change product code after the 12:30 freeze. Confirm the hub laptop and a phone hotspot can serve GET /health. Append one line to docs/bob-log.md with task S5 and the result only if a doc fix is required. Otherwise tell Troy the hotspot works. Do not edit src/contract.ts.
+Do not change product code after the 12:30 freeze. Confirm the hub laptop and a phone hotspot can serve GET /health. Tell Troy the hotspot works. Do not edit src/contract.ts.
 ```
 
 RT9 is held. Do not start gym pins until the team supplies the gym table layout. `IBM_7734` is the gym photo, not that layout. Branch later would be `donita/rt9-gym-pins`.
@@ -626,8 +626,7 @@ Change the seed so a morning looks busy on the three stalls that already exist. 
 Do not edit src/contract.ts.
 Run npm run check.
 Open a pull request into main.
-Append one line to docs/bob-log.md with the task id, branch, and PR link. Create the file if it is missing.
-Then run gh pr merge --auto --squash --delete-branch.
+Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### P0. Poll status text
@@ -644,8 +643,7 @@ Edit public/poll.js only. It already defaults ms to 2000 and sets document.body.
 Do not edit src/contract.ts.
 Run npm run check.
 Open a pull request into main.
-Append one line to docs/bob-log.md with the task id, branch, and PR link. Create the file if it is missing.
-Then run gh pr merge --auto --squash --delete-branch.
+Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### J2. Printable ticket
@@ -662,8 +660,7 @@ Add print CSS to public/phone.html. There is no print stylesheet yet. Do not add
 Do not edit src/contract.ts.
 Run npm run check.
 Open a pull request into main.
-Append one line to docs/bob-log.md with the task id, branch, and PR link. Create the file if it is missing.
-Then run gh pr merge --auto --squash --delete-branch.
+Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ## Tomorrow AM
@@ -682,8 +679,7 @@ Create data/locations.json. It does not exist yet. Source labels are docs/floorp
 Do not edit src/contract.ts.
 Run npm run check.
 Open a pull request into main.
-Append one line to docs/bob-log.md with the task id, branch, and PR link. Create the file if it is missing.
-Then run gh pr merge --auto --squash --delete-branch.
+Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### G1. Guardian page
@@ -700,8 +696,7 @@ Add a read-only guardian view for a ticket code. Add the route in src/server.ts.
 Do not edit src/contract.ts.
 Run npm run check.
 Open a pull request into main.
-Append one line to docs/bob-log.md with the task id, branch, and PR link. Create the file if it is missing.
-Then run gh pr merge --auto --squash --delete-branch.
+Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### J3. QR on the ticket
@@ -718,8 +713,7 @@ On the printed ticket in public/phone.html, show a QR that opens the phone page 
 Do not edit src/contract.ts.
 Run npm run check.
 Open a pull request into main.
-Append one line to docs/bob-log.md with the task id, branch, and PR link. Create the file if it is missing.
-Then run gh pr merge --auto --squash --delete-branch.
+Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ## User journey
@@ -759,8 +753,7 @@ Build the phone join form, ticket code, position, wait, and call banner in publi
 Do not edit src/contract.ts.
 Run npm run check.
 Open a pull request into main.
-Append one line to docs/bob-log.md with the task id, branch, and PR link. Create the file if it is missing.
-Then run gh pr merge --auto --squash --delete-branch.
+Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### RT6. Empty station file
@@ -777,8 +770,7 @@ Create data/station-locations.json. It does not exist yet. Make it an empty mapp
 Do not edit src/contract.ts.
 Run npm run check.
 Open a pull request into main.
-Append one line to docs/bob-log.md with the task id, branch, and PR link. Create the file if it is missing.
-Then run gh pr merge --auto --squash --delete-branch.
+Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ## Tomorrow AM
@@ -797,8 +789,7 @@ In public/phone.html, when estWaitMin is over 20, say the student can step away.
 Do not edit src/contract.ts.
 Run npm run check.
 Open a pull request into main.
-Append one line to docs/bob-log.md with the task id, branch, and PR link. Create the file if it is missing.
-Then run gh pr merge --auto --squash --delete-branch.
+Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### A3. Pitch and demo script
@@ -815,8 +806,7 @@ Add a new doc under docs/ with a pitch draft and a day-2 demo script. Include an
 Do not edit src/contract.ts.
 Run npm run check.
 Open a pull request into main.
-Append one line to docs/bob-log.md with the task id, branch, and PR link. Create the file if it is missing.
-Then run gh pr merge --auto --squash --delete-branch.
+Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### RT8. Find your classes
@@ -833,8 +823,7 @@ On the enrolled phone screen in public/phone.html, add a link that reads Find yo
 Do not edit src/contract.ts.
 Run npm run check.
 Open a pull request into main.
-Append one line to docs/bob-log.md with the task id, branch, and PR link. Create the file if it is missing.
-Then run gh pr merge --auto --squash --delete-branch.
+Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### A2. Demo check
@@ -850,8 +839,7 @@ Read docs/delegation.md for A2.
 Check the demo against the script, including staff tap Call next live. Until A3 exists, the script source is the demo steps in docs/product.md. On the hub, Call next must change the phone banner within 2 seconds. This is part of the 11:00 dry run.
 Do not edit src/contract.ts.
 Open a pull request into main only if a fix was required. If you open one, run npm run check first.
-Still log the result. Append one line to docs/bob-log.md with the task id, branch, and PR link when a PR exists. If no fix was required, append one line with the task id, branch, and the result, and do not open a pull request. Create the file if it is missing.
-If you opened a pull request, then run gh pr merge --auto --squash --delete-branch.
+Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### A5. Both modes check
@@ -867,8 +855,7 @@ Read docs/delegation.md for A5.
 Demo check for LAN and Render. The LAN offline beat and the Render beat from A3 must both pass. If either mode is not up, record that and do not block the 12:30 freeze.
 Do not edit src/contract.ts.
 Open a pull request into main only if a fix was required. If you open one, run npm run check first.
-Still log the result. Append one line to docs/bob-log.md with the task id, branch, and PR link when a PR exists. If no fix was required, append one line with the task id, branch, and the result, including any mode that was not up. Create the file if it is missing.
-If you opened a pull request, then run gh pr merge --auto --squash --delete-branch.
+Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### S1. Pitch rehearsal
@@ -882,8 +869,7 @@ If you opened a pull request, then run gh pr merge --auto --squash --delete-bran
 Read docs/delegation.md for S1.
 Rehearse the final pitch twice, after the 12:30 freeze and before the 2:00 submit. No product code after 12:30.
 Do not open a code PR. Do not branch from main unless you already have a branch for a doc fix.
-Log the rehearsal in docs/bob-log.md only if you already have a branch for a doc fix. That line includes the task id and branch. Create the file if it is missing.
-Do not run gh pr merge --auto --squash --delete-branch.
+Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 Held, no task prompt: RT10 alias text waits until the team supplies at least five real other names. Do not invent aliases.
@@ -975,8 +961,7 @@ Build the TV board in public/board.html. The header string is the contract BRAND
 Do not edit src/contract.ts.
 Run npm run check.
 Open a pull request into main.
-Append one line to docs/bob-log.md with the task id, branch, and PR link. Create the file if it is missing.
-Then run gh pr merge --auto --squash --delete-branch.
+Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ## Tomorrow AM
@@ -997,8 +982,7 @@ Create public/map.html and public/map.js. Neither exists. The page reads data/fl
 Do not edit src/contract.ts.
 Run npm run check.
 Open a pull request into main.
-Append one line to docs/bob-log.md with the task id, branch, and PR link. Create the file if it is missing.
-Then run gh pr merge --auto --squash --delete-branch.
+Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### RT4. Log pin clicks
@@ -1015,8 +999,7 @@ In public/map.html, map.html?edit=1 logs x and y to the console, each between 0 
 Do not edit src/contract.ts.
 Run npm run check.
 Open a pull request into main.
-Append one line to docs/bob-log.md with the task id, branch, and PR link. Create the file if it is missing.
-Then run gh pr merge --auto --squash --delete-branch.
+Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### V3. Board polish
@@ -1033,8 +1016,7 @@ Polish public/board.html so it fits a 1920 by 1080 TV, uses department colours f
 Do not edit src/contract.ts.
 Run npm run check.
 Open a pull request into main.
-Append one line to docs/bob-log.md with the task id, branch, and PR link. Create the file if it is missing.
-Then run gh pr merge --auto --squash --delete-branch.
+Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### V2. Admin desktop
@@ -1051,8 +1033,7 @@ Create public/admin.html. It does not exist yet. GET /api/admin/summary returns 
 Do not edit src/contract.ts.
 Run npm run check.
 Open a pull request into main.
-Append one line to docs/bob-log.md with the task id, branch, and PR link. Create the file if it is missing.
-Then run gh pr merge --auto --squash --delete-branch.
+Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### S2. README screenshots
@@ -1069,8 +1050,7 @@ After the 12:30 freeze, docs only. README.md links a screenshot of the phone pag
 Do not edit src/contract.ts.
 Run npm run check.
 Open a pull request into main.
-Append one line to docs/bob-log.md with the task id, branch, and PR link. Create the file if it is missing.
-Then run gh pr merge --auto --squash --delete-branch.
+Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ## User journey

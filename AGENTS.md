@@ -41,6 +41,7 @@ Before a PR: `npm run check`.
 - Do not create docs/api.md. The contract lives in src/contract.ts.
 - Do not edit [docs/DESIGN-PUP-Enrollment-Queue.md](docs/DESIGN-PUP-Enrollment-Queue.md). UI design is owned by Donita.
 - One owner per fact. If a fact fits two files, put it in the more specific one and link from the other.
+- Never merge a PR or turn on auto-merge. Open the PR and stop.
 
 ## Scratch folder
 
