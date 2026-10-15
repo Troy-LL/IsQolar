@@ -1,4 +1,5 @@
 import { planCampusRoute, campusStarts, GATE_START, allRooms, roomName, roomCode, roomDisplay, roomListed, parseRoomQuery, searchRooms, wingName, floorShort, SEARCH_LIMIT } from "./route.js";
+import { projectFloor, unprojectFloor } from "./floor-geo.js";
 
 const $ = (id) => document.getElementById(id);
 const NS = "http://www.w3.org/2000/svg";
@@ -36,7 +37,7 @@ function legPad() {
     right: desk ? 96 : 100,
   };
 }
-const S = { floors: [], paths: null, stairs: null, campus: null, rooms: [], inside: false, floorId: null, sel: null, route: null, step: -1, cam: {} };
+const S = { floors: [], paths: null, stairs: null, campus: null, rooms: [], inside: false, overlay: false, floorId: null, sel: null, route: null, step: -1, cam: {} };
 
 function svg(tag, attrs = {}, text) {
   const n = document.createElementNS(NS, tag);
@@ -134,6 +135,11 @@ function bbox(points, pad = 0) {
 // ---------- outdoor (MapLibre + OpenStreetMap) ----------
 const STYLE = "https://tiles.openfreemap.org/styles/liberty";
 let map = null;
+let destMarker = null;
+const floorAssetOk = new Map();
+// library-2f stays off while RT11 is held.
+const HELD_FLOORS = new Set(["library-2f"]);
+const EMPTY_FC = { type: "FeatureCollection", features: [] };
 const flyDur = (ms) => (RM ? 0 : ms * SLOW);
 function lngLatBox(coords) {
   const xs = coords.map((c) => c[0]);
@@ -191,6 +197,40 @@ function featCenter(f) {
 }
 function mainFeatures() { return S.campus.buildings.features.filter((f) => f.properties.main); }
 function mainCoords() { return mainFeatures().flatMap(featCoords); }
+function floorRow(floorId) { return S.floors.find((x) => x.id === floorId); }
+function floorCorners(floorId) {
+  const row = floorRow(floorId);
+  return row && row.corners && row.corners.length === 4 ? row.corners : null;
+}
+function floorFeature(floorId) {
+  const row = floorRow(floorId);
+  if (!row || !row.osm) return null;
+  return S.campus.buildings.features.find((f) => f.properties.osm === row.osm) || null;
+}
+function buildingCoords(floorId) {
+  const feat = floorFeature(floorId);
+  return feat ? featCoords(feat) : mainCoords();
+}
+function floorSvgUrl(floorId) { return `maps/${floorId}.svg`; }
+function floorWebpUrl(floorId) { return `maps/${floorId}.webp`; }
+async function probeFloorAssets() {
+  await Promise.all(S.floors.map(async (f) => {
+    const [svg, webp] = await Promise.all([
+      fetch(floorSvgUrl(f.id), { method: "HEAD" }).then((r) => r.ok).catch(() => false),
+      fetch(floorWebpUrl(f.id), { method: "HEAD" }).then((r) => r.ok).catch(() => false),
+    ]);
+    floorAssetOk.set(f.id, { svg, webp });
+  }));
+}
+function floorOnSwitcher(floorId) {
+  if (HELD_FLOORS.has(floorId)) return false;
+  const a = floorAssetOk.get(floorId);
+  return !!(a && a.svg && S.paths.floors[floorId]);
+}
+function floorDrawable(floorId) {
+  const a = floorAssetOk.get(floorId);
+  return !!(a && (a.webp || a.svg));
+}
 function buildingName(f) {
   const n = f.properties.name;
   if (!n || n.includes("?")) return "";
@@ -274,6 +314,8 @@ function initMap() {
       map.on("click", "pup-3d", (e) => {
         const f = e.features && e.features[0];
         if (!f) return;
+        const row = floorRow(S.floorId);
+        if (S.overlay && row && f.properties.osm === row.osm) return;
         const full = S.campus.buildings.features.find((x) => x.properties.osm === f.properties.osm);
         if (!full) return;
         applyFrom(full.properties.osm);
@@ -365,15 +407,14 @@ function shortLabel(r) {
   return t.length > 14 ? t.slice(0, 13) + "…" : t;
 }
 
-const FLOOR_IMG = { "main-1f-lobby": "maps/main-1f-lobby.webp", "main-4f": "maps/main-4f.webp", "main-5f": "maps/main-5f.webp" };
-const FLOOR_SVG = { "main-1f-lobby": "maps/main-1f-lobby.svg", "main-4f": "maps/main-4f.svg", "main-5f": "maps/main-5f.svg" };
 const floorSvgCache = new Map();
 const FLOOR_EXT = new Map();
 async function floorPlan(floorId) {
   if (floorSvgCache.has(floorId)) return floorSvgCache.get(floorId).cloneNode(true);
-  const imgUrl = FLOOR_IMG[floorId];
-  const svgUrl = FLOOR_SVG[floorId];
-  if (!imgUrl || !svgUrl) return null;
+  const assets = floorAssetOk.get(floorId);
+  if (!assets || !assets.svg) return null;
+  const imgUrl = assets.webp ? floorWebpUrl(floorId) : floorSvgUrl(floorId);
+  const svgUrl = floorSvgUrl(floorId);
   try {
     const [W, H] = floorSize(floorId);
     const wrap = svg("g", { class: "floor-svg", "data-floor": floorId });
@@ -416,6 +457,10 @@ async function floorPlan(floorId) {
 }
 
 async function drawIndoor(floorId) {
+  if (S.overlay && floorCorners(floorId)) {
+    syncOverlayGraphics(floorId);
+    return;
+  }
   const root = $("indoor");
   root.replaceChildren();
   const f = S.paths.floors[floorId];
@@ -677,7 +722,7 @@ function drawFloorTabs() {
   const cur = S.floors.find((x) => x.id === S.floorId);
   const seen = new Set();
   for (const f of [...S.floors].reverse()) {
-    if (!S.paths.floors[f.id] || !FLOOR_IMG[f.id]) continue;
+    if (!floorOnSwitcher(f.id)) continue;
     if (cur && f.building !== cur.building) continue;
     if (seen.has(floorShort(f))) continue;
     seen.add(floorShort(f));
@@ -702,12 +747,206 @@ function axisBearing() {
   return b;
 }
 const FLY_IN = 1400;
+function dimBuilding(osmId) {
+  const id = osmId || "";
+  map.setPaintProperty("pup-3d", "fill-extrusion-height", ["case", ["==", ["get", "osm"], id], 0.15, ["-", ["get", "height"], 0.3]]);
+  map.setPaintProperty("pup-3d", "fill-extrusion-opacity", ["case", ["==", ["get", "osm"], id], 0.28, 0.95]);
+  map.setPaintProperty("pup-roof", "fill-extrusion-base", ["case", ["==", ["get", "osm"], id], 0.15, ["-", ["get", "height"], 0.3]]);
+  map.setPaintProperty("pup-roof", "fill-extrusion-height", ["case", ["==", ["get", "osm"], id], 0.35, ["get", "height"]]);
+  map.setPaintProperty("pup-roof", "fill-extrusion-opacity", ["case", ["==", ["get", "osm"], id], 0.35, 1]);
+}
+function restoreBuildings() {
+  if (!map || !map.getLayer("pup-3d")) return;
+  map.setPaintProperty("pup-3d", "fill-extrusion-height", ["-", ["get", "height"], 0.3]);
+  map.setPaintProperty("pup-3d", "fill-extrusion-opacity", 0.95);
+  map.setPaintProperty("pup-roof", "fill-extrusion-base", ["-", ["get", "height"], 0.3]);
+  map.setPaintProperty("pup-roof", "fill-extrusion-height", ["get", "height"]);
+  map.setPaintProperty("pup-roof", "fill-extrusion-opacity", 1);
+}
+function clearOverlay() {
+  S.overlay = false;
+  if (destMarker) destMarker.remove();
+  if (!map || !map.getSource("floor-plan")) return;
+  map.setLayoutProperty("floor-raster", "visibility", "none");
+  map.getSource("floor-route").setData(EMPTY_FC);
+  map.getSource("floor-stairs").setData(EMPTY_FC);
+  restoreBuildings();
+}
+async function rasterSvg(url) {
+  const text = await fetch(url).then((r) => r.text());
+  const doc = new DOMParser().parseFromString(text, "image/svg+xml");
+  const w = Number(doc.documentElement.getAttribute("width")) || 1000;
+  const h = Number(doc.documentElement.getAttribute("height")) || 1000;
+  const blob = new Blob([text], { type: "image/svg+xml;charset=utf-8" });
+  const obj = URL.createObjectURL(blob);
+  try {
+    const img = new Image();
+    await new Promise((res, rej) => {
+      img.onload = res;
+      img.onerror = rej;
+      img.src = obj;
+    });
+    const canvas = document.createElement("canvas");
+    canvas.width = w;
+    canvas.height = h;
+    canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+    return canvas.toDataURL("image/png");
+  } finally {
+    URL.revokeObjectURL(obj);
+  }
+}
+async function floorImageUrl(floorId) {
+  const assets = floorAssetOk.get(floorId);
+  if (!assets) return null;
+  if (assets.webp) return floorWebpUrl(floorId);
+  if (assets.svg) return rasterSvg(floorSvgUrl(floorId));
+  return null;
+}
+function destPinEl() {
+  const e = el("div", { class: "dpin" });
+  e.append(el("span", { class: "ring" }), el("span", { class: "drop" }));
+  return e;
+}
+function onFloorPlanClick(e) {
+  if (!S.overlay || !S.floorId) return;
+  const corners = floorCorners(S.floorId);
+  const floor = S.paths.floors[S.floorId];
+  if (!corners || !floor) return;
+  const [u, v] = unprojectFloor(corners, e.lngLat.lng, e.lngLat.lat);
+  let best = null;
+  let bestD = 0.045;
+  for (const r of floor.rooms) {
+    if (!roomListed(r)) continue;
+    const d = Math.hypot(r.x - u, r.y - v);
+    if (d < bestD) {
+      best = r;
+      bestD = d;
+    }
+  }
+  if (best) selectRoom({ ...best, floorId: S.floorId });
+}
+async function showFloorImage(floorId) {
+  const url = await floorImageUrl(floorId);
+  const coordinates = floorCorners(floorId);
+  if (!url || !coordinates || !map) return false;
+  if (!map.getSource("floor-plan")) {
+    map.addSource("floor-plan", { type: "image", url, coordinates });
+    map.addLayer({ id: "floor-raster", type: "raster", source: "floor-plan", paint: { "raster-opacity": 1, "raster-fade-duration": 0 } });
+    map.addSource("floor-route", { type: "geojson", data: EMPTY_FC });
+    map.addLayer({ id: "floor-route-case", type: "line", source: "floor-route", layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": "#ffffff", "line-width": 8 } });
+    map.addLayer({ id: "floor-route", type: "line", source: "floor-route", layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": "#8B0000", "line-width": 4 } });
+    map.addSource("floor-stairs", { type: "geojson", data: EMPTY_FC });
+    map.addLayer({
+      id: "floor-stairs",
+      type: "circle",
+      source: "floor-stairs",
+      paint: {
+        "circle-radius": ["case", ["==", ["get", "on"], 1], 7, 4],
+        "circle-color": ["case", ["==", ["get", "on"], 1], "#8B0000", "#B8ACA3"],
+        "circle-stroke-width": 1.5,
+        "circle-stroke-color": "#ffffff",
+      },
+    });
+    map.on("click", "floor-raster", onFloorPlanClick);
+    map.on("mouseenter", "floor-raster", () => (map.getCanvas().style.cursor = "pointer"));
+    map.on("mouseleave", "floor-raster", () => (map.getCanvas().style.cursor = ""));
+  } else {
+    map.setLayoutProperty("floor-raster", "visibility", "visible");
+    map.getSource("floor-plan").updateImage({ url, coordinates });
+  }
+  return true;
+}
+function syncOverlayGraphics(floorId) {
+  if (!map || !map.getSource("floor-route")) return;
+  const corners = floorCorners(floorId);
+  if (!corners) return;
+  const xy = (x, y) => projectFloor(corners, x, y);
+  const leg = S.route ? S.route.legs.find((l) => l.floorId === floorId) : null;
+  const cur = !!(S.route && S.step >= 0 && S.route.steps[S.step].floorId === floorId);
+  const line = leg && leg.points.length ? leg.points.map((q) => xy(q.x, q.y)) : [];
+  map.getSource("floor-route").setData(line.length ? { type: "FeatureCollection", features: [{ type: "Feature", properties: {}, geometry: { type: "LineString", coordinates: line } }] } : EMPTY_FC);
+  const opacity = line.length ? (cur ? 1 : 0.35) : 0;
+  map.setPaintProperty("floor-route", "line-opacity", opacity);
+  map.setPaintProperty("floor-route-case", "line-opacity", opacity);
+  const st = (S.stairs.floors[floorId] && S.stairs.floors[floorId].stairs) || {};
+  const routeStair = S.route && S.route.stair;
+  const onRouteIds = new Set([...(leg && leg.ids ? leg.ids : []), ...(routeStair ? [routeStair] : [])]);
+  map.getSource("floor-stairs").setData({
+    type: "FeatureCollection",
+    features: Object.entries(st).map(([id, q]) => ({
+      type: "Feature",
+      properties: { on: onRouteIds.has(id) ? 1 : 0 },
+      geometry: { type: "Point", coordinates: xy(q.x, q.y) },
+    })),
+  });
+  const room = S.sel && S.sel.room && S.sel.room.floorId === floorId ? S.sel.room : null;
+  const floor = S.paths.floors[floorId];
+  let dest = null;
+  if (room && floor) {
+    const door = floor.nodes.find((x) => x.id === room.id) || floor.nodes.find((x) => x.id === room.node);
+    const p = door || room;
+    dest = xy(p.x, p.y);
+  }
+  if (!dest) {
+    if (destMarker) destMarker.remove();
+    return;
+  }
+  if (!destMarker) destMarker = new maplibregl.Marker({ element: destPinEl(), anchor: "center" });
+  destMarker.setLngLat(dest).addTo(map);
+}
+async function flyFootprint(floorId, duration) {
+  const feat = floorFeature(floorId);
+  const corners = floorCorners(floorId);
+  const coords = corners || buildingCoords(floorId);
+  const [[w, so], [e, n]] = lngLatBox(coords);
+  const bearing = feat && feat.properties.main ? axisBearing() : map.getBearing();
+  const pitch = params.has("pitch") ? Number(params.get("pitch")) : 0;
+  await flyTo({ center: [(w + e) / 2, (so + n) / 2], zoom: 18.6, pitch, bearing, duration, curve: 1.4 });
+}
+async function enterOverlay(floorId) {
+  const first = !S.overlay;
+  if (S.inside) {
+    S.inside = false;
+    document.body.classList.remove("inside");
+    $("indoor").replaceChildren();
+    $("pin").hidden = true;
+    $("arrive").hidden = true;
+  }
+  const feat = floorFeature(floorId) || mainFeatures()[0];
+  if (first) stage("zooming");
+  if (feat) highlight(feat);
+  if (map.getLayer("pup-roof-sel")) map.setPaintProperty("pup-roof-sel", "fill-extrusion-opacity", 0);
+  dimBuilding(feat && feat.properties.osm);
+  const shown = await showFloorImage(floorId);
+  if (!shown) {
+    restoreBuildings();
+    S.overlay = false;
+    return false;
+  }
+  S.overlay = true;
+  syncOverlayGraphics(floorId);
+  $("back").hidden = false;
+  $("floors").hidden = false;
+  syncCompass();
+  drawFloorTabs();
+  const f = floorRow(floorId);
+  $("where").textContent = `${buildingLabel(f)} · ${floorShort(f)}`;
+  stage("indoor");
+  if (first) await flyFootprint(floorId, FLY_IN);
+  return true;
+}
 async function enterBuilding(floorId) {
   const prev = S.floorId;
   S.floorId = floorId;
+  if (map && floorCorners(floorId) && floorDrawable(floorId)) {
+    const ok = await enterOverlay(floorId);
+    if (ok) return;
+  }
+  if (S.overlay) clearOverlay();
   if (!S.inside) {
     stage("zooming");
-    highlight(mainFeatures()[0]);
+    const feat = floorFeature(floorId) || mainFeatures()[0];
+    highlight(feat);
     const fade = async () => {
       stage("crossfade");
       const chip = $("where");
@@ -730,8 +969,10 @@ async function enterBuilding(floorId) {
       if (!RM) await chip.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200 * SLOW, fill: "forwards" }).finished;
     };
     if (map && !RM) {
-      const [[w, so], [e, n]] = lngLatBox(mainCoords());
-      const flight = flyTo({ center: [(w + e) / 2, (so + n) / 2], zoom: 18.6, pitch: 0, bearing: axisBearing(), duration: FLY_IN, curve: 1.4 });
+      const feat = floorFeature(floorId);
+      const [[w, so], [e, n]] = lngLatBox(buildingCoords(floorId));
+      const bearing = feat && feat.properties.main ? axisBearing() : map.getBearing();
+      const flight = flyTo({ center: [(w + e) / 2, (so + n) / 2], zoom: 18.6, pitch: 0, bearing, duration: FLY_IN, curve: 1.4 });
       await wait(FLY_IN * 0.7);
       await Promise.all([flight, fade()]);
     } else {
@@ -752,7 +993,9 @@ async function enterBuilding(floorId) {
 }
 async function exitBuilding() {
   if (map && map.getLayer("pup-roof-sel")) map.setPaintProperty("pup-roof-sel", "fill-extrusion-opacity", 0.8);
-  if (!S.inside) return;
+  const was = S.inside || S.overlay;
+  clearOverlay();
+  if (!was) return;
   stage("leaving");
   drawOutdoor();
   S.inside = false;
@@ -770,7 +1013,25 @@ async function showFloor(floorId) {
   await enterBuilding(floorId);
   focusIndoor();
 }
+function focusOverlay() {
+  const corners = floorCorners(S.floorId);
+  if (!corners || !map) return;
+  const xy = (x, y) => projectFloor(corners, x, y);
+  const leg = S.route ? S.route.legs.find((l) => l.floorId === S.floorId) : null;
+  if (leg && leg.points.length) {
+    const last = S.route.steps.length - 1;
+    if (S.step === last && S.floorId === S.route.legs.at(-1).floorId && S.sel && S.sel.room) {
+      return flyTo({ center: xy(S.sel.room.x, S.sel.room.y), zoom: 19, pitch: map.getPitch(), bearing: map.getBearing(), duration: 600 });
+    }
+    return fitLeg(leg.points.map((q) => xy(q.x, q.y)));
+  }
+  if (S.sel && S.sel.room && S.sel.room.floorId === S.floorId) {
+    return flyTo({ center: xy(S.sel.room.x, S.sel.room.y), zoom: 18.8, pitch: map.getPitch(), bearing: map.getBearing(), duration: 500 });
+  }
+  return flyFootprint(S.floorId, 400);
+}
 function focusIndoor() {
+  if (S.overlay && floorCorners(S.floorId)) return focusOverlay();
   const t = tf(S.floorId);
   const leg = S.route ? S.route.legs.find((l) => l.floorId === S.floorId) : null;
   if (leg && leg.points.length) {
@@ -843,7 +1104,8 @@ async function closeSheet() {
   S.step = -1;
   syncSheet();
   highlight(null);
-  if (S.inside) await drawIndoor(S.floorId);
+  if (S.overlay) syncOverlayGraphics(S.floorId);
+  else if (S.inside) await drawIndoor(S.floorId);
   else drawOutdoor();
   if (S.inside) drawFloorTabs();
 }
@@ -869,7 +1131,7 @@ async function selectBuilding(f) {
   if (p.main) openSheet({ crumb: "PUP Main · Sta. Mesa", title: "PUP Main Building", sub: "Floors 1F, 4F, 5F mapped inside", inside: true, flag: S.campus.entrance.note || "" });
   else openSheet({ crumb: "PUP Main · Sta. Mesa", title: buildingName(f) || "Building", sub: "No floor plan yet" });
   $("dir").hidden = true;
-  if (S.inside) await exitBuilding();
+  if (S.inside || S.overlay) await exitBuilding();
   highlight(f);
   if (map) await fitTo(p.main ? mainCoords() : featCoords(f), { maxZoom: 18.6 });
 }
@@ -1094,7 +1356,7 @@ async function goStep(i) {
   if (cur) cur.scrollIntoView({ block: "nearest" });
   const s = S.route.steps[S.step];
   if (s.floorId === "outdoor") {
-    if (S.inside) await exitBuilding();
+    if (S.inside || S.overlay) await exitBuilding();
     drawOutdoor();
     const leg = S.route.legs[0];
     if (map) await fitLeg(leg.points.map((q) => [q.x, q.y]));
@@ -1265,6 +1527,7 @@ async function load() {
     ["data/floors.json", "data/paths.json", "data/stairs.json", "data/campus-osm.json"].map((u) => fetch(u).then((r) => r.json()))
   );
   Object.assign(S, { floors, paths, stairs, campus, rooms: allRooms(paths) });
+  await probeFloorAssets();
   mountFrom();
   setCam("indoor", { x: 0, y: 0, w: 1000, h: 1000 });
   if (window.maplibregl) await initMap();

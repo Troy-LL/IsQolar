@@ -50,7 +50,9 @@ Leave these out of tonight:
 
 ## Write the floor and location rows
 
-`data/floors.json` is a list of objects with `id`, `building`, `floor`, `label`, `image`, and `approximate`. Copy `building` and `floor` from `rooms.json`. The lobby row is the only tonight row with `approximate: true`.
+`data/floors.json` is a list of objects with `id`, `building`, `floor`, `label`, `image`, `approximate`, and `osm`. Copy `building` and `floor` from `rooms.json`. The lobby row is the only tonight row with `approximate: true`. `osm` is the footprint id in `data/campus-osm.json`: every `main-*` row uses `relation/6752508`, `gym-gf` uses `way/583440438`, and `library-2f` and `library-3f` use `way/126342422`.
+
+A floor with a known fit also has `corners`: four `[lng, lat]` points in image order top-left, top-right, bottom-right, bottom-left. They are the oriented bounding box of that footprint's outer ring, in local meters, then converted back to longitude and latitude. For Main, the box axis is the bearing from the South Wing label to the North Wing label in `data/campus-osm.json` (14.1°). `mainBearing` (164.1°) is about 30° off that wing line, so it is not the axis. 4F puts North toward the bottom of the poster, so its up-axis is 194.1° (the northward bearing plus 180). 1F, 2F, and 5F put North to the right, so their up-axis is 284.1°. The same four box corners are stored; only the corner order changes. `gym-gf`, `library-2f`, and `library-3f` leave `corners` unset. Their rings exist, but nothing in the floor data says which way the poster faces.
 
 Pins are the `rooms` on each floor in `data/paths.json`. Each room has `id`, `label`, `kind`, `x`, `y`, and `node`. `x` and `y` are fractions of the image width and height, from 0 to 1. The room `id` matches a node `id` on that floor. There is no `data/locations.json`.
 
@@ -62,7 +64,7 @@ The stairs are in the same physical place on every Main Building floor, so every
 
 `data/paths.json` has, per floor, corridor nodes along each wing and around the dome, edges between neighbors, and room and stair points. Each room and stair point links to its nearest corridor node, so a route never cuts through a room. All `x` and `y` values are 0..1 of the image. Room labels come from `rooms.json` only. On 4F the same classroom numbers repeat in every wing, so those rows carry a `wing` field. The route finder (`public/route.js`) goes from the start to the nearest stairwell that exists on both floors, then from that same stairwell to the room. `npm run check` fails if a node is outside 0..1, an edge points at a missing node, or a floor graph is not connected.
 
-The map page does not show the poster photos. It draws each floor from this graph: corridors as wide bands, rooms as labeled tiles, stairs as black squares. 4F is drawn a quarter turn back so its wings face the same way as on 1F and 5F. To move a point, open `map.html?edit=1`, go inside, click the spot, copy the logged `x,y` (already turned back to the poster's 0..1), and edit the JSON. Compare with the poster in `public/maps/` while you do it.
+A floor that has `corners` and a file at `maps/<floorId>.webp` or `maps/<floorId>.svg` is drawn on that building's footprint in MapLibre: the webp, or the SVG rasterized to a canvas, sits on a dimmed extrusion of that building. Route lines, stairs, and the destination pin use the same corners to turn 0..1 floor coordinates into longitude and latitude. The floor switcher lists only the current building, and only a floor whose SVG exists. `library-2f` stays off while RT11 is held. A floor with no `corners` stays on the separate `#indoor` plan, drawn from this graph: corridors as wide bands, rooms as labeled tiles, stairs as black squares. To move a point, open `map.html?edit=1`, go inside, click the spot, copy the logged `x,y` (already turned back to the poster's 0..1), and edit the JSON. Compare with the poster in `public/maps/` while you do it.
 
 ## Outdoor map and licenses
 

@@ -7,7 +7,9 @@
     "image": "public/maps/main-1f-lobby.png",
     "approximate": true,
     "imageWebp": "public/maps/main-1f-lobby.webp",
-    "poster": "public/maps/main-1f-lobby.jpg"
+    "poster": "public/maps/main-1f-lobby.jpg",
+    "osm": "relation/6752508",
+    "corners": [[121.009968, 14.5965527], [121.0103018, 14.5978428], [121.0116238, 14.5975185], [121.01129, 14.5962284]]
   },
   {
     "id": "main-4f",
@@ -17,7 +19,9 @@
     "image": "public/maps/main-4f.png",
     "approximate": false,
     "imageWebp": "public/maps/main-4f.webp",
-    "poster": "public/maps/main-4f.jpg"
+    "poster": "public/maps/main-4f.jpg",
+    "osm": "relation/6752508",
+    "corners": [[121.01129, 14.5962284], [121.009968, 14.5965527], [121.0103018, 14.5978428], [121.0116238, 14.5975185]]
   },
   {
     "id": "main-5f",
@@ -27,7 +31,9 @@
     "image": "public/maps/main-5f.png",
     "approximate": false,
     "imageWebp": "public/maps/main-5f.webp",
-    "poster": "public/maps/main-5f.jpg"
+    "poster": "public/maps/main-5f.jpg",
+    "osm": "relation/6752508",
+    "corners": [[121.009968, 14.5965527], [121.0103018, 14.5978428], [121.0116238, 14.5975185], [121.01129, 14.5962284]]
   },
   {
     "id": "main-2f",
@@ -35,7 +41,9 @@
     "floor": "2F",
     "label": "Main Building 2F",
     "image": "public/maps/main-2f.jpg",
-    "approximate": false
+    "approximate": false,
+    "osm": "relation/6752508",
+    "corners": [[121.009968, 14.5965527], [121.0103018, 14.5978428], [121.0116238, 14.5975185], [121.01129, 14.5962284]]
   },
   {
     "id": "gym-gf",
@@ -43,7 +51,8 @@
     "floor": "GF",
     "label": "Gymnasium ground floor",
     "image": "public/maps/gym-gf.jpg",
-    "approximate": false
+    "approximate": false,
+    "osm": "way/583440438"
   },
   {
     "id": "library-2f",
@@ -51,7 +60,8 @@
     "floor": "2F",
     "label": "Library 2F",
     "image": "public/maps/library-2f.jpg",
-    "approximate": false
+    "approximate": false,
+    "osm": "way/126342422"
   },
   {
     "id": "library-3f",
@@ -59,6 +69,7 @@
     "floor": "3F",
     "label": "Library 3F",
     "image": "public/maps/library-3f.png",
-    "approximate": false
+    "approximate": false,
+    "osm": "way/126342422"
   }
 ]
