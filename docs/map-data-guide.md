@@ -13,7 +13,7 @@ How to turn a floor-plan photo into a pin on Room TBA. The rules are in [floorpl
 | `docs/floorplans/catalog.md` | Which photo is which floor, and which shots are not plans. |
 | `public/maps/<floorId>.(jpg\|png)` | Cleaned image the page shows. Added by RT1. |
 | `data/floors.json` | One row per floor the page can open. Added by RT2. |
-| `data/locations.json` | One row per pin. Added by RT5. |
+| `data/locations.json` | Not in the repo. Pins are the `rooms` on each floor in `data/paths.json`. |
 | `data/station-locations.json` | Station or stall id to location id. Empty until the gym layout exists (RT6, then RT9). |
 | `data/stairs.json` | Shared stairwell ids and one `x,y` per floor for each (RT13). |
 | `data/paths.json` | Walk graph per floor: corridor nodes, edges, stair and room points (RT13). |
@@ -52,7 +52,7 @@ Leave these out of tonight:
 
 `data/floors.json` is a list of objects with `id`, `building`, `floor`, `label`, `image`, and `approximate`. Copy `building` and `floor` from `rooms.json`. The lobby row is the only tonight row with `approximate: true`.
 
-`data/locations.json` is a list of objects with `id`, `floorId`, `label`, `kind`, `x`, `y`, `aliases`, `source`, and `verified`. Copy `label`, `kind`, and `source` from the matching `rooms.json` row. `floorId` matches a floor `id`. `aliases` is `[]`. `x` and `y` are fractions of the image width and height, from 0 to 1.
+Pins are the `rooms` on each floor in `data/paths.json`. Each room has `id`, `label`, `kind`, `x`, `y`, and `node`. `x` and `y` are fractions of the image width and height, from 0 to 1. The room `id` matches a node `id` on that floor. There is no `data/locations.json`.
 
 `data/station-locations.json` starts empty. It later maps a station or stall id from the contract (`checkin`, `docs`, `validation`, `main`, `stall`, `enrolled`, or a stall id such as `BSCS-1`) to a location `id`. No gym mapping until RT9.
 
@@ -76,11 +76,11 @@ The campus view uses MapLibre GL JS (BSD-3-Clause), served from `node_modules` a
 2. Switch to the floor you are pinning.
 3. Click the spot on the image that matches the label.
 4. Read `x` and `y` from the browser console. Both are between 0 and 1.
-5. Write those two numbers onto that label's row in `data/locations.json`.
+5. Write those two numbers onto that label's room in `data/paths.json`.
 
 Nothing is saved for you. There is no editor form. A click only logs.
 
-Set `verified` to `false` when the label contains `?`, and when you have not checked the pin against the photo. The validator prints how many rows are still `verified: false`.
+A pin that is not confirmed has `flag` set to `?`, including when the label contains `?`. The validator counts those rows, and any row with `verified: false`, as verified false.
 
 ## Add an alias
 
@@ -96,17 +96,19 @@ Do not invent a short name, a nickname, or a translation.
 
 ## Run the validator
 
-RT7 adds the check to `npm run check`. Until that task merges, `npm run check` is typecheck, lint, and test, and it does not read map JSON.
+`npm run check` runs the map check after typecheck, lint, and test. The check reads `data/floors.json`, the rooms in `data/paths.json`, the floor ids in `data/stairs.json`, and the image files named on each floor.
 
-After RT7, `npm run check` fails when it finds:
+It fails when it finds:
 
-- a duplicate `id`
-- a `floorId` that is not in `data/floors.json`
-- an `x` or `y` outside 0..1
-- a `kind` outside the set above
-- an `image` path that is not a file on disk
+- a duplicate floor `id`, room `id`, node `id` on the same floor, or stair `id` in the shared list
+- a floor id on the walk graph, the stair file, or an unplaced row that is not in `data/floors.json`
+- an `x` or `y` outside 0..1 on a room, a node, or a stair point
+- a room `kind` outside the set above
+- an `image`, `imageWebp`, or `poster` path that is not a file on disk
 
-It also prints the count of `verified: false` rows and the count of labels that contain `?`. Those two counts are a report. A `?` label is allowed to remain. A failure is only the five cases above.
+A room `id` that matches that room's node `id` is the link to the walk graph. The same stair `id` on two floors is one stairwell. Neither is a duplicate. Node kinds such as `corridor` and `start` are graph kinds. The kind check applies to rooms.
+
+It prints the count of verified false rows and the count of labels that contain `?`. A verified false row has `verified: false` or a `flag`. Those two counts are a report. A `?` label is allowed to remain. A failure is only the five cases above.
 
 ## Lobby stand-in
 
