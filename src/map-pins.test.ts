@@ -133,5 +133,11 @@ describe("map pins", () => {
     assert.match(css, /\.opin:focus-visible \{ outline: 3px solid var\(--maroon-deep\); outline-offset: 2px; \}/);
     const html = readFileSync(new URL("../public/map.html", import.meta.url), "utf8");
     assert.equal(html.match(/map-pins\.js/g)?.length, 1);
+    const js = readFileSync(new URL("../public/map.js", import.meta.url), "utf8");
+    assert.match(js, /import \{ drawMapPins, namesLayer, wingsLayer \} from "\.\/map-pins\.js"/);
+    assert.match(js, /filter: namesLayer\.filter/);
+    assert.match(js, /filter: wingsLayer\.filter/);
+    assert.match(js, /drawMapPins\(\$\("indoor"\)/);
+    assert.match(js, /drawMapPins\(\$\("outdoor"\)/);
   });
 });
