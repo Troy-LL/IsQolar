@@ -11,7 +11,7 @@
     "hub": "HUB_FILE=hub-state.json SEED=1 tsx src/server.ts",
     "start": "tsx src/server.ts",
     "seed": "tsx src/seed.ts",
-    "test": "node --import tsx/esm --test $(find src -name '*.test.ts')",
+    "test": "find src -name '*.test.ts' -print0 | xargs -0 node --import tsx/esm --test",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "check": "npm run typecheck && npm run lint && npm run test"

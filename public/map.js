@@ -25,7 +25,14 @@ const GOAL_ZOOM = innerWidth >= 900 ? 19.5 : 20.5;
 function legPad() {
   const desk = innerWidth >= 900;
   const open = !$("sheet").hidden;
-  return { top: desk ? 90 : 140, bottom: desk ? 40 : 160, left: (desk && open ? 420 : 0) + 24, right: 88 };
+  // Clear location chip, floor tabs, zoom, and the live sheet height (RT19 F2/F4/D1–D3).
+  const sheetBottom = !desk && open ? snapPx() + 28 : desk ? 48 : 24;
+  return {
+    top: desk ? 96 : 168,
+    bottom: sheetBottom,
+    left: (desk && open ? 420 : 0) + (desk ? 28 : 72),
+    right: desk ? 96 : 100,
+  };
 }
 const S = { floors: [], paths: null, stairs: null, campus: null, rooms: [], inside: false, floorId: null, sel: null, route: null, step: -1, cam: {} };
 
@@ -57,10 +64,10 @@ function insets() {
   const desk = W >= 900;
   const sheet = $("sheet");
   const open = !sheet.hidden;
-  const top = desk ? 24 : 80;
-  const left = desk && open ? 420 : 12;
-  const right = S.inside ? 76 : 16;
-  const bottom = !desk && open ? snapPx() + 12 : 16;
+  const top = desk ? 32 : 88;
+  const left = desk && open ? 420 : S.inside ? 64 : 12;
+  const right = S.inside ? 88 : 16;
+  const bottom = !desk && open ? snapPx() + 20 : 16;
   return { W, H, top, left, right, bottom };
 }
 function fitCam(box, padPx = 0, bottomPx) {
@@ -101,9 +108,14 @@ function fitCamPad(box, pad, maxZoom = GOAL_ZOOM) {
   const ah = Math.max(80, H - pad.top - pad.bottom);
   // never zoom past maxZoom: grow tiny boxes around their center
   const fw = fitCam(floorBox(S.floorId)).w;
-  const minW = (fw / Math.pow(2, maxZoom - 18)) * (aw / W);
+  let minW = (fw / Math.pow(2, maxZoom - 18)) * (aw / W);
+  // Short lobby/stair legs: keep at least ~140px of the shorter axis on screen (RT19 F4)
+  const minScreen = 140;
+  const worldPerPx = fw / W;
+  const minSpan = minScreen * worldPerPx * (W / aw);
+  if (minSpan > minW) minW = minSpan;
   if (box.w < minW) box = { x: box.x + box.w / 2 - minW / 2, y: box.y, w: minW, h: box.h };
-  const minH = minW * (ah / aw);
+  const minH = Math.max(minW * (ah / aw), minSpan);
   if (box.h < minH) box = { x: box.x, y: box.y + box.h / 2 - minH / 2, w: box.w, h: minH };
   const s = Math.min(aw / box.w, ah / box.h);
   return { x: box.x + box.w / 2 - (pad.left + aw / 2) / s, y: box.y + box.h / 2 - (pad.top + ah / 2) / s, w: W / s, h: H / s };
@@ -427,7 +439,10 @@ async function drawIndoor(floorId) {
     const n = f.nodes.find((x) => x.id === r.node);
     const route = n && onLeg.has(`${n.x.toFixed(5)},${n.y.toFixed(5)}`);
     labels.push({ text: lab, p, prio: isDest ? 0 : route ? 2 : 3, unsure: !!(r.flag || (roomCode(r) && roomCode(r).unsure)) });
-    if (isDest) dest = p;
+    if (isDest) {
+      const door = f.nodes.find((x) => x.id === r.id) || n;
+      dest = door ? t(door.x, door.y) : p;
+    }
   }
   const stairs = Object.entries(st).map(([id, q]) => ({ id, p: t(q.x, q.y), name: (S.stairs.stairs.find((s) => s.id === id) || {}).name || id }));
   if (leg) {
@@ -444,7 +459,7 @@ async function drawIndoor(floorId) {
   if (line) root.insertBefore(lab, line);
   else root.append(lab);
   root.append(svg("g", { id: "over" }));
-  S.ix = { floorId, wings, labels, stairs, start, startText: floorId === S.floors[0].id ? "You are here (entrance)" : "You are here", legStart: leg && !arrive ? t(leg.points[0].x, leg.points[0].y) : null, arrive, dest, destText: S.sel && S.sel.room ? roomDisplay(S.sel.room) : "" };
+  S.ix = { floorId, wings, labels, stairs, start, startText: floorId === S.floors[0].id ? "You are here (entrance)" : "You are here", legStart: leg && !arrive ? t(leg.points[0].x, leg.points[0].y) : null, arrive, dest, destText: "" };
   queueLabels();
 }
 
@@ -479,56 +494,52 @@ function drawLabels() {
   const free = (b) => !taken.some((o) => b.x < o.x + o.w && o.x < b.x + b.w && b.y < o.y + o.h && o.y < b.y + b.h);
   const ix = S.ix;
   // Pin sits on the corridor-side edge of the dest room so the baked room code stays readable
-  // and the 13px dest label pill clears the pin.
-  let destPin = ix.dest;
-  if (ix.dest && S.sel && S.sel.room) {
-    const room = S.sel.room;
-    const f = S.paths.floors[ix.floorId];
-    const cn = f.nodes.find((n) => n.id === room.node);
-    if (cn) {
-      const tfn = tf(ix.floorId);
-      const cxy = tfn(cn.x, cn.y);
-      const dx = cxy.x - ix.dest.x;
-      const dy = cxy.y - ix.dest.y;
-      const len = Math.hypot(dx, dy) || 1;
-      // pull pin ~40% of the way from room centre toward the corridor node
-      destPin = { x: ix.dest.x + dx * 0.4, y: ix.dest.y + dy * 0.4 };
-    }
-  }
+  // Dest pin at door. No floating code text — baked code stays under dest highlight.
+  const destPin = ix.dest;
   if (ix.dest) {
     const d = scr(destPin);
     taken.push({ x: d.x - 14, y: d.y - 40, w: 28, h: 40 });
-    if (z >= 19 && ix.destText) {
-      const w = ix.destText.length * 8 + 4;
-      taken.push({ x: d.x + 16, y: d.y - 34, w, h: 18 });
-      g.append(svg("text", { x: destPin.x + 18 * u, y: destPin.y - 25 * u, class: "r-lab dest", style: `font-size:${13 * u}px;font-weight:800;text-anchor:start;stroke-width:${3 * u}px` }, ix.destText));
-    }
   }
   const arr = $("arrive");
   arr.hidden = !(S.inside && ix.arrive);
   if (ix.arrive) {
     const a = scr(ix.arrive.p);
     arr.querySelector("span").textContent = ix.arrive.text;
-    // desktop: keep the chip clear of the side panel (panel width plus 16px)
-    const panel = innerWidth >= 900 && !$("sheet").hidden ? $("sheet").getBoundingClientRect().right + 16 : 0;
-    a.x = Math.max(a.x, panel - 8);
+    const desk = innerWidth >= 900;
+    const open = !$("sheet").hidden;
+    const panelL = desk && open ? $("sheet").getBoundingClientRect().right + 12 : 12;
+    const sheetTop = !desk && open ? innerHeight - snapPx() : innerHeight;
+    // Measure after a probe place, then clamp into the free map (RT19 F3)
     arr.style.transform = `translate(${a.x + 8}px, ${a.y + 8}px)`;
     const r = arr.getBoundingClientRect();
-    taken.push({ x: a.x + 8, y: a.y + 8, w: r.width || 160, h: r.height || 26 });
+    const cw = r.width || 200;
+    const ch = r.height || 28;
+    const maxX = innerWidth - cw - (S.inside ? 92 : 16);
+    const maxY = sheetTop - ch - 10;
+    const minX = panelL;
+    const minY = desk ? 24 : 150;
+    const x = Math.min(Math.max(a.x + 8, minX), Math.max(minX, maxX));
+    const y = Math.min(Math.max(a.y + 8, minY), Math.max(minY, maxY));
+    arr.style.transform = `translate(${x}px, ${y}px)`;
+    taken.push({ x, y, w: cw, h: ch });
   }
-  // stairs icons, fixed 20px, drawn above the route line
+  // Stairs: 24px maroon rounded icons. At fit zoom, on-route full opacity, others 40%.
   const over = document.getElementById("over");
   if (over) over.replaceChildren();
+  const leg = S.route ? S.route.legs.find((l) => l.floorId === ix.floorId) : null;
+  const routeStair = S.route && S.route.stair;
+  const onRouteIds = new Set([...(leg && leg.ids ? leg.ids : []), ...(routeStair ? [routeStair] : [])]);
   for (const s of ix.stairs) {
     const q = scr(s.p);
-    const b = { x: q.x - 9, y: q.y - 9, w: 18, h: 18 };
+    const b = { x: q.x - 12, y: q.y - 12, w: 24, h: 24 };
     if (z >= 19 && !free(b)) continue;
     taken.push(b);
-    let k = u;
-    const sg = svg("g", { class: "stair" });
-    k *= 20 / 18;
-    sg.append(svg("rect", { x: s.p.x - 9 * k, y: s.p.y - 9 * k, width: 18 * k, height: 18 * k, rx: 3 * k, fill: "#8B0000" }));
-    sg.append(svg("path", { d: `M${s.p.x - 5 * k} ${s.p.y + 5 * k} h${4 * k} v${-4 * k} h${4 * k} v${-4 * k} h${3 * k}`, fill: "none", stroke: "#fff", "stroke-width": 1.8 * k }));
+    const k = u;
+    const onRoute = onRouteIds.has(s.id);
+    const op = z < 19 ? (onRoute || !S.route ? 1 : 0.4) : 1;
+    const sg = svg("g", { class: "stair", opacity: String(op) });
+    sg.append(svg("rect", { x: s.p.x - 12 * k, y: s.p.y - 12 * k, width: 24 * k, height: 24 * k, rx: 6 * k, fill: "#8B0000" }));
+    sg.append(svg("path", { d: `M${s.p.x - 7 * k} ${s.p.y + 7 * k} h${5 * k} v${-5 * k} h${5 * k} v${-5 * k} h${4 * k}`, fill: "none", stroke: "#fff", "stroke-width": 2 * k, "stroke-linecap": "round", "stroke-linejoin": "round" }));
     sg.append(svg("title", {}, s.name));
     (over || g).append(sg);
   }
@@ -556,7 +567,7 @@ function drawLabels() {
   if (z >= 19) {
     const order = [...ix.labels].sort((a, b) => a.prio - b.prio);
     for (const l of order) {
-      if (l.prio === 0 && ix.destText) continue;
+      if (l.prio === 0) continue; // baked code visible under dest highlight
       if (hasImg && l.prio > 0) continue; // baked on the directory image
       const q = scr(l.p);
       const w = l.text.length * 6.4 + 6;
@@ -789,10 +800,10 @@ function mountFrom() {
   sel.style.cssText = "flex:1;min-width:0;border:0;outline:0;background:transparent;color:inherit;font:inherit;font-size:17px;width:100%";
   for (const s of campusStarts(S.campus)) sel.append(el("option", { value: s.id }, s.label));
   sel.value = GATE_START;
-  const pill = el("label", { class: "pill" });
-  pill.style.flex = "1 1 180px";
+  const pill = el("label", { class: "pill from" });
   pill.append(el("span", {}, "From"), sel);
   const search = $("q").closest("label");
+  search.classList.add("search");
   search.parentElement.insertBefore(pill, search);
   sel.addEventListener("change", () => {
     if (S.sel && S.sel.room && S.route) directions();
@@ -821,7 +832,8 @@ function directions() {
   list.hidden = false;
   $("stepnav").hidden = false;
   $("dir").hidden = true;
-  setSnap("peek");
+  // Phone: half (50vh) keeps Next step on screen (RT19 F1). Desktop sheet is side panel.
+  setSnap("half");
   return goStep(0);
 }
 async function goStep(i) {
