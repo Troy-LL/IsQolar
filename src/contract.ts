@@ -35,6 +35,9 @@ export type Station =
 /** The lifecycle state of a ticket within its current station. */
 export type TicketStatus = "waiting" | "called" | "done";
 
+/** Where a ticket was created. `hub` is the venue laptop. `online` is the public instance. */
+export type TicketSource = "hub" | "online";
+
 // ---------------------------------------------------------------------------
 // Core entities
 // ---------------------------------------------------------------------------
@@ -56,6 +59,8 @@ export interface Ticket {
   createdAt: string; // ISO 8601
   /** Set when a stall staff member calls this ticket. Null until then. */
   calledAt: string | null; // ISO 8601
+  /** Absent on tickets written before this field. */
+  source?: TicketSource;
 }
 
 export interface Stall {
@@ -79,6 +84,28 @@ export interface GuardianStatus {
   station: Station;
   /** Human-readable label for the current station (e.g. "Waiting at stall"). */
   label: string;
+}
+
+/** Staff action saved on the tablet while the hub is unreachable. `next` is Call next. `done` is Mark done. */
+export type StaffSyncAction = "next" | "done";
+
+/**
+ * One saved staff action. The tablet keeps this locally.
+ * Replay posts `next` to POST /api/stalls/:stall/next and `done` to POST /api/tickets/:id/done.
+ * The server does not store this record.
+ */
+export interface StaffSyncItem {
+  /** Client id. The tablet replays each id once. */
+  id: string;
+  action: StaffSyncAction;
+  /** Stall the tablet was serving. */
+  stall: string;
+  /** Ticket id for `done`. Null for `next`, which still lets the server pick the next waiting ticket. */
+  ticketId: string | null;
+  /** ISO 8601 time the tablet saved the action. */
+  savedAt: string;
+  /** True after the hub accepts the replay. The tablet shows the synced-later mark when this is true. */
+  syncedLater: boolean;
 }
 
 // ---------------------------------------------------------------------------
@@ -129,6 +156,10 @@ export interface AdminSummary {
   /** Count of tickets at each station. */
   byStation: Record<Station, number>;
 }
+
+// GET /api/guardian/:code
+// :code is the printed ticket code (Ticket.code), not Ticket.id.
+// Returns: GuardianStatus
 
 // GET /health
 export interface HealthResponse {
