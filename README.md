@@ -1,4 +1,8 @@
-# PUP Enrollment Queue
+# IsQolar
+
+**Every Iskolar, in the right line.**
+
+IsQolar shows every freshman where they are in line, when they can step away, and when they're truly done.
 
 A local web app for first-year enrollment at PUP Manila.
 It gives each freshman a ticket for their course stall and a live board of every stall.
