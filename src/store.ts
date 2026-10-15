@@ -1,5 +1,19 @@
 import { randomUUID } from "node:crypto";
+import { mkdirSync, writeFileSync, renameSync, readFileSync, existsSync } from "node:fs";
+import { dirname } from "node:path";
 import type { Ticket, Stall, Station } from "./contract.js";
+
+// ---------------------------------------------------------------------------
+// StoreSnapshot — the serialised shape written to hub-state.json.
+// ---------------------------------------------------------------------------
+
+export interface StoreSnapshot {
+  version: 1;
+  ticketCounter: number;
+  tickets: StoredTicket[];
+  stalls: Stall[];
+  completionTimes: Record<string, number[]>;
+}
 
 export interface StoredTicket extends Ticket {
   previous: Ticket | null;
@@ -191,15 +205,183 @@ export class MemoryStore implements Store {
     }
     return best;
   }
+
+  // ---------------------------------------------------------------------------
+  // Snapshot helpers — used by FileStore to serialise and restore state.
+  // ---------------------------------------------------------------------------
+
+  toSnapshot(): StoreSnapshot {
+    const completionTimes: Record<string, number[]> = {};
+    for (const [k, v] of this.completionTimes.entries()) {
+      completionTimes[k] = [...v];
+    }
+    return {
+      version: 1,
+      ticketCounter: this.ticketCounter,
+      tickets: Array.from(this.tickets.values()),
+      stalls: Array.from(this.stalls.values()),
+      completionTimes,
+    };
+  }
+
+  loadSnapshot(s: StoreSnapshot): void {
+    // Build all maps in locals first so an error partway through leaves the store empty.
+    const newTickets = new Map<string, StoredTicket>();
+    for (const t of s.tickets) {
+      newTickets.set(t.id, t);
+    }
+    const newStalls = new Map<string, Stall>();
+    for (const st of s.stalls) {
+      newStalls.set(st.id, st);
+    }
+    const newCompletionTimes = new Map<string, number[]>();
+    for (const [k, v] of Object.entries(s.completionTimes)) {
+      newCompletionTimes.set(k, [...v]);
+    }
+    // All parsing succeeded — commit to the store.
+    this.tickets = newTickets;
+    this.stalls = newStalls;
+    this.completionTimes = newCompletionTimes;
+    this.ticketCounter = s.ticketCounter;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// FileStore — extends MemoryStore with atomic JSON persistence.
+// Used only on the hub when HUB_FILE is set.
+// ---------------------------------------------------------------------------
+
+export class FileStore extends MemoryStore {
+  private readonly filePath: string;
+  readonly loadedFromFile: boolean;
+
+  constructor(filePath: string) {
+    super();
+    this.filePath = filePath;
+    this.loadedFromFile = false;
+
+    if (existsSync(filePath)) {
+      let raw: string;
+      try {
+        raw = readFileSync(filePath, "utf8");
+      } catch (err) {
+        console.error(`[FileStore] Could not read ${filePath}:`, err);
+        this.loadedFromFile = false;
+        return;
+      }
+      let parsed: unknown;
+      try {
+        parsed = JSON.parse(raw);
+      } catch {
+        console.error(`[FileStore] ${filePath} is not valid JSON — renaming to .bad`);
+        try { renameSync(filePath, filePath + ".bad"); } catch { /* ignore */ }
+        this.loadedFromFile = false;
+        return;
+      }
+      if (!FileStore.isValidSnapshot(parsed)) {
+        console.error(`[FileStore] ${filePath} has an unexpected shape — renaming to .bad`);
+        try { renameSync(filePath, filePath + ".bad"); } catch { /* ignore */ }
+        this.loadedFromFile = false;
+        return;
+      }
+      try {
+        this.loadSnapshot(parsed as StoreSnapshot);
+      } catch (err) {
+        console.error(`[FileStore] Failed to load snapshot from ${filePath}:`, err);
+        try { renameSync(filePath, filePath + ".bad"); } catch { /* ignore */ }
+        this.loadedFromFile = false;
+        return;
+      }
+      this.loadedFromFile = true;
+    }
+  }
+
+  private static isValidSnapshot(v: unknown): v is StoreSnapshot {
+    if (typeof v !== "object" || v === null) return false;
+    const s = v as Record<string, unknown>;
+    if (
+      s["version"] !== 1 ||
+      typeof s["ticketCounter"] !== "number" ||
+      !Array.isArray(s["tickets"]) ||
+      !Array.isArray(s["stalls"])
+    ) return false;
+    // completionTimes must be a non-null, non-array object.
+    const ct = s["completionTimes"];
+    if (typeof ct !== "object" || ct === null || Array.isArray(ct)) return false;
+    // Every ticket must be a non-null object with a string id.
+    for (const t of s["tickets"] as unknown[]) {
+      if (typeof t !== "object" || t === null) return false;
+      if (typeof (t as Record<string, unknown>)["id"] !== "string") return false;
+    }
+    // Every stall must be a non-null object with a string id.
+    for (const st of s["stalls"] as unknown[]) {
+      if (typeof st !== "object" || st === null) return false;
+      if (typeof (st as Record<string, unknown>)["id"] !== "string") return false;
+    }
+    return true;
+  }
+
+  private save(): void {
+    const snap = this.toSnapshot();
+    const json = JSON.stringify(snap, null, 2);
+    const tmp = this.filePath + ".tmp";
+    mkdirSync(dirname(this.filePath), { recursive: true });
+    writeFileSync(tmp, json, "utf8");
+    renameSync(tmp, this.filePath);
+  }
+
+  // Override every mutating method to save after the super call.
+
+  override async reset(): Promise<void> {
+    await super.reset();
+    this.save();
+  }
+
+  override async seed(): Promise<void> {
+    await super.seed();
+    this.save();
+  }
+
+  override async nextCode(): Promise<string> {
+    const code = await super.nextCode();
+    this.save();
+    return code;
+  }
+
+  override async setTicket(ticket: StoredTicket): Promise<void> {
+    await super.setTicket(ticket);
+    this.save();
+  }
+
+  override async setStall(stall: Stall): Promise<void> {
+    await super.setStall(stall);
+    this.save();
+  }
+
+  override async recordCompletion(stallId: string, durationMs: number): Promise<void> {
+    await super.recordCompletion(stallId, durationMs);
+    this.save();
+  }
 }
 
 // ---------------------------------------------------------------------------
 // Singleton factory
 // ---------------------------------------------------------------------------
 
-const _store: Store = new MemoryStore();
+const _store: Store = process.env.HUB_FILE
+  ? new FileStore(process.env.HUB_FILE)
+  : new MemoryStore();
 
-/** Returns the active store. MemoryStore on both the hub and Render (ADR 005). */
+/**
+ * Returns the active store.
+ * On the hub (`npm run hub`), HUB_FILE is set and the store is a FileStore.
+ * On Render and in tests, HUB_FILE is unset and the store is a plain MemoryStore (ADR 005).
+ */
 export function getStore(): Store {
   return _store;
+}
+
+/** True only when the active store is a FileStore that successfully loaded a file on startup. */
+export function hubFileLoaded(): boolean {
+  return _store instanceof FileStore && _store.loadedFromFile;
 }

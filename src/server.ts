@@ -3,7 +3,7 @@ import { randomUUID } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { join, dirname } from "node:path";
 import type { Ticket, TicketDetail, Stall, AdminSummary, HealthResponse, Station } from "./contract.js";
-import { getStore, type StoredTicket } from "./store.js";
+import { getStore, hubFileLoaded, type StoredTicket } from "./store.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -296,9 +296,12 @@ async function refreshStall(stallId: string): Promise<void> {
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const PORT = Number(process.env.PORT) || 3000;
-  app.listen(PORT, "0.0.0.0", () => {
+  app.listen(PORT, "0.0.0.0", async () => {
     console.log(`IsQolar listening on http://0.0.0.0:${PORT}`);
-    if (process.env.SEED === "1") {
+    if (hubFileLoaded()) {
+      const tickets = await getStore().getTickets();
+      console.log(`Loaded hub state from the file (${tickets.length} ticket${tickets.length === 1 ? "" : "s"}).`);
+    } else if (process.env.SEED === "1") {
       getStore().seed().then(() => console.log("Auto-seeded on startup."));
     }
   });

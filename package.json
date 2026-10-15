@@ -8,6 +8,7 @@
   },
   "scripts": {
     "dev": "SEED=1 tsx src/server.ts",
+    "hub": "HUB_FILE=hub-state.json SEED=1 tsx src/server.ts",
     "start": "tsx src/server.ts",
     "seed": "tsx src/seed.ts",
     "test": "node --import tsx/esm --test $(find src -name '*.test.ts')",
