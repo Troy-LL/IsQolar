@@ -1,12 +1,13 @@
-// IsQolar shared mock store
+﻿// IsQolar shared mock store
 // Persisted: localStorage key isqolar.v5
 // Cross-tab sync: BroadcastChannel('isqolar') + storage event
 // Simulation tick: store.start() ticks every 2 real seconds (SPEED = 60: 1 sim-min = 1 real-sec)
 //
-// FROZEN API — do not add exports after M1.
+// FROZEN API â€” do not add exports after M1.
 // Full export list is in isqolar-plan.md Sub-Task 1.
 
 import { colleges } from './colleges.js';
+import { runTick } from './sim.js';
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -27,7 +28,7 @@ const DEMO_OTP       = '482913';
 const DEMO_STAFF_PIN = '1234';
 
 // ---------------------------------------------------------------------------
-// Step order (Decision 1 — never hardcoded in screens, always read from here)
+// Step order (Decision 1 â€” never hardcoded in screens, always read from here)
 // ---------------------------------------------------------------------------
 export const stepOrder = [
   { step: 1, station: 'Admission',        what: 'Submit admission documents and entrance credentials' },
@@ -150,7 +151,7 @@ function _seedState() {
 }
 
 // ---------------------------------------------------------------------------
-// Public API — FROZEN after M1
+// Public API â€” FROZEN after M1
 // ---------------------------------------------------------------------------
 
 /** Initialise (or reload) state from localStorage. Call once at app startup. */
@@ -184,11 +185,11 @@ export function start() {
     tick();
   }, TICK_MS);
 }
-
+/** Advance one tick: run simulation, save, emit. */
 /** Manually advance one tick (called by simulation or tests). */
 export function tick() {
   _lastTick = Date.now();
-  // Simulation logic lives in the simulation module; store just emits.
+  if (_state) { runTick(_state, nextNo); }
   _save();
   _emit();
 }
@@ -265,7 +266,7 @@ export function myTicketNo(permit) {
 }
 
 /** Get student-facing view for a ticket. */
-export function view_student(no) {
+function view_student(no) {
   if (!_state || !_state.tickets[no]) return null;
   const tk = _state.tickets[no];
   const stall = _state.stalls[tk.stall];
@@ -361,7 +362,7 @@ export function guardianView(permit, code) {
   };
 }
 
-/** Request guardian access (step 1 of 2 — just validates permit exists). */
+/** Request guardian access (step 1 of 2 â€” just validates permit exists). */
 export function guardianRequest(permit) {
   if (!_state) return { ok: false };
   return { ok: !!_state.byPermit[permit] };
@@ -739,3 +740,4 @@ export function markDone() {
   _save();
   _emit();
 }
+
