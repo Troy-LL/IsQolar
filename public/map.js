@@ -5,8 +5,8 @@ const NS = "http://www.w3.org/2000/svg";
 const params = new URLSearchParams(location.search);
 const SLOW = params.get("slow") === "1" ? 5 : 1;
 const EDIT = params.get("edit") === "1";
-// 4F's directory poster is turned a quarter turn compared with 1F and 5F, so draw it turned back.
-const ROTATE = { "main-4f": true };
+// Floor plans are drawn in poster pixel space (see paths.floors[id].svgSize). No rotation.
+const ROTATE = {};
 const WINGS = [
   ["West wing", ["stair-west-end", "stair-west-dome"]],
   ["North wing", ["stair-north-end", "stair-north-dome"]],
@@ -316,18 +316,17 @@ function drawLine(root, pts, current) {
 }
 
 // ---------- indoor ----------
+function floorSize(floorId) {
+  const s = S.paths.floors[floorId].svgSize;
+  return s && s.length === 2 ? s : [1000, Math.round(1000 / (S.paths.floors[floorId].aspect || 1))];
+}
 function tf(floorId) {
-  const a = S.paths.floors[floorId].aspect;
-  return (x, y) => {
-    const X = x * 1000;
-    const Y = (y * 1000) / a;
-    return ROTATE[floorId] ? { x: Y, y: -X } : { x: X, y: Y };
-  };
+  const [W, H] = floorSize(floorId);
+  return (x, y) => ({ x: x * W, y: y * H });
 }
 function untf(floorId, X, Y) {
-  const a = S.paths.floors[floorId].aspect;
-  const [x, y] = ROTATE[floorId] ? [-Y, X] : [X, Y];
-  return { x: x / 1000, y: (y * a) / 1000 };
+  const [W, H] = floorSize(floorId);
+  return { x: X / W, y: Y / H };
 }
 function floorBox(floorId) {
   const t = tf(floorId);
@@ -343,26 +342,35 @@ function shortLabel(r) {
   return t.length > 14 ? t.slice(0, 13) + "…" : t;
 }
 
+const FLOOR_IMG = { "main-1f-lobby": "maps/main-1f-lobby.webp", "main-4f": "maps/main-4f.webp", "main-5f": "maps/main-5f.webp" };
 const FLOOR_SVG = { "main-1f-lobby": "maps/main-1f-lobby.svg", "main-4f": "maps/main-4f.svg", "main-5f": "maps/main-5f.svg" };
 const floorSvgCache = new Map();
 async function floorPlan(floorId) {
   if (floorSvgCache.has(floorId)) return floorSvgCache.get(floorId).cloneNode(true);
-  const url = FLOOR_SVG[floorId];
-  if (!url) return null;
+  const imgUrl = FLOOR_IMG[floorId];
+  const svgUrl = FLOOR_SVG[floorId];
+  if (!imgUrl || !svgUrl) return null;
   try {
-    const text = await fetch(url).then((r) => r.text());
-    const doc = new DOMParser().parseFromString(text, "image/svg+xml");
-    const plan = doc.querySelector("g.plan");
-    if (!plan) return null;
-    // Bring <defs> (stair hatch) along so the pattern paints.
+    const [W, H] = floorSize(floorId);
     const wrap = svg("g", { class: "floor-svg", "data-floor": floorId });
-    const defs = doc.querySelector("defs");
-    if (defs) wrap.append(document.importNode(defs, true));
-    wrap.append(document.importNode(plan, true));
+    // Polished directory image is the visual base (2x asset scaled to poster pixels).
+    wrap.append(svg("image", { href: imgUrl, width: W, height: H, preserveAspectRatio: "none" }));
+    // Transparent room polygons from the SVG for hit-testing only.
+    const text = await fetch(svgUrl).then((r) => r.text());
+    const doc = new DOMParser().parseFromString(text, "image/svg+xml");
+    const hits = svg("g", { class: "hits", fill: "transparent", stroke: "none", "pointer-events": "all" });
+    doc.querySelectorAll("[data-room]").forEach((el) => {
+      const n = document.importNode(el, true);
+      n.setAttribute("fill", "transparent");
+      n.setAttribute("stroke", "none");
+      n.classList.add("room");
+      hits.append(n);
+    });
+    wrap.append(hits);
     floorSvgCache.set(floorId, wrap);
     return wrap.cloneNode(true);
   } catch (e) {
-    console.warn("floor svg", e);
+    console.warn("floor plan", e);
     return null;
   }
 }
@@ -470,10 +478,12 @@ function drawLabels() {
   const taken = [];
   const free = (b) => !taken.some((o) => b.x < o.x + o.w && o.x < b.x + b.w && b.y < o.y + o.h && o.y < b.y + b.h);
   const ix = S.ix;
+  const hasFloorImg = !!document.querySelector(".floor-svg image");
   if (ix.dest) {
     const d = scr(ix.dest);
     taken.push({ x: d.x - 14, y: d.y - 40, w: 28, h: 40 });
-    if (z >= 19 && ix.destText) {
+    // Floor images already bake room codes; pin is enough when the directory art is present.
+    if (z >= 19 && ix.destText && !hasFloorImg) {
       const w = ix.destText.length * 8 + 4;
       taken.push({ x: d.x + 16, y: d.y - 34, w, h: 18 });
       g.append(svg("text", { x: ix.dest.x + 18 * u, y: ix.dest.y - 25 * u, class: "r-lab dest", style: `font-size:${13 * u}px;font-weight:800;text-anchor:start;stroke-width:${3 * u}px` }, ix.destText));
@@ -514,22 +524,23 @@ function drawLabels() {
     taken.push({ x: q.x - 9, y: q.y - 9, w: 18, h: 18 });
   }
   if (ix.legStart) dot(ix.legStart, "#1b6e3f");
-  if (z < 19) {
+  // Polished floor images already bake wing names and room codes; only overlay dest when zoomed.
+  const hasImg = !!document.querySelector(".floor-svg image");
+  if (z < 19 && !hasImg) {
     for (const w of ix.wings) {
       const q = scr(w.p);
       const bw = w.text.length * 9;
       const box = { x: q.x - bw / 2, y: q.y - 9, w: bw, h: 18 };
-      // nudge below a stair icon instead of drawing over it
       const y = free(box) ? w.p.y : w.p.y + 22 * u;
-      // text padding 16px: keep the whole label on screen
       const half = bw / 2 + 16;
       const sx = Math.max(half, Math.min(innerWidth - half, q.x));
       g.append(svg("text", { x: c.x + sx * u, y, class: "w-name", style: `font-size:${13 * u}px;letter-spacing:${0.08 * 13 * u}px` }, w.text));
     }
-  } else {
+  } else if (z >= 19) {
     const order = [...ix.labels].sort((a, b) => a.prio - b.prio);
     for (const l of order) {
       if (l.prio === 0 && ix.destText) continue;
+      if (hasImg && l.prio > 0) continue; // baked on the directory image
       const q = scr(l.p);
       const w = l.text.length * 6.4 + 6;
       const b = { x: q.x - w / 2, y: q.y - 8, w, h: 16 };
