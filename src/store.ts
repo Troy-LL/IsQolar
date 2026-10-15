@@ -72,13 +72,14 @@ export class MemoryStore implements Store {
     await this.setStall({ id: "BSIT-1", name: "BS Information Technology — Stall 1", department: "IT & CS", activeInterviewers: 1, queueLength: 0, nowServing: null });
     await this.setStall({ id: "BSEE-1", name: "BS Electrical Engineering — Stall 1", department: "Engineering", activeInterviewers: 1, queueLength: 0, nowServing: null });
 
-    const students = [
-      { name: "Ana Reyes", course: "BSCS" },
-      { name: "Ben Santos", course: "BSIT" },
-      { name: "Cara Lim", course: "BSCS" },
-      { name: "Dan Cruz", course: "BSEE" },
-      { name: "Eva Tan", course: "BSIT" },
+    const pattern: { name: string; course: string; stall: string; count: number }[] = [
+      { name: "Ana Reyes", course: "BSCS", stall: "BSCS-1", count: 9 },
+      { name: "Cara Lim", course: "BSCS", stall: "BSCS-1", count: 9 },
+      { name: "Ben Santos", course: "BSIT", stall: "BSIT-1", count: 7 },
+      { name: "Eva Tan", course: "BSIT", stall: "BSIT-1", count: 7 },
+      { name: "Dan Cruz", course: "BSEE", stall: "BSEE-1", count: 9 },
     ];
+    const students = pattern.flatMap((row) => Array.from({ length: row.count }, () => ({ name: row.name, course: row.course, stall: row.stall })));
 
     for (const s of students) {
       const ticket: StoredTicket = {
@@ -86,8 +87,8 @@ export class MemoryStore implements Store {
         code: await this.nextCode(),
         name: s.name,
         course: s.course,
-        station: "checkin",
-        stall: null,
+        station: "stall",
+        stall: s.stall,
         status: "waiting",
         simulated: true,
         createdAt: new Date().toISOString(),
@@ -98,7 +99,7 @@ export class MemoryStore implements Store {
       await this.setTicket(ticket);
     }
 
-    console.log("Seed complete: 3 stalls, 5 tickets.");
+    console.log("Seed complete: 3 stalls, 41 tickets (18 BSCS-1 / 14 BSIT-1 / 9 BSEE-1).");
   }
 
   async nextCode(): Promise<string> {

@@ -25,10 +25,10 @@ How to run the app is in [README.md](../README.md). Stations, polling, and wait 
 
 The phone, staff, and board pages are shells today (`public/phone.html`, `public/staff.html`, `public/board.html`). `public/map.html` is not in the repo yet. This is the demo to run once those screens are filled in. If the map is not solid by the 12:30 PM cut on Oct 16, stop after the enrolled line. The queue still stands. See [plan-room-tba.md](plan-room-tba.md).
 
-`npm run seed` loads the morning that is in `src/store.ts`: stalls `BSCS-1`, `BSIT-1`, and `BSEE-1`, and five simulated tickets at check-in (Ana Reyes, Ben Santos, Cara Lim, Dan Cruz, Eva Tan). Seeded tickets are labeled simulated.
+`npm run seed` loads the morning that is in `src/store.ts`: stalls `BSCS-1`, `BSIT-1`, and `BSEE-1`, and 41 simulated tickets on those stalls. The tickets repeat Ana Reyes, Ben Santos, Cara Lim, Dan Cruz, and Eva Tan. Seeded tickets are labeled simulated.
 
-1. **Board (about one minute).** Open the live board on the hub laptop. The header is "IsQolar Live Board". The simulated label is visible. Three stalls, five tickets.
-2. **Call next (about one minute).** On the phone, open one of those tickets. Staff advance it to the course stall and tap Call next. Within 2 seconds the phone shows "Ikaw na, Iskolar!" and the board shows the new now-serving ticket. Pages poll every 2 seconds.
+1. **Board (about one minute).** Open the live board on the hub laptop. The header is "IsQolar Live Board". The simulated label is visible. Three stalls, 41 tickets.
+2. **Call next (about one minute).** On the phone, open one of those tickets. It is already waiting at its course stall. Staff tap Call next. Within 2 seconds the phone shows "Ikaw na, Iskolar!" and the board shows the new now-serving ticket. Pages poll every 2 seconds.
 3. **Find your classes (about one minute).** Staff mark the ticket through to enrolled. The phone shows "You're fully enrolled. Welcome, Iskolar ng Bayan." Then **Find your classes** opens Room TBA. Search a label that is already transcribed, for example "JPIA Office (E500)" on the Main Academic Building 5F plan (`IBM_7742` in [floorplans/rooms.json](floorplans/rooms.json)). The pin for that label shows only after the tonight pin task is done. The lobby plan is the `IBM_7739` directory, marked approximate, until a real lobby plan arrives.
 
 Estimated wait on the ticket follows [architecture.md](architecture.md). The design file's wait note is the look spec.
