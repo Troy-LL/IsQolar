@@ -33,35 +33,112 @@
   }
 
   // ---------------------------------------------------------------------------
+  // fetchT — fetch with AbortController timeout (ms).
+  // A rejected promise (network error or timeout) means hub unreachable.
+  // Any HTTP response means hub reachable.
+  // ---------------------------------------------------------------------------
+  function fetchT(url, options, ms) {
+    var ctrl = new AbortController();
+    var timer = setTimeout(function () { ctrl.abort(); }, ms);
+    var opts = Object.assign({}, options || {}, { signal: ctrl.signal });
+    return fetch(url, opts).finally(function () { clearTimeout(timer); });
+  }
+
+  // ---------------------------------------------------------------------------
   // State
   // ---------------------------------------------------------------------------
   var stallId = null;        // stall id from ?stall=
   var stallName = '';        // display name
   var lsKey = null;          // isqolar.staff.called.STALL
-  var calledTicket = null;   // {id, code, name, course} or null
-  var inflight = false;      // true while any POST is in flight
+  var lsSyncKey = null;      // isqolar.staff.sync.STALL
+
+  // calledTicket: {id, code, name, course[, sync:'waiting'|'synced']} or null
+  var calledTicket = null;
+  var inflight = false;      // true while any POST is in flight (or replay)
   var waitingCount = 0;      // last known queue length
   var msgFromPoll = false;   // true when elMsg was last set by the queue poll
 
   // D3: last undoable action — not persisted, cleared on reload
-  // {type: 'call'|'done', id, code, name, course} or null
   var lastAction = null;
+
+  // H2 state
+  var hubDown = false;       // true when hub is unreachable
+  var lastQueue = [];        // copy of most recent queue array from onQueueData
+  var replayRunning = false; // true while replay() is executing
 
   // DOM refs set up after render
   var elHeader = null;
+  var elSyncLine = null;     // H2: sync status line under the header
   var elWaiting = null;
   var elCalled = null;
   var elMsg = null;
   var elLastAction = null;
-  var elUndoBtn = null;      // Undo button inside the last-action line
+  var elUndoBtn = null;
   var elCallBtn = null;
   var elDoneBtn = null;
+  var elSavedSection = null; // H2: saved-actions section
+  var elSavedList = null;
 
   // D3: lookup section refs
   var elLookupInput = null;
   var elLookupMsg = null;
   var elLookupResult = null;
-  var elLookupUndoBtn = null;  // the current "Undo last move" button, or null
+  var elLookupUndoBtn = null;
+
+  // ---------------------------------------------------------------------------
+  // Sync list helpers
+  // ---------------------------------------------------------------------------
+  function loadSyncList() {
+    return lsGet(lsSyncKey) || [];
+  }
+
+  function saveSyncList(list) {
+    lsSet(lsSyncKey, list);
+  }
+
+  function makeSyncId() {
+    return Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 8);
+  }
+
+  function unsyncedItems(list) {
+    return list.filter(function (i) { return !i.syncedLater; });
+  }
+
+  function hasUnsynced(list) {
+    return unsyncedItems(list).length > 0;
+  }
+
+  // After replay: keep every unsynced item and the newest 10 synced items,
+  // without changing order (oldest first throughout).
+  function trimSyncList(list) {
+    // Count synced items from the end; mark the ones to keep.
+    var syncedKept = 0;
+    var keepIds = {};
+    for (var k = list.length - 1; k >= 0; k--) {
+      if (!list[k].syncedLater) {
+        keepIds[list[k].id] = true;
+      } else if (syncedKept < 10) {
+        keepIds[list[k].id] = true;
+        syncedKept++;
+      }
+    }
+    return list.filter(function (i) { return keepIds[i.id]; });
+  }
+
+  // The consumed ticket ids: ticketId of every done item + calledTicket.id
+  function consumedIds(list) {
+    var ids = [];
+    list.forEach(function (item) {
+      if (item.action === 'done' && item.ticketId) ids.push(item.ticketId);
+    });
+    if (calledTicket) ids.push(calledTicket.id);
+    return ids;
+  }
+
+  // Save mode: on while hub is down OR any item is unsynced.
+  function inSaveMode() {
+    return hubDown || hasUnsynced(loadSyncList());
+  }
 
   // ---------------------------------------------------------------------------
   // Render: build the page skeleton
@@ -75,6 +152,11 @@
     elHeader.className = 'header';
     app.appendChild(elHeader);
 
+    // H2: sync status line
+    elSyncLine = document.createElement('div');
+    elSyncLine.className = 'sync-line';
+    app.appendChild(elSyncLine);
+
     // waiting count
     elWaiting = document.createElement('p');
     elWaiting.className = 'waiting';
@@ -85,7 +167,7 @@
     elCalled.className = 'called-panel';
     app.appendChild(elCalled);
 
-    // message line (errors, feedback from main actions)
+    // message line
     elMsg = document.createElement('p');
     elMsg.className = 'msg';
     app.appendChild(elMsg);
@@ -124,6 +206,22 @@
     btnRow.appendChild(elCallBtn);
     btnRow.appendChild(elDoneBtn);
     app.appendChild(btnRow);
+
+    // H2: saved-actions section (hidden when empty)
+    elSavedSection = document.createElement('div');
+    elSavedSection.className = 'saved-section';
+    elSavedSection.style.display = 'none';
+
+    var savedTitle = document.createElement('h2');
+    savedTitle.className = 'saved-title';
+    savedTitle.textContent = 'Saved on this tablet';
+    elSavedSection.appendChild(savedTitle);
+
+    elSavedList = document.createElement('ul');
+    elSavedList.className = 'saved-list';
+    elSavedSection.appendChild(elSavedList);
+
+    app.appendChild(elSavedSection);
 
     // D3: lookup section
     var lookupSection = document.createElement('div');
@@ -188,7 +286,76 @@
   }
 
   // ---------------------------------------------------------------------------
-  // Called-ticket panel
+  // H2: sync status line
+  // ---------------------------------------------------------------------------
+  function renderSyncLine() {
+    var list = loadSyncList();
+    var nUnsynced = unsyncedItems(list).length;
+
+    if (hubDown) {
+      var text = 'Offline. Call next and Mark done are saved on this tablet.';
+      if (nUnsynced > 0) text += ' ' + nUnsynced + ' waiting to sync.';
+      elSyncLine.textContent = text;
+      elSyncLine.style.display = '';
+    } else if (replayRunning) {
+      elSyncLine.textContent = 'Back online. Syncing ' + nUnsynced + ' saved action' + (nUnsynced === 1 ? '' : 's') + '\u2026';
+      elSyncLine.style.display = '';
+    } else if (nUnsynced > 0) {
+      elSyncLine.textContent = nUnsynced + ' waiting to sync.';
+      elSyncLine.style.display = '';
+    } else {
+      elSyncLine.textContent = '';
+      elSyncLine.style.display = 'none';
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // H2: waiting line (shows "(last known)" when hub is down)
+  // ---------------------------------------------------------------------------
+  function renderWaiting() {
+    var list = loadSyncList();
+    var consumed = consumedIds(list);
+    if (hubDown) {
+      var avail = lastQueue.filter(function (t) {
+        return consumed.indexOf(t.id) === -1;
+      }).length;
+      elWaiting.textContent = 'Waiting: ' + avail + ' (last known)';
+    } else {
+      elWaiting.textContent = 'Waiting: ' + waitingCount;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // H2: saved-actions section
+  // ---------------------------------------------------------------------------
+  function renderSavedSection() {
+    var list = loadSyncList();
+    // Show newest 10 items, newest first.
+    var display = list.slice(-10).reverse();
+    if (display.length === 0) {
+      elSavedSection.style.display = 'none';
+      return;
+    }
+    elSavedSection.style.display = '';
+    elSavedList.textContent = '';
+    display.forEach(function (item) {
+      var li = document.createElement('li');
+      li.className = 'saved-item';
+      var label = item.action === 'next' ? 'Call next' : 'Mark done';
+      var time = '';
+      try {
+        time = new Date(item.savedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      } catch (e) {
+        time = item.savedAt || '';
+      }
+      var status = item.syncedLater ? 'synced later' : 'waiting to sync';
+      li.textContent = label + ' \u00b7 ' + time + ' \u00b7 ' + status;
+      elSavedList.appendChild(li);
+    });
+  }
+
+  // ---------------------------------------------------------------------------
+  // Called-ticket panel (shows sync mark when calledTicket.sync is set)
   // ---------------------------------------------------------------------------
   function renderCalledPanel() {
     elCalled.textContent = '';
@@ -205,6 +372,16 @@
     elCalled.appendChild(big);
     elCalled.appendChild(nameEl);
     elCalled.appendChild(courseEl);
+    if (calledTicket.sync) {
+      var syncMark = document.createElement('div');
+      syncMark.className = 'ticket-sync-mark';
+      if (calledTicket.sync === 'waiting') {
+        syncMark.textContent = 'Saved on this tablet, waiting to sync';
+      } else {
+        syncMark.textContent = 'Synced later';
+      }
+      elCalled.appendChild(syncMark);
+    }
   }
 
   // ---------------------------------------------------------------------------
@@ -223,21 +400,27 @@
     elUndoBtn.style.display = '';
   }
 
-  // Called after 400 already at final station: keep the text, hide Undo.
   function renderLastActionNoUndo() {
     elUndoBtn.style.display = 'none';
   }
 
   // ---------------------------------------------------------------------------
-  // Button state — covers Call next, Mark done, Undo, and lookup Undo
+  // Button state
   // ---------------------------------------------------------------------------
   function syncButtons() {
     elCallBtn.disabled = inflight || calledTicket !== null;
     elDoneBtn.disabled = inflight || calledTicket === null;
-    // Undo button visibility is governed by renderLastAction; just handle disabled.
     elUndoBtn.disabled = inflight;
-    // Lookup Undo last move button — visual disable while any POST is in flight.
     if (elLookupUndoBtn) elLookupUndoBtn.disabled = inflight;
+  }
+
+  // Render all dynamic UI in one call — used after state changes.
+  function renderAll() {
+    renderSyncLine();
+    renderWaiting();
+    renderCalledPanel();
+    renderSavedSection();
+    syncButtons();
   }
 
   // ---------------------------------------------------------------------------
@@ -251,12 +434,98 @@
       }
       return;
     }
+    // A good poll response means the hub is reachable.
+    hubDown = false;
+    if (hasUnsynced(loadSyncList())) replay();
+    renderAll();
     if (msgFromPoll) {
       elMsg.textContent = '';
       msgFromPoll = false;
     }
+    lastQueue = data.slice();
     waitingCount = data.length;
-    elWaiting.textContent = 'Waiting: ' + waitingCount;
+    renderWaiting();
+    renderSyncLine();
+  }
+
+  // ---------------------------------------------------------------------------
+  // H2: health probe every 3 s
+  // ---------------------------------------------------------------------------
+  var probeRunning = false;
+
+  function startProbe() {
+    setInterval(function () {
+      if (probeRunning) return;
+      probeRunning = true;
+      fetchT('/health', null, 3000)
+        .then(function (res) {
+          return res.json().then(function (body) { return { ok: res.ok, body: body }; });
+        })
+        .then(function (r) {
+          if (r.ok && r.body && r.body.ok) {
+            hubDown = false;
+            if (hasUnsynced(loadSyncList())) replay();
+            renderAll();
+          } else {
+            if (!hubDown) { hubDown = true; renderAll(); }
+          }
+        })
+        .catch(function () {
+          if (!hubDown) { hubDown = true; renderAll(); }
+        })
+        .finally(function () { probeRunning = false; });
+    }, 3000);
+  }
+
+  // ---------------------------------------------------------------------------
+  // H2: Save mode — Call next path
+  // ---------------------------------------------------------------------------
+  function saveCallNext() {
+    var list = loadSyncList();
+    var consumed = consumedIds(list);
+    var next = null;
+    for (var i = 0; i < lastQueue.length; i++) {
+      if (consumed.indexOf(lastQueue[i].id) === -1) {
+        next = lastQueue[i];
+        break;
+      }
+    }
+    if (!next) {
+      msgFromPoll = false;
+      elMsg.textContent = 'No one is waiting in the last known queue.';
+      return;
+    }
+    calledTicket = { id: next.id, code: next.code, name: next.name, course: next.course, sync: 'waiting' };
+    lsSet(lsKey, calledTicket);
+    var item = { id: makeSyncId(), action: 'next', stall: stallId, ticketId: null, savedAt: new Date().toISOString(), syncedLater: false };
+    list.push(item);
+    saveSyncList(list);
+    lastAction = null;
+    elLastAction.textContent = next.code + ' called';
+    elUndoBtn.style.display = 'none';
+    msgFromPoll = false;
+    elMsg.textContent = 'Saved on this tablet. It will sync when the hub is back.';
+    renderAll();
+  }
+
+  // ---------------------------------------------------------------------------
+  // H2: Save mode — Mark done path
+  // ---------------------------------------------------------------------------
+  function saveMarkDone() {
+    var ticketCode = calledTicket.code;
+    var ticketId = calledTicket.id;
+    var list = loadSyncList();
+    var item = { id: makeSyncId(), action: 'done', stall: stallId, ticketId: ticketId, savedAt: new Date().toISOString(), syncedLater: false };
+    list.push(item);
+    saveSyncList(list);
+    lastAction = null;
+    elLastAction.textContent = ticketCode + ' done';
+    elUndoBtn.style.display = 'none';
+    calledTicket = null;
+    lsRemove(lsKey);
+    msgFromPoll = false;
+    elMsg.textContent = 'Saved on this tablet. It will sync when the hub is back.';
+    renderAll();
   }
 
   // ---------------------------------------------------------------------------
@@ -264,12 +533,18 @@
   // ---------------------------------------------------------------------------
   function onCallNext() {
     if (inflight || calledTicket !== null) return;
+
+    if (inSaveMode()) {
+      saveCallNext();
+      return;
+    }
+
     inflight = true;
     msgFromPoll = false;
     elMsg.textContent = '';
     syncButtons();
 
-    fetch('/api/stalls/' + encodeURIComponent(stallId) + '/next', { method: 'POST' })
+    fetchT('/api/stalls/' + encodeURIComponent(stallId) + '/next', { method: 'POST' }, 4000)
       .then(function (res) {
         return res.json().then(function (body) {
           return { ok: res.ok, status: res.status, body: body };
@@ -291,12 +566,20 @@
         }
       })
       .catch(function () {
-        msgFromPoll = false;
-        elMsg.textContent = 'Cannot reach the hub. Try again.';
-      })
-      .finally(function () {
+        // Network failure — switch to save mode and run the saved path.
+        hubDown = true;
         inflight = false;
         syncButtons();
+        saveCallNext();
+        return; // skip finally's syncButtons
+      })
+      .finally(function () {
+        // Only reached when .catch did not return early via the save path.
+        // Guard: if inflight was already cleared in .catch, do not double-clear.
+        if (inflight) {
+          inflight = false;
+          syncButtons();
+        }
       });
   }
 
@@ -305,6 +588,12 @@
   // ---------------------------------------------------------------------------
   function onMarkDone() {
     if (inflight || calledTicket === null) return;
+
+    if (inSaveMode()) {
+      saveMarkDone();
+      return;
+    }
+
     inflight = true;
     msgFromPoll = false;
     elMsg.textContent = '';
@@ -315,7 +604,7 @@
     var ticketName = calledTicket.name;
     var ticketCourse = calledTicket.course;
 
-    fetch('/api/tickets/' + encodeURIComponent(ticketId) + '/done', { method: 'POST' })
+    fetchT('/api/tickets/' + encodeURIComponent(ticketId) + '/done', { method: 'POST' }, 4000)
       .then(function (res) {
         return res.json().then(function (body) {
           return { ok: res.ok, status: res.status, body: body };
@@ -329,7 +618,6 @@
           renderCalledPanel();
           renderLastAction();
         } else if (r.status === 400 && r.body.error === 'already at final station') {
-          // Someone else made this move — treat as done but no Undo
           lastAction = null;
           elLastAction.textContent = ticketCode + ' done';
           calledTicket = null;
@@ -350,27 +638,29 @@
         }
       })
       .catch(function () {
-        msgFromPoll = false;
-        elMsg.textContent = 'Cannot reach the hub. Try again.';
-        renderCalledPanel();
-      })
-      .finally(function () {
+        hubDown = true;
         inflight = false;
         syncButtons();
+        saveMarkDone();
+        return;
+      })
+      .finally(function () {
+        if (inflight) {
+          inflight = false;
+          renderCalledPanel();
+          syncButtons();
+        }
       });
   }
 
   // ---------------------------------------------------------------------------
-  // Undo last action (Part A)
+  // Undo last action (D3 Part A — online only)
   // ---------------------------------------------------------------------------
   function onUndoLastAction() {
     if (inflight || !lastAction) return;
 
     var action = lastAction;
-
-    // Guard: undo of a call requires calledTicket to still be that ticket.
     if (action.type === 'call' && (!calledTicket || calledTicket.id !== action.id)) return;
-    // Guard: undo of a done requires no ticket to be currently called.
     if (action.type === 'done' && calledTicket !== null) return;
 
     inflight = true;
@@ -378,7 +668,7 @@
     elMsg.textContent = '';
     syncButtons();
 
-    fetch('/api/tickets/' + encodeURIComponent(action.id) + '/undo', { method: 'POST' })
+    fetchT('/api/tickets/' + encodeURIComponent(action.id) + '/undo', { method: 'POST' }, 4000)
       .then(function (res) {
         return res.json().then(function (body) {
           return { ok: res.ok, status: res.status, body: body };
@@ -388,7 +678,6 @@
         if (r.ok) {
           lastAction = null;
           if (action.type === 'call') {
-            // Ticket is back in line (waiting at stall)
             calledTicket = null;
             lsRemove(lsKey);
             renderCalledPanel();
@@ -396,7 +685,6 @@
             msgFromPoll = false;
             elMsg.textContent = action.code + ' is back in line.';
           } else {
-            // action.type === 'done'
             renderLastAction();
             if (r.body.station === 'stall' && r.body.status === 'called') {
               calledTicket = { id: r.body.id, code: r.body.code, name: r.body.name, course: r.body.course };
@@ -432,11 +720,285 @@
       .catch(function () {
         msgFromPoll = false;
         elMsg.textContent = 'Cannot reach the hub. Try again.';
+        if (!hubDown) { hubDown = true; renderAll(); }
       })
       .finally(function () {
         inflight = false;
         syncButtons();
       });
+  }
+
+  // ---------------------------------------------------------------------------
+  // H2: replay
+  // ---------------------------------------------------------------------------
+  function replay() {
+    if (replayRunning || inflight || hubDown) return;
+    var list = loadSyncList();
+    if (!hasUnsynced(list)) return;
+
+    replayRunning = true;
+    inflight = true;
+    var notes = [];
+    var syncedThisRun = 0;
+    renderSyncLine();
+    syncButtons();
+
+    // Process items sequentially via a recursive step function.
+    function step(items) {
+      if (items.length === 0) {
+        finish(notes);
+        return;
+      }
+      var item = items[0];
+      var rest = items.slice(1);
+
+      if (item.action === 'next') {
+        replayNext(item, rest, notes);
+      } else {
+        replayDone(item, rest, notes);
+      }
+    }
+
+    // Replay a 'next' item.
+    function replayNext(item, rest, notes) {
+      // E = ticketId of first done after this item, or calledTicket.id.
+      var listNow = loadSyncList();
+      var myIdx = -1;
+      for (var i = 0; i < listNow.length; i++) {
+        if (listNow[i].id === item.id) { myIdx = i; break; }
+      }
+      var E = null;
+      if (myIdx !== -1) {
+        for (var j = myIdx + 1; j < listNow.length; j++) {
+          if (listNow[j].action === 'done' && listNow[j].ticketId) {
+            E = listNow[j].ticketId;
+            break;
+          }
+        }
+      }
+      if (!E && calledTicket) E = calledTicket.id;
+      if (!E) {
+        // No expected ticket — drop this item.
+        dropItem(item, 'Saved Call next dropped: no expected ticket.');
+        notes.push('Saved Call next dropped: no expected ticket.');
+        step(rest);
+        return;
+      }
+      // GET the expected ticket.
+      fetchT('/api/tickets/' + encodeURIComponent(E), null, 4000)
+        .then(function (res) {
+          return res.json().then(function (body) { return { ok: res.ok, body: body }; });
+        })
+        .then(function (r) {
+          if (!r.ok) {
+            // 404 — drop
+            if (calledTicket && calledTicket.id === E) {
+              calledTicket = null;
+              lsRemove(lsKey);
+            }
+            dropItem(item, 'Saved Call next dropped: ticket no longer exists on the hub.');
+            notes.push('Saved Call next dropped: ticket no longer exists on the hub.');
+            step(rest);
+            return;
+          }
+          var t = r.body;
+          if (t.station === 'stall' && t.stall === stallId && t.status === 'called') {
+            // Already called on the hub — mark synced without posting.
+            markSynced(item);
+            if (calledTicket && calledTicket.id === E) {
+              calledTicket = Object.assign({}, calledTicket, { sync: 'synced' });
+              lsSet(lsKey, calledTicket);
+            }
+            step(rest);
+            return;
+          }
+          if (t.station === 'stall' && t.stall === stallId && t.status === 'waiting') {
+            // Post next.
+            fetchT('/api/stalls/' + encodeURIComponent(stallId) + '/next', { method: 'POST' }, 4000)
+              .then(function (res2) {
+                return res2.json().then(function (body2) { return { ok: res2.ok, body: body2 }; });
+              })
+              .then(function (r2) {
+                if (r2.ok) {
+                  markSynced(item);
+                  if (calledTicket && calledTicket.id === E) {
+                    calledTicket = Object.assign({}, calledTicket, { sync: 'synced' });
+                    lsSet(lsKey, calledTicket);
+                  }
+                  // If the hub called a different ticket first, undo that.
+                  if (r2.body.id !== E) {
+                    var wrongCode = r2.body.code;
+                    fetchT('/api/tickets/' + encodeURIComponent(r2.body.id) + '/undo', { method: 'POST' }, 4000)
+                      .then(function (undoRes) {
+                        return undoRes.json().then(function (undoBody) {
+                          return { ok: undoRes.ok };
+                        });
+                      })
+                      .then(function (ur) {
+                        if (ur.ok) {
+                          notes.push('The hub had ' + wrongCode + ' first in line, so ' + wrongCode + ' went back in line.');
+                        } else {
+                          notes.push('Could not put ' + wrongCode + ' back in line.');
+                        }
+                      })
+                      .catch(function () {
+                        notes.push('Could not put ' + wrongCode + ' back in line.');
+                        hubDown = true;
+                        finish(notes);
+                        return; // stop — finish already handles cleanup
+                      })
+                      .then(function () {
+                        // Only continues when catch did not set hubDown (no rethrow path).
+                        if (!hubDown) step(rest);
+                      });
+                  } else {
+                    step(rest);
+                  }
+                } else {
+                  // Non-200 from next — drop.
+                  if (calledTicket && calledTicket.id === E) {
+                    calledTicket = null;
+                    lsRemove(lsKey);
+                  }
+                  dropItem(item, 'Saved Call next dropped: unexpected response from hub.');
+                  notes.push('Saved Call next dropped: unexpected response from hub.');
+                  step(rest);
+                }
+              })
+              .catch(function () {
+                hubDown = true;
+                finish(notes);
+              });
+            return;
+          }
+          // Any other state — drop.
+          if (calledTicket && calledTicket.id === E) {
+            calledTicket = null;
+            lsRemove(lsKey);
+          }
+          var dropMsg = 'Saved Call next dropped: ' + (t.code || E) + ' is no longer at ' + stallId + '.';
+          dropItem(item, dropMsg);
+          notes.push(dropMsg);
+          step(rest);
+        })
+        .catch(function () {
+          hubDown = true;
+          finish(notes);
+        });
+    }
+
+    // Replay a 'done' item.
+    function replayDone(item, rest, notes) {
+      var T = item.ticketId;
+      if (!T) {
+        dropItem(item, 'Saved Mark done dropped: no ticket id.');
+        notes.push('Saved Mark done dropped: no ticket id.');
+        step(rest);
+        return;
+      }
+      fetchT('/api/tickets/' + encodeURIComponent(T), null, 4000)
+        .then(function (res) {
+          return res.json().then(function (body) { return { ok: res.ok, body: body }; });
+        })
+        .then(function (r) {
+          if (!r.ok) {
+            dropItem(item, 'Saved Mark done dropped: ticket no longer exists on the hub.');
+            notes.push('Saved Mark done dropped: ticket no longer exists on the hub.');
+            step(rest);
+            return;
+          }
+          var t = r.body;
+          if (t.station === 'enrolled') {
+            // Already done — mark synced.
+            markSynced(item);
+            step(rest);
+            return;
+          }
+          if (t.station === 'stall' && t.stall === stallId) {
+            // Post done.
+            fetchT('/api/tickets/' + encodeURIComponent(T) + '/done', { method: 'POST' }, 4000)
+              .then(function (res2) {
+                return res2.json().then(function (body2) { return { ok: res2.ok, status: res2.status, body: body2 }; });
+              })
+              .then(function (r2) {
+                if (r2.ok || (r2.status === 400 && r2.body.error === 'already at final station')) {
+                  markSynced(item);
+                  step(rest);
+                } else if (r2.status === 404) {
+                  dropItem(item, 'Saved Mark done dropped: ticket no longer exists on the hub.');
+                  notes.push('Saved Mark done dropped: ticket no longer exists on the hub.');
+                  step(rest);
+                } else {
+                  dropItem(item, 'Saved Mark done dropped: unexpected response from hub.');
+                  notes.push('Saved Mark done dropped: unexpected response from hub.');
+                  step(rest);
+                }
+              })
+              .catch(function () {
+                hubDown = true;
+                finish(notes);
+              });
+            return;
+          }
+          // Any other state — drop.
+          var dropMsg = 'Saved Mark done for ' + (t.code || T) + ' dropped: ' + (t.code || T) + ' is no longer at ' + stallId + '.';
+          dropItem(item, dropMsg);
+          notes.push(dropMsg);
+          step(rest);
+        })
+        .catch(function () {
+          hubDown = true;
+          finish(notes);
+        });
+    }
+
+    function markSynced(item) {
+      syncedThisRun++;
+      var list = loadSyncList();
+      for (var i = 0; i < list.length; i++) {
+        if (list[i].id === item.id) { list[i].syncedLater = true; break; }
+      }
+      saveSyncList(list);
+      renderSavedSection();
+    }
+
+    function dropItem(item, msg) {
+      var list = loadSyncList();
+      saveSyncList(list.filter(function (i) { return i.id !== item.id; }));
+      renderSavedSection();
+    }
+
+    function finish(notes) {
+      var list = trimSyncList(loadSyncList());
+      saveSyncList(list);
+      replayRunning = false;
+      inflight = false;
+      syncButtons();
+
+      // Show "Synced later: N saved actions." + any notes.
+      var msg = '';
+      if (syncedThisRun > 0) {
+        msg = 'Synced later: ' + syncedThisRun + ' saved action' + (syncedThisRun === 1 ? '' : 's') + '.';
+      }
+      if (notes.length > 0) {
+        msg = (msg ? msg + ' ' : '') + notes.join(' ');
+      }
+      if (msg) {
+        msgFromPoll = false;
+        elMsg.textContent = msg;
+      }
+
+      renderAll();
+
+      // Refresh queue count and lastQueue.
+      fetchT('/api/stalls/' + encodeURIComponent(stallId) + '/queue', null, 4000)
+        .then(function (res) { return res.json(); })
+        .then(function (data) { if (Array.isArray(data)) { onQueueData(data); } })
+        .catch(function () { /* ignore — probe will pick it up */ });
+    }
+
+    // Kick off with the unsynced items.
+    step(unsyncedItems(loadSyncList()));
   }
 
   // ---------------------------------------------------------------------------
@@ -451,7 +1013,7 @@
   }
 
   // ---------------------------------------------------------------------------
-  // Lookup — Find button (Part B)
+  // Lookup — Find button (D3 Part B)
   // ---------------------------------------------------------------------------
   function onLookup() {
     var raw = elLookupInput.value;
@@ -459,14 +1021,14 @@
 
     elLookupMsg.textContent = '';
     elLookupResult.textContent = '';
+    elLookupUndoBtn = null;
 
     if (!code) {
       elLookupMsg.textContent = 'Type a ticket code.';
       return;
     }
 
-    // Fetch a fresh copy of the queue — not the poll's stale data.
-    fetch('/api/stalls/' + encodeURIComponent(stallId) + '/queue')
+    fetchT('/api/stalls/' + encodeURIComponent(stallId) + '/queue', null, 4000)
       .then(function (res) {
         return res.json().then(function (body) {
           return { ok: res.ok, body: body };
@@ -479,14 +1041,16 @@
         }
         var queue = r.body;
         var found = null;
+        var foundIdx = 0;
         for (var i = 0; i < queue.length; i++) {
           if (queue[i].code === code) {
             found = queue[i];
+            foundIdx = i;
             break;
           }
         }
         if (found) {
-          renderLookupResult(found, i + 1);
+          renderLookupResult(found, foundIdx + 1);
         } else if (calledTicket && calledTicket.code === code) {
           elLookupMsg.textContent = code + ' is your called ticket. Use Undo above.';
         } else {
@@ -495,6 +1059,7 @@
       })
       .catch(function () {
         elLookupMsg.textContent = 'Cannot reach the hub. Try again.';
+        if (!hubDown) { hubDown = true; renderAll(); }
       });
   }
 
@@ -538,7 +1103,7 @@
   }
 
   // ---------------------------------------------------------------------------
-  // Lookup — Undo last move (Part B item 10)
+  // Lookup — Undo last move (D3 Part B item 10, online only)
   // ---------------------------------------------------------------------------
   function onLookupUndo(ticketId, ticketCode, btn) {
     if (inflight) return;
@@ -546,8 +1111,7 @@
     elLookupMsg.textContent = '';
     syncButtons();
 
-    // First verify the ticket is still waiting at this stall before posting undo.
-    fetch('/api/tickets/' + encodeURIComponent(ticketId))
+    fetchT('/api/tickets/' + encodeURIComponent(ticketId), null, 4000)
       .then(function (res) {
         return res.json().then(function (body) {
           return { ok: res.ok, status: res.status, body: body };
@@ -555,7 +1119,6 @@
       })
       .then(function (r) {
         if (!r.ok) {
-          // 404 or other error
           elLookupResult.textContent = '';
           elLookupUndoBtn = null;
           elLookupMsg.textContent = 'Ticket no longer exists on the hub.';
@@ -572,8 +1135,7 @@
           syncButtons();
           return;
         }
-        // Ticket confirmed still waiting here — post undo.
-        fetch('/api/tickets/' + encodeURIComponent(ticketId) + '/undo', { method: 'POST' })
+        fetchT('/api/tickets/' + encodeURIComponent(ticketId) + '/undo', { method: 'POST' }, 4000)
           .then(function (res2) {
             return res2.json().then(function (body2) {
               return { ok: res2.ok, status: res2.status, body: body2 };
@@ -596,6 +1158,7 @@
           })
           .catch(function () {
             elLookupMsg.textContent = 'Cannot reach the hub. Try again.';
+            if (!hubDown) { hubDown = true; renderAll(); }
           })
           .finally(function () {
             inflight = false;
@@ -604,21 +1167,32 @@
       })
       .catch(function () {
         elLookupMsg.textContent = 'Cannot reach the hub. Try again.';
+        if (!hubDown) { hubDown = true; renderAll(); }
         inflight = false;
         syncButtons();
       });
   }
 
   // ---------------------------------------------------------------------------
-  // Restore saved ticket on load
+  // Restore saved ticket on load (H2 modified)
   // ---------------------------------------------------------------------------
   function restoreSavedTicket(onDone) {
     var saved = lsGet(lsKey);
+    var list = loadSyncList();
+
+    // If unsynced items exist, keep the saved ticket as-is without a server check.
+    if (saved && saved.id && hasUnsynced(list)) {
+      calledTicket = saved;
+      onDone();
+      return;
+    }
+
     if (!saved || !saved.id) {
       onDone();
       return;
     }
-    fetch('/api/tickets/' + encodeURIComponent(saved.id))
+
+    fetchT('/api/tickets/' + encodeURIComponent(saved.id), null, 4000)
       .then(function (res) {
         return res.json().then(function (body) {
           return { ok: res.ok, status: res.status, body: body };
@@ -643,7 +1217,7 @@
   // Load stall list with retry on network failure
   // ---------------------------------------------------------------------------
   function loadStalls(onSuccess, onUnknown) {
-    fetch('/api/stalls')
+    fetchT('/api/stalls', null, 4000)
       .then(function (res) {
         return res.json();
       })
@@ -698,6 +1272,7 @@
       stallId = found.id;
       stallName = found.name || '';
       lsKey = 'isqolar.staff.called.' + stallId;
+      lsSyncKey = 'isqolar.staff.sync.' + stallId;
 
       buildPage();
       renderHeader();
@@ -706,8 +1281,10 @@
       restoreSavedTicket(function () {
         renderCalledPanel();
         renderLastAction();
-        syncButtons();
+        renderAll();
+        startProbe();
         window.IsQolar.poll('/api/stalls/' + encodeURIComponent(stallId) + '/queue', onQueueData);
+        if (hasUnsynced(loadSyncList())) replay();
       });
 
     }, function () {
