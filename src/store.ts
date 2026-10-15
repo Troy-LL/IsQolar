@@ -72,53 +72,14 @@ export class MemoryStore implements Store {
     await this.setStall({ id: "BSIT-1", name: "BS Information Technology — Stall 1", department: "IT & CS", activeInterviewers: 1, queueLength: 0, nowServing: null });
     await this.setStall({ id: "BSEE-1", name: "BS Electrical Engineering — Stall 1", department: "Engineering", activeInterviewers: 1, queueLength: 0, nowServing: null });
 
-    // ~40 simulated tickets with uneven queue lengths: BSCS-1 busiest (18), BSIT-1 medium (14), BSEE-1 lightest (9)
-    const students: { name: string; course: string; stall: string }[] = [
-      // BSCS-1 — 18 tickets at stall
-      { name: "Ana Reyes",       course: "BSCS", stall: "BSCS-1" },
-      { name: "Carlo Mendoza",   course: "BSCS", stall: "BSCS-1" },
-      { name: "Diana Flores",    course: "BSCS", stall: "BSCS-1" },
-      { name: "Emilio Garcia",   course: "BSCS", stall: "BSCS-1" },
-      { name: "Fiona Castillo",  course: "BSCS", stall: "BSCS-1" },
-      { name: "Gabriel Torres",  course: "BSCS", stall: "BSCS-1" },
-      { name: "Hannah Ramos",    course: "BSCS", stall: "BSCS-1" },
-      { name: "Ivan Dela Cruz",  course: "BSCS", stall: "BSCS-1" },
-      { name: "Julia Santos",    course: "BSCS", stall: "BSCS-1" },
-      { name: "Kevin Lim",       course: "BSCS", stall: "BSCS-1" },
-      { name: "Laura Aquino",    course: "BSCS", stall: "BSCS-1" },
-      { name: "Marco Villanueva",course: "BSCS", stall: "BSCS-1" },
-      { name: "Nina Soriano",    course: "BSCS", stall: "BSCS-1" },
-      { name: "Oscar Bautista",  course: "BSCS", stall: "BSCS-1" },
-      { name: "Paula Reyes",     course: "BSCS", stall: "BSCS-1" },
-      { name: "Ramon Ocampo",    course: "BSCS", stall: "BSCS-1" },
-      { name: "Sofia Fernandez", course: "BSCS", stall: "BSCS-1" },
-      { name: "Tristan Delos Santos", course: "BSCS", stall: "BSCS-1" },
-      // BSIT-1 — 14 tickets at stall
-      { name: "Ben Santos",      course: "BSIT", stall: "BSIT-1" },
-      { name: "Cara Lim",        course: "BSIT", stall: "BSIT-1" },
-      { name: "Eva Tan",         course: "BSIT", stall: "BSIT-1" },
-      { name: "Felix Cruz",      course: "BSIT", stall: "BSIT-1" },
-      { name: "Grace Navarro",   course: "BSIT", stall: "BSIT-1" },
-      { name: "Henry Pascual",   course: "BSIT", stall: "BSIT-1" },
-      { name: "Iris Magno",      course: "BSIT", stall: "BSIT-1" },
-      { name: "Jose Valdez",     course: "BSIT", stall: "BSIT-1" },
-      { name: "Karen Espiritu",  course: "BSIT", stall: "BSIT-1" },
-      { name: "Luis Macaraeg",   course: "BSIT", stall: "BSIT-1" },
-      { name: "Maria Chua",      course: "BSIT", stall: "BSIT-1" },
-      { name: "Neil Aguilar",    course: "BSIT", stall: "BSIT-1" },
-      { name: "Olivia Domingo",  course: "BSIT", stall: "BSIT-1" },
-      { name: "Pedro Reyes",     course: "BSIT", stall: "BSIT-1" },
-      // BSEE-1 — 9 tickets at stall
-      { name: "Dan Cruz",        course: "BSEE", stall: "BSEE-1" },
-      { name: "Queenie Alvarado",course: "BSEE", stall: "BSEE-1" },
-      { name: "Rogelio Manalo",  course: "BSEE", stall: "BSEE-1" },
-      { name: "Sheila Bondoc",   course: "BSEE", stall: "BSEE-1" },
-      { name: "Tomas Guevara",   course: "BSEE", stall: "BSEE-1" },
-      { name: "Uma Salazar",     course: "BSEE", stall: "BSEE-1" },
-      { name: "Victor Padilla",  course: "BSEE", stall: "BSEE-1" },
-      { name: "Wendy Concepcion",course: "BSEE", stall: "BSEE-1" },
-      { name: "Ximena Flores",   course: "BSEE", stall: "BSEE-1" },
+    const pattern: { name: string; course: string; stall: string; count: number }[] = [
+      { name: "Ana Reyes", course: "BSCS", stall: "BSCS-1", count: 9 },
+      { name: "Cara Lim", course: "BSCS", stall: "BSCS-1", count: 9 },
+      { name: "Ben Santos", course: "BSIT", stall: "BSIT-1", count: 7 },
+      { name: "Eva Tan", course: "BSIT", stall: "BSIT-1", count: 7 },
+      { name: "Dan Cruz", course: "BSEE", stall: "BSEE-1", count: 9 },
     ];
+    const students = pattern.flatMap((row) => Array.from({ length: row.count }, () => ({ name: row.name, course: row.course, stall: row.stall })));
 
     for (const s of students) {
       const ticket: StoredTicket = {
