@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 1700" width="1280" height="1700" data-floor="gym-gf">
+  <g class="plan">
+    <rect width="1280" height="1700" fill="#FFFFFF"/>
+    <path class="wing" fill="#FFFFFF" stroke="#6B5E57" stroke-width="2" stroke-linejoin="round" fill-rule="evenodd" d="M80,148 L1200,148 L1200,1620 L80,1620 L80,560 L28,560 L28,400 L80,400 Z"/>
+    <polygon class="corridor" fill="#F3EDE8" stroke="none" points="520,360 700,360 700,610 520,610"/>
+    <polygon class="corridor" fill="#F3EDE8" stroke="none" points="300,545 920,545 920,610 300,610"/>
+    <polygon class="corridor" fill="#F3EDE8" stroke="none" points="300,580 360,580 360,1280 300,1280"/>
+    <polygon class="corridor" fill="#F3EDE8" stroke="none" points="860,580 920,580 920,1280 860,1280"/>
+    <polygon class="corridor" fill="#F3EDE8" stroke="none" points="300,1240 1095,1240 1095,1310 300,1310"/>
+    <g class="rooms">
+      <polygon class="room" data-room="gym-gf-drop-off-area" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="470,40 810,40 810,128 470,128"/>
+      <polygon class="room" data-room="gym-gf-she-female-cr-x2" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="80,148 175,148 175,360 80,360"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="175,148 245,148 245,360 175,360"/>
+      <polygon class="room" data-room="gym-gf-elec-room" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="245,148 400,148 400,360 245,360"/>
+      <polygon class="room" data-room="gym-gf-maintenance-office" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="400,148 545,148 545,360 400,360"/>
+      <polygon class="room" data-room="gym-gf-lobby-porch" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="545,148 860,148 860,360 545,360"/>
+      <polygon class="room" data-room="gym-gf-stock-room-equipment-storage" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="860,148 1035,148 1035,360 860,360"/>
+      <polygon class="room" data-room="gym-gf-he-male-cr-x2" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1035,148 1125,148 1125,360 1035,360"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1125,148 1165,148 1165,360 1125,360"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1165,148 1200,148 1200,360 1165,360"/>
+      <polygon class="room" data-room="gym-gf-porch" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="28,400 80,400 80,560 28,560"/>
+      <polygon class="room" data-room="gym-gf-badminton-court-x2" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="100,385 520,385 520,540 100,540"/>
+      <polygon class="room" data-room="gym-gf-badminton-court-x2" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="700,385 1075,385 1075,540 700,540"/>
+      <polygon class="room" data-room="gym-gf-bleachers-e-w" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="80,580 300,580 300,1280 80,1280"/>
+      <polygon class="room" data-room="gym-gf-basketball-court" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="380,610 860,610 860,1240 380,1240"/>
+      <polygon class="room" data-room="gym-gf-bleachers-e-w" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="920,580 1095,580 1095,860 920,860"/>
+      <polygon class="room" data-room="gym-gf-lobby" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="920,860 1095,860 1095,1040 920,1040"/>
+      <polygon class="room" data-room="gym-gf-bleachers-e-w" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="920,1040 1095,1040 1095,1280 920,1280"/>
+      <polygon class="room" data-room="gym-gf-porch" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1095,380 1200,380 1200,1280 1095,1280"/>
+      <polygon class="room" data-room="gym-gf-she-female-cr-x2" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="80,1310 210,1310 210,1450 80,1450"/>
+      <polygon class="room" data-room="gym-gf-female-dressing-room" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="210,1310 450,1310 450,1470 210,1470"/>
+      <polygon class="room" data-room="gym-gf-fire-pump-room" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="80,1470 280,1470 280,1590 80,1590"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="280,1470 430,1470 430,1590 280,1590"/>
+      <polygon class="room" data-room="gym-gf-stage" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="500,1310 810,1310 810,1490 500,1490"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="500,1490 810,1490 810,1590 500,1590"/>
+      <polygon class="room" data-room="gym-gf-male-dressing-room" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="850,1310 1040,1310 1040,1470 850,1470"/>
+      <polygon class="room" data-room="gym-gf-he-male-cr-x2" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1040,1310 1180,1310 1180,1450 1040,1450"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="850,1470 1000,1470 1000,1590 850,1590"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1000,1470 1180,1470 1180,1590 1000,1590"/>
+    </g>
+    <g fill="none" stroke="#B8ACA3" stroke-width="1">
+      <line x1="310" y1="385" x2="310" y2="540"/>
+      <line x1="100" y1="462" x2="520" y2="462"/>
+      <line x1="887" y1="385" x2="887" y2="540"/>
+      <line x1="700" y1="462" x2="1075" y2="462"/>
+      <line x1="380" y1="925" x2="860" y2="925"/>
+      <circle cx="620" cy="925" r="48"/>
+      <circle cx="620" cy="710" r="18"/>
+      <circle cx="620" cy="1140" r="18"/>
+      <path d="M500,610 L500,730 L740,730 L740,610"/>
+      <path d="M500,1240 L500,1120 L740,1120 L740,1240"/>
+      <line x1="104" y1="592" x2="104" y2="1268"/>
+      <line x1="132" y1="592" x2="132" y2="1268"/>
+      <line x1="160" y1="592" x2="160" y2="1268"/>
+      <line x1="188" y1="592" x2="188" y2="1268"/>
+      <line x1="216" y1="592" x2="216" y2="1268"/>
+      <line x1="244" y1="592" x2="244" y2="1268"/>
+      <line x1="272" y1="592" x2="272" y2="1268"/>
+      <line x1="944" y1="592" x2="944" y2="848"/>
+      <line x1="972" y1="592" x2="972" y2="848"/>
+      <line x1="1000" y1="592" x2="1000" y2="848"/>
+      <line x1="1028" y1="592" x2="1028" y2="848"/>
+      <line x1="1056" y1="592" x2="1056" y2="848"/>
+      <line x1="944" y1="1052" x2="944" y2="1268"/>
+      <line x1="972" y1="1052" x2="972" y2="1268"/>
+      <line x1="1000" y1="1052" x2="1000" y2="1268"/>
+      <line x1="1028" y1="1052" x2="1028" y2="1268"/>
+      <line x1="1056" y1="1052" x2="1056" y2="1268"/>
+      <line x1="183" y1="168" x2="237" y2="168"/>
+      <line x1="183" y1="196" x2="237" y2="196"/>
+      <line x1="183" y1="224" x2="237" y2="224"/>
+      <line x1="183" y1="252" x2="237" y2="252"/>
+      <line x1="183" y1="280" x2="237" y2="280"/>
+      <line x1="183" y1="308" x2="237" y2="308"/>
+      <line x1="183" y1="336" x2="237" y2="336"/>
+      <line x1="1173" y1="168" x2="1192" y2="168"/>
+      <line x1="1173" y1="196" x2="1192" y2="196"/>
+      <line x1="1173" y1="224" x2="1192" y2="224"/>
+      <line x1="1173" y1="252" x2="1192" y2="252"/>
+      <line x1="1173" y1="280" x2="1192" y2="280"/>
+      <line x1="1173" y1="308" x2="1192" y2="308"/>
+      <line x1="1173" y1="336" x2="1192" y2="336"/>
+      <line x1="292" y1="1490" x2="418" y2="1490"/>
+      <line x1="292" y1="1514" x2="418" y2="1514"/>
+      <line x1="292" y1="1538" x2="418" y2="1538"/>
+      <line x1="292" y1="1562" x2="418" y2="1562"/>
+      <line x1="862" y1="1490" x2="988" y2="1490"/>
+      <line x1="862" y1="1514" x2="988" y2="1514"/>
+      <line x1="862" y1="1538" x2="988" y2="1538"/>
+      <line x1="862" y1="1562" x2="988" y2="1562"/>
+    </g>
+    <g class="room-nums" fill="#4A403A" font-family="system-ui,sans-serif" font-weight="600" text-anchor="middle">
+      <text x="640" y="84" font-size="13" dominant-baseline="central">Drop-off Area</text>
+      <text x="127" y="254" font-size="13" dominant-baseline="central">SHE</text>
+      <text x="322" y="246" font-size="12" dominant-baseline="central">
+        <tspan x="322" dy="-8">Elec</tspan>
+        <tspan x="322" dy="16">Room</tspan>
+      </text>
+      <text x="472" y="246" font-size="11" dominant-baseline="central">
+        <tspan x="472" dy="-8">Maintenance</tspan>
+        <tspan x="472" dy="16">Office?</tspan>
+      </text>
+      <text x="760" y="220" font-size="13" dominant-baseline="central">Lobby Porch</text>
+      <text x="947" y="246" font-size="11" dominant-baseline="central">
+        <tspan x="947" dy="-16">Stock Room /</tspan>
+        <tspan x="947" dy="14">Equipment</tspan>
+        <tspan x="947" dy="14">Storage</tspan>
+      </text>
+      <text x="1080" y="254" font-size="13" dominant-baseline="central">HE</text>
+      <text x="1145" y="254" font-size="10" dominant-baseline="central">JAN.</text>
+      <text x="54" y="528" font-size="9" dominant-baseline="central">Porch</text>
+      <text x="310" y="462" font-size="13" dominant-baseline="central">
+        <tspan x="310" dy="-8">Badminton</tspan>
+        <tspan x="310" dy="16">Court</tspan>
+      </text>
+      <text x="887" y="462" font-size="13" dominant-baseline="central">
+        <tspan x="887" dy="-8">Badminton</tspan>
+        <tspan x="887" dy="16">Court</tspan>
+      </text>
+      <text transform="rotate(-90 190 930)" x="190" y="930" font-size="14" dominant-baseline="central">Bleachers</text>
+      <text x="620" y="840" font-size="14" dominant-baseline="central">Basketball Court</text>
+      <text transform="rotate(-90 1007 720)" x="1007" y="720" font-size="12" dominant-baseline="central">Bleachers</text>
+      <text x="1007" y="950" font-size="13" dominant-baseline="central">Lobby</text>
+      <text transform="rotate(-90 1007 1160)" x="1007" y="1160" font-size="12" dominant-baseline="central">Bleachers</text>
+      <text x="1147" y="420" font-size="12" dominant-baseline="central">Porch</text>
+      <text x="145" y="1380" font-size="13" dominant-baseline="central">SHE</text>
+      <text x="330" y="1390" font-size="12" dominant-baseline="central">
+        <tspan x="330" dy="-8">Female</tspan>
+        <tspan x="330" dy="16">Dressing Room</tspan>
+      </text>
+      <text x="180" y="1530" font-size="12" dominant-baseline="central">
+        <tspan x="180" dy="-8">EE Pump</tspan>
+        <tspan x="180" dy="16">Room</tspan>
+      </text>
+      <text x="655" y="1400" font-size="16" dominant-baseline="central">Stage</text>
+      <text x="655" y="1540" font-size="12" dominant-baseline="central">Back Stage</text>
+      <text x="945" y="1390" font-size="12" dominant-baseline="central">
+        <tspan x="945" dy="-8">Male</tspan>
+        <tspan x="945" dy="16">Dressing Room</tspan>
+      </text>
+      <text x="1110" y="1380" font-size="13" dominant-baseline="central">HE</text>
+      <text x="1090" y="1530" font-size="13" dominant-baseline="central">STO.</text>
+    </g>
+    <g class="marks" font-family="system-ui,sans-serif" font-weight="700" text-anchor="middle">
+      <g transform="translate(620 280)">
+        <path fill="#FFC72C" stroke="#8B0000" stroke-width="2" d="M0,-26 C-12,-26 -20,-16 -20,-6 C-20,8 0,26 0,26 C0,26 20,8 20,-6 C20,-16 12,-26 0,-26 Z"/>
+        <circle cy="-8" r="5" fill="#8B0000"/>
+      </g>
+      <g fill="#8B0000">
+        <rect x="32" y="458" width="44" height="18" rx="1"/>
+        <rect x="590" y="328" width="52" height="20" rx="1"/>
+        <rect x="748" y="328" width="52" height="20" rx="1"/>
+        <rect x="1008" y="488" width="52" height="20" rx="1"/>
+        <rect x="8" y="1348" width="58" height="36" rx="1"/>
+        <rect x="452" y="1360" width="40" height="64" rx="1"/>
+        <rect x="812" y="1360" width="36" height="64" rx="1"/>
+        <rect x="1206" y="1348" width="58" height="36" rx="1"/>
+      </g>
+      <g fill="#FFC72C" font-size="10">
+        <text x="54" y="471" dominant-baseline="central">EXIT</text>
+        <text x="616" y="338" dominant-baseline="central">EXIT</text>
+        <text x="774" y="338" dominant-baseline="central">EXIT</text>
+        <text x="1034" y="498" dominant-baseline="central">EXIT</text>
+        <text x="37" y="1366" font-size="8" dominant-baseline="central">
+          <tspan x="37" dy="0">FIRE</tspan>
+          <tspan x="37" dy="11">EXIT</tspan>
+        </text>
+        <text x="472" y="1384" font-size="8" dominant-baseline="central">
+          <tspan x="472" dy="0">FIRE</tspan>
+          <tspan x="472" dy="12">EXIT</tspan>
+        </text>
+        <text x="830" y="1384" font-size="8" dominant-baseline="central">
+          <tspan x="830" dy="0">FIRE</tspan>
+          <tspan x="830" dy="12">EXIT</tspan>
+        </text>
+        <text x="1235" y="1366" font-size="8" dominant-baseline="central">
+          <tspan x="1235" dy="0">FIRE</tspan>
+          <tspan x="1235" dy="11">EXIT</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+</svg>
