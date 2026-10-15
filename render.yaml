@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: isqolar
+    runtime: node
+    plan: free
+    buildCommand: npm ci --include=dev
+    startCommand: npm start
+    autoDeploy: true
+    envVars:
+      - key: SEED
+        value: "1"

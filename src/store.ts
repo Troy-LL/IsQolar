@@ -8,7 +8,7 @@ export interface StoredTicket extends Ticket {
 
 // ---------------------------------------------------------------------------
 // Store interface — every operation server.ts needs.
-// Async so a remote store (Redis, day 2) fits without changing callers.
+// Async so a different store can fit later without changing callers.
 // ---------------------------------------------------------------------------
 
 export interface Store {
@@ -35,7 +35,7 @@ export interface Store {
 
 // ---------------------------------------------------------------------------
 // MemoryStore — in-process implementation used for now.
-// STORE=redis will select the Upstash adapter on day 2 (task O1).
+// Online mode runs on Render as one long-lived process, so MemoryStore works there too (ADR 005).
 // ---------------------------------------------------------------------------
 
 export class MemoryStore implements Store {
@@ -199,7 +199,7 @@ export class MemoryStore implements Store {
 
 const _store: Store = new MemoryStore();
 
-/** Returns the active store. STORE=redis will select the Upstash adapter on day 2 (task O1). */
+/** Returns the active store. MemoryStore on both the hub and Render (ADR 005). */
 export function getStore(): Store {
   return _store;
 }
