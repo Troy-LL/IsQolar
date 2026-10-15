@@ -14,6 +14,10 @@ const WINGS = [
   ["South wing", ["stair-south-north", "stair-south-south"]],
 ];
 
+const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const EASE_IO = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+const PEEK = 132;
+const LEG_PAD = 48;
 const S = { floors: [], paths: null, stairs: null, campus: null, rooms: [], inside: false, floorId: null, sel: null, route: null, step: -1, cam: {} };
 
 function svg(tag, attrs = {}, text) {
@@ -28,7 +32,7 @@ function el(tag, attrs = {}, text) {
   if (text !== undefined) n.textContent = text;
   return n;
 }
-const wait = (ms) => new Promise((r) => setTimeout(r, ms * SLOW));
+const wait = (ms) => new Promise((r) => setTimeout(r, RM ? 0 : ms * SLOW));
 const stage = (s) => (document.body.dataset.stage = s);
 
 // ---------- camera ----------
@@ -36,6 +40,7 @@ function layerOf(name) { return $(name); }
 function setCam(name, c) {
   S.cam[name] = c;
   layerOf(name).setAttribute("viewBox", `${c.x} ${c.y} ${c.w} ${c.h}`);
+  if (name === "indoor") queueLabels();
 }
 function insets() {
   const W = innerWidth;
@@ -46,22 +51,30 @@ function insets() {
   const top = desk ? 24 : 80;
   const left = desk && open ? 420 : 12;
   const right = S.inside ? 76 : 16;
-  const bottom = !desk && open ? sheet.offsetHeight + 12 : 16;
+  const bottom = !desk && open ? snapPx() + 12 : 16;
   return { W, H, top, left, right, bottom };
 }
-function fitCam(box) {
-  const { W, H, top, left, right, bottom } = insets();
+function fitCam(box, padPx = 0, bottomPx) {
+  const ins = insets();
+  const { W, H } = ins;
+  const top = ins.top + padPx;
+  const left = ins.left + padPx;
+  const right = ins.right + padPx;
+  const bottom = (bottomPx ?? ins.bottom) + padPx;
   const aw = Math.max(80, W - left - right);
   const ah = Math.max(80, H - top - bottom);
   const s = Math.min(aw / box.w, ah / box.h);
   return { x: box.x + box.w / 2 - (left + aw / 2) / s, y: box.y + box.h / 2 - (top + ah / 2) / s, w: W / s, h: H / s };
 }
-function tween(name, to, ms) {
+function tween(name, to, ms, ease = (t) => 1 - Math.pow(1 - t, 3)) {
   const from = S.cam[name] || to;
-  const dur = ms * SLOW;
+  const dur = RM ? 0 : ms * SLOW;
+  if (!dur) {
+    setCam(name, to);
+    return Promise.resolve();
+  }
   return new Promise((done) => {
     const t0 = performance.now();
-    const ease = (t) => 1 - Math.pow(1 - t, 3);
     function frame(now) {
       const t = Math.min(1, (now - t0) / dur);
       const k = ease(t);
@@ -83,7 +96,7 @@ function bbox(points, pad = 0) {
 // ---------- outdoor (MapLibre + OpenStreetMap) ----------
 const STYLE = "https://tiles.openfreemap.org/styles/liberty";
 let map = null;
-const flyDur = (ms) => ms * SLOW;
+const flyDur = (ms) => (RM ? 0 : ms * SLOW);
 function lngLatBox(coords) {
   const xs = coords.map((c) => c[0]);
   const ys = coords.map((c) => c[1]);
@@ -96,7 +109,7 @@ function mapPadding() {
 function moveDone(ms = 1400) {
   // moveend does not fire when the camera is already there, so also stop waiting after the move time.
   return new Promise((r) => {
-    const t = setTimeout(r, flyDur(ms) + 400);
+    const t = setTimeout(r, flyDur(ms) + (RM ? 50 : 400));
     map.once("moveend", () => {
       clearTimeout(t);
       r();
@@ -105,8 +118,24 @@ function moveDone(ms = 1400) {
 }
 async function flyTo(opts) {
   const done = moveDone(opts.duration || 1400);
-  const p = mapPadding();
-  map.flyTo({ ...opts, padding: { top: p.top, left: p.left, right: p.right, bottom: p.bottom }, duration: flyDur(opts.duration || 1400), curve: 1.3, easing: (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2), essential: true });
+  const p = opts.padding || mapPadding();
+  const padding = { top: p.top, left: p.left, right: p.right, bottom: p.bottom };
+  if (RM) map.jumpTo({ ...opts, padding });
+  else map.flyTo({ curve: 1.3, easing: EASE_IO, ...opts, padding, duration: flyDur(opts.duration || 1400), essential: true });
+  await done;
+}
+// Fit the outdoor camera to one leg: 48px padding, peek height at the bottom, 600ms easeInOutCubic.
+async function fitLeg(coords) {
+  const { top, left, right } = insets();
+  const desk = innerWidth >= 900;
+  const padding = { top: top + LEG_PAD, left: left + LEG_PAD, right: right + LEG_PAD, bottom: (desk ? 16 : PEEK) + LEG_PAD };
+  const bearing = map.getBearing();
+  const cam = map.cameraForBounds(lngLatBox(coords), { padding, bearing, maxZoom: 18.4 });
+  if (!cam) return;
+  const done = moveDone(600);
+  const opts = { center: cam.center, zoom: cam.zoom - 0.2, pitch: 30, bearing, padding: { top: 0, left: 0, right: 0, bottom: 0 } };
+  if (RM) map.jumpTo(opts);
+  else map.easeTo({ ...opts, duration: flyDur(600), easing: EASE_IO });
   await done;
 }
 async function fitTo(coords, extra = {}) {
@@ -169,6 +198,8 @@ function initMap() {
           const f = map.getFilter(layer.id);
           const notCampus = ["!", ["within", ring]];
           map.setFilter(layer.id, f ? ["all", f, notCampus] : notCampus);
+          // The basemap's own 3D buildings ignore the campus filter at tile edges (its Main Building is 41 m), so keep the basemap flat.
+          if (layer.type === "fill-extrusion") map.setLayoutProperty(layer.id, "visibility", "none");
         }
       }
       map.addSource("pup-campus", { type: "geojson", data: campus.campus });
@@ -181,20 +212,26 @@ function initMap() {
         type: "fill-extrusion",
         source: "pup-buildings",
         paint: {
-          "fill-extrusion-color": ["case", ["boolean", ["feature-state", "sel"], false], "#ffcc00", ["get", "main"], "#a32626", ["==", ["get", "name"], null], "#d8d0cb", "#e3d5cc"],
-          "fill-extrusion-height": ["get", "height"],
+          "fill-extrusion-color": "#C9BFB7",
+          "fill-extrusion-height": ["-", ["get", "height"], 0.3],
           "fill-extrusion-base": 0,
-          "fill-extrusion-opacity": 0.92,
+          "fill-extrusion-opacity": 0.95,
+          "fill-extrusion-vertical-gradient": true,
         },
       });
-      map.addLayer({ id: "pup-walk-case", type: "line", source: "pup-walk", layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": "#ffffff", "line-width": 9 } });
-      map.addLayer({ id: "pup-walk", type: "line", source: "pup-walk", layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": "#880000", "line-width": 5, "line-dasharray": [1.4, 1] } });
+      // Roof caps: a thin slab on top so roofs read lighter than walls.
+      map.addLayer({ id: "pup-roof", type: "fill-extrusion", source: "pup-buildings", paint: { "fill-extrusion-color": "#E9E2DC", "fill-extrusion-base": ["-", ["get", "height"], 0.3], "fill-extrusion-height": ["get", "height"], "fill-extrusion-opacity": 1, "fill-extrusion-vertical-gradient": false } });
+      map.addLayer({ id: "pup-roof-sel", type: "fill-extrusion", source: "pup-buildings", filter: ["==", ["get", "osm"], ""], paint: { "fill-extrusion-color": "#8B0000", "fill-extrusion-base": ["-", ["get", "height"], 0.29], "fill-extrusion-height": ["+", ["get", "height"], 0.02], "fill-extrusion-opacity": 0.8, "fill-extrusion-vertical-gradient": false } });
+      map.addLayer({ id: "pup-walk-case", type: "line", source: "pup-walk", layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": "#ffffff", "line-width": 12 } });
+      map.addLayer({ id: "pup-walk", type: "line", source: "pup-walk", layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": "#8B0000", "line-width": 6 } });
+      map.addSource("pup-wings", { type: "geojson", data: campus.wingLabels });
+      map.addLayer({ id: "pup-wings", type: "symbol", source: "pup-wings", minzoom: 17.6, layout: { "text-field": ["upcase", ["get", "name"]], "text-font": ["Noto Sans Bold"], "text-size": 11, "text-letter-spacing": 0.08 }, paint: { "text-color": "#6B5E57", "text-halo-color": "#ffffff", "text-halo-width": 1.5 } });
       map.addLayer({
         id: "pup-names",
         type: "symbol",
         source: "pup-buildings",
         filter: ["!=", ["get", "name"], null],
-        layout: { "text-field": ["get", "name"], "text-font": ["Noto Sans Bold"], "text-size": ["case", ["get", "main"], 14, 11], "text-max-width": 8, "text-allow-overlap": false },
+        layout: { "text-field": ["get", "name"], "text-font": ["Noto Sans Bold"], "text-size": ["case", ["get", "main"], 14, 11], "text-max-width": 8, "text-allow-overlap": false, "symbol-z-order": "source" },
         paint: { "text-color": ["case", ["get", "main"], "#5c0000", "#1f1a1a"], "text-halo-color": "#ffffff", "text-halo-width": 2 },
       });
       map.on("click", "pup-3d", (e) => {
@@ -205,6 +242,8 @@ function initMap() {
       });
       map.on("mouseenter", "pup-3d", () => (map.getCanvas().style.cursor = "pointer"));
       map.on("mouseleave", "pup-3d", () => (map.getCanvas().style.cursor = ""));
+      map.on("rotate", syncCompass);
+      syncCompass();
       marker(campus.gate.lngLat, "#1b6e3f", "Main gate").addTo(map);
       marker(campus.entrance.lngLat, "#ffcc00", "Entrance ?").addTo(map);
       map.once("idle", () => {
@@ -217,28 +256,39 @@ function initMap() {
     });
   });
 }
-let selId = null;
 function highlight(f) {
-  if (!map || !map.getSource("pup-buildings")) return;
-  if (selId) map.setFeatureState({ source: "pup-buildings", id: selId }, { sel: false });
-  selId = f ? f.properties.osm : null;
-  if (selId) map.setFeatureState({ source: "pup-buildings", id: selId }, { sel: true });
+  if (!map || !map.getLayer("pup-roof-sel")) return;
+  const id = f ? f.properties.osm : "";
+  map.setFilter("pup-roof-sel", ["==", ["get", "osm"], id]);
+  map.setFilter("pup-roof", ["!=", ["get", "osm"], id]);
+}
+function syncCompass() {
+  const b = map ? map.getBearing() : 0;
+  const c = $("compass");
+  c.hidden = S.inside || Math.abs(b) < 0.5;
+  c.firstElementChild.style.transform = `rotate(${-b}deg)`;
+  const fl = $("floors");
+  c.style.top = fl.hidden ? "" : `${fl.getBoundingClientRect().bottom + 10}px`;
 }
 function drawOutdoor() {
   if (!map || !map.getSource("pup-walk")) return;
   const leg = S.route && S.route.legs.find((l) => l.floorId === "outdoor");
+  const cur = S.route && S.step >= 0 && S.route.steps[S.step].floorId === "outdoor";
+  map.setPaintProperty("pup-walk", "line-opacity", cur ? 1 : 0.35);
+  map.setPaintProperty("pup-walk-case", "line-opacity", cur ? 1 : 0.35);
   map.getSource("pup-walk").setData({
     type: "FeatureCollection",
     features: leg ? [{ type: "Feature", properties: {}, geometry: { type: "LineString", coordinates: leg.points.map((p) => [p.x, p.y]) } }] : [],
   });
 }
 
-function drawLine(root, pts, width, dash) {
+// Route line in screen pixels: 6px brand red over a 3px white casing.
+function drawLine(root, pts, current) {
   const p = pts.map((q) => `${q.x.toFixed(1)},${q.y.toFixed(1)}`).join(" ");
-  root.append(
-    svg("polyline", { points: p, fill: "none", stroke: "#fff", "stroke-width": width * 1.8, "stroke-linecap": "round", "stroke-linejoin": "round" }),
-    svg("polyline", { points: p, fill: "none", stroke: "#880000", "stroke-width": width, "stroke-dasharray": `${dash * 2.4} ${dash * 1.4}`, "stroke-linecap": "round", "stroke-linejoin": "round", class: "route-line" })
-  );
+  const g = svg("g", { opacity: current ? 1 : 0.35 });
+  const base = { points: p, fill: "none", "stroke-linecap": "round", "stroke-linejoin": "round", "vector-effect": "non-scaling-stroke" };
+  g.append(svg("polyline", { ...base, stroke: "#fff", "stroke-width": 12 }), svg("polyline", { ...base, stroke: "#8B0000", "stroke-width": 6, class: "route-line" }));
+  root.append(g);
 }
 
 // ---------- indoor ----------
@@ -298,17 +348,16 @@ function drawIndoor(floorId) {
   root.append(mass, halls, corr);
 
   const st = S.stairs.floors[floorId].stairs;
-  const names = svg("g");
+  const wings = [];
   for (const [name, ids] of WINGS) {
     const ps = ids.filter((id) => st[id]).map((id) => t(st[id].x, st[id].y));
     if (ps.length < 2) continue;
-    const mx = (ps[0].x + ps[1].x) / 2;
-    const my = (ps[0].y + ps[1].y) / 2;
-    names.append(svg("text", { x: mx, y: my, class: "w-name" }, name.toUpperCase()));
+    wings.push({ text: name.toUpperCase(), p: { x: (ps[0].x + ps[1].x) / 2, y: (ps[0].y + ps[1].y) / 2 } });
   }
-  root.append(names);
 
   const leg = S.route ? S.route.legs.find((l) => l.floorId === floorId) : null;
+  const onLeg = new Set(leg ? leg.points.map((q) => `${q.x.toFixed(5)},${q.y.toFixed(5)}`) : []);
+  const labels = [];
   const destId = S.sel && S.sel.room ? S.sel.room.id : null;
   const rooms = svg("g");
   const seen = new Set();
@@ -320,11 +369,12 @@ function drawIndoor(floorId) {
     seen.add(key);
     const p = t(r.x, r.y);
     const lab = shortLabel(r);
-    const long = lab.length > 5;
-    const w = long ? Math.max(44, lab.length * 4.6) : 34;
+    const w = lab.length > 5 ? Math.max(44, lab.length * 4.6) : 34;
     const g = svg("g", { class: "room" });
     g.append(svg("rect", { x: p.x - w / 2, y: p.y - 9, width: w, height: 18, rx: 4, class: `r-tile${r.flag ? " unsure" : ""}${isDest ? " dest" : ""}` }));
-    g.append(svg("text", { x: p.x, y: p.y, class: `r-lab${long ? " long" : ""}${isDest ? " dest" : ""}` }, lab));
+    const n = f.nodes.find((x) => x.id === r.node);
+    const route = n && onLeg.has(`${n.x.toFixed(5)},${n.y.toFixed(5)}`);
+    labels.push({ text: lab, p, prio: isDest ? 0 : route ? 2 : 3 });
     g.append(svg("title", {}, roomName(r)));
     g.addEventListener("click", (e) => {
       if (EDIT) return;
@@ -335,30 +385,101 @@ function drawIndoor(floorId) {
     if (isDest) dest = p;
   }
   root.append(rooms);
-  for (const [id, q] of Object.entries(st)) {
-    const p = t(q.x, q.y);
-    const g = svg("g");
-    g.append(svg("rect", { x: p.x - 9, y: p.y - 9, width: 18, height: 18, rx: 3, fill: "#1f1a1a" }));
-    g.append(svg("path", { d: `M${p.x - 5} ${p.y + 5} h4 v-4 h4 v-4 h3`, fill: "none", stroke: "#fff", "stroke-width": 1.8 }));
-    g.append(svg("title", {}, (S.stairs.stairs.find((s) => s.id === id) || {}).name || id));
-    root.append(g);
-  }
-  if (f.start) {
-    const s = N.get(f.start);
-    root.append(svg("circle", { cx: s.x, cy: s.y, r: 9, fill: "#1b6e3f", stroke: "#fff", "stroke-width": 3 }));
-    root.append(svg("text", { x: s.x + 13, y: s.y + 4, class: "b-lab", style: "font-size:11px;fill:#1b6e3f" }, floorId === S.floors[0].id ? "You are here (entrance)" : "You are here"));
-  }
+  const stairs = Object.entries(st).map(([id, q]) => ({ id, p: t(q.x, q.y), name: (S.stairs.stairs.find((s) => s.id === id) || {}).name || id }));
   if (leg) {
-    const pts = leg.points.map((q) => t(q.x, q.y));
-    drawLine(root, pts, 7, 6);
-    const a = pts[0];
-    root.append(svg("circle", { cx: a.x, cy: a.y, r: 8, fill: "#1b6e3f", stroke: "#fff", "stroke-width": 3 }));
+    const cur = S.step >= 0 && S.route.steps[S.step].floorId === floorId;
+    drawLine(root, leg.points.map((q) => t(q.x, q.y)), cur);
   }
-  if (dest) {
-    root.append(
-      svg("path", { d: `M${dest.x} ${dest.y - 12} c-9 -10 -14 -16 -14 -24 a14 14 0 1 1 28 0 c0 8 -5 14 -14 24z`, fill: "#880000", stroke: "#fff", "stroke-width": 2.5 }),
-      svg("circle", { cx: dest.x, cy: dest.y - 36, r: 5.5, fill: "#ffcc00" })
-    );
+  const start = f.start ? N.get(f.start) : null;
+  const lab = svg("g", { id: "labs" });
+  root.append(lab);
+  S.ix = { floorId, wings, labels, stairs, start, startText: floorId === S.floors[0].id ? "You are here (entrance)" : "You are here", legStart: leg ? t(leg.points[0].x, leg.points[0].y) : null, dest };
+  queueLabels();
+}
+
+// Indoor zoom: 18 when the whole floor fits, plus one per doubling, so "zoom 19" means 2x the fit.
+function indoorZoom() {
+  if (!S.floorId || !S.cam.indoor) return 18;
+  return 18 + Math.log2(fitCam(floorBox(S.floorId)).w / S.cam.indoor.w);
+}
+let labelQueued = false;
+function queueLabels() {
+  if (labelQueued) return;
+  labelQueued = true;
+  requestAnimationFrame(() => {
+    labelQueued = false;
+    drawLabels();
+  });
+}
+function drawLabels() {
+  const g = document.getElementById("labs");
+  const pin = $("pin");
+  if (!g || !S.ix || !S.cam.indoor) {
+    pin.hidden = true;
+    return;
+  }
+  g.replaceChildren();
+  const c = S.cam.indoor;
+  const u = c.w / innerWidth; // units per screen px
+  const scr = (p) => ({ x: (p.x - c.x) / u, y: (p.y - c.y) / u });
+  const z = indoorZoom();
+  document.body.dataset.izoom = z.toFixed(2);
+  const taken = [];
+  const free = (b) => !taken.some((o) => b.x < o.x + o.w && o.x < b.x + b.w && b.y < o.y + o.h && o.y < b.y + b.h);
+  const ix = S.ix;
+  if (ix.dest) {
+    const d = scr(ix.dest);
+    taken.push({ x: d.x - 14, y: d.y - 40, w: 28, h: 40 });
+  }
+  // stairs icons, fixed 18px
+  for (const s of ix.stairs) {
+    const q = scr(s.p);
+    const b = { x: q.x - 9, y: q.y - 9, w: 18, h: 18 };
+    if (z >= 19 && !free(b)) continue;
+    taken.push(b);
+    const k = u;
+    const sg = svg("g", { class: "stair" });
+    sg.append(svg("rect", { x: s.p.x - 9 * k, y: s.p.y - 9 * k, width: 18 * k, height: 18 * k, rx: 3 * k, fill: "#1f1a1a" }));
+    sg.append(svg("path", { d: `M${s.p.x - 5 * k} ${s.p.y + 5 * k} h${4 * k} v${-4 * k} h${4 * k} v${-4 * k} h${3 * k}`, fill: "none", stroke: "#fff", "stroke-width": 1.8 * k }));
+    sg.append(svg("title", {}, s.name));
+    g.append(sg);
+  }
+  const dot = (p, color) => g.append(svg("circle", { cx: p.x, cy: p.y, r: 8 * u, fill: color, stroke: "#fff", "stroke-width": 3 * u }));
+  if (ix.start) {
+    dot(ix.start, "#1b6e3f");
+    const q = scr(ix.start);
+    taken.push({ x: q.x - 9, y: q.y - 9, w: 18, h: 18 });
+  }
+  if (ix.legStart) dot(ix.legStart, "#1b6e3f");
+  if (z < 19) {
+    for (const w of ix.wings) {
+      const q = scr(w.p);
+      const bw = w.text.length * 9;
+      const box = { x: q.x - bw / 2, y: q.y - 9, w: bw, h: 18 };
+      // nudge below a stair icon instead of drawing over it
+      const y = free(box) ? w.p.y : w.p.y + 22 * u;
+      g.append(svg("text", { x: w.p.x, y, class: "w-name", style: `font-size:${13 * u}px;letter-spacing:${0.08 * 13 * u}px` }, w.text));
+    }
+  } else {
+    const order = [...ix.labels].sort((a, b) => a.prio - b.prio);
+    for (const l of order) {
+      const q = scr(l.p);
+      const w = l.text.length * 6.4 + 6;
+      const b = { x: q.x - w / 2, y: q.y - 8, w, h: 16 };
+      if (!free(b)) continue;
+      taken.push(b);
+      g.append(svg("text", { x: l.p.x, y: l.p.y, class: `r-lab${l.prio === 0 ? " dest" : ""}`, style: `font-size:${11 * u}px;stroke-width:${3 * u}px` }, l.text));
+    }
+  }
+  if (ix.start) {
+    const q = scr(ix.start);
+    const b = { x: q.x + 12, y: q.y - 8, w: ix.startText.length * 6.4, h: 16 };
+    if (free(b)) g.append(svg("text", { x: ix.start.x + 13 * u, y: ix.start.y + 4 * u, class: "b-lab", style: `font-size:${11 * u}px;fill:#1b6e3f;stroke-width:${3 * u}px` }, ix.startText));
+  }
+  pin.hidden = !(S.inside && ix.dest);
+  if (ix.dest) {
+    const d = scr(ix.dest);
+    pin.style.transform = `translate(${d.x}px, ${d.y}px)`;
   }
 }
 
@@ -368,33 +489,58 @@ function drawFloorTabs() {
   for (const f of [...S.floors].reverse()) {
     if (!S.paths.floors[f.id]) continue;
     const b = el("button", { type: "button", "aria-pressed": String(f.id === S.floorId) }, floorShort(f));
-    if (S.route && S.route.legs.some((l) => l.floorId === f.id)) b.classList.add("on-route");
+    if (S.route) {
+      const indoor = S.route.legs.filter((l) => l.floorId !== "outdoor");
+      const cap = indoor[0] && indoor[0].floorId === f.id ? "Start" : indoor.at(-1) && indoor.at(-1).floorId === f.id ? "Goal" : "";
+      if (cap) b.append(el("small", {}, cap));
+    }
     b.addEventListener("click", () => showFloor(f.id));
     nav.append(b);
   }
 }
 
 // ---------- transitions ----------
+function axisBearing() {
+  // Long axis of the Main Building: up the screen on a phone, across on a wide screen.
+  const az = S.campus.mainBearing || 0;
+  let b = innerWidth < innerHeight ? az : az - 90;
+  while (b > 90) b -= 180;
+  while (b < -90) b += 180;
+  return b;
+}
+const FLY_IN = 1400;
 async function enterBuilding(floorId) {
+  const prev = S.floorId;
   S.floorId = floorId;
   if (!S.inside) {
     stage("zooming");
-    highlight(null);
-    if (map) {
-      const c = mainCoords();
-      const [[w, so], [e, n]] = lngLatBox(c);
-      await flyTo({ center: [(w + e) / 2, (so + n) / 2], zoom: 18.4, pitch: 62, bearing: -25, duration: 1600 });
+    highlight(mainFeatures()[0]);
+    const fade = async () => {
+      stage("crossfade");
+      drawIndoor(floorId);
+      setCam("indoor", fitCam(floorBox(floorId)));
+      S.inside = true;
+      document.body.classList.add("inside");
+      $("back").hidden = false;
+      $("floors").hidden = false;
+      syncCompass();
+      await wait(350);
+    };
+    if (map && !RM) {
+      const [[w, so], [e, n]] = lngLatBox(mainCoords());
+      const flight = flyTo({ center: [(w + e) / 2, (so + n) / 2], zoom: 18.6, pitch: 0, bearing: axisBearing(), duration: FLY_IN, curve: 1.4 });
+      await wait(FLY_IN * 0.7);
+      await Promise.all([flight, fade()]);
+    } else {
+      await fade();
     }
-    stage("crossfade");
-    drawIndoor(floorId);
-    setCam("indoor", fitCam(floorBox(floorId)));
-    S.inside = true;
-    document.body.classList.add("inside");
-    $("back").hidden = false;
-    $("floors").hidden = false;
-    await wait(650);
   } else {
     drawIndoor(floorId);
+    if (prev && prev !== floorId && !RM) {
+      const order = S.floors.map((x) => x.id);
+      const dir = order.indexOf(floorId) > order.indexOf(prev) ? 1 : -1;
+      $("indoor").animate([{ opacity: 0, transform: `translateY(${8 * dir}px)` }, { opacity: 1, transform: "none" }], { duration: 220 * SLOW, easing: "cubic-bezier(.2,.8,.2,1)" });
+    }
   }
   drawFloorTabs();
   const f = S.floors.find((x) => x.id === floorId);
@@ -409,9 +555,10 @@ async function exitBuilding() {
   document.body.classList.remove("inside");
   $("back").hidden = true;
   $("floors").hidden = true;
+  $("pin").hidden = true;
   $("where").textContent = "PUP Main · Sta. Mesa";
-  await wait(300);
-  if (map) await fitTo(featCoords(S.campus.campus), { pitch: 55, maxZoom: 17.2 });
+  if (map) await fitTo(featCoords(S.campus.campus), { pitch: 55, maxZoom: 17.2, duration: 900 });
+  syncCompass();
   stage("outdoor");
 }
 async function showFloor(floorId) {
@@ -423,7 +570,7 @@ function focusIndoor() {
   const leg = S.route ? S.route.legs.find((l) => l.floorId === S.floorId) : null;
   if (leg && leg.points.length) {
     const pts = leg.points.map((q) => t(q.x, q.y));
-    return tween("indoor", fitCam(bbox(pts, 70)), 500);
+    return tween("indoor", fitCam(bbox(pts, 0), LEG_PAD, innerWidth >= 900 ? 16 : PEEK), 600, EASE_IO);
   }
   if (S.sel && S.sel.room && S.sel.room.floorId === S.floorId) {
     const p = t(S.sel.room.x, S.sel.room.y);
@@ -444,12 +591,39 @@ function openSheet({ crumb, title, sub, flag, inside }) {
   $("steps").hidden = true;
   $("stepnav").hidden = true;
   $("sheet").hidden = false;
-  $("sheet").classList.remove("expanded");
+  setSnap("half");
+}
+// Bottom sheet snaps: peek 132px, half 50vh, full 88vh.
+const SNAPS = ["peek", "half", "full"];
+function snapPx(name = $("sheet").dataset.snap) {
+  return name === "peek" ? PEEK : name === "full" ? innerHeight * 0.88 : innerHeight * 0.5;
+}
+function setSnap(name) {
+  $("sheet").dataset.snap = name;
   syncSheet();
 }
 function syncSheet() {
-  const h = $("sheet").hidden ? 0 : $("sheet").offsetHeight;
+  const h = $("sheet").hidden ? 0 : snapPx();
   document.documentElement.style.setProperty("--sheet-h", innerWidth >= 900 ? "0px" : `${h}px`);
+}
+function setupSheet() {
+  const sh = $("sheet");
+  let y0 = null;
+  sh.addEventListener("pointerdown", (e) => {
+    if (e.target.closest("button:not(.handle)") || (sh.scrollTop > 0 && !e.target.closest(".handle"))) return;
+    y0 = e.clientY;
+  });
+  const end = (e) => {
+    if (y0 === null) return;
+    const dy = e.clientY - y0;
+    y0 = null;
+    const i = SNAPS.indexOf(sh.dataset.snap);
+    if (dy > 40) setSnap(SNAPS[Math.max(0, i - 1)]);
+    else if (dy < -40) setSnap(SNAPS[Math.min(2, i + 1)]);
+  };
+  sh.addEventListener("pointerup", end);
+  sh.addEventListener("pointercancel", () => (y0 = null));
+  $("handle").addEventListener("click", () => setSnap(SNAPS[(SNAPS.indexOf(sh.dataset.snap) + 1) % 3]));
 }
 function closeSheet() {
   $("sheet").hidden = true;
@@ -457,6 +631,7 @@ function closeSheet() {
   S.route = null;
   S.step = -1;
   syncSheet();
+  highlight(null);
   if (S.inside) drawIndoor(S.floorId);
   else drawOutdoor();
   if (S.inside) drawFloorTabs();
@@ -480,11 +655,8 @@ async function selectBuilding(f) {
   S.route = null;
   drawOutdoor();
   const p = f.properties;
-  if (p.main) {
-    openSheet({ crumb: "PUP Main · Sta. Mesa", title: "PUP Main Building", sub: `${p.name} · floors 1F, 4F, 5F mapped inside`, inside: true, flag: `Height: ${p.heightSource}.` });
-  } else {
-    openSheet({ crumb: "PUP Main · Sta. Mesa", title: p.name || "Unnamed building ?", sub: `OpenStreetMap ${p.osm}`, flag: `No floor plan for this building yet. Height: ${p.heightSource}.` });
-  }
+  if (p.main) openSheet({ crumb: "PUP Main · Sta. Mesa", title: "PUP Main Building", sub: "Floors 1F, 4F, 5F mapped inside", inside: true });
+  else openSheet({ crumb: "PUP Main · Sta. Mesa", title: p.name || "Unnamed building ?", sub: "No floor plan yet" });
   $("dir").hidden = true;
   if (S.inside) await exitBuilding();
   highlight(f);
@@ -504,7 +676,7 @@ function directions() {
   S.route = r;
   r.steps.forEach((s, i) => {
     const f = S.floors.find((x) => x.id === s.floorId);
-    const b = el("button", { type: "button" });
+    const b = el("button", { type: "button", "data-n": String(i + 1) });
     b.append(document.createTextNode(s.text), el("span", { class: "fl" }, s.floorId === "outdoor" ? "Campus" : floorShort(f)));
     b.addEventListener("click", () => goStep(i));
     const li = el("li");
@@ -514,7 +686,7 @@ function directions() {
   list.hidden = false;
   $("stepnav").hidden = false;
   $("dir").hidden = true;
-  syncSheet();
+  setSnap("peek");
   return goStep(0);
 }
 async function goStep(i) {
@@ -531,17 +703,11 @@ async function goStep(i) {
     if (S.inside) await exitBuilding();
     drawOutdoor();
     const leg = S.route.legs[0];
-    if (map) await fitTo(leg.points.map((q) => [q.x, q.y]), { maxZoom: 18, pitch: 35 });
+    if (map) await fitLeg(leg.points.map((q) => [q.x, q.y]));
     return;
   }
   await enterBuilding(s.floorId);
-  if (S.step === 1) {
-    const f = S.paths.floors[s.floorId];
-    const st = f.nodes.find((x) => x.id === f.start);
-    const p = tf(s.floorId)(st.x, st.y);
-    await tween("indoor", fitCam({ x: p.x - 160, y: p.y - 160, w: 320, h: 320 }), 500);
-    return;
-  }
+  drawIndoor(s.floorId);
   await focusIndoor();
 }
 
@@ -551,6 +717,7 @@ function searchAll(q) {
   if (!s) return [];
   const rooms = S.rooms.filter((r) => roomName(r).toLowerCase().includes(s)).map((r) => ({ type: "room", r }));
   const bs = S.campus.buildings.features.filter((f) => f.properties.name && buildingName(f).toLowerCase().includes(s)).map((b) => ({ type: "building", b }));
+  if (!bs.some((x) => x.b.properties.main) && S.campus.wingLabels.features.some((w) => w.properties.name.toLowerCase().includes(s))) bs.unshift({ type: "building", b: mainFeatures()[0] });
   return [...rooms, ...bs].slice(0, 40);
 }
 function renderResults() {
@@ -687,10 +854,8 @@ async function load() {
     return exitBuilding();
   });
   $("close").addEventListener("click", closeSheet);
-  $("handle").addEventListener("click", () => {
-    $("sheet").classList.toggle("expanded");
-    syncSheet();
-  });
+  setupSheet();
+  $("compass").addEventListener("click", () => map && (RM ? map.jumpTo({ bearing: 0 }) : map.easeTo({ bearing: 0, duration: 300 * SLOW })));
   $("dir").addEventListener("click", directions);
   $("inside").addEventListener("click", () => showFloor(floors[0].id));
   $("prev").addEventListener("click", () => goStep(S.step - 1));
@@ -703,6 +868,7 @@ async function load() {
   });
   addEventListener("resize", () => {
     syncSheet();
+    syncCompass();
     if (S.inside) setCam("indoor", fitCam(floorBox(S.floorId)));
   });
   setupGestures();

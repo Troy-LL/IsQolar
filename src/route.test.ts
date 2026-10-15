@@ -71,8 +71,13 @@ describe("campus OSM data", () => {
       gate: { lngLat: [number, number] };
       walk: { coordinates: [number, number][] };
     };
-    const wings = c.buildings.features.filter((f) => f.properties.main).map((f) => f.properties.name);
+    const main = c.buildings.features.filter((f) => f.properties.main);
+    assert.equal(main.length, 1, "Main Building should be one unioned shape");
+    assert.equal(main[0].properties.height, 19.2, "design override: 6 floors x 3.2 m");
+    const wings = (c as unknown as { wingLabels: { features: { properties: { name: string } }[] } }).wingLabels.features.map((f) => f.properties.name);
     for (const w of ["North Wing", "South Wing", "East Wing", "West Wing"]) assert.ok(wings.includes(w), `${w} missing`);
+    const walk = (c as unknown as { walk: { coordinates: number[][] }; entrance: { lngLat: number[] } });
+    assert.deepEqual(walk.walk.coordinates.at(-1), walk.entrance.lngLat, "walk ends on the entrance");
     for (const f of c.buildings.features) assert.ok(f.properties.height > 0);
     assert.deepEqual(c.walk.coordinates[0], c.gate.lngLat);
   });

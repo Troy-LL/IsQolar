@@ -28,12 +28,14 @@
 
 <div id="where" class="where">PUP Main · Sta. Mesa</div>
 <nav id="floors" class="floors" aria-label="Floors" hidden></nav>
+<button type="button" id="compass" class="compass" aria-label="Reset map to north" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l4 9h-8z" fill="#8B0000"/><path d="M12 21l-4-9h8z" fill="#b9aca5"/></svg></button>
+<div id="pin" class="dpin" hidden><span class="ring"></span><span class="drop"></span></div>
 <div class="zoomctl">
   <button type="button" id="zoomIn" class="round" aria-label="Zoom in">+</button>
   <button type="button" id="zoomOut" class="round" aria-label="Zoom out">−</button>
 </div>
 
-<section id="sheet" class="sheet" hidden aria-live="polite">
+<section id="sheet" class="sheet" data-snap="half" hidden aria-live="polite">
   <button type="button" id="handle" class="handle" aria-label="Expand or collapse"></button>
   <p id="crumb" class="crumb"></p>
   <div class="head">
@@ -54,7 +56,6 @@
     <button type="button" id="prev" class="quiet">Back</button>
     <button type="button" id="next" class="primary">Next step</button>
   </div>
-  <p class="note">Outdoor map: OpenStreetMap buildings and walkways. Floors: traced from the PUP floor directories. ? means not confirmed.</p>
 </section>
 <script src="vendor/maplibre/maplibre-gl.js"></script>
 <script type="module" src="map.js"></script>
