@@ -3,23 +3,7 @@ import { randomUUID } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { join, dirname } from "node:path";
 import type { Ticket, TicketDetail, Stall, AdminSummary, HealthResponse, Station } from "./contract.js";
-import {
-  getTicket,
-  getTickets,
-  setTicket,
-  getStalls,
-  getStall,
-  setStall,
-  nextCode,
-  nextStation,
-  recordCompletion,
-  avgServiceMin,
-  stallQueueLength,
-  ticketPositionAtStall,
-  pickStallForCourse,
-  type StoredTicket,
-} from "./store.js";
-import { seed } from "./seed.js";
+import { getStore, type StoredTicket } from "./store.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -34,7 +18,8 @@ app.get("/health", (_req, res) => {
 });
 
 // POST /api/tickets
-app.post("/api/tickets", (req, res) => {
+app.post("/api/tickets", async (req, res) => {
+  const store = getStore();
   const { name, course } = req.body as { name: string; course: string; permitNo?: string };
   if (!name || !course) {
     res.status(400).json({ error: "name and course are required" });
@@ -42,7 +27,7 @@ app.post("/api/tickets", (req, res) => {
   }
   const ticket: StoredTicket = {
     id: randomUUID(),
-    code: nextCode(),
+    code: await store.nextCode(),
     name,
     course,
     station: "checkin",
@@ -54,22 +39,23 @@ app.post("/api/tickets", (req, res) => {
     previous: null,
     completedAt: null,
   };
-  setTicket(ticket);
+  await store.setTicket(ticket);
   const out: Ticket = toTicket(ticket);
   res.status(201).json(out);
 });
 
 // GET /api/tickets/:id
-app.get("/api/tickets/:id", (req, res) => {
-  const ticket = getTicket(req.params.id);
+app.get("/api/tickets/:id", async (req, res) => {
+  const store = getStore();
+  const ticket = await store.getTicket(req.params.id);
   if (!ticket) {
     res.status(404).json({ error: "not found" });
     return;
   }
   const position = ticket.station === "stall" && ticket.stall
-    ? ticketPositionAtStall(ticket.id)
+    ? await store.ticketPositionAtStall(ticket.id)
     : 1;
-  const est = ticket.stall ? avgServiceMin(ticket.stall) : 3;
+  const est = ticket.stall ? await store.avgServiceMin(ticket.stall) : 3;
   const detail: TicketDetail = {
     ...toTicket(ticket),
     position,
@@ -79,19 +65,23 @@ app.get("/api/tickets/:id", (req, res) => {
 });
 
 // GET /api/stalls
-app.get("/api/stalls", (_req, res) => {
-  const stalls: Stall[] = getStalls().map((s) => withLiveStall(s));
+app.get("/api/stalls", async (_req, res) => {
+  const store = getStore();
+  const raw = await store.getStalls();
+  const stalls: Stall[] = await Promise.all(raw.map((s) => withLiveStall(s)));
   res.json(stalls);
 });
 
 // GET /api/stalls/:stall/queue
-app.get("/api/stalls/:stall/queue", (req, res) => {
-  const stall = getStall(req.params.stall);
+app.get("/api/stalls/:stall/queue", async (req, res) => {
+  const store = getStore();
+  const stall = await store.getStall(req.params.stall);
   if (!stall) {
     res.status(404).json({ error: "not found" });
     return;
   }
-  const queue: Ticket[] = getTickets()
+  const all = await store.getTickets();
+  const queue: Ticket[] = all
     .filter(
       (t) =>
         t.stall === req.params.stall &&
@@ -104,14 +94,16 @@ app.get("/api/stalls/:stall/queue", (req, res) => {
 });
 
 // POST /api/stalls/:stall/next
-app.post("/api/stalls/:stall/next", (req, res) => {
+app.post("/api/stalls/:stall/next", async (req, res) => {
+  const store = getStore();
   const stallId = req.params.stall;
-  const stall = getStall(stallId);
+  const stall = await store.getStall(stallId);
   if (!stall) {
     res.status(404).json({ error: "not found" });
     return;
   }
-  const oldest = getTickets()
+  const all = await store.getTickets();
+  const oldest = all
     .filter(
       (t) =>
         t.stall === stallId &&
@@ -130,18 +122,19 @@ app.post("/api/stalls/:stall/next", (req, res) => {
     calledAt: new Date().toISOString(),
     previous: prev,
   };
-  setTicket(updated);
+  await store.setTicket(updated);
   const updatedStall: Stall = {
-    ...withLiveStall(stall),
+    ...await withLiveStall(stall),
     nowServing: updated.code,
   };
-  setStall(updatedStall);
+  await store.setStall(updatedStall);
   res.json(toTicket(updated));
 });
 
 // POST /api/admin/seed
-app.post("/api/admin/seed", (_req, res) => {
-  seed();
+app.post("/api/admin/seed", async (_req, res) => {
+  const store = getStore();
+  await store.seed();
   const byStation: Record<Station, number> = {
     checkin: 0,
     docs: 0,
@@ -150,7 +143,7 @@ app.post("/api/admin/seed", (_req, res) => {
     stall: 0,
     enrolled: 0,
   };
-  for (const t of getTickets()) {
+  for (const t of await store.getTickets()) {
     byStation[t.station]++;
   }
   const summary: AdminSummary = { byStation };
@@ -158,13 +151,14 @@ app.post("/api/admin/seed", (_req, res) => {
 });
 
 // POST /api/tickets/:id/done
-app.post("/api/tickets/:id/done", (req, res) => {
-  const ticket = getTicket(req.params.id);
+app.post("/api/tickets/:id/done", async (req, res) => {
+  const store = getStore();
+  const ticket = await store.getTicket(req.params.id);
   if (!ticket) {
     res.status(404).json({ error: "not found" });
     return;
   }
-  const next = nextStation(ticket.station);
+  const next = store.nextStation(ticket.station);
   if (!next) {
     res.status(400).json({ error: "already at final station" });
     return;
@@ -174,18 +168,18 @@ app.post("/api/tickets/:id/done", (req, res) => {
   let completedAt = ticket.completedAt;
 
   if (next === "stall") {
-    const stallObj = pickStallForCourse(ticket.course);
+    const stallObj = await store.pickStallForCourse(ticket.course);
     if (!stallObj) {
       res.status(409).json({ error: "no stall for course" });
       return;
     }
     assignedStall = stallObj.id;
-    setStall({ ...withLiveStall(stallObj) });
+    await store.setStall({ ...await withLiveStall(stallObj) });
   }
 
   if (ticket.station === "stall" && ticket.calledAt) {
     const duration = Date.now() - new Date(ticket.calledAt).getTime();
-    if (ticket.stall) recordCompletion(ticket.stall, duration);
+    if (ticket.stall) await store.recordCompletion(ticket.stall, duration);
     completedAt = new Date().toISOString();
   }
 
@@ -197,21 +191,22 @@ app.post("/api/tickets/:id/done", (req, res) => {
     previous: prev,
     completedAt,
   };
-  setTicket(updated);
+  await store.setTicket(updated);
 
   if (ticket.stall) {
-    refreshStall(ticket.stall);
+    await refreshStall(ticket.stall);
   }
   if (assignedStall && assignedStall !== ticket.stall) {
-    refreshStall(assignedStall);
+    await refreshStall(assignedStall);
   }
 
   res.json(toTicket(updated));
 });
 
 // POST /api/tickets/:id/undo
-app.post("/api/tickets/:id/undo", (req, res) => {
-  const ticket = getTicket(req.params.id);
+app.post("/api/tickets/:id/undo", async (req, res) => {
+  const store = getStore();
+  const ticket = await store.getTicket(req.params.id);
   if (!ticket) {
     res.status(404).json({ error: "not found" });
     return;
@@ -226,16 +221,17 @@ app.post("/api/tickets/:id/undo", (req, res) => {
     previous: null,
     completedAt: ticket.completedAt,
   };
-  setTicket(restored);
+  await store.setTicket(restored);
 
-  if (ticket.stall) refreshStall(ticket.stall);
-  if (prev.stall && prev.stall !== ticket.stall) refreshStall(prev.stall);
+  if (ticket.stall) await refreshStall(ticket.stall);
+  if (prev.stall && prev.stall !== ticket.stall) await refreshStall(prev.stall);
 
   res.json(toTicket(restored));
 });
 
 // GET /api/admin/summary
-app.get("/api/admin/summary", (_req, res) => {
+app.get("/api/admin/summary", async (_req, res) => {
+  const store = getStore();
   const byStation: Record<Station, number> = {
     checkin: 0,
     docs: 0,
@@ -244,7 +240,7 @@ app.get("/api/admin/summary", (_req, res) => {
     stall: 0,
     enrolled: 0,
   };
-  for (const t of getTickets()) {
+  for (const t of await store.getTickets()) {
     byStation[t.station]++;
   }
   const summary: AdminSummary = { byStation };
@@ -274,9 +270,11 @@ function snapshot(t: StoredTicket): Ticket {
   return toTicket(t);
 }
 
-function withLiveStall(s: Stall): Stall {
-  const queueLength = stallQueueLength(s.id);
-  const called = getTickets().find(
+async function withLiveStall(s: Stall): Promise<Stall> {
+  const store = getStore();
+  const queueLength = await store.stallQueueLength(s.id);
+  const all = await store.getTickets();
+  const called = all.find(
     (t) => t.stall === s.id && t.station === "stall" && t.status === "called"
   );
   return {
@@ -286,9 +284,10 @@ function withLiveStall(s: Stall): Stall {
   };
 }
 
-function refreshStall(stallId: string): void {
-  const s = getStall(stallId);
-  if (s) setStall(withLiveStall(s));
+async function refreshStall(stallId: string): Promise<void> {
+  const store = getStore();
+  const s = await store.getStall(stallId);
+  if (s) await store.setStall(await withLiveStall(s));
 }
 
 // ---------------------------------------------------------------------------
@@ -300,8 +299,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   app.listen(PORT, () => {
     console.log(`IsQolar listening on http://localhost:${PORT}`);
     if (process.env.SEED === "1") {
-      seed();
-      console.log("Auto-seeded on startup.");
+      getStore().seed().then(() => console.log("Auto-seeded on startup."));
     }
   });
 }
