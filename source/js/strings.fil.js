@@ -1,4 +1,4 @@
-// IsQolar UI strings â€” Filipino
+// IsQolar UI strings — Filipino
 // ALL VALUES ARE DRAFTS. Every string below needs a native-speaker check
 // before the pilot. See HANDOFF.md section 8.
 // Keys must match strings.en.js exactly.
@@ -155,7 +155,7 @@ export const fil = {
 
   /* --- Explore / campus --- */
   exploreHeading:    "I-explore ang PUP", // DRAFT
-  mabiÐ½Ð¸Campus:      "Mabini Campus", // DRAFT
+  mabiниCampus:      "Mabini Campus", // DRAFT
   ndcCampus:         "NDC Compound", // DRAFT
   mhCampus:          "M.H. del Pilar Campus", // DRAFT
   buildingTBC:       "Gusaling ipapatunay pa", // DRAFT
@@ -216,73 +216,6 @@ export const fil = {
     { q: "Paano kung mawala ang koneksyon?", a: "Mananatili sa screen ang inyong huling kilalang posisyon. Ligtas ang inyong lugar sa pila. Kapag bumalik ang network, mag-a-update ang pahina." }, // DRAFT
     { q: "Para kanino ang mga hakbang?", a: "Para sa lahat ng first-year, on-site enrollee sa PUP Manila. Hindi sakop ang mga continuing student, transferee at graduate student." }, // DRAFT
   ],
-
-
-  /* --- Landing: nav, sections, features, benefits, how-it-works, preview, footer --- */
-  navFeatures:       "Mga tampok", // DRAFT
-  navHowItWorks:     "Paano gumagana", // DRAFT
-  navLiveCount:      "Live count", // DRAFT
-  navPreview:        "Preview", // DRAFT
-  navFaqs:           "Mga FAQ", // DRAFT
-
-  personaStudent:    "Estudyante", // DRAFT
-  personaGuardian:   "Guardian", // DRAFT
-  personaStaff:      "Staff", // DRAFT
-  personaBoard:      "Now Serving Board", // DRAFT
-  personaStudentDesc: "Sumali sa pila, subaybayan ang mga hakbang.", // DRAFT
-  personaGuardianDesc: "Panoorin ang progreso ng estudyante mula sa labas.", // DRAFT
-  personaStaffDesc:  "Pamahalaan ang isang course stall.", // DRAFT
-  personaBoardDesc:  "Ang malaking screen para sa buong venue.", // DRAFT
-
-  toolsOfflineOn:    "Naka-on ang network loss", // DRAFT
-  toolsOfflineOff:   "Naka-off ang network loss", // DRAFT
-
-  featureTitle1:     "Live queue ticket", // DRAFT
-  featureDesc1:      "Ang inyong apat na digit na numero ay sumusunod sa inyo buong araw. Isang ticket, isang numero, mula sa pintuan ng gym hanggang enrolled.", // DRAFT
-  featureTitle2:     "Course stall board", // DRAFT
-  featureDesc2:      "Ipinapakita ng bawat course stall kung ilan ang naghihintay. Hanapin ang pinakamaikling pila bago pumunta.", // DRAFT
-  featureTitle3:     "Staff two-tap console", // DRAFT
-  featureDesc3:      "Tawagan ang susunod. Markahan bilang tapos. Iyon lang. Pinamamahalaan ng staff ang kanilang stall mula sa isang screen nang walang pagsasanay.", // DRAFT
-
-  benefit1Title:     "Walang paghula", // DRAFT
-  benefit1Desc:      "Alam ninyo ang inyong numero, ilan ang nauna sa inyo at mga gaano katagal.", // DRAFT
-  benefit2Title:     "Ligtas na umalis", // DRAFT
-  benefit2Desc:      "Sinasabi ng wait estimate kung kailan kayo maaaring kumain o tumawag sa pamilya.", // DRAFT
-  benefit3Title:     "Malinaw na katapusan", // DRAFT
-  benefit3Desc:      "Nakikita ninyo ang bawat hakbang. Ang huli ay nagsasabi na kayo ay fully enrolled.", // DRAFT
-  benefit4Title:     "Gumagana offline", // DRAFT
-  benefit4Desc:      "Hindi kailangan ng Wi-Fi. Lahat ay tumatakbo sa network ng venue.", // DRAFT
-  benefit5Title:     "Walang install", // DRAFT
-  benefit5Desc:      "Buksan ang link sa inyong phone. Iyon lang. Walang app, walang password.", // DRAFT
-  benefit6Title:     "Guardian view", // DRAFT
-  benefit6Desc:      "Maaaring makita ng pamilya sa labas ng venue ang inyong progreso nang hindi nakikita ang inyong mga detalye.", // DRAFT
-
-  howTitle1:         "I-scan at sumali", // DRAFT
-  howDesc1:          "I-scan ang venue QR at ilagay ang inyong permit number. Makakakuha kayo ng ticket sa ilang segundo.", // DRAFT
-  howTitle2:         "Panoorin ang board", // DRAFT
-  howDesc2:          "Ipinapakita ng Now Serving board ang bawat stall. Hanapin ang inyong numero at paghihintay.", // DRAFT
-  howTitle3:         "Matawagan", // DRAFT
-  howDesc3:          "Kapag ikaw na ang susunod, nagpapakita ng gold banner ang inyong phone at nagvi-vibrate. Pumunta sa inyong stall.", // DRAFT
-  howTitle4:         "Matapos nang enrolled", // DRAFT
-  howDesc4:          "Kinukumpirma ng huling hakbang na fully enrolled na kayo. Ipakita ang screen sa exit.", // DRAFT
-
-  previewHeading:    "Tingnan ngayon", // DRAFT
-  previewSub:        "Live data mula sa simulated na umaga.", // DRAFT
-  nowServing:        "Tinatawag na", // DRAFT
-  waiting:           (n) => `${n} naghihintay`, // DRAFT
-
-  liveCountHeading:  "Live course count", // DRAFT
-  liveCountSub:      "Pumili ng kurso upang makita ang mga slots na natitira.", // DRAFT
-  liveCountSelect:   "Pumili ng kurso", // DRAFT
-  liveCountSlots:    (n) => `${n} slots natitira`, // DRAFT
-  liveCountFull:     "Puno na", // DRAFT
-  liveCountTotal:    (open, total) => `${open} ng ${total} na kurso ang bukas`, // DRAFT
-
-  bannerText:        "Prototype: lahat ng data ay simulated. Walang ipinapadala sa PUP.", // DRAFT
-
-  footerTagline:     "IsQolar. Alamin ang inyong lugar sa pila.", // DRAFT
-  footerBuilt:       "Binuo sa ICS x IBM Bobathon, PUP Manila, Oktubre 2026.", // DRAFT
-  footerTeam:        "Team: Troy, Ayen, Donita, Viv, Justin.", // DRAFT
 
   /* --- Error / problem messages --- */
   errGeneric:     "May nangyaring mali. Magtanong sa check-in desk.", // DRAFT
