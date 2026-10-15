@@ -25,26 +25,26 @@
         },
         {
           "id": "c-E-3",
-          "x": 0.35518,
-          "y": 0.59678,
+          "x": 0.35139,
+          "y": 0.60438,
           "kind": "corridor"
         },
         {
           "id": "c-E-4",
-          "x": 0.33727,
-          "y": 0.63274,
+          "x": 0.33456,
+          "y": 0.63817,
           "kind": "corridor"
         },
         {
           "id": "c-E-5",
-          "x": 0.31935,
-          "y": 0.66871,
+          "x": 0.31773,
+          "y": 0.67196,
           "kind": "corridor"
         },
         {
           "id": "c-E-6",
-          "x": 0.30144,
-          "y": 0.70466,
+          "x": 0.3009,
+          "y": 0.70576,
           "kind": "corridor"
         },
         {
@@ -67,32 +67,32 @@
         },
         {
           "id": "c-N-2",
-          "x": 0.48345,
-          "y": 0.48868,
+          "x": 0.48442,
+          "y": 0.48873,
           "kind": "corridor"
         },
         {
           "id": "c-N-3",
-          "x": 0.5052,
-          "y": 0.48987,
+          "x": 0.50607,
+          "y": 0.48992,
           "kind": "corridor"
         },
         {
           "id": "c-N-4",
-          "x": 0.5704,
-          "y": 0.49344,
+          "x": 0.57098,
+          "y": 0.49347,
           "kind": "corridor"
         },
         {
           "id": "c-N-5",
-          "x": 0.63562,
-          "y": 0.49701,
+          "x": 0.63591,
+          "y": 0.49703,
           "kind": "corridor"
         },
         {
           "id": "c-N-6",
-          "x": 0.65735,
-          "y": 0.4982,
+          "x": 0.65754,
+          "y": 0.49821,
           "kind": "corridor"
         },
         {
@@ -109,128 +109,128 @@
         },
         {
           "id": "c-W-1",
-          "x": 0.38791,
-          "y": 0.43835,
+          "x": 0.39225,
+          "y": 0.43376,
           "kind": "corridor"
         },
         {
           "id": "c-W-2",
-          "x": 0.3466,
-          "y": 0.35542,
+          "x": 0.34368,
+          "y": 0.3018,
           "kind": "corridor"
         },
         {
           "id": "c-W-3",
-          "x": 0.31155,
-          "y": 0.28505,
+          "x": 0.28189,
+          "y": 0.13393,
           "kind": "corridor"
         },
         {
           "id": "c-W-4",
-          "x": 0.29864,
-          "y": 0.25912,
+          "x": 0.25475,
+          "y": 0.06018,
           "kind": "corridor"
         },
         {
           "id": "c-W-5",
-          "x": 0.29279,
-          "y": 0.24738,
+          "x": 0.25,
+          "y": 0.04728,
           "kind": "corridor"
         },
         {
           "id": "c-D-1",
-          "x": 0.165,
+          "x": 0.185,
           "y": 0.48471,
           "kind": "corridor"
         },
         {
           "id": "c-S-0",
-          "x": 0.165,
-          "y": 0.22667,
+          "x": 0.185,
+          "y": 0.22275,
           "kind": "corridor"
         },
         {
           "id": "c-S-1",
-          "x": 0.165,
-          "y": 0.24706,
+          "x": 0.185,
+          "y": 0.24314,
           "kind": "corridor"
         },
         {
           "id": "c-S-2",
-          "x": 0.165,
-          "y": 0.28784,
+          "x": 0.185,
+          "y": 0.27686,
           "kind": "corridor"
         },
         {
           "id": "c-S-3",
-          "x": 0.165,
-          "y": 0.30196,
+          "x": 0.185,
+          "y": 0.28922,
           "kind": "corridor"
         },
         {
           "id": "c-S-4",
-          "x": 0.165,
-          "y": 0.40078,
+          "x": 0.185,
+          "y": 0.37569,
           "kind": "corridor"
         },
         {
           "id": "c-S-5",
-          "x": 0.165,
-          "y": 0.44314,
+          "x": 0.185,
+          "y": 0.41275,
           "kind": "corridor"
         },
         {
           "id": "c-S-6",
-          "x": 0.165,
-          "y": 0.45882,
+          "x": 0.185,
+          "y": 0.41961,
           "kind": "corridor"
         },
         {
           "id": "c-S-7",
-          "x": 0.165,
-          "y": 0.48471,
+          "x": 0.185,
+          "y": 0.43647,
           "kind": "corridor"
         },
         {
           "id": "c-S-8",
-          "x": 0.165,
-          "y": 0.53882,
+          "x": 0.185,
+          "y": 0.48471,
           "kind": "corridor"
         },
         {
           "id": "c-S-9",
-          "x": 0.165,
-          "y": 0.58431,
+          "x": 0.185,
+          "y": 0.53627,
           "kind": "corridor"
         },
         {
           "id": "c-S-10",
-          "x": 0.165,
-          "y": 0.62667,
+          "x": 0.185,
+          "y": 0.57333,
           "kind": "corridor"
         },
         {
           "id": "c-S-11",
-          "x": 0.165,
-          "y": 0.72549,
+          "x": 0.185,
+          "y": 0.6598,
           "kind": "corridor"
         },
         {
           "id": "c-S-12",
-          "x": 0.165,
-          "y": 0.73961,
+          "x": 0.185,
+          "y": 0.67216,
           "kind": "corridor"
         },
         {
           "id": "c-S-13",
-          "x": 0.165,
-          "y": 0.78039,
+          "x": 0.185,
+          "y": 0.70588,
           "kind": "corridor"
         },
         {
           "id": "c-S-14",
-          "x": 0.165,
-          "y": 0.80078,
+          "x": 0.185,
+          "y": 0.72627,
           "kind": "corridor"
         },
         {
@@ -259,32 +259,32 @@
         },
         {
           "id": "stair-west-dome",
-          "x": 0.38791,
-          "y": 0.43835,
+          "x": 0.39225,
+          "y": 0.43376,
           "kind": "stairs"
         },
         {
           "id": "stair-west-end",
-          "x": 0.29864,
-          "y": 0.25912,
+          "x": 0.25475,
+          "y": 0.06018,
           "kind": "stairs"
         },
         {
           "id": "stair-south-north",
-          "x": 0.165,
-          "y": 0.24706,
+          "x": 0.185,
+          "y": 0.24314,
           "kind": "stairs"
         },
         {
           "id": "stair-south-mid",
-          "x": 0.165,
-          "y": 0.45882,
+          "x": 0.185,
+          "y": 0.41961,
           "kind": "stairs"
         },
         {
           "id": "stair-south-south",
-          "x": 0.165,
-          "y": 0.78039,
+          "x": 0.185,
+          "y": 0.70588,
           "kind": "stairs"
         },
         {
@@ -296,146 +296,146 @@
         },
         {
           "id": "main-1f-lobby-admission-and-registration-office-w2",
-          "x": 0.33321,
-          "y": 0.37184,
+          "x": 0.32896,
+          "y": 0.31513,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-office-for-scholarship-and-financial-assistance-w4",
-          "x": 0.29816,
-          "y": 0.30146,
+          "x": 0.26717,
+          "y": 0.14726,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-accounting-office-s7",
-          "x": 0.174,
-          "y": 0.53882,
+          "x": 0.194,
+          "y": 0.43647,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-accounting-division-students-services-section-s8",
-          "x": 0.174,
-          "y": 0.62667,
+          "x": 0.194,
+          "y": 0.57333,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-payroll-section-s9",
-          "x": 0.174,
-          "y": 0.73961,
+          "x": 0.194,
+          "y": 0.67216,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-office-of-the-university-registrar-s1",
-          "x": 0.156,
-          "y": 0.30196,
+          "x": 0.176,
+          "y": 0.28922,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-students-records-office-s2",
-          "x": 0.156,
-          "y": 0.44314,
+          "x": 0.176,
+          "y": 0.41275,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-human-resource-management-division-s3",
-          "x": 0.156,
-          "y": 0.58431,
+          "x": 0.176,
+          "y": 0.53627,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-budget-services-s4",
-          "x": 0.156,
-          "y": 0.72549,
+          "x": 0.176,
+          "y": 0.6598,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-property-extension-office-s5",
-          "x": 0.174,
-          "y": 0.28784,
+          "x": 0.194,
+          "y": 0.27686,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-cashier-s6",
-          "x": 0.174,
-          "y": 0.40078,
+          "x": 0.194,
+          "y": 0.37569,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-procurement-office-n1",
-          "x": 0.50579,
-          "y": 0.46322,
+          "x": 0.50666,
+          "y": 0.46326,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-central-records-office-n2",
-          "x": 0.63621,
-          "y": 0.47036,
+          "x": 0.6365,
+          "y": 0.47038,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-commission-on-audit-office-n3",
-          "x": 0.48286,
-          "y": 0.51533,
+          "x": 0.48383,
+          "y": 0.51538,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-campus-ministry-office-n4",
-          "x": 0.56981,
-          "y": 0.52009,
+          "x": 0.57039,
+          "y": 0.52012,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-security-office-n5",
-          "x": 0.65676,
-          "y": 0.52485,
+          "x": 0.65695,
+          "y": 0.52486,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-free-pup-office-e1",
-          "x": 0.36858,
-          "y": 0.6132,
+          "x": 0.36479,
+          "y": 0.6208,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-hrd-records-office-e2",
-          "x": 0.35066,
-          "y": 0.64916,
+          "x": 0.34796,
+          "y": 0.65459,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-department-of-military-science-and-tactics-office-e3",
-          "x": 0.33275,
-          "y": 0.68513,
+          "x": 0.33113,
+          "y": 0.68838,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-corps-of-cadets-headquarters-e4",
-          "x": 0.31484,
-          "y": 0.72109,
+          "x": 0.3143,
+          "y": 0.72218,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-medical-clinic-services-e5",
-          "x": 0.34178,
-          "y": 0.58036,
+          "x": 0.338,
+          "y": 0.58797,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-dental-clinic-services-e6",
-          "x": 0.32387,
-          "y": 0.61633,
+          "x": 0.32117,
+          "y": 0.62176,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-office-of-the-director-medical-health-services-e7",
-          "x": 0.30596,
-          "y": 0.65229,
+          "x": 0.30433,
+          "y": 0.65555,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-office-of-the-director-public-affairs-office-e8",
-          "x": 0.28805,
-          "y": 0.68825,
+          "x": 0.2875,
+          "y": 0.68934,
           "kind": "room"
         },
         {
@@ -592,7 +592,7 @@
         ],
         [
           "c-D-1",
-          "c-S-7"
+          "c-S-8"
         ],
         [
           "stair-east-dome",
@@ -644,7 +644,7 @@
         ],
         [
           "main-1f-lobby-accounting-office-s7",
-          "c-S-8"
+          "c-S-7"
         ],
         [
           "main-1f-lobby-accounting-division-students-services-section-s8",
@@ -740,95 +740,95 @@
           "id": "main-1f-lobby-admission-and-registration-office-w2",
           "label": "Admission and Registration Office (W2)",
           "kind": "office",
-          "x": 0.3194,
-          "y": 0.3887,
+          "x": 0.3138,
+          "y": 0.3288,
           "node": "c-W-2"
         },
         {
           "id": "main-1f-lobby-office-for-scholarship-and-financial-assistance-w4",
           "label": "Office for Scholarship and Financial Assistance (W4)",
           "kind": "office",
-          "x": 0.2844,
-          "y": 0.3184,
+          "x": 0.252,
+          "y": 0.161,
           "node": "c-W-3"
         },
         {
           "id": "main-1f-lobby-accounting-office-s7",
           "label": "Accounting Office (S7)",
           "kind": "office",
-          "x": 0.2112,
-          "y": 0.5388,
-          "node": "c-S-8"
+          "x": 0.2425,
+          "y": 0.4365,
+          "node": "c-S-7"
         },
         {
           "id": "main-1f-lobby-accounting-division-students-services-section-s8",
           "label": "Accounting Division - Students Services Section (S8)",
           "kind": "office",
-          "x": 0.2112,
-          "y": 0.6267,
+          "x": 0.2379,
+          "y": 0.5733,
           "node": "c-S-10"
         },
         {
           "id": "main-1f-lobby-payroll-section-s9",
           "label": "Payroll Section (S9)",
           "kind": "office",
-          "x": 0.2112,
-          "y": 0.7396,
+          "x": 0.2228,
+          "y": 0.6722,
           "node": "c-S-12"
         },
         {
           "id": "main-1f-lobby-office-of-the-university-registrar-s1",
           "label": "Office of the University Registrar (S1)",
           "kind": "office",
-          "x": 0.1187,
-          "y": 0.302,
+          "x": 0.1275,
+          "y": 0.2892,
           "node": "c-S-3"
         },
         {
           "id": "main-1f-lobby-students-records-office-s2",
           "label": "Students Records Office (S2)",
           "kind": "office",
-          "x": 0.1187,
-          "y": 0.4431,
+          "x": 0.1275,
+          "y": 0.4128,
           "node": "c-S-5"
         },
         {
           "id": "main-1f-lobby-human-resource-management-division-s3",
           "label": "Human Resource Management Division (S3)",
           "kind": "office",
-          "x": 0.1187,
-          "y": 0.5843,
+          "x": 0.1275,
+          "y": 0.5363,
           "node": "c-S-9"
         },
         {
           "id": "main-1f-lobby-budget-services-s4",
           "label": "Budget Services (S4)",
           "kind": "office",
-          "x": 0.1187,
-          "y": 0.7255,
+          "x": 0.1275,
+          "y": 0.6598,
           "node": "c-S-11"
         },
         {
           "id": "main-1f-lobby-property-extension-office-s5",
           "label": "Property Extension Office (S5)",
           "kind": "office",
-          "x": 0.2112,
-          "y": 0.2878,
+          "x": 0.2278,
+          "y": 0.2769,
           "node": "c-S-2"
         },
         {
           "id": "main-1f-lobby-cashier-s6",
           "label": "Cashier (S6)",
           "kind": "office",
-          "x": 0.2112,
-          "y": 0.4008,
+          "x": 0.2425,
+          "y": 0.3757,
           "node": "c-S-4"
         },
         {
           "id": "main-1f-lobby-procurement-office-n1",
           "label": "Procurement Office (N1)",
           "kind": "office",
-          "x": 0.5064,
+          "x": 0.5073,
           "y": 0.4358,
           "node": "c-N-3"
         },
@@ -836,7 +836,7 @@
           "id": "main-1f-lobby-central-records-office-n2",
           "label": "Central Records Office (N2)",
           "kind": "office",
-          "x": 0.6368,
+          "x": 0.6371,
           "y": 0.4429,
           "node": "c-N-5"
         },
@@ -844,7 +844,7 @@
           "id": "main-1f-lobby-commission-on-audit-office-n3",
           "label": "Commission on Audit Office (N3)",
           "kind": "office",
-          "x": 0.4823,
+          "x": 0.4832,
           "y": 0.5428,
           "node": "c-N-2"
         },
@@ -852,7 +852,7 @@
           "id": "main-1f-lobby-campus-ministry-office-n4",
           "label": "Campus Ministry Office (N4)",
           "kind": "office",
-          "x": 0.5692,
+          "x": 0.5698,
           "y": 0.5475,
           "node": "c-N-4"
         },
@@ -860,7 +860,7 @@
           "id": "main-1f-lobby-security-office-n5",
           "label": "Security Office (N5)",
           "kind": "office",
-          "x": 0.6562,
+          "x": 0.6563,
           "y": 0.5523,
           "node": "c-N-6"
         },
@@ -868,64 +868,64 @@
           "id": "main-1f-lobby-free-pup-office-e1",
           "label": "FREE - PUP Office (E1)",
           "kind": "office",
-          "x": 0.3824,
-          "y": 0.6301,
+          "x": 0.3786,
+          "y": 0.6377,
           "node": "c-E-3"
         },
         {
           "id": "main-1f-lobby-hrd-records-office-e2",
           "label": "HRD Records Office (E2)",
           "kind": "office",
-          "x": 0.3644,
-          "y": 0.6661,
+          "x": 0.3618,
+          "y": 0.6715,
           "node": "c-E-4"
         },
         {
           "id": "main-1f-lobby-department-of-military-science-and-tactics-office-e3",
           "label": "Department of Military Science and Tactics Office (E3)",
           "kind": "office",
-          "x": 0.3465,
-          "y": 0.702,
+          "x": 0.3449,
+          "y": 0.7053,
           "node": "c-E-5"
         },
         {
           "id": "main-1f-lobby-corps-of-cadets-headquarters-e4",
           "label": "Corps of Cadets Headquarters (E4)",
           "kind": "office",
-          "x": 0.3286,
-          "y": 0.738,
+          "x": 0.3281,
+          "y": 0.7391,
           "node": "c-E-6"
         },
         {
           "id": "main-1f-lobby-medical-clinic-services-e5",
           "label": "Medical Clinic Services (E5)",
           "kind": "office",
-          "x": 0.328,
-          "y": 0.5635,
+          "x": 0.3242,
+          "y": 0.5711,
           "node": "c-E-3"
         },
         {
           "id": "main-1f-lobby-dental-clinic-services-e6",
           "label": "Dental Clinic Services (E6)",
           "kind": "office",
-          "x": 0.3101,
-          "y": 0.5994,
+          "x": 0.3074,
+          "y": 0.6049,
           "node": "c-E-4"
         },
         {
           "id": "main-1f-lobby-office-of-the-director-medical-health-services-e7",
           "label": "Office of the Director - Medical Health Services (E7)",
           "kind": "office",
-          "x": 0.2922,
-          "y": 0.6354,
+          "x": 0.2905,
+          "y": 0.6387,
           "node": "c-E-5"
         },
         {
           "id": "main-1f-lobby-office-of-the-director-public-affairs-office-e8",
           "label": "Office of the Director - Public Affairs Office (E8)",
           "kind": "office",
-          "x": 0.2743,
-          "y": 0.6714,
+          "x": 0.2737,
+          "y": 0.6724,
           "node": "c-E-6"
         },
         {
@@ -3009,8 +3009,8 @@
         },
         {
           "id": "c-N-7",
-          "x": 0.61537,
-          "y": 0.48066,
+          "x": 0.61557,
+          "y": 0.48067,
           "kind": "corridor"
         },
         {
@@ -3063,14 +3063,14 @@
         },
         {
           "id": "c-W-2",
-          "x": 0.36107,
-          "y": 0.36272,
+          "x": 0.36404,
+          "y": 0.36789,
           "kind": "corridor"
         },
         {
           "id": "c-W-3",
-          "x": 0.32923,
-          "y": 0.30731,
+          "x": 0.3322,
+          "y": 0.31249,
           "kind": "corridor"
         },
         {
@@ -3099,66 +3099,60 @@
         },
         {
           "id": "c-E-3",
-          "x": 0.37162,
-          "y": 0.57364,
+          "x": 0.36874,
+          "y": 0.57944,
           "kind": "corridor"
         },
         {
           "id": "c-E-4",
-          "x": 0.36787,
-          "y": 0.58117,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-E-5",
           "x": 0.35595,
           "y": 0.60512,
           "kind": "corridor"
         },
         {
-          "id": "c-E-6",
+          "id": "c-E-5",
           "x": 0.34403,
           "y": 0.62905,
           "kind": "corridor"
         },
         {
-          "id": "c-E-7",
+          "id": "c-E-6",
           "x": 0.3321,
           "y": 0.65298,
           "kind": "corridor"
         },
         {
-          "id": "c-E-8",
+          "id": "c-E-7",
           "x": 0.32018,
           "y": 0.67692,
           "kind": "corridor"
         },
         {
-          "id": "c-E-9",
+          "id": "c-E-8",
           "x": 0.30826,
           "y": 0.70086,
           "kind": "corridor"
         },
         {
-          "id": "c-E-10",
+          "id": "c-E-9",
           "x": 0.29633,
           "y": 0.72479,
           "kind": "corridor"
         },
         {
-          "id": "c-E-11",
+          "id": "c-E-10",
           "x": 0.28441,
           "y": 0.74873,
           "kind": "corridor"
         },
         {
-          "id": "c-E-12",
+          "id": "c-E-11",
           "x": 0.27254,
           "y": 0.77255,
           "kind": "corridor"
         },
         {
-          "id": "c-E-13",
+          "id": "c-E-12",
           "x": 0.26532,
           "y": 0.78705,
           "kind": "corridor"
@@ -3388,8 +3382,8 @@
         },
         {
           "id": "main-5f-comfort-room-west",
-          "x": 0.32923,
-          "y": 0.31185,
+          "x": 0.3322,
+          "y": 0.31703,
           "kind": "room"
         },
         {
@@ -3628,8 +3622,8 @@
         },
         {
           "id": "main-5f-comfort-room-north",
-          "x": 0.37162,
-          "y": 0.57818,
+          "x": 0.36874,
+          "y": 0.58397,
           "kind": "room"
         },
         {
@@ -3754,8 +3748,8 @@
         },
         {
           "id": "main-5f-comfort-room-east",
-          "x": 0.61537,
-          "y": 0.4852,
+          "x": 0.61557,
+          "y": 0.48521,
           "kind": "room"
         },
         {
@@ -3766,8 +3760,8 @@
         },
         {
           "id": "main-5f-elevator-south-wing",
-          "x": 0.36107,
-          "y": 0.36726,
+          "x": 0.36404,
+          "y": 0.37243,
           "kind": "room"
         },
         {
@@ -3951,10 +3945,6 @@
           "c-E-12"
         ],
         [
-          "c-E-12",
-          "c-E-13"
-        ],
-        [
           "c-dome",
           "c-D-1"
         ],
@@ -4080,7 +4070,7 @@
         ],
         [
           "stair-east-end",
-          "c-E-12"
+          "c-E-11"
         ],
         [
           "stair-south-north",
@@ -4272,39 +4262,39 @@
         ],
         [
           "main-5f-e503",
-          "c-E-4"
+          "c-E-3"
         ],
         [
           "main-5f-e505",
-          "c-E-5"
+          "c-E-4"
         ],
         [
           "main-5f-e507",
-          "c-E-6"
+          "c-E-5"
         ],
         [
           "main-5f-e509",
-          "c-E-7"
+          "c-E-6"
         ],
         [
           "main-5f-e511",
-          "c-E-8"
+          "c-E-7"
         ],
         [
           "main-5f-e513",
-          "c-E-9"
+          "c-E-8"
         ],
         [
           "main-5f-e515",
-          "c-E-10"
+          "c-E-9"
         ],
         [
           "main-5f-e517",
-          "c-E-11"
+          "c-E-10"
         ],
         [
           "main-5f-e519",
-          "c-E-12"
+          "c-E-11"
         ],
         [
           "main-5f-e500",
@@ -4312,39 +4302,39 @@
         ],
         [
           "main-5f-e502",
-          "c-E-4"
+          "c-E-3"
         ],
         [
           "main-5f-e504",
-          "c-E-5"
+          "c-E-4"
         ],
         [
           "main-5f-e506",
-          "c-E-6"
+          "c-E-5"
         ],
         [
           "main-5f-e508",
-          "c-E-7"
+          "c-E-6"
         ],
         [
           "main-5f-e510",
-          "c-E-8"
+          "c-E-7"
         ],
         [
           "main-5f-e512",
-          "c-E-9"
+          "c-E-8"
         ],
         [
           "main-5f-e514",
-          "c-E-10"
+          "c-E-9"
         ],
         [
           "main-5f-e516",
-          "c-E-11"
+          "c-E-10"
         ],
         [
           "main-5f-e518",
-          "c-E-12"
+          "c-E-11"
         ],
         [
           "main-5f-comfort-room-east",
@@ -4368,7 +4358,7 @@
         ],
         [
           "main-5f-college-of-accountancy-student-council-office-e519",
-          "c-E-12"
+          "c-E-11"
         ],
         [
           "main-5f-college-of-science-accreditation-center-s516",
@@ -4506,7 +4496,7 @@
           "id": "main-5f-s511",
           "label": "S511",
           "kind": "room",
-          "x": 0.215,
+          "x": 0.2089,
           "y": 0.2631,
           "node": "c-S-3",
           "code": "S511"
@@ -4524,7 +4514,7 @@
           "id": "main-5f-s518",
           "label": "S518",
           "kind": "room",
-          "x": 0.215,
+          "x": 0.2088,
           "y": 0.7203,
           "node": "c-S-21",
           "code": "S518"
@@ -4786,7 +4776,7 @@
           "kind": "room",
           "x": 0.3471,
           "y": 0.5575,
-          "node": "c-E-4",
+          "node": "c-E-3",
           "code": "E503"
         },
         {
@@ -4795,7 +4785,7 @@
           "kind": "room",
           "x": 0.3352,
           "y": 0.5814,
-          "node": "c-E-5",
+          "node": "c-E-4",
           "code": "E505"
         },
         {
@@ -4804,7 +4794,7 @@
           "kind": "room",
           "x": 0.3233,
           "y": 0.6054,
-          "node": "c-E-6",
+          "node": "c-E-5",
           "code": "E507"
         },
         {
@@ -4813,7 +4803,7 @@
           "kind": "room",
           "x": 0.3113,
           "y": 0.6293,
-          "node": "c-E-7",
+          "node": "c-E-6",
           "code": "E509"
         },
         {
@@ -4822,7 +4812,7 @@
           "kind": "room",
           "x": 0.2994,
           "y": 0.6532,
-          "node": "c-E-8",
+          "node": "c-E-7",
           "code": "E511"
         },
         {
@@ -4831,7 +4821,7 @@
           "kind": "room",
           "x": 0.2875,
           "y": 0.6772,
-          "node": "c-E-9",
+          "node": "c-E-8",
           "code": "E513"
         },
         {
@@ -4840,7 +4830,7 @@
           "kind": "room",
           "x": 0.2756,
           "y": 0.7011,
-          "node": "c-E-10",
+          "node": "c-E-9",
           "code": "E515"
         },
         {
@@ -4849,7 +4839,7 @@
           "kind": "room",
           "x": 0.2636,
           "y": 0.7251,
-          "node": "c-E-11",
+          "node": "c-E-10",
           "code": "E517"
         },
         {
@@ -4858,7 +4848,7 @@
           "kind": "room",
           "x": 0.2517,
           "y": 0.749,
-          "node": "c-E-12",
+          "node": "c-E-11",
           "code": "E519"
         },
         {
@@ -4876,7 +4866,7 @@
           "kind": "room",
           "x": 0.3886,
           "y": 0.6048,
-          "node": "c-E-4",
+          "node": "c-E-3",
           "code": "E502"
         },
         {
@@ -4885,7 +4875,7 @@
           "kind": "room",
           "x": 0.3767,
           "y": 0.6288,
-          "node": "c-E-5",
+          "node": "c-E-4",
           "code": "E504"
         },
         {
@@ -4894,7 +4884,7 @@
           "kind": "room",
           "x": 0.3648,
           "y": 0.6527,
-          "node": "c-E-6",
+          "node": "c-E-5",
           "code": "E506"
         },
         {
@@ -4903,7 +4893,7 @@
           "kind": "room",
           "x": 0.3529,
           "y": 0.6767,
-          "node": "c-E-7",
+          "node": "c-E-6",
           "code": "E508"
         },
         {
@@ -4912,7 +4902,7 @@
           "kind": "room",
           "x": 0.3409,
           "y": 0.7006,
-          "node": "c-E-8",
+          "node": "c-E-7",
           "code": "E510"
         },
         {
@@ -4921,7 +4911,7 @@
           "kind": "room",
           "x": 0.329,
           "y": 0.7245,
-          "node": "c-E-9",
+          "node": "c-E-8",
           "code": "E512"
         },
         {
@@ -4930,7 +4920,7 @@
           "kind": "room",
           "x": 0.3171,
           "y": 0.7485,
-          "node": "c-E-10",
+          "node": "c-E-9",
           "code": "E514"
         },
         {
@@ -4939,7 +4929,7 @@
           "kind": "room",
           "x": 0.3052,
           "y": 0.7724,
-          "node": "c-E-11",
+          "node": "c-E-10",
           "code": "E516"
         },
         {
@@ -4948,7 +4938,7 @@
           "kind": "room",
           "x": 0.2933,
           "y": 0.7963,
-          "node": "c-E-12",
+          "node": "c-E-11",
           "code": "E518"
         },
         {
@@ -4997,7 +4987,7 @@
           "kind": "office",
           "x": 0.2517,
           "y": 0.749,
-          "node": "c-E-12"
+          "node": "c-E-11"
         },
         {
           "id": "main-5f-college-of-science-accreditation-center-s516",
