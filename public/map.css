@@ -213,3 +213,11 @@ button:focus-visible, a:focus-visible, .maplibregl-canvas:focus-visible { outlin
   .from-panel { left: 12px; right: auto; top: 72px; bottom: auto; width: 380px; max-height: min(640px, calc(100vh - 96px)); border-radius: 16px; box-shadow: 0 12px 40px rgba(31, 26, 26, .22); padding: 12px 14px 14px; transform: translateY(-8px); opacity: 0; transition: transform 280ms cubic-bezier(.2, .8, .2, 1), opacity 280ms cubic-bezier(.2, .8, .2, 1); }
   .from-layer.open .from-panel { transform: none; opacity: 1; }
 }
+
+.opin { width: 44px; height: 44px; margin: 0; padding: 0; border: 0; background: transparent; appearance: none; cursor: pointer; display: block; line-height: 0; }
+.opin svg { display: block; width: 44px; height: 44px; overflow: visible; filter: drop-shadow(0 1px 1.5px rgba(31, 26, 26, .35)); }
+.opin-fill { fill: #8B0000; stroke: #fff; stroke-width: 2; stroke-linejoin: round; }
+.opin[data-state="selected"] .opin-fill,
+.opin[data-state="destination"] .opin-fill { fill: #FFC72C; }
+.opin-ring { fill: #fff; }
+.opin:focus-visible { outline: 3px solid var(--maroon-deep); outline-offset: 2px; }
