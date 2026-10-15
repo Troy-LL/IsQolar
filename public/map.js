@@ -19,7 +19,8 @@ const EASE_IO = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 
 const PEEK = 132;
 const LEG_PAD = 48;
 // Indoor zoom is relative to the whole-floor fit, and a wide screen fits the floor far larger, so desktop stops a step earlier.
-const LEG_MAX_ZOOM = 19.5;
+// Phones may zoom further on a leg so very short lobby legs still read as a line.
+const LEG_MAX_ZOOM = innerWidth >= 900 ? 19.5 : 20.5;
 const GOAL_ZOOM = innerWidth >= 900 ? 19.5 : 20.5;
 // Every leg clears the floor chip (top), the floor stack (right) and the sheet (bottom).
 function legPad() {
@@ -65,9 +66,9 @@ function insets() {
   const sheet = $("sheet");
   const open = !sheet.hidden;
   // Phone: the chip and floor tabs sit at the top, so the plan uses the full width below them.
-  const top = desk ? 72 : S.inside ? 200 : 88;
+  const top = desk ? 72 : S.inside ? 140 : 88;
   const left = desk && open ? 420 : 12;
-  const right = desk && S.inside ? 88 : 12;
+  const right = S.inside && desk ? 88 : 12;
   const bottom = !desk && open ? snapPx() + 20 : 16;
   return { W, H, top, left, right, bottom };
 }
@@ -83,7 +84,10 @@ function fitCam(box, padPx = 0, bottomPx) {
   const s = Math.min(aw / box.w, ah / box.h);
   return { x: box.x + box.w / 2 - (left + aw / 2) / s, y: box.y + box.h / 2 - (top + ah / 2) / s, w: W / s, h: H / s };
 }
+// The newest tween per layer wins, so an older fit can't finish on top of a step's leg camera.
+const tweenGen = {};
 function tween(name, to, ms, ease = (t) => 1 - Math.pow(1 - t, 3)) {
+  const gen = (tweenGen[name] = (tweenGen[name] || 0) + 1);
   const from = S.cam[name] || to;
   const dur = RM ? 0 : ms * SLOW;
   if (!dur) {
@@ -93,6 +97,7 @@ function tween(name, to, ms, ease = (t) => 1 - Math.pow(1 - t, 3)) {
   return new Promise((done) => {
     const t0 = performance.now();
     function frame(now) {
+      if (tweenGen[name] !== gen) return done();
       const t = Math.min(1, (now - t0) / dur);
       const k = ease(t);
       setCam(name, { x: from.x + (to.x - from.x) * k, y: from.y + (to.y - from.y) * k, w: from.w + (to.w - from.w) * k, h: from.h + (to.h - from.h) * k });
@@ -110,11 +115,7 @@ function fitCamPad(box, pad, maxZoom = GOAL_ZOOM) {
   // never zoom past maxZoom: grow tiny boxes around their center
   const fw = fitCam(floorBox(S.floorId), 0, 16).w;
   let minW = (fw / Math.pow(2, maxZoom - 18)) * (aw / W);
-  // Short lobby/stair legs: keep at least ~140px of the shorter axis on screen (RT19 F4)
-  const minScreen = 140;
-  const worldPerPx = fw / W;
-  const minSpan = minScreen * worldPerPx * (W / aw);
-  if (minSpan > minW) minW = minSpan;
+  const minSpan = minW;
   if (box.w < minW) box = { x: box.x + box.w / 2 - minW / 2, y: box.y, w: minW, h: box.h };
   const minH = Math.max(minW * (ah / aw), minSpan);
   if (box.h < minH) box = { x: box.x, y: box.y + box.h / 2 - minH / 2, w: box.w, h: minH };
@@ -343,7 +344,11 @@ function untf(floorId, X, Y) {
 }
 function floorBox(floorId) {
   const t = tf(floorId);
-  return bbox(S.paths.floors[floorId].nodes.map((n) => t(n.x, n.y)), 50);
+  const pts = S.paths.floors[floorId].nodes.map((n) => t(n.x, n.y));
+  // Fit the drawn footprint (wing walls/rooms), not just the graph nodes, so no wing is clipped.
+  const ext = FLOOR_EXT.get(floorId);
+  if (ext) pts.push({ x: ext.x, y: ext.y }, { x: ext.x + ext.w, y: ext.y + ext.h });
+  return bbox(pts, ext ? 12 : 50);
 }
 function shortLabel(r) {
   const c = roomCode(r);
@@ -358,6 +363,7 @@ function shortLabel(r) {
 const FLOOR_IMG = { "main-1f-lobby": "maps/main-1f-lobby.webp", "main-4f": "maps/main-4f.webp", "main-5f": "maps/main-5f.webp" };
 const FLOOR_SVG = { "main-1f-lobby": "maps/main-1f-lobby.svg", "main-4f": "maps/main-4f.svg", "main-5f": "maps/main-5f.svg" };
 const floorSvgCache = new Map();
+const FLOOR_EXT = new Map();
 async function floorPlan(floorId) {
   if (floorSvgCache.has(floorId)) return floorSvgCache.get(floorId).cloneNode(true);
   const imgUrl = FLOOR_IMG[floorId];
@@ -371,6 +377,22 @@ async function floorPlan(floorId) {
     // Transparent room polygons from the SVG for hit-testing only.
     const text = await fetch(svgUrl).then((r) => r.text());
     const doc = new DOMParser().parseFromString(text, "image/svg+xml");
+    {
+      let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+      doc.querySelectorAll("polygon, path.wing").forEach((pg) => {
+        const v = (pg.getAttribute("points") || pg.getAttribute("d") || "").replace(/[MLZ]/g, " ").trim().split(/[\s,]+/).filter(Boolean).map(Number);
+        for (let i = 0; i + 1 < v.length; i += 2) {
+          if (!isFinite(v[i]) || !isFinite(v[i + 1])) continue;
+          x0 = Math.min(x0, v[i]); x1 = Math.max(x1, v[i]); y0 = Math.min(y0, v[i + 1]); y1 = Math.max(y1, v[i + 1]);
+        }
+      });
+      if (isFinite(x0)) {
+        const vb = (doc.documentElement.getAttribute("viewBox") || "").split(/[\s,]+/).map(Number);
+        const sx = vb.length === 4 && vb[2] ? W / vb[2] : 1;
+        const sy = vb.length === 4 && vb[3] ? H / vb[3] : 1;
+        FLOOR_EXT.set(floorId, { x: x0 * sx, y: y0 * sy, w: (x1 - x0) * sx, h: (y1 - y0) * sy });
+      }
+    }
     const hits = svg("g", { class: "hits", fill: "transparent", stroke: "none", "pointer-events": "all" });
     doc.querySelectorAll("[data-room]").forEach((el) => {
       const n = document.importNode(el, true);
@@ -541,17 +563,25 @@ function drawLabels() {
   const leg = S.route ? S.route.legs.find((l) => l.floorId === ix.floorId) : null;
   const routeStair = S.route && S.route.stair;
   const onRouteIds = new Set([...(leg && leg.ids ? leg.ids : []), ...(routeStair ? [routeStair] : [])]);
+  // Stairs (Troy RT21): route stairs are 24px maroon, with a "Stairs" caption at step/goal zoom.
+  // All other stairs are small muted 15px marks with no caption, and they are hidden at fit zoom during a route.
   for (const s of ix.stairs) {
     const q = scr(s.p);
-    taken.push({ x: q.x - 12, y: q.y - 12, w: 24, h: 24 });
+    const onRoute = !!S.route && onRouteIds.has(s.id);
+    if (S.route && !onRoute && z < 18.6) continue;
     const k = u;
-    const onRoute = onRouteIds.has(s.id);
-    const op = z < 19 && S.route && !onRoute ? 0.55 : 1;
-    const sg = svg("g", { class: "stair", opacity: String(op), "data-stair": s.id });
-    sg.append(svg("rect", { x: s.p.x - 12 * k, y: s.p.y - 12 * k, width: 24 * k, height: 24 * k, rx: 6 * k, fill: "#8B0000", stroke: "#fff", "stroke-width": 1.5 * k }));
-    sg.append(svg("path", { d: `M${s.p.x - 7 * k} ${s.p.y + 7 * k} h${5 * k} v${-5 * k} h${5 * k} v${-5 * k} h${4 * k}`, fill: "none", stroke: "#fff", "stroke-width": 2 * k, "stroke-linecap": "round", "stroke-linejoin": "round" }));
+    const sz = onRoute ? 24 : 15;
+    const h = sz / 2;
+    taken.push({ x: q.x - h, y: q.y - h, w: sz, h: sz });
+    const sg = svg("g", { class: `stair${onRoute ? " on" : ""}`, "data-stair": s.id });
+    const f = sz / 24;
+    sg.append(svg("rect", { x: s.p.x - h * k, y: s.p.y - h * k, width: sz * k, height: sz * k, rx: (onRoute ? 6 : 4) * k, fill: onRoute ? "#8B0000" : "#B8ACA3", stroke: "#fff", "stroke-width": (onRoute ? 1.5 : 1) * k }));
+    sg.append(svg("path", { d: `M${s.p.x - 7 * f * k} ${s.p.y + 7 * f * k} h${5 * f * k} v${-5 * f * k} h${5 * f * k} v${-5 * f * k} h${4 * f * k}`, fill: "none", stroke: "#fff", "stroke-width": (onRoute ? 2 : 1.5) * k, "stroke-linecap": "round", "stroke-linejoin": "round" }));
     const cap = { x: q.x - 16, y: q.y + 13, w: 32, h: 11 };
-    if (free(cap)) taken.push(cap) && sg.append(svg("text", { x: s.p.x, y: s.p.y + 22 * k, class: "stair-lab", style: `font-size:${9 * k}px;stroke-width:${2.5 * k}px` }, "Stairs"));
+    if (onRoute && z >= 18.6 && free(cap)) {
+      taken.push(cap);
+      sg.append(svg("text", { x: s.p.x, y: s.p.y + 22 * k, class: "stair-lab", style: `font-size:${9 * k}px;stroke-width:${2.5 * k}px` }, "Stairs"));
+    }
     sg.append(svg("title", {}, s.name));
     (over || g).append(sg);
   }
@@ -565,14 +595,32 @@ function drawLabels() {
   // Wing names are app overlays at 13px; hide them past zoom 19.5 so they do not clip at goal zoom.
   // Room codes stay baked on the directory image; only dest gets an overlay pill.
   const hasImg = !!document.querySelector(".floor-svg image");
+  // Route samples in screen px so wing names never sit on the line.
+  const routePts = [];
+  if (leg) {
+    const tt = tf(ix.floorId);
+    const P = leg.points.map((q) => scr(tt(q.x, q.y)));
+    for (let i = 1; i < P.length; i++) {
+      const n = Math.max(1, Math.ceil(Math.hypot(P[i].x - P[i - 1].x, P[i].y - P[i - 1].y) / 6));
+      for (let j = 0; j <= n; j++) routePts.push({ x: P[i - 1].x + ((P[i].x - P[i - 1].x) * j) / n, y: P[i - 1].y + ((P[i].y - P[i - 1].y) * j) / n });
+    }
+  }
+  const clearRoute = (b) => !routePts.some((p) => p.x > b.x - 6 && p.x < b.x + b.w + 6 && p.y > b.y - 6 && p.y < b.y + b.h + 6);
   if (z < 19.5) {
     for (const w of ix.wings) {
       const q = scr(w.p);
       const bw = w.text.length * 9;
       const box = { x: q.x - bw / 2, y: q.y - 9, w: bw, h: 18 };
-      const y = free(box) ? w.p.y : w.p.y + 22 * u;
       const half = bw / 2 + 16;
-      const sx = Math.max(half, Math.min(innerWidth - half, q.x));
+      let sx = Math.max(half, Math.min(innerWidth - half, q.x));
+      let dy = null;
+      for (const [ox, oy] of [[0, 0], [0, 22], [0, -22], [bw / 2 + 24, 0], [-(bw / 2 + 24), 0], [0, 44], [0, -44]]) {
+        const b = { x: sx + ox - bw / 2, y: q.y + oy - 9, w: bw, h: 18 };
+        if (b.x < 8 || b.x + bw > innerWidth - 8) continue;
+        if (free(b) && clearRoute(b)) { sx += ox; dy = oy; taken.push(b); break; }
+      }
+      if (dy === null) continue;
+      const y = w.p.y + dy * u;
       g.append(svg("text", { x: c.x + sx * u, y, class: "w-name", style: `font-size:${13 * u}px;letter-spacing:${0.08 * 13 * u}px` }, w.text));
     }
   }
@@ -605,11 +653,20 @@ function drawLabels() {
   }
 }
 
+function buildingLabel(f) {
+  return !f || /^Main/.test(f.building || "") ? "PUP Main Building" : f.building;
+}
 function drawFloorTabs() {
   const nav = $("floors");
   nav.replaceChildren();
+  // Only the current building's floors, one tab per floor label (no duplicate 2F, gym is its own building).
+  const cur = S.floors.find((x) => x.id === S.floorId);
+  const seen = new Set();
   for (const f of [...S.floors].reverse()) {
     if (!S.paths.floors[f.id] || !FLOOR_IMG[f.id]) continue;
+    if (cur && f.building !== cur.building) continue;
+    if (seen.has(floorShort(f))) continue;
+    seen.add(floorShort(f));
     const b = el("button", { type: "button", "aria-pressed": String(f.id === S.floorId) }, floorShort(f));
     if (S.route) {
       const indoor = S.route.legs.filter((l) => l.floorId !== "outdoor");
@@ -655,7 +712,7 @@ async function enterBuilding(floorId) {
       syncCompass();
       await wait(350);
       const f0 = S.floors.find((x) => x.id === floorId);
-      chip.textContent = `PUP Main Building · ${floorShort(f0)}`;
+      chip.textContent = `${buildingLabel(f0)} · ${floorShort(f0)}`;
       if (!RM) await chip.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200 * SLOW, fill: "forwards" }).finished;
     };
     if (map && !RM) {
@@ -676,7 +733,7 @@ async function enterBuilding(floorId) {
   }
   drawFloorTabs();
   const f = S.floors.find((x) => x.id === floorId);
-  $("where").textContent = `PUP Main Building · ${floorShort(f)}`;
+  $("where").textContent = `${buildingLabel(f)} · ${floorShort(f)}`;
   stage("indoor");
 }
 async function exitBuilding() {
