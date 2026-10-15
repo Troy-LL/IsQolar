@@ -25,27 +25,48 @@ export function wingName(letter) {
   return WING_NAME[letter] || null;
 }
 
-// Wing-letter + number from data we already have (N412, E412, S513). Never invent a wing.
-// If the wing is unknown ("?"), return the bare number with "?" and mark it unsure (grey in the UI).
+// Canonical PUP classroom code: wing letter + floor digit + two digits, e.g. E402, S508, N412.
+// Optional trailing letter for split rooms (S512A). Codes come from the floor posters in public/maps/
+// (5F prints S508; 4F prints "Class Room 412" inside the North/East/West wing, stored as N412).
+// Lobby codes like (W2) and (S7) are 1F office directory labels, not classroom codes.
+export function isValidRoomCode(code) {
+  return /^[NESW]\d{3}[A-Z]?$/.test(String(code || "").replace(/\?$/, "").toUpperCase());
+}
+
+function packCode(letter, number, unsure) {
+  const code = letter.toUpperCase() + String(number).toUpperCase();
+  if (!isValidRoomCode(code)) return null;
+  return { code: code + (unsure ? "?" : ""), unsure: !!unsure, letter: letter.toUpperCase(), number: String(number).toUpperCase() };
+}
+
 export function roomCode(room) {
-  const label = (room && room.label) || "";
-  const flagged = !!(room && room.flag) || /\?/.test(label);
-  let m = /^([NESW])(\d+[A-Z]?)\??$/i.exec(label.trim());
-  if (m) {
-    return { code: m[1].toUpperCase() + m[2].toUpperCase() + (flagged ? "?" : ""), unsure: flagged, letter: m[1].toUpperCase(), number: m[2].toUpperCase() };
+  if (!room) return null;
+  const label = room.label || "";
+  const flagged = !!room.flag || /\?/.test(label) || /\?/.test(room.code || "");
+  if (room.code && isValidRoomCode(room.code)) {
+    const m = /^([NESW])(\d{3}[A-Z]?)/i.exec(room.code);
+    return packCode(m[1], m[2], flagged);
   }
-  m = /\(([NESW])(\d+[A-Z]?)\??\)\??$/i.exec(label);
-  if (m) {
-    return { code: m[1].toUpperCase() + m[2].toUpperCase() + (flagged ? "?" : ""), unsure: flagged, letter: m[1].toUpperCase(), number: m[2].toUpperCase() };
-  }
-  m = /^Classroom (\d+[A-Z]?)$/i.exec(label);
+  // 5F posters print the code on the room (S513, E501, …)
+  let m = /^([NESW])(\d{3}[A-Z]?)\??$/i.exec(label.trim());
+  if (m) return packCode(m[1], m[2], flagged);
+  // 4F posters print "Class Room 412" inside a named wing
+  m = /^Classroom (\d{3}[A-Z]?)$/i.exec(label);
   if (m) {
     const letter = wingLetter(room.wing);
     if (!letter) return { code: m[1] + "?", unsure: true, letter: null, number: m[1] };
-    return { code: letter + m[1], unsure: flagged, letter, number: m[1] };
+    return packCode(letter, m[1], flagged);
   }
   return null;
 }
+
+export function isClassroom(room) {
+  if (!room) return false;
+  if (/^Classroom\s/i.test(room.label || "")) return true;
+  return !!roomCode(room);
+}
+
+export const SEARCH_LIMIT = 8;
 
 export function roomDisplay(room) {
   const c = roomCode(room);
@@ -53,16 +74,45 @@ export function roomDisplay(room) {
 }
 
 // "N412", "N 412", "north 412" → letter + number. Bare "412" → which-wing chooser.
+// A lone wing letter ("S") is letterOnly: show a hint, do not list rooms yet.
 export function parseRoomQuery(query) {
   const s = String(query || "").trim().toLowerCase().replace(/\s+/g, " ");
   if (!s) return null;
+  if (/^[nsew]$/.test(s)) return { letter: s.toUpperCase(), number: null, bare: false, letterOnly: true };
   const named = /^(north|south|east|west)\s+(\d+[a-z]?)\??$/.exec(s);
-  if (named) return { letter: named[1][0].toUpperCase(), number: named[2].toUpperCase(), bare: false };
+  if (named) return { letter: named[1][0].toUpperCase(), number: named[2].toUpperCase(), bare: false, letterOnly: false };
   const coded = /^([nsew])\s*(\d+[a-z]?)\??$/.exec(s);
-  if (coded) return { letter: coded[1].toUpperCase(), number: coded[2].toUpperCase(), bare: false };
+  if (coded) return { letter: coded[1].toUpperCase(), number: coded[2].toUpperCase(), bare: false, letterOnly: false };
   const bare = /^(\d+[a-z]?)\??$/.exec(s);
-  if (bare) return { letter: null, number: bare[1].toUpperCase(), bare: true };
+  if (bare) return { letter: null, number: bare[1].toUpperCase(), bare: true, letterOnly: false };
   return null;
+}
+
+function floorRank(floorId) {
+  const m = /(\d+)f/i.exec(floorId || "");
+  return m ? Number(m[1]) : 99;
+}
+
+function numberRank(room) {
+  const c = roomCode(room);
+  if (!c) return 1e9;
+  const n = parseInt(c.number, 10);
+  return Number.isFinite(n) ? n : 1e9;
+}
+
+export function sortSearchHits(hits) {
+  return hits.slice().sort((a, b) => {
+    const ca = isClassroom(a) ? 0 : 1;
+    const cb = isClassroom(b) ? 0 : 1;
+    if (ca !== cb) return ca - cb;
+    const fa = floorRank(a.floorId);
+    const fb = floorRank(b.floorId);
+    if (fa !== fb) return fa - fb;
+    const na = numberRank(a);
+    const nb = numberRank(b);
+    if (na !== nb) return na - nb;
+    return roomDisplay(a).localeCompare(roomDisplay(b));
+  });
 }
 
 function graphFor(paths, floorId) {
@@ -166,22 +216,23 @@ export function allRooms(paths) {
 export function searchRooms(paths, query) {
   const rooms = allRooms(paths);
   const parsed = parseRoomQuery(query);
-  if (parsed) {
+  if (parsed && parsed.letterOnly) return [];
+  if (parsed && parsed.number) {
     const hits = rooms.filter((r) => {
       const c = roomCode(r);
-      if (!c || c.number !== parsed.number) return false;
-      if (parsed.letter) return c.letter === parsed.letter;
-      return true;
+      if (!c) return false;
+      // Wing prefix must match exactly: S never returns W rooms.
+      if (parsed.letter && c.letter !== parsed.letter) return false;
+      // Digits are a prefix so typing S5 lists S501, S513, …
+      return c.number.startsWith(parsed.number);
     });
-    // Bare numbers and coded queries prefer the code list (empty is fine: nothing matched).
-    return hits;
+    return sortSearchHits(hits);
   }
   const q = query.trim().toLowerCase();
   if (!q) return [];
-  return rooms.filter((r) => {
-    const c = roomCode(r);
-    return roomName(r).toLowerCase().includes(q) || (c && c.code.toLowerCase().includes(q)) || r.id.includes(q);
-  });
+  // Free-text: match real names and ids, not a lone letter inside a code.
+  const hits = rooms.filter((r) => roomName(r).toLowerCase().includes(q) || r.id.toLowerCase().includes(q));
+  return sortSearchHits(hits);
 }
 
 function findRoom(paths, roomId) {

@@ -1,7 +1,7 @@
 // Types for public/route.js so src/route.test.ts can import it.
 export interface Point { x: number; y: number }
 export interface PathNode { id: string; x: number; y: number; kind: string; label?: string }
-export interface PathRoom { id: string; label: string; kind: string; x: number; y: number; node: string; wing?: string; flag?: string }
+export interface PathRoom { id: string; label: string; kind: string; x: number; y: number; node: string; wing?: string; flag?: string; code?: string }
 export interface PathFloor { aspect: number; start: string | null; nodes: PathNode[]; edges: [string, string][]; rooms: PathRoom[] }
 export interface Paths { floors: Record<string, PathFloor>; unplaced: { floorId: string; label: string; reason: string }[] }
 export interface Stairs { stairs: { id: string; name: string }[]; floors: Record<string, { stairs: Record<string, Point>; notes: string }> }
@@ -16,9 +16,13 @@ export function floorShort(floor: Floor | string): string;
 export function roomName(room: PathRoom): string;
 export function wingLetter(wing: string | undefined | null): string | null;
 export function wingName(letter: string): string | null;
+export function isValidRoomCode(code: string | null | undefined): boolean;
 export function roomCode(room: PathRoom): { code: string; unsure: boolean; letter: string | null; number: string } | null;
 export function roomDisplay(room: PathRoom): string;
-export function parseRoomQuery(query: string): { letter: string | null; number: string; bare: boolean } | null;
+export function parseRoomQuery(query: string): { letter: string | null; number: string | null; bare: boolean; letterOnly: boolean } | null;
+export function isClassroom(room: PathRoom): boolean;
+export function sortSearchHits<T extends PathRoom & { floorId: string }>(hits: T[]): T[];
+export const SEARCH_LIMIT: number;
 export function shortestPath(paths: Paths, floorId: string, from: string, to: string): { distance: number; ids: string[]; points: Point[] } | null;
 export function allRooms(paths: Paths): (PathRoom & { floorId: string })[];
 export function searchRooms(paths: Paths, query: string): (PathRoom & { floorId: string })[];

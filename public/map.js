@@ -1,4 +1,4 @@
-import { planCampusRoute, allRooms, roomName, roomCode, roomDisplay, parseRoomQuery, searchRooms, wingName, floorShort } from "./route.js";
+import { planCampusRoute, allRooms, roomName, roomCode, roomDisplay, parseRoomQuery, searchRooms, wingName, floorShort, SEARCH_LIMIT } from "./route.js";
 
 const $ = (id) => document.getElementById(id);
 const NS = "http://www.w3.org/2000/svg";
@@ -794,10 +794,10 @@ function searchAll(q) {
   if (!s) return [];
   const parsed = parseRoomQuery(q);
   const rooms = searchRooms(S.paths, q).map((r) => ({ type: "room", r, parsed }));
-  if (parsed) return rooms.slice(0, 40);
+  if (parsed) return rooms;
   const bs = S.campus.buildings.features.filter((f) => f.properties.name && buildingName(f).toLowerCase().includes(s)).map((b) => ({ type: "building", b }));
   if (!bs.some((x) => x.b.properties.main) && S.campus.wingLabels.features.some((w) => w.properties.name.toLowerCase().includes(s))) bs.unshift({ type: "building", b: mainFeatures()[0] });
-  return [...rooms, ...bs].slice(0, 40);
+  return [...rooms, ...bs];
 }
 function renderResults() {
   const q = $("q").value;
@@ -809,9 +809,15 @@ function renderResults() {
     return;
   }
   const parsed = parseRoomQuery(q);
+  if (parsed && parsed.letterOnly) {
+    list.hidden = false;
+    const hint = ({ N: "N412", S: "S513", E: "E501", W: "W412" })[parsed.letter] || "S513";
+    list.append(el("li", { class: "hint" }, `Type a room number, e.g. ${hint}`));
+    return;
+  }
   const hits = searchAll(q);
   // Coded query with one hit: go straight to the room (skip the which-wing chooser).
-  if (parsed && parsed.letter && hits.length === 1 && hits[0].type === "room") {
+  if (parsed && parsed.letter && parsed.number && hits.length === 1 && hits[0].type === "room") {
     const code = (roomCode(hits[0].r).code || "").replace(/\?$/, "");
     const compact = q.trim().toLowerCase().replace(/\s+/g, "").replace(/\?$/, "");
     const named = /^(north|south|east|west)\s+/i.test(q.trim());
@@ -825,10 +831,13 @@ function renderResults() {
     list.append(el("li", { class: "empty" }, `"${q.trim()}" is not on the map yet.`));
     return;
   }
-  if (parsed && parsed.bare && hits.length > 1) {
-    list.append(el("li", { class: "chooser" }, "Which wing?"));
+  if (parsed && parsed.bare) {
+    const roomHits = hits.filter((h) => h.type === "room");
+    if (roomHits.length > 1) list.append(el("li", { class: "chooser" }, "Which wing?"));
   }
-  for (const h of hits) {
+  const shown = hits.slice(0, SEARCH_LIMIT);
+  const more = hits.length - shown.length;
+  for (const h of shown) {
     const b = el("button", { type: "button" });
     const box = el("span");
     if (h.type === "room") {
@@ -853,6 +862,7 @@ function renderResults() {
     li.append(b);
     list.append(li);
   }
+  if (more > 0) list.append(el("li", { class: "more" }, `${more} more; keep typing to narrow`));
 }
 function pick(fn) {
   $("results").hidden = true;

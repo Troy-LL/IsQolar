@@ -1,7 +1,7 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { planRoute, planCampusRoute, NOT_ON_MAP, roomCode, roomDisplay, parseRoomQuery, searchRooms, type Paths, type Stairs, type Floor, type Campus } from "../public/route.js";
+import { planRoute, planCampusRoute, NOT_ON_MAP, roomCode, roomDisplay, parseRoomQuery, searchRooms, isClassroom, isValidRoomCode, SEARCH_LIMIT, type Paths, type Stairs, type Floor, type Campus } from "../public/route.js";
 
 const paths = JSON.parse(readFileSync("data/paths.json", "utf8")) as Paths;
 const stairs = JSON.parse(readFileSync("data/stairs.json", "utf8")) as Stairs;
@@ -66,21 +66,37 @@ describe("route", () => {
 
 
 describe("room codes", () => {
-  it("builds wing-letter + number from existing wing data", () => {
+  it("uses poster classroom codes in the letter + 3-digit format", () => {
     const n = paths.floors["main-4f"].rooms.find((r) => r.id === "main-4f-north-412")!;
     const e = paths.floors["main-4f"].rooms.find((r) => r.id === "main-4f-east-412")!;
     const s = paths.floors["main-5f"].rooms.find((r) => r.id === "main-5f-s513")!;
+    assert.equal(n.code, "N412");
     assert.equal(roomCode(n)!.code, "N412");
     assert.equal(roomCode(e)!.code, "E412");
     assert.equal(roomCode(s)!.code, "S513");
     assert.equal(roomDisplay(n), "N412");
   });
 
+  it("rejects codes that are not wing letter + 3 digits", () => {
+    assert.equal(isValidRoomCode("S7"), false);
+    assert.equal(isValidRoomCode("W2"), false);
+    assert.equal(isValidRoomCode("W51"), false);
+    assert.equal(isValidRoomCode("N41"), false);
+    assert.equal(isValidRoomCode("412"), false);
+    assert.equal(isValidRoomCode("S513"), true);
+    assert.equal(isValidRoomCode("S512A"), true);
+    assert.equal(isValidRoomCode("N412"), true);
+    assert.equal(roomCode({ label: "Accounting Office (S7)", kind: "office", id: "x", x: 0, y: 0, node: "c" }), null);
+    assert.equal(roomCode({ label: "S7", kind: "office", id: "x", x: 0, y: 0, node: "c" }), null);
+    assert.equal(roomCode({ label: "W51?", kind: "office", id: "x", x: 0, y: 0, node: "c", flag: "?" }), null);
+  });
+
   it("parses N412, 'N 412' and 'north 412', and treats bare 412 as a chooser", () => {
-    assert.deepEqual(parseRoomQuery("N412"), { letter: "N", number: "412", bare: false });
-    assert.deepEqual(parseRoomQuery("N 412"), { letter: "N", number: "412", bare: false });
-    assert.deepEqual(parseRoomQuery("north 412"), { letter: "N", number: "412", bare: false });
-    assert.deepEqual(parseRoomQuery("412"), { letter: null, number: "412", bare: true });
+    assert.deepEqual(parseRoomQuery("N412"), { letter: "N", number: "412", bare: false, letterOnly: false });
+    assert.deepEqual(parseRoomQuery("N 412"), { letter: "N", number: "412", bare: false, letterOnly: false });
+    assert.deepEqual(parseRoomQuery("north 412"), { letter: "N", number: "412", bare: false, letterOnly: false });
+    assert.deepEqual(parseRoomQuery("412"), { letter: null, number: "412", bare: true, letterOnly: false });
+    assert.deepEqual(parseRoomQuery("S"), { letter: "S", number: null, bare: false, letterOnly: true });
   });
 
   it("bare-number search lists each wing; a coded query goes to that room", () => {
@@ -92,6 +108,60 @@ describe("room codes", () => {
     assert.equal(coded[0].id, "main-4f-north-412");
     assert.equal(searchRooms(paths, "north 412")[0].id, "main-4f-north-412");
     assert.equal(searchRooms(paths, "N 412")[0].id, "main-4f-north-412");
+  });
+});
+
+
+describe("search rules", () => {
+  it("does not treat 1F lobby office codes (W2, S7) as classroom room codes", () => {
+    const w2 = paths.floors["main-1f-lobby"].rooms.find((r) => r.id.endsWith("-w2"))!;
+    const s7 = paths.floors["main-1f-lobby"].rooms.find((r) => r.id.endsWith("-s7"))!;
+    assert.equal(w2.label, "Admission and Registration Office (W2)");
+    assert.equal(s7.label, "Accounting Office (S7)");
+    assert.equal(roomCode(w2), null);
+    assert.equal(roomCode(s7), null);
+    assert.equal(roomDisplay(w2), "Admission and Registration Office (W2)");
+  });
+
+  it("a lone wing letter returns no rooms (hint in the UI)", () => {
+    assert.deepEqual(searchRooms(paths, "S"), []);
+    assert.deepEqual(searchRooms(paths, "n"), []);
+  });
+
+  it("S never returns W rooms; S5 lists South-wing rooms by number", () => {
+    const hits = searchRooms(paths, "S5");
+    assert.ok(hits.length > 0);
+    for (const r of hits) {
+      const c = roomCode(r)!;
+      assert.equal(c.letter, "S");
+      assert.ok(c.number.startsWith("5"), c.code);
+    }
+    assert.equal(hits.some((r) => roomCode(r)?.letter === "W"), false);
+  });
+
+  it("results are sorted by floor, then numeric room number", () => {
+    const hits = searchRooms(paths, "S5");
+    for (let i = 1; i < hits.length; i++) {
+      const a = hits[i - 1];
+      const b = hits[i];
+      const fa = Number(/(\d+)f/i.exec(a.floorId)![1]);
+      const fb = Number(/(\d+)f/i.exec(b.floorId)![1]);
+      assert.ok(fa <= fb, `${a.id} before ${b.id}`);
+      if (fa === fb) {
+        assert.ok(parseInt(roomCode(a)!.number, 10) <= parseInt(roomCode(b)!.number, 10));
+      }
+    }
+  });
+
+  it("classrooms rank above other place types", () => {
+    // Free-text that hits both a classroom code-name and an office name.
+    const hits = searchRooms(paths, "science");
+    if (hits.length >= 2) {
+      const firstClass = hits.findIndex((r) => isClassroom(r));
+      const firstOther = hits.findIndex((r) => !isClassroom(r));
+      if (firstClass >= 0 && firstOther >= 0) assert.ok(firstClass < firstOther);
+    }
+    assert.equal(SEARCH_LIMIT, 8);
   });
 });
 
