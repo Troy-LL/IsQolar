@@ -18,6 +18,14 @@ const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const EASE_IO = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 const PEEK = 132;
 const LEG_PAD = 48;
+// Indoor zoom is relative to the whole-floor fit, and a wide screen fits the floor far larger, so desktop stops a step earlier.
+const GOAL_ZOOM = innerWidth >= 900 ? 19.5 : 20.5;
+// Every leg clears the floor chip (top), the floor stack (right) and the sheet (bottom).
+function legPad() {
+  const desk = innerWidth >= 900;
+  const open = !$("sheet").hidden;
+  return { top: desk ? 90 : 140, bottom: desk ? 40 : 160, left: (desk && open ? 420 : 0) + 24, right: 88 };
+}
 const S = { floors: [], paths: null, stairs: null, campus: null, rooms: [], inside: false, floorId: null, sel: null, route: null, step: -1, cam: {} };
 
 function svg(tag, attrs = {}, text) {
@@ -85,6 +93,20 @@ function tween(name, to, ms, ease = (t) => 1 - Math.pow(1 - t, 3)) {
     requestAnimationFrame(frame);
   });
 }
+function fitCamPad(box, pad, maxZoom = GOAL_ZOOM) {
+  const W = innerWidth;
+  const H = innerHeight;
+  const aw = Math.max(80, W - pad.left - pad.right);
+  const ah = Math.max(80, H - pad.top - pad.bottom);
+  // never zoom past maxZoom: grow tiny boxes around their center
+  const fw = fitCam(floorBox(S.floorId)).w;
+  const minW = (fw / Math.pow(2, maxZoom - 18)) * (aw / W);
+  if (box.w < minW) box = { x: box.x + box.w / 2 - minW / 2, y: box.y, w: minW, h: box.h };
+  const minH = minW * (ah / aw);
+  if (box.h < minH) box = { x: box.x, y: box.y + box.h / 2 - minH / 2, w: box.w, h: minH };
+  const s = Math.min(aw / box.w, ah / box.h);
+  return { x: box.x + box.w / 2 - (pad.left + aw / 2) / s, y: box.y + box.h / 2 - (pad.top + ah / 2) / s, w: W / s, h: H / s };
+}
 function bbox(points, pad = 0) {
   const xs = points.map((p) => p.x);
   const ys = points.map((p) => p.y);
@@ -126,9 +148,7 @@ async function flyTo(opts) {
 }
 // Fit the outdoor camera to one leg: 48px padding, peek height at the bottom, 600ms easeInOutCubic.
 async function fitLeg(coords) {
-  const { top, left, right } = insets();
-  const desk = innerWidth >= 900;
-  const padding = { top: top + LEG_PAD, left: left + LEG_PAD, right: right + LEG_PAD, bottom: (desk ? 16 : PEEK) + LEG_PAD };
+  const padding = legPad();
   const bearing = map.getBearing();
   const cam = map.cameraForBounds(lngLatBox(coords), { padding, bearing, maxZoom: 18.4 });
   if (!cam) return;
@@ -225,7 +245,7 @@ function initMap() {
       map.addLayer({ id: "pup-walk-case", type: "line", source: "pup-walk", layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": "#ffffff", "line-width": 12 } });
       map.addLayer({ id: "pup-walk", type: "line", source: "pup-walk", layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": "#8B0000", "line-width": 6 } });
       map.addSource("pup-wings", { type: "geojson", data: campus.wingLabels });
-      map.addLayer({ id: "pup-wings", type: "symbol", source: "pup-wings", minzoom: 17.6, layout: { "text-field": ["upcase", ["get", "name"]], "text-font": ["Noto Sans Bold"], "text-size": 11, "text-letter-spacing": 0.08 }, paint: { "text-color": "#6B5E57", "text-halo-color": "#ffffff", "text-halo-width": 1.5 } });
+      map.addLayer({ id: "pup-wings", type: "symbol", source: "pup-wings", minzoom: 17.6, layout: { "text-field": ["upcase", ["get", "name"]], "text-font": ["Noto Sans Bold"], "text-size": 11, "text-letter-spacing": 0.08, "text-padding": 16 }, paint: { "text-color": "#6B5E57", "text-halo-color": "#ffffff", "text-halo-width": 1.5 } });
       map.addLayer({
         id: "pup-names",
         type: "symbol",
@@ -245,7 +265,10 @@ function initMap() {
       map.on("rotate", syncCompass);
       syncCompass();
       marker(campus.gate.lngLat, "#1b6e3f", "Main gate").addTo(map);
-      marker(campus.entrance.lngLat, "#ffcc00", "Entrance ?").addTo(map);
+      // Entrance: dot plus a label below it that gives way to the building names (6px collision margin).
+      map.addSource("pup-entrance", { type: "geojson", data: { type: "Feature", properties: { label: "Main entrance ?" }, geometry: { type: "Point", coordinates: campus.entrance.lngLat } } });
+      map.addLayer({ id: "pup-entrance-dot", type: "circle", source: "pup-entrance", paint: { "circle-radius": 6, "circle-color": "#FFC72C", "circle-stroke-color": "#ffffff", "circle-stroke-width": 2.5 } }, "pup-names");
+      map.addLayer({ id: "pup-entrance-label", type: "symbol", source: "pup-entrance", layout: { "text-field": ["get", "label"], "text-font": ["Noto Sans Bold"], "text-size": 11, "text-variable-anchor": ["top", "bottom", "right", "left"], "text-radial-offset": 0.9, "text-padding": 6, "text-allow-overlap": false, "text-optional": true }, paint: { "text-color": "#1f1a1a", "text-halo-color": "#ffffff", "text-halo-width": 2 } }, "pup-names");
       map.once("idle", () => {
         clearTimeout(timer);
         if (!settled) {
@@ -336,8 +359,8 @@ function drawIndoor(floorId) {
     const B = N.get(b);
     if (A.kind !== "corridor" || B.kind !== "corridor") continue;
     const seg = { x1: A.x, y1: A.y, x2: B.x, y2: B.y, "stroke-linecap": "round" };
-    mass.append(svg("line", { ...seg, stroke: "#cdbfb8", "stroke-width": width + 6 }));
-    halls.append(svg("line", { ...seg, stroke: "#fffdfb", "stroke-width": width }));
+    mass.append(svg("line", { ...seg, stroke: "#D9CFC8", "stroke-width": width + 2 }));
+    halls.append(svg("line", { ...seg, stroke: "#F3EDE8", "stroke-width": width }));
   }
   const corr = svg("g");
   for (const [a, b] of f.edges) {
@@ -390,10 +413,16 @@ function drawIndoor(floorId) {
     const cur = S.step >= 0 && S.route.steps[S.step].floorId === floorId;
     drawLine(root, leg.points.map((q) => t(q.x, q.y)), cur);
   }
-  const start = f.start ? N.get(f.start) : null;
+  const indoorLegs = S.route ? S.route.legs.filter((l) => l.floorId !== "outdoor") : [];
+  const startFloor = indoorLegs.length ? indoorLegs[0].floorId : S.floors[0].id;
+  const start = f.start && floorId === startFloor ? N.get(f.start) : null;
+  const arrive = leg && leg.arrive && floorId !== startFloor ? { p: t(leg.points[0].x, leg.points[0].y), text: `Arrive ${floorShort(S.floors.find((x) => x.id === floorId))} · ${leg.arrive}` } : null;
   const lab = svg("g", { id: "labs" });
-  root.append(lab);
-  S.ix = { floorId, wings, labels, stairs, start, startText: floorId === S.floors[0].id ? "You are here (entrance)" : "You are here", legStart: leg ? t(leg.points[0].x, leg.points[0].y) : null, dest };
+  // icons and labels sit under the route line so a short leg is never hidden by its own stairs icon
+  const line = root.querySelector("g[opacity]");
+  if (line) root.insertBefore(lab, line);
+  else root.append(lab);
+  S.ix = { floorId, wings, labels, stairs, start, startText: floorId === S.floors[0].id ? "You are here (entrance)" : "You are here", legStart: leg && !arrive ? t(leg.points[0].x, leg.points[0].y) : null, arrive, dest, destText: S.sel && S.sel.room ? shortLabel(S.sel.room) : "" };
   queueLabels();
 }
 
@@ -430,6 +459,20 @@ function drawLabels() {
   if (ix.dest) {
     const d = scr(ix.dest);
     taken.push({ x: d.x - 14, y: d.y - 40, w: 28, h: 40 });
+    if (z >= 19 && ix.destText) {
+      const w = ix.destText.length * 8 + 4;
+      taken.push({ x: d.x + 16, y: d.y - 34, w, h: 18 });
+      g.append(svg("text", { x: ix.dest.x + 18 * u, y: ix.dest.y - 25 * u, class: "r-lab dest", style: `font-size:${13 * u}px;font-weight:800;text-anchor:start;stroke-width:${3 * u}px` }, ix.destText));
+    }
+  }
+  const arr = $("arrive");
+  arr.hidden = !(S.inside && ix.arrive);
+  if (ix.arrive) {
+    const a = scr(ix.arrive.p);
+    arr.querySelector("span").textContent = ix.arrive.text;
+    arr.style.transform = `translate(${a.x + 8}px, ${a.y + 8}px)`;
+    const r = arr.getBoundingClientRect();
+    taken.push({ x: a.x + 8, y: a.y + 8, w: r.width || 160, h: r.height || 26 });
   }
   // stairs icons, fixed 18px
   for (const s of ix.stairs) {
@@ -458,11 +501,15 @@ function drawLabels() {
       const box = { x: q.x - bw / 2, y: q.y - 9, w: bw, h: 18 };
       // nudge below a stair icon instead of drawing over it
       const y = free(box) ? w.p.y : w.p.y + 22 * u;
-      g.append(svg("text", { x: w.p.x, y, class: "w-name", style: `font-size:${13 * u}px;letter-spacing:${0.08 * 13 * u}px` }, w.text));
+      // text padding 16px: keep the whole label on screen
+      const half = bw / 2 + 16;
+      const sx = Math.max(half, Math.min(innerWidth - half, q.x));
+      g.append(svg("text", { x: c.x + sx * u, y, class: "w-name", style: `font-size:${13 * u}px;letter-spacing:${0.08 * 13 * u}px` }, w.text));
     }
   } else {
     const order = [...ix.labels].sort((a, b) => a.prio - b.prio);
     for (const l of order) {
+      if (l.prio === 0 && ix.destText) continue;
       const q = scr(l.p);
       const w = l.text.length * 6.4 + 6;
       const b = { x: q.x - w / 2, y: q.y - 8, w, h: 16 };
@@ -517,6 +564,8 @@ async function enterBuilding(floorId) {
     highlight(mainFeatures()[0]);
     const fade = async () => {
       stage("crossfade");
+      const chip = $("where");
+      if (!RM) await chip.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 150 * SLOW, fill: "forwards" }).finished;
       drawIndoor(floorId);
       setCam("indoor", fitCam(floorBox(floorId)));
       S.inside = true;
@@ -525,6 +574,9 @@ async function enterBuilding(floorId) {
       $("floors").hidden = false;
       syncCompass();
       await wait(350);
+      const f0 = S.floors.find((x) => x.id === floorId);
+      chip.textContent = `PUP Main Building · ${floorShort(f0)}`;
+      if (!RM) await chip.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200 * SLOW, fill: "forwards" }).finished;
     };
     if (map && !RM) {
       const [[w, so], [e, n]] = lngLatBox(mainCoords());
@@ -556,6 +608,7 @@ async function exitBuilding() {
   $("back").hidden = true;
   $("floors").hidden = true;
   $("pin").hidden = true;
+  $("arrive").hidden = true;
   $("where").textContent = "PUP Main · Sta. Mesa";
   if (map) await fitTo(featCoords(S.campus.campus), { pitch: 55, maxZoom: 17.2, duration: 900 });
   syncCompass();
@@ -570,7 +623,13 @@ function focusIndoor() {
   const leg = S.route ? S.route.legs.find((l) => l.floorId === S.floorId) : null;
   if (leg && leg.points.length) {
     const pts = leg.points.map((q) => t(q.x, q.y));
-    return tween("indoor", fitCam(bbox(pts, 0), LEG_PAD, innerWidth >= 900 ? 16 : PEEK), 600, EASE_IO);
+    const last = S.route.steps.length - 1;
+    if (S.step === last && S.floorId === S.route.legs.at(-1).floorId && S.sel && S.sel.room) {
+      // goal: the destination wing at about zoom 20.5, pin in the middle of the free area
+      const d = t(S.sel.room.x, S.sel.room.y);
+      return tween("indoor", fitCamPad({ x: d.x - 1, y: d.y - 1, w: 2, h: 2 }, legPad(), GOAL_ZOOM), 600, EASE_IO);
+    }
+    return tween("indoor", fitCamPad(bbox(pts, 0), legPad(), GOAL_ZOOM), 600, EASE_IO);
   }
   if (S.sel && S.sel.room && S.sel.room.floorId === S.floorId) {
     const p = t(S.sel.room.x, S.sel.room.y);
@@ -655,7 +714,7 @@ async function selectBuilding(f) {
   S.route = null;
   drawOutdoor();
   const p = f.properties;
-  if (p.main) openSheet({ crumb: "PUP Main · Sta. Mesa", title: "PUP Main Building", sub: "Floors 1F, 4F, 5F mapped inside", inside: true });
+  if (p.main) openSheet({ crumb: "PUP Main · Sta. Mesa", title: "PUP Main Building", sub: "Floors 1F, 4F, 5F mapped inside", inside: true, flag: `Main entrance ? ${S.campus.entrance.note.replace(/^\?\s*/, "")}` });
   else openSheet({ crumb: "PUP Main · Sta. Mesa", title: p.name || "Unnamed building ?", sub: "No floor plan yet" });
   $("dir").hidden = true;
   if (S.inside) await exitBuilding();

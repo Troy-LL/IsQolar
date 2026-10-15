@@ -64,6 +64,32 @@ describe("route", () => {
   });
 });
 
+describe("route drawing", () => {
+  it("never doubles back through a dead-end vertex", () => {
+    for (const to of ["main-4f-north-412", "main-5f-e501", "main-5f-n519"]) {
+      const r = planCampusRoute(paths, stairs, floors, campus, to);
+      assert.ok(r.ok);
+      for (const leg of r.legs.filter((l) => l.floorId !== "outdoor")) {
+        const a = paths.floors[leg.floorId].aspect;
+        const p = leg.points.map((q) => ({ x: q.x, y: q.y / a }));
+        for (let i = 1; i < p.length - 1; i++) {
+          const u = { x: p[i].x - p[i - 1].x, y: p[i].y - p[i - 1].y };
+          const v = { x: p[i + 1].x - p[i].x, y: p[i + 1].y - p[i].y };
+          const lu = Math.hypot(u.x, u.y);
+          const lv = Math.hypot(v.x, v.y);
+          if (lu < 1e-6 || lv < 1e-6) continue;
+          assert.ok((u.x * v.x + u.y * v.y) / (lu * lv) > -0.95, `${to} ${leg.floorId} doubles back at point ${i}`);
+        }
+      }
+    }
+  });
+  it("names the arrival stairs on the goal floor", () => {
+    const r = planCampusRoute(paths, stairs, floors, campus, "main-4f-north-412");
+    assert.ok(r.ok);
+    assert.equal((r.legs.at(-1) as { arrive?: string }).arrive, "East wing stairs by the dome");
+  });
+});
+
 describe("campus OSM data", () => {
   it("has PUP Main Building wings from OSM and a walk that starts at the gate", () => {
     const c = JSON.parse(readFileSync("data/campus-osm.json", "utf8")) as {

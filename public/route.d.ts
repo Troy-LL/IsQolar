@@ -6,7 +6,7 @@ export interface PathFloor { aspect: number; start: string | null; nodes: PathNo
 export interface Paths { floors: Record<string, PathFloor>; unplaced: { floorId: string; label: string; reason: string }[] }
 export interface Stairs { stairs: { id: string; name: string }[]; floors: Record<string, { stairs: Record<string, Point>; notes: string }> }
 export interface Floor { id: string; floor: string; label: string; image: string }
-export interface Leg { floorId: string; ids: string[]; points: Point[] }
+export interface Leg { floorId: string; ids: string[]; points: Point[]; arrive?: string }
 export interface Step { floorId: string; text: string }
 export type RouteResult =
   | { ok: true; room: PathRoom & { floorId: string }; stair?: string; legs: Leg[]; steps: Step[] }

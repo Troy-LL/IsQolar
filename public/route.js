@@ -61,7 +61,46 @@ export function shortestPath(paths, floorId, from, to) {
   }
   const ids = [to];
   while (ids[0] !== from) ids.unshift(prev.get(ids[0]));
-  return { distance: dist.get(to), ids, points: ids.map((id) => ({ x: g.nodes.get(id).x, y: g.nodes.get(id).y })) };
+  return { distance: dist.get(to), ids, points: snapLeg(g, ids, paths.floors[floorId].aspect || 1) };
+}
+
+// Draw a leg on the corridors: leaves (start, stairs, rooms) join the corridor at their foot point, not at the
+// corridor vertex, so the line never runs out to a vertex and doubles back.
+function snapLeg(g, ids, aspect) {
+  const P = (id) => g.nodes.get(id);
+  const isLeaf = (id) => P(id).kind !== "corridor";
+  const foot = (p, a, b) => {
+    const ax = a.x, ay = a.y / aspect, bx = b.x, by = b.y / aspect, px = p.x, py = p.y / aspect;
+    const dx = bx - ax, dy = by - ay;
+    const L = dx * dx + dy * dy || 1;
+    const t = Math.max(0, Math.min(1, ((px - ax) * dx + (py - ay) * dy) / L));
+    return { x: ax + dx * t, y: (ay + dy * t) * aspect, t, d: Math.hypot(px - ax - dx * t, py - ay - dy * t) };
+  };
+  const corrNbrs = (c) => (g.adj.get(c) || []).map(([n]) => n).filter((n) => !isLeaf(n));
+  const pts = ids.map((id) => ({ x: P(id).x, y: P(id).y }));
+  const n = ids.length;
+  if (n === 3 && isLeaf(ids[0]) && isLeaf(ids[2])) {
+    // leaf, corridor vertex, leaf: put both feet on the corridor segment that suits them best
+    const c = ids[1];
+    let best = null;
+    for (const m of corrNbrs(c)) {
+      const a = foot(P(ids[0]), P(c), P(m));
+      const b = foot(P(ids[2]), P(c), P(m));
+      if (!best || a.d + b.d < best.a.d + best.b.d) best = { a, b };
+    }
+    if (best) return [pts[0], { x: best.a.x, y: best.a.y }, { x: best.b.x, y: best.b.y }, pts[2]];
+    return pts;
+  }
+  const out = pts.slice();
+  if (n >= 3 && isLeaf(ids[0]) && !isLeaf(ids[1]) && !isLeaf(ids[2])) {
+    const f = foot(P(ids[0]), P(ids[1]), P(ids[2]));
+    out[1] = { x: f.x, y: f.y };
+  }
+  if (n >= 3 && isLeaf(ids[n - 1]) && !isLeaf(ids[n - 2]) && !isLeaf(ids[n - 3])) {
+    const f = foot(P(ids[n - 1]), P(ids[n - 2]), P(ids[n - 3]));
+    out[n - 2] = { x: f.x, y: f.y };
+  }
+  return out;
 }
 
 export function allRooms(paths) {
@@ -125,7 +164,7 @@ export function planRoute(paths, stairs, floors, start, roomId) {
     stair: best.id,
     legs: [
       { floorId: start.floorId, ids: best.a.ids, points: best.a.points },
-      { floorId: room.floorId, ids: b.ids, points: b.points },
+      { floorId: room.floorId, ids: b.ids, points: b.points, arrive: stairName(best.id) },
     ],
     steps: [
       { floorId: start.floorId, text: `Walk to the ${stairName(best.id)}` },
