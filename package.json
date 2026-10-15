@@ -7,7 +7,7 @@
     "node": "20.x"
   },
   "scripts": {
-    "dev": "SEED=1 tsx src/server.ts",
+    "dev": "node scripts/dev.mjs",
     "hub": "HUB_FILE=hub-state.json SEED=1 tsx src/server.ts",
     "start": "tsx src/server.ts",
     "seed": "tsx src/seed.ts",
