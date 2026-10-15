@@ -1,0 +1,593 @@
+{
+ "note": "Traced by hand from the campus evacuation plan photo IBM_7737 (1024 x 768 view of it). Building numbers and names come from the IBM_7738 legend in docs/floorplans/rooms.json. Shapes are approximate. Anything not on the plan is flagged with ?.",
+ "source": "IBM_7737",
+ "viewBox": [
+  50,
+  105,
+  780,
+  620
+ ],
+ "buildings": [
+  {
+   "num": 8,
+   "label": "8. Track and Football Oval",
+   "shape": "ellipse",
+   "cx": 195,
+   "cy": 270,
+   "rx": 108,
+   "ry": 128,
+   "rotate": 18,
+   "fill": "field"
+  },
+  {
+   "num": 28,
+   "label": "28. Interfaith Chapel",
+   "shape": "circle",
+   "cx": 428,
+   "cy": 227,
+   "r": 60
+  },
+  {
+   "num": 29,
+   "label": "29. College of Nutrition & Food Science Building",
+   "shape": "poly",
+   "points": [
+    [
+     375,
+     128
+    ],
+    [
+     505,
+     128
+    ],
+    [
+     505,
+     150
+    ],
+    [
+     375,
+     150
+    ]
+   ]
+  },
+  {
+   "num": 26,
+   "label": "26. PUP Main Academic Building",
+   "shape": "poly",
+   "points": [
+    [
+     530,
+     147
+    ],
+    [
+     587,
+     147
+    ],
+    [
+     582,
+     265
+    ],
+    [
+     600,
+     282
+    ],
+    [
+     690,
+     350
+    ],
+    [
+     670,
+     390
+    ],
+    [
+     565,
+     340
+    ],
+    [
+     548,
+     330
+    ],
+    [
+     520,
+     312
+    ],
+    [
+     518,
+     290
+    ],
+    [
+     525,
+     262
+    ]
+   ],
+   "id": "main",
+   "indoor": true
+  },
+  {
+   "num": 27,
+   "label": "27. (South Wing) Academic Building",
+   "shape": "poly",
+   "points": [
+    [
+     590,
+     200
+    ],
+    [
+     632,
+     172
+    ],
+    [
+     700,
+     300
+    ],
+    [
+     660,
+     325
+    ]
+   ]
+  },
+  {
+   "num": 15,
+   "label": "15. Mabini Monument/PUP Obelisk",
+   "shape": "circle",
+   "cx": 365,
+   "cy": 470,
+   "r": 22
+  },
+  {
+   "num": 16,
+   "label": "16. Tennis Court",
+   "shape": "poly",
+   "points": [
+    [
+     230,
+     488
+    ],
+    [
+     318,
+     488
+    ],
+    [
+     318,
+     560
+    ],
+    [
+     230,
+     560
+    ]
+   ],
+   "fill": "field"
+  },
+  {
+   "num": 9,
+   "label": "9. Grandstand",
+   "shape": "poly",
+   "points": [
+    [
+     250,
+     365
+    ],
+    [
+     300,
+     315
+    ],
+    [
+     312,
+     330
+    ],
+    [
+     262,
+     380
+    ]
+   ]
+  },
+  {
+   "num": 12,
+   "label": "12. Mabini Shrine Museum & Information Center",
+   "shape": "poly",
+   "points": [
+    [
+     330,
+     358
+    ],
+    [
+     360,
+     358
+    ],
+    [
+     360,
+     390
+    ],
+    [
+     330,
+     390
+    ]
+   ]
+  },
+  {
+   "num": 11,
+   "label": "11. Mabini Replica House",
+   "shape": "poly",
+   "points": [
+    [
+     280,
+     420
+    ],
+    [
+     305,
+     410
+    ],
+    [
+     330,
+     425
+    ],
+    [
+     305,
+     442
+    ]
+   ]
+  },
+  {
+   "num": 24,
+   "label": "24. Lagoon",
+   "shape": "poly",
+   "points": [
+    [
+     420,
+     420
+    ],
+    [
+     500,
+     385
+    ],
+    [
+     525,
+     400
+    ],
+    [
+     505,
+     450
+    ],
+    [
+     440,
+     525
+    ],
+    [
+     420,
+     520
+    ]
+   ],
+   "fill": "water"
+  },
+  {
+   "num": 25,
+   "label": "25. Amphi Theater",
+   "shape": "circle",
+   "cx": 548,
+   "cy": 408,
+   "r": 18
+  },
+  {
+   "num": 23,
+   "label": "23. Ninoy Aquino Learning Resource Center",
+   "shape": "poly",
+   "points": [
+    [
+     515,
+     500
+    ],
+    [
+     548,
+     488
+    ],
+    [
+     610,
+     670
+    ],
+    [
+     578,
+     680
+    ]
+   ]
+  },
+  {
+   "num": 44,
+   "label": "44. Commercial Spaces",
+   "shape": "poly",
+   "points": [
+    [
+     565,
+     440
+    ],
+    [
+     590,
+     440
+    ],
+    [
+     590,
+     505
+    ],
+    [
+     565,
+     505
+    ]
+   ]
+  },
+  {
+   "num": 22,
+   "label": "22. Physical Education Building",
+   "shape": "poly",
+   "points": [
+    [
+     420,
+     568
+    ],
+    [
+     448,
+     566
+    ],
+    [
+     450,
+     688
+    ],
+    [
+     420,
+     688
+    ]
+   ]
+  },
+  {
+   "num": 21,
+   "label": "21. PUP Tahanan ng Alumni",
+   "shape": "poly",
+   "points": [
+    [
+     398,
+     620
+    ],
+    [
+     418,
+     620
+    ],
+    [
+     418,
+     665
+    ],
+    [
+     398,
+     665
+    ]
+   ]
+  },
+  {
+   "num": 20,
+   "label": "20. Swimming Pool",
+   "shape": "poly",
+   "points": [
+    [
+     283,
+     598
+    ],
+    [
+     380,
+     598
+    ],
+    [
+     380,
+     655
+    ],
+    [
+     283,
+     655
+    ]
+   ]
+  },
+  {
+   "num": 19,
+   "label": "19. Cultural Sports Center (Gym)",
+   "shape": "poly",
+   "points": [
+    [
+     135,
+     588
+    ],
+    [
+     275,
+     595
+    ],
+    [
+     272,
+     683
+    ],
+    [
+     130,
+     678
+    ]
+   ]
+  },
+  {
+   "num": 43,
+   "label": "43. Food Technology Research and Development Center",
+   "shape": "poly",
+   "points": [
+    [
+     466,
+     656
+    ],
+    [
+     558,
+     656
+    ],
+    [
+     558,
+     705
+    ],
+    [
+     466,
+     705
+    ]
+   ]
+  },
+  {
+   "num": 34,
+   "label": "34. University Canteen/Sampaguita Building",
+   "shape": "poly",
+   "points": [
+    [
+     695,
+     398
+    ],
+    [
+     755,
+     415
+    ],
+    [
+     745,
+     447
+    ],
+    [
+     688,
+     430
+    ]
+   ]
+  },
+  {
+   "num": 36,
+   "label": "36. Charlie del Rosario Hall (Student Guidance)",
+   "shape": "poly",
+   "points": [
+    [
+     652,
+     452
+    ],
+    [
+     775,
+     498
+    ],
+    [
+     760,
+     545
+    ],
+    [
+     645,
+     500
+    ]
+   ]
+  },
+  {
+   "num": 37,
+   "label": "37. Laboratory High School Building",
+   "shape": "poly",
+   "points": [
+    [
+     735,
+     570
+    ],
+    [
+     800,
+     605
+    ],
+    [
+     770,
+     680
+    ],
+    [
+     728,
+     650
+    ]
+   ]
+  },
+  {
+   "num": 2,
+   "label": "2. Mural Brass Sculpture",
+   "shape": "poly",
+   "points": [
+    [
+     705,
+     323
+    ],
+    [
+     730,
+     323
+    ],
+    [
+     730,
+     352
+    ],
+    [
+     705,
+     352
+    ]
+   ]
+  },
+  {
+   "num": 3,
+   "label": "3. Guard House",
+   "shape": "poly",
+   "points": [
+    [
+     86,
+     425
+    ],
+    [
+     100,
+     425
+    ],
+    [
+     100,
+     440
+    ],
+    [
+     86,
+     440
+    ]
+   ]
+  }
+ ],
+ "gate": {
+  "x": 93,
+  "y": 432,
+  "label": "3. Guard House"
+ },
+ "entrance": {
+  "x": 548,
+  "y": 328,
+  "label": "Main Building entrance (East wing entrance, per the 1F directory)",
+  "flag": "?",
+  "note": "? The campus plan does not mark the door or name the wings, so this spot is a guess at the dome side facing the lagoon."
+ },
+ "walk": {
+  "points": [
+   [
+    93,
+    432
+   ],
+   [
+    160,
+    446
+   ],
+   [
+    318,
+    455
+   ],
+   [
+    345,
+    444
+   ],
+   [
+    398,
+    408
+   ],
+   [
+    470,
+    368
+   ],
+   [
+    548,
+    328
+   ]
+  ],
+  "flag": "?",
+  "note": "? Drawn along the open walkways on the plan, not a surveyed path."
+ }
+}

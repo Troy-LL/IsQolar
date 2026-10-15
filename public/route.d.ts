@@ -18,3 +18,5 @@ export function shortestPath(paths: Paths, floorId: string, from: string, to: st
 export function allRooms(paths: Paths): (PathRoom & { floorId: string })[];
 export function searchRooms(paths: Paths, query: string): (PathRoom & { floorId: string })[];
 export function planRoute(paths: Paths, stairs: Stairs, floors: Floor[], start: { floorId: string; node: string }, roomId: string): RouteResult;
+export interface Campus { walk: { points: [number, number][] }; gate: { label: string; x: number; y: number } }
+export function planCampusRoute(paths: Paths, stairs: Stairs, floors: Floor[], campus: Campus, roomId: string): RouteResult;

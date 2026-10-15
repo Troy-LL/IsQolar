@@ -1,11 +1,12 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { planRoute, NOT_ON_MAP, type Paths, type Stairs, type Floor } from "../public/route.js";
+import { planRoute, planCampusRoute, NOT_ON_MAP, type Paths, type Stairs, type Floor, type Campus } from "../public/route.js";
 
 const paths = JSON.parse(readFileSync("data/paths.json", "utf8")) as Paths;
 const stairs = JSON.parse(readFileSync("data/stairs.json", "utf8")) as Stairs;
 const floors = JSON.parse(readFileSync("data/floors.json", "utf8")) as Floor[];
+const campus = JSON.parse(readFileSync("data/campus.json", "utf8")) as Campus;
 const lobby = { floorId: "main-1f-lobby", node: "start" };
 
 describe("route", () => {
@@ -39,6 +40,20 @@ describe("route", () => {
     if (!r.ok) return;
     assert.equal(r.stair, "stair-east-dome");
     assert.equal(r.steps[1].text, "Go up to 5F");
+  });
+
+  it("continues from outdoors: entrance, lobby, stairs, floor", () => {
+    const r = planCampusRoute(paths, stairs, floors, campus, "main-4f-north-412");
+    assert.equal(r.ok, true);
+    if (!r.ok) return;
+    assert.deepEqual(r.legs.map((l) => l.floorId), ["outdoor", "main-1f-lobby", "main-4f"]);
+    assert.deepEqual(r.steps.map((s) => s.text), [
+      "Walk from the Guard House to the Main Building entrance",
+      "Enter the lobby (1F)",
+      "Walk to the East wing stairs by the dome",
+      "Go up to 4F",
+      "Walk to Classroom 412 (North wing)",
+    ]);
   });
 
   it("says a missing room is not on the map yet", () => {

@@ -2,41 +2,59 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Room TBA · IsQolar</title>
 <link rel="stylesheet" href="map.css">
 </head>
-<body>
-<header class="bar">
-  <h1>Room TBA</h1>
-  <p>Main Academic Building</p>
+<body data-stage="outdoor">
+<div id="viewport" class="viewport">
+  <svg id="outdoor" class="layer" preserveAspectRatio="xMidYMid meet" role="img" aria-label="PUP A. Mabini Campus map"></svg>
+  <svg id="indoor" class="layer" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Floor plan"></svg>
+</div>
+
+<header class="top">
+  <button type="button" id="back" class="round" aria-label="Back to campus" hidden>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <label class="pill">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <span class="sr">Search rooms and buildings</span>
+    <input id="q" type="search" placeholder="Where is 412?" autocomplete="off" enterkeyhint="search">
+    <button type="button" id="clear" class="clear" aria-label="Clear search" hidden>×</button>
+  </label>
+  <ul id="results" class="results" hidden></ul>
 </header>
-<main>
-  <section class="finder" aria-label="Find a room">
-    <label for="from">From</label>
-    <select id="from"></select>
-    <label for="q">To</label>
-    <input id="q" type="search" placeholder="Room, e.g. 512, E501, Cashier" autocomplete="off">
-    <ul id="results" class="results" hidden></ul>
-    <p id="msg" class="msg" role="status"></p>
-  </section>
+
+<div id="where" class="where">PUP A. Mabini Campus</div>
+<nav id="floors" class="floors" aria-label="Floors" hidden></nav>
+<div class="zoomctl">
+  <button type="button" id="zoomIn" class="round" aria-label="Zoom in">+</button>
+  <button type="button" id="zoomOut" class="round" aria-label="Zoom out">−</button>
+</div>
+
+<section id="sheet" class="sheet" hidden aria-live="polite">
+  <button type="button" id="handle" class="handle" aria-label="Expand or collapse"></button>
+  <p id="crumb" class="crumb"></p>
+  <div class="head">
+    <h1 id="title"></h1>
+    <button type="button" id="close" class="x" aria-label="Close">×</button>
+  </div>
+  <p id="sub" class="sub"></p>
+  <p id="flag" class="flag" hidden></p>
+  <div class="actions">
+    <button type="button" id="dir" class="primary">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19V12a3 3 0 013-3h9M14 5l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Directions
+    </button>
+    <button type="button" id="inside" class="quiet" hidden>Go inside</button>
+  </div>
   <ol id="steps" class="steps" hidden></ol>
-  <nav id="tabs" class="tabs" aria-label="Floors"></nav>
-  <div class="zoom">
-    <button type="button" id="zoomOut" aria-label="Zoom out">−</button>
-    <span id="zoomLabel">100%</span>
-    <button type="button" id="zoomIn" aria-label="Zoom in">+</button>
-    <label class="toggle"><input type="checkbox" id="showLabels" checked> Labels</label>
+  <div id="stepnav" class="stepnav" hidden>
+    <button type="button" id="prev" class="quiet">Back</button>
+    <button type="button" id="next" class="primary">Next step</button>
   </div>
-  <div id="scroll" class="scroll">
-    <div id="stage" class="stage">
-      <img id="plan" alt="">
-      <svg id="route" class="route" preserveAspectRatio="none" aria-hidden="true"></svg>
-      <div id="pins" class="pins"></div>
-    </div>
-  </div>
-  <p class="note">Floor plans are photos of the PUP directories. Labels with ? are not confirmed.</p>
-</main>
+  <p class="note">Traced from the PUP campus plan and floor directories. ? means not confirmed.</p>
+</section>
 <script type="module" src="map.js"></script>
 </body>
 </html>
