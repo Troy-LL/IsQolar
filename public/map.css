@@ -18,7 +18,7 @@ body.inside #indoor { opacity: 1; pointer-events: auto; transform: none; }
 body.inside #outdoor { opacity: 0; pointer-events: none; transform: scale(1.18); }
 body.slow .layer { transition-duration: 2.4s; }
 
-.top { position: fixed; top: 0; left: 0; right: 0; padding: 12px 12px 0; display: flex; gap: 8px; align-items: flex-start; z-index: 5; pointer-events: none; flex-wrap: wrap; }
+.top { position: fixed; top: 0; left: 0; right: 0; padding: 12px 12px 0; display: flex; gap: 8px; align-items: flex-start; z-index: 5; pointer-events: none; flex-wrap: nowrap; overflow: visible; }
 .top > * { pointer-events: auto; }
 .pill { flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; height: 52px; padding: 0 14px; background: var(--paper); border-radius: 26px; box-shadow: 0 2px 10px rgba(31,26,26,.18); border: 2px solid transparent; }
 .pill:focus-within { border-color: var(--maroon); }
@@ -137,7 +137,7 @@ body.slow .layer { transition-duration: 2.4s; }
 /* Traced floor SVG (RT17) */
 .floor-svg .room { fill: transparent; stroke: none; cursor: pointer; }
 .floor-svg .room.unsure { fill: transparent; }
-.floor-svg .room.dest { fill: rgba(139, 0, 0, 0.18); stroke: #8B0000; stroke-width: 2.5; vector-effect: non-scaling-stroke; }
+.floor-svg .room.dest { fill: rgba(139, 0, 0, 0.12); stroke: #8B0000; stroke-width: 2; vector-effect: non-scaling-stroke; }
 .floor-svg image { pointer-events: none; }
 .floor-svg .corridor { fill: #F3EDE8; }
 .floor-svg .floor-fill { fill: #E7E1DB; }
@@ -145,3 +145,18 @@ body.slow .layer { transition-duration: 2.4s; }
 .floor-svg .dome { fill: #F7F1EE; stroke: #6B5E57; stroke-width: 2; vector-effect: non-scaling-stroke; }
 .floor-svg .dome-ring { fill: none; stroke: #6B5E57; stroke-width: 1.2; opacity: .55; vector-effect: non-scaling-stroke; }
 .floor-svg .stair-pad { stroke: #6B5E57; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+
+/* From picker + search: From takes remaining space; search collapses to icon */
+.pill.from { flex: 1 1 0; min-width: 0; }
+.pill.from select { flex: 1; min-width: 0; border: 0; outline: 0; font-size: 15px; background: transparent; color: var(--ink); }
+.pill.search { flex: 0 0 44px; width: 44px; min-width: 44px; max-width: 44px; padding: 0; justify-content: center; overflow: hidden; box-sizing: border-box; transition: flex-basis .2s var(--ease), max-width .2s var(--ease), padding .2s var(--ease); }
+.top .pill.from { flex: 1 1 0%; min-width: 0; max-width: calc(100% - 56px); }
+.pill.search:focus-within, .pill.search.open { flex: 1 1 160px; width: auto; min-width: 0; max-width: none; padding: 0 14px; justify-content: flex-start; }
+.pill.search input { width: 0; opacity: 0; pointer-events: none; }
+.pill.search:focus-within input, .pill.search.open input { width: auto; flex: 1; min-width: 0; opacity: 1; pointer-events: auto; }
+.pill.search .clear { display: none; }
+.pill.search:focus-within .clear, .pill.search.open .clear { display: grid; }
+@media (min-width: 900px) {
+  .pill.search { flex: 1 1 0; width: auto; min-width: 0; max-width: none; padding: 0 14px; justify-content: flex-start; }
+  .pill.search input { width: auto; flex: 1; opacity: 1; pointer-events: auto; }
+}

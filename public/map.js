@@ -427,7 +427,10 @@ async function drawIndoor(floorId) {
     const n = f.nodes.find((x) => x.id === r.node);
     const route = n && onLeg.has(`${n.x.toFixed(5)},${n.y.toFixed(5)}`);
     labels.push({ text: lab, p, prio: isDest ? 0 : route ? 2 : 3, unsure: !!(r.flag || (roomCode(r) && roomCode(r).unsure)) });
-    if (isDest) dest = p;
+    if (isDest) {
+      const door = f.nodes.find((x) => x.id === r.id) || n;
+      dest = door ? t(door.x, door.y) : p;
+    }
   }
   const stairs = Object.entries(st).map(([id, q]) => ({ id, p: t(q.x, q.y), name: (S.stairs.stairs.find((s) => s.id === id) || {}).name || id }));
   if (leg) {
@@ -444,7 +447,7 @@ async function drawIndoor(floorId) {
   if (line) root.insertBefore(lab, line);
   else root.append(lab);
   root.append(svg("g", { id: "over" }));
-  S.ix = { floorId, wings, labels, stairs, start, startText: floorId === S.floors[0].id ? "You are here (entrance)" : "You are here", legStart: leg && !arrive ? t(leg.points[0].x, leg.points[0].y) : null, arrive, dest, destText: S.sel && S.sel.room ? roomDisplay(S.sel.room) : "" };
+  S.ix = { floorId, wings, labels, stairs, start, startText: floorId === S.floors[0].id ? "You are here (entrance)" : "You are here", legStart: leg && !arrive ? t(leg.points[0].x, leg.points[0].y) : null, arrive, dest, destText: "" };
   queueLabels();
 }
 
@@ -479,30 +482,11 @@ function drawLabels() {
   const free = (b) => !taken.some((o) => b.x < o.x + o.w && o.x < b.x + b.w && b.y < o.y + o.h && o.y < b.y + b.h);
   const ix = S.ix;
   // Pin sits on the corridor-side edge of the dest room so the baked room code stays readable
-  // and the 13px dest label pill clears the pin.
-  let destPin = ix.dest;
-  if (ix.dest && S.sel && S.sel.room) {
-    const room = S.sel.room;
-    const f = S.paths.floors[ix.floorId];
-    const cn = f.nodes.find((n) => n.id === room.node);
-    if (cn) {
-      const tfn = tf(ix.floorId);
-      const cxy = tfn(cn.x, cn.y);
-      const dx = cxy.x - ix.dest.x;
-      const dy = cxy.y - ix.dest.y;
-      const len = Math.hypot(dx, dy) || 1;
-      // pull pin ~40% of the way from room centre toward the corridor node
-      destPin = { x: ix.dest.x + dx * 0.4, y: ix.dest.y + dy * 0.4 };
-    }
-  }
+  // Dest pin at door. No floating code text — baked code stays under dest highlight.
+  const destPin = ix.dest;
   if (ix.dest) {
     const d = scr(destPin);
     taken.push({ x: d.x - 14, y: d.y - 40, w: 28, h: 40 });
-    if (z >= 19 && ix.destText) {
-      const w = ix.destText.length * 8 + 4;
-      taken.push({ x: d.x + 16, y: d.y - 34, w, h: 18 });
-      g.append(svg("text", { x: destPin.x + 18 * u, y: destPin.y - 25 * u, class: "r-lab dest", style: `font-size:${13 * u}px;font-weight:800;text-anchor:start;stroke-width:${3 * u}px` }, ix.destText));
-    }
   }
   const arr = $("arrive");
   arr.hidden = !(S.inside && ix.arrive);
@@ -516,19 +500,23 @@ function drawLabels() {
     const r = arr.getBoundingClientRect();
     taken.push({ x: a.x + 8, y: a.y + 8, w: r.width || 160, h: r.height || 26 });
   }
-  // stairs icons, fixed 20px, drawn above the route line
+  // Stairs: 24px maroon rounded icons. At fit zoom, on-route full opacity, others 40%.
   const over = document.getElementById("over");
   if (over) over.replaceChildren();
+  const leg = S.route ? S.route.legs.find((l) => l.floorId === ix.floorId) : null;
+  const routeStair = S.route && S.route.stair;
+  const onRouteIds = new Set([...(leg && leg.ids ? leg.ids : []), ...(routeStair ? [routeStair] : [])]);
   for (const s of ix.stairs) {
     const q = scr(s.p);
-    const b = { x: q.x - 9, y: q.y - 9, w: 18, h: 18 };
+    const b = { x: q.x - 12, y: q.y - 12, w: 24, h: 24 };
     if (z >= 19 && !free(b)) continue;
     taken.push(b);
-    let k = u;
-    const sg = svg("g", { class: "stair" });
-    k *= 20 / 18;
-    sg.append(svg("rect", { x: s.p.x - 9 * k, y: s.p.y - 9 * k, width: 18 * k, height: 18 * k, rx: 3 * k, fill: "#8B0000" }));
-    sg.append(svg("path", { d: `M${s.p.x - 5 * k} ${s.p.y + 5 * k} h${4 * k} v${-4 * k} h${4 * k} v${-4 * k} h${3 * k}`, fill: "none", stroke: "#fff", "stroke-width": 1.8 * k }));
+    const k = u;
+    const onRoute = onRouteIds.has(s.id);
+    const op = z < 19 ? (onRoute || !S.route ? 1 : 0.4) : 1;
+    const sg = svg("g", { class: "stair", opacity: String(op) });
+    sg.append(svg("rect", { x: s.p.x - 12 * k, y: s.p.y - 12 * k, width: 24 * k, height: 24 * k, rx: 6 * k, fill: "#8B0000" }));
+    sg.append(svg("path", { d: `M${s.p.x - 7 * k} ${s.p.y + 7 * k} h${5 * k} v${-5 * k} h${5 * k} v${-5 * k} h${4 * k}`, fill: "none", stroke: "#fff", "stroke-width": 2 * k, "stroke-linecap": "round", "stroke-linejoin": "round" }));
     sg.append(svg("title", {}, s.name));
     (over || g).append(sg);
   }
@@ -556,7 +544,7 @@ function drawLabels() {
   if (z >= 19) {
     const order = [...ix.labels].sort((a, b) => a.prio - b.prio);
     for (const l of order) {
-      if (l.prio === 0 && ix.destText) continue;
+      if (l.prio === 0) continue; // baked code visible under dest highlight
       if (hasImg && l.prio > 0) continue; // baked on the directory image
       const q = scr(l.p);
       const w = l.text.length * 6.4 + 6;
@@ -789,10 +777,10 @@ function mountFrom() {
   sel.style.cssText = "flex:1;min-width:0;border:0;outline:0;background:transparent;color:inherit;font:inherit;font-size:17px;width:100%";
   for (const s of campusStarts(S.campus)) sel.append(el("option", { value: s.id }, s.label));
   sel.value = GATE_START;
-  const pill = el("label", { class: "pill" });
-  pill.style.flex = "1 1 180px";
+  const pill = el("label", { class: "pill from" });
   pill.append(el("span", {}, "From"), sel);
   const search = $("q").closest("label");
+  search.classList.add("search");
   search.parentElement.insertBefore(pill, search);
   sel.addEventListener("change", () => {
     if (S.sel && S.sel.room && S.route) directions();

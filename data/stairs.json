@@ -1,253 +1,253 @@
 {
- "note": "Stairwells are in the same physical place on every Main Building floor, so every floor uses the same ids. x and y are 0..1 of each floor image, because each floor is a different poster.",
- "stairs": [
-  {
-   "id": "stair-west-end",
-   "name": "West wing far-end stairs"
-  },
-  {
-   "id": "stair-west-dome",
-   "name": "West wing stairs by the dome"
-  },
-  {
-   "id": "stair-south-north",
-   "name": "South wing stairs (West side)"
-  },
-  {
-   "id": "stair-south-mid",
-   "name": "South wing middle stairs"
-  },
-  {
-   "id": "stair-south-south",
-   "name": "South wing stairs (East side)"
-  },
-  {
-   "id": "stair-north-end",
-   "name": "North wing far-end stairs"
-  },
-  {
-   "id": "stair-north-dome",
-   "name": "North wing stairs by the dome"
-  },
-  {
-   "id": "stair-east-end",
-   "name": "East wing far-end stairs"
-  },
-  {
-   "id": "stair-east-dome",
-   "name": "East wing stairs by the dome"
-  },
-  {
-   "id": "lib2-stair-ne",
-   "name": "?"
-  },
-  {
-   "id": "lib2-stair-se",
-   "name": "?"
-  },
-  {
-   "id": "lib3-stairs-up",
-   "name": "Stairs (up)"
-  },
-  {
-   "id": "lib3-stair-north",
-   "name": "?"
+  "note": "Stairwells are in the same physical place on every Main Building floor, so every floor uses the same ids. x and y are 0..1 of each floor image, because each floor is a different poster.",
+  "stairs": [
+    {
+      "id": "stair-west-end",
+      "name": "West wing far-end stairs"
+    },
+    {
+      "id": "stair-west-dome",
+      "name": "West wing stairs by the dome"
+    },
+    {
+      "id": "stair-south-north",
+      "name": "South wing stairs (West side)"
+    },
+    {
+      "id": "stair-south-mid",
+      "name": "South wing middle stairs"
+    },
+    {
+      "id": "stair-south-south",
+      "name": "South wing stairs (East side)"
+    },
+    {
+      "id": "stair-north-end",
+      "name": "North wing far-end stairs"
+    },
+    {
+      "id": "stair-north-dome",
+      "name": "North wing stairs by the dome"
+    },
+    {
+      "id": "stair-east-end",
+      "name": "East wing far-end stairs"
+    },
+    {
+      "id": "stair-east-dome",
+      "name": "East wing stairs by the dome"
+    },
+    {
+      "id": "lib2-stair-ne",
+      "name": "?"
+    },
+    {
+      "id": "lib2-stair-se",
+      "name": "?"
+    },
+    {
+      "id": "lib3-stairs-up",
+      "name": "Stairs (up)"
+    },
+    {
+      "id": "lib3-stair-north",
+      "name": "?"
+    }
+  ],
+  "floors": {
+    "main-1f-lobby": {
+      "stairs": {
+        "stair-west-end": {
+          "x": 0.2986,
+          "y": 0.2591
+        },
+        "stair-west-dome": {
+          "x": 0.3956,
+          "y": 0.4538
+        },
+        "stair-south-north": {
+          "x": 0.165,
+          "y": 0.2471
+        },
+        "stair-south-mid": {
+          "x": 0.165,
+          "y": 0.5137
+        },
+        "stair-south-south": {
+          "x": 0.165,
+          "y": 0.7804
+        },
+        "stair-north-end": {
+          "x": 0.6933,
+          "y": 0.5002
+        },
+        "stair-north-dome": {
+          "x": 0.4385,
+          "y": 0.4862
+        },
+        "stair-east-dome": {
+          "x": 0.3956,
+          "y": 0.5156
+        },
+        "stair-east-end": {
+          "x": 0.2833,
+          "y": 0.7412
+        }
+      },
+      "notes": "all nine stairwells found on this plan"
+    },
+    "main-4f": {
+      "stairs": {
+        "stair-south-south": {
+          "x": 0.5544,
+          "y": 0.19
+        },
+        "stair-south-mid": {
+          "x": 0.515,
+          "y": 0.19
+        },
+        "stair-south-north": {
+          "x": 0.4756,
+          "y": 0.19
+        },
+        "stair-east-end": {
+          "x": 0.2684,
+          "y": 0.3121
+        },
+        "stair-east-dome": {
+          "x": 0.4864,
+          "y": 0.4282
+        },
+        "stair-west-end": {
+          "x": 0.7636,
+          "y": 0.3121
+        },
+        "stair-west-dome": {
+          "x": 0.5456,
+          "y": 0.4282
+        },
+        "stair-north-dome": {
+          "x": 0.516,
+          "y": 0.469
+        },
+        "stair-north-end": {
+          "x": 0.516,
+          "y": 0.6965
+        }
+      },
+      "notes": "all nine stairwells found on this plan"
+    },
+    "main-5f": {
+      "stairs": {
+        "stair-west-end": {
+          "x": 0.259,
+          "y": 0.1851
+        },
+        "stair-west-dome": {
+          "x": 0.405,
+          "y": 0.4391
+        },
+        "stair-south-north": {
+          "x": 0.17,
+          "y": 0.2572
+        },
+        "stair-south-mid": {
+          "x": 0.17,
+          "y": 0.4917
+        },
+        "stair-south-south": {
+          "x": 0.17,
+          "y": 0.7262
+        },
+        "stair-north-end": {
+          "x": 0.7728,
+          "y": 0.489
+        },
+        "stair-north-dome": {
+          "x": 0.4505,
+          "y": 0.472
+        },
+        "stair-east-dome": {
+          "x": 0.4065,
+          "y": 0.5037
+        },
+        "stair-east-end": {
+          "x": 0.2725,
+          "y": 0.7726
+        }
+      },
+      "notes": "all nine stairwells found on this plan"
+    },
+    "main-2f": {
+      "stairs": {
+        "stair-west-end": {
+          "x": 0.27,
+          "y": 0.25
+        },
+        "stair-west-dome": {
+          "x": 0.41,
+          "y": 0.45
+        },
+        "stair-south-north": {
+          "x": 0.2,
+          "y": 0.4212
+        },
+        "stair-south-mid": {
+          "x": 0.21,
+          "y": 0.5592
+        },
+        "stair-south-south": {
+          "x": 0.204,
+          "y": 0.688
+        },
+        "stair-north-end": {
+          "x": 0.756,
+          "y": 0.5095
+        },
+        "stair-north-dome": {
+          "x": 0.504,
+          "y": 0.5775
+        },
+        "stair-east-dome": {
+          "x": 0.39,
+          "y": 0.62
+        },
+        "stair-east-end": {
+          "x": 0.395,
+          "y": 0.88
+        }
+      },
+      "notes": "all nine stairwells found on this plan"
+    },
+    "gym-gf": {
+      "stairs": {},
+      "notes": "no stairwell is drawn on this plan ?"
+    },
+    "library-2f": {
+      "stairs": {
+        "lib2-stair-ne": {
+          "x": 0.7048,
+          "y": 0.1976
+        },
+        "lib2-stair-se": {
+          "x": 0.7432,
+          "y": 0.824
+        }
+      },
+      "notes": "two stair icons on the right side of this plan; a stair on the left edge is unclear ?"
+    },
+    "library-3f": {
+      "stairs": {
+        "lib3-stairs-up": {
+          "x": 0.58,
+          "y": 0.76
+        },
+        "lib3-stair-north": {
+          "x": 0.5,
+          "y": 0.06
+        }
+      },
+      "notes": "Stairs (up) is labeled by the lobby. The stair at the north end of the plan is unlabeled ?"
+    }
   }
- ],
- "floors": {
-  "main-1f-lobby": {
-   "stairs": {
-    "stair-west-end": {
-     "x": 0.425,
-     "y": 0.2
-    },
-    "stair-west-dome": {
-     "x": 0.3933,
-     "y": 0.457
-    },
-    "stair-south-north": {
-     "x": 0.165,
-     "y": 0.2118
-    },
-    "stair-south-mid": {
-     "x": 0.165,
-     "y": 0.5294
-    },
-    "stair-south-south": {
-     "x": 0.165,
-     "y": 0.8471
-    },
-    "stair-north-end": {
-     "x": 0.7128,
-     "y": 0.5178
-    },
-    "stair-north-dome": {
-     "x": 0.4384,
-     "y": 0.4877
-    },
-    "stair-east-dome": {
-     "x": 0.3949,
-     "y": 0.5147
-    },
-    "stair-east-end": {
-     "x": 0.2616,
-     "y": 0.7641
-    }
-   },
-   "notes": "all nine stairwells found on this plan"
-  },
-  "main-4f": {
-   "stairs": {
-    "stair-south-south": {
-     "x": 0.5544,
-     "y": 0.19
-    },
-    "stair-south-mid": {
-     "x": 0.515,
-     "y": 0.19
-    },
-    "stair-south-north": {
-     "x": 0.4756,
-     "y": 0.19
-    },
-    "stair-east-end": {
-     "x": 0.2684,
-     "y": 0.3121
-    },
-    "stair-east-dome": {
-     "x": 0.4864,
-     "y": 0.4282
-    },
-    "stair-west-end": {
-     "x": 0.7636,
-     "y": 0.3121
-    },
-    "stair-west-dome": {
-     "x": 0.5456,
-     "y": 0.4282
-    },
-    "stair-north-dome": {
-     "x": 0.516,
-     "y": 0.469
-    },
-    "stair-north-end": {
-     "x": 0.516,
-     "y": 0.6965
-    }
-   },
-   "notes": "all nine stairwells found on this plan"
-  },
-  "main-5f": {
-   "stairs": {
-    "stair-west-end": {
-     "x": 0.2321,
-     "y": 0.1817
-    },
-    "stair-west-dome": {
-     "x": 0.4036,
-     "y": 0.4411
-    },
-    "stair-south-north": {
-     "x": 0.17,
-     "y": 0.2042
-    },
-    "stair-south-mid": {
-     "x": 0.17,
-     "y": 0.5219
-    },
-    "stair-south-south": {
-     "x": 0.17,
-     "y": 0.8396
-    },
-    "stair-north-end": {
-     "x": 0.7721,
-     "y": 0.5074
-    },
-    "stair-north-dome": {
-     "x": 0.4504,
-     "y": 0.4734
-    },
-    "stair-east-dome": {
-     "x": 0.4072,
-     "y": 0.5046
-    },
-    "stair-east-end": {
-     "x": 0.2681,
-     "y": 0.8051
-    }
-   },
-   "notes": "all nine stairwells found on this plan"
-  },
-  "main-2f": {
-   "stairs": {
-    "stair-west-end": {
-     "x": 0.27,
-     "y": 0.25
-    },
-    "stair-west-dome": {
-     "x": 0.41,
-     "y": 0.45
-    },
-    "stair-south-north": {
-     "x": 0.2,
-     "y": 0.4212
-    },
-    "stair-south-mid": {
-     "x": 0.21,
-     "y": 0.5592
-    },
-    "stair-south-south": {
-     "x": 0.204,
-     "y": 0.688
-    },
-    "stair-north-end": {
-     "x": 0.756,
-     "y": 0.5095
-    },
-    "stair-north-dome": {
-     "x": 0.504,
-     "y": 0.5775
-    },
-    "stair-east-dome": {
-     "x": 0.39,
-     "y": 0.62
-    },
-    "stair-east-end": {
-     "x": 0.395,
-     "y": 0.88
-    }
-   },
-   "notes": "all nine stairwells found on this plan"
-  },
-  "gym-gf": {
-   "stairs": {},
-   "notes": "no stairwell is drawn on this plan ?"
-  },
-  "library-2f": {
-   "stairs": {
-    "lib2-stair-ne": {
-     "x": 0.7048,
-     "y": 0.1976
-    },
-    "lib2-stair-se": {
-     "x": 0.7432,
-     "y": 0.824
-    }
-   },
-   "notes": "two stair icons on the right side of this plan; a stair on the left edge is unclear ?"
-  },
-  "library-3f": {
-   "stairs": {
-    "lib3-stairs-up": {
-     "x": 0.58,
-     "y": 0.76
-    },
-    "lib3-stair-north": {
-     "x": 0.5,
-     "y": 0.06
-    }
-   },
-   "notes": "Stairs (up) is labeled by the lobby. The stair at the north end of the plan is unlabeled ?"
-  }
- }
 }
