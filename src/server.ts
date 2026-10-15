@@ -9,6 +9,9 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export const app = express();
 app.use(express.json());
+app.get("/", (_req, res) => {
+  res.redirect("/map.html");
+});
 app.use(express.static(join(__dirname, "../public")));
 app.use("/data", express.static(join(__dirname, "../data")));
 app.use("/vendor/maplibre", express.static(join(__dirname, "../node_modules/maplibre-gl/dist")));
