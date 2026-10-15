@@ -41,7 +41,7 @@ export type TicketStatus = "waiting" | "called" | "done";
 
 export interface Ticket {
   id: string;
-  /** Short human-readable code printed on the physical ticket (e.g. "A-042"). */
+  /** Short human-readable code printed on the physical ticket (e.g. "0427"). Four digits, zero-padded, counting from 0001. */
   code: string;
   name: string;
   /** The course the student is enrolling in (e.g. "BSCS", "BSIT"). */
