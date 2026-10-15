@@ -139,7 +139,7 @@ the end of this milestone.
 
 ## Sub-Task 2 — Simulation Engine (M2)
 
-**Status:** [ ] pending
+**Status:** [x] done
 
 ### Intent
 Bring the store to life: ticking queues, auto-serve, slot decay, day-reset, wait estimates,
