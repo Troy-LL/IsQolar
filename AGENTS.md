@@ -23,7 +23,10 @@ Read this first. Then read the doc that owns the topic you are working on.
 npm install       # install dependencies
 npm start         # start the server on port 3000
 npm run seed      # reset state and load the simulated morning
+npm run check     # typecheck, lint, and test — run before every PR
 ```
+
+Before a PR: `npm run check`.
 
 ## Rules for every agent run
 

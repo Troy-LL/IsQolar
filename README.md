@@ -66,3 +66,18 @@ The shared data types and endpoint shapes live in [src/contract.ts](src/contract
 The contract was frozen at 11:15 on October 15, 2026.
 Only the project manager may change it after that time.
 See [docs/decisions/003-contract-freeze-at-11-15.md](docs/decisions/003-contract-freeze-at-11-15.md).
+
+## Checks
+
+```bash
+npm run check
+```
+
+Runs three steps in order and stops at the first failure:
+
+1. `typecheck` — `tsc --noEmit` with strict mode
+2. `lint` — ESLint with the recommended TypeScript rules
+3. `test` — Node's built-in test runner over every `*.test.ts` under `src/`
+
+Run this before opening any PR.
+
