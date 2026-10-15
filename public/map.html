@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Room TBA · IsQolar</title>
+<link rel="stylesheet" href="map.css">
+</head>
+<body>
+<header class="bar">
+  <h1>Room TBA</h1>
+  <p>Main Academic Building</p>
+</header>
+<main>
+  <section class="finder" aria-label="Find a room">
+    <label for="from">From</label>
+    <select id="from"></select>
+    <label for="q">To</label>
+    <input id="q" type="search" placeholder="Room, e.g. 512, E501, Cashier" autocomplete="off">
+    <ul id="results" class="results" hidden></ul>
+    <p id="msg" class="msg" role="status"></p>
+  </section>
+  <ol id="steps" class="steps" hidden></ol>
+  <nav id="tabs" class="tabs" aria-label="Floors"></nav>
+  <div class="zoom">
+    <button type="button" id="zoomOut" aria-label="Zoom out">−</button>
+    <span id="zoomLabel">100%</span>
+    <button type="button" id="zoomIn" aria-label="Zoom in">+</button>
+    <label class="toggle"><input type="checkbox" id="showLabels" checked> Labels</label>
+  </div>
+  <div id="scroll" class="scroll">
+    <div id="stage" class="stage">
+      <img id="plan" alt="">
+      <svg id="route" class="route" preserveAspectRatio="none" aria-hidden="true"></svg>
+      <div id="pins" class="pins"></div>
+    </div>
+  </div>
+  <p class="note">Floor plans are photos of the PUP directories. Labels with ? are not confirmed.</p>
+</main>
+<script type="module" src="map.js"></script>
+</body>
+</html>

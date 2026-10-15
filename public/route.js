@@ -1,0 +1,136 @@
+// Floor-by-floor routing for the Room TBA map.
+// Plain ES module: the map page loads it in the browser and src/route.test.ts imports it in Node.
+// Data comes from data/paths.json (walk graph per floor) and data/stairs.json (shared stairwell ids).
+
+export const NOT_ON_MAP = "not on the map yet";
+
+export function floorShort(floor) {
+  const m = /^(\d+F)/.exec(floor && floor.floor ? floor.floor : String(floor || ""));
+  return m ? m[1] : String(floor && floor.id ? floor.id : floor);
+}
+
+export function roomName(room) {
+  return room.wing ? `${room.label} (${room.wing})` : room.label;
+}
+
+function graphFor(paths, floorId) {
+  const floor = paths.floors[floorId];
+  if (!floor) return null;
+  const aspect = floor.aspect || 1;
+  const nodes = new Map(floor.nodes.map((n) => [n.id, n]));
+  const adj = new Map();
+  for (const [a, b] of floor.edges) {
+    const na = nodes.get(a);
+    const nb = nodes.get(b);
+    if (!na || !nb) continue;
+    const w = Math.hypot((na.x - nb.x) * aspect, na.y - nb.y);
+    if (!adj.has(a)) adj.set(a, []);
+    if (!adj.has(b)) adj.set(b, []);
+    adj.get(a).push([b, w]);
+    adj.get(b).push([a, w]);
+  }
+  return { nodes, adj };
+}
+
+// Dijkstra on one floor. Rooms, stairs and the start point are leaves, so a route never cuts through a room.
+export function shortestPath(paths, floorId, from, to) {
+  const g = graphFor(paths, floorId);
+  if (!g || !g.nodes.has(from) || !g.nodes.has(to)) return null;
+  const dist = new Map([[from, 0]]);
+  const prev = new Map();
+  const done = new Set();
+  while (true) {
+    let cur = null;
+    let best = Infinity;
+    for (const [id, d] of dist) {
+      if (!done.has(id) && d < best) {
+        best = d;
+        cur = id;
+      }
+    }
+    if (cur === null) return null;
+    if (cur === to) break;
+    done.add(cur);
+    for (const [next, w] of g.adj.get(cur) || []) {
+      const nd = best + w;
+      if (nd < (dist.get(next) ?? Infinity)) {
+        dist.set(next, nd);
+        prev.set(next, cur);
+      }
+    }
+  }
+  const ids = [to];
+  while (ids[0] !== from) ids.unshift(prev.get(ids[0]));
+  return { distance: dist.get(to), ids, points: ids.map((id) => ({ x: g.nodes.get(id).x, y: g.nodes.get(id).y })) };
+}
+
+export function allRooms(paths) {
+  const out = [];
+  for (const [floorId, floor] of Object.entries(paths.floors)) {
+    for (const r of floor.rooms) out.push({ ...r, floorId });
+  }
+  return out;
+}
+
+export function searchRooms(paths, query) {
+  const q = String(query || "").trim().toLowerCase();
+  if (!q) return [];
+  return allRooms(paths).filter((r) => roomName(r).toLowerCase().includes(q) || r.id.includes(q));
+}
+
+function findRoom(paths, roomId) {
+  return allRooms(paths).find((r) => r.id === roomId) || null;
+}
+
+// Plan a route from a start (floorId + node id) to a room id.
+// Returns { ok: true, legs, steps } or { ok: false, message }.
+export function planRoute(paths, stairs, floors, start, roomId) {
+  const room = findRoom(paths, roomId);
+  if (!room) {
+    return { ok: false, message: `${roomId} is ${NOT_ON_MAP}.` };
+  }
+  const label = (id) => floorShort(floors.find((f) => f.id === id) || id);
+  const stairName = (id) => (stairs.stairs.find((s) => s.id === id) || { name: id }).name;
+  const target = roomName(room);
+
+  if (start.floorId === room.floorId) {
+    const p = shortestPath(paths, room.floorId, start.node, room.id);
+    if (!p) return { ok: false, message: `No walking path to ${target} yet.` };
+    return {
+      ok: true,
+      room,
+      legs: [{ floorId: room.floorId, ids: p.ids, points: p.points }],
+      steps: [{ floorId: room.floorId, text: `Walk to ${target}` }],
+    };
+  }
+
+  const fromStairs = (stairs.floors[start.floorId] || { stairs: {} }).stairs;
+  const toStairs = (stairs.floors[room.floorId] || { stairs: {} }).stairs;
+  let best = null;
+  for (const id of Object.keys(fromStairs)) {
+    if (!toStairs[id]) continue;
+    const a = shortestPath(paths, start.floorId, start.node, id);
+    if (!a) continue;
+    if (!best || a.distance < best.a.distance) best = { id, a };
+  }
+  if (!best) return { ok: false, message: `No shared stairs between ${label(start.floorId)} and ${label(room.floorId)} yet.` };
+  const b = shortestPath(paths, room.floorId, best.id, room.id);
+  if (!b) return { ok: false, message: `No walking path to ${target} yet.` };
+  const fromN = parseInt(label(start.floorId), 10);
+  const toN = parseInt(label(room.floorId), 10);
+  const dir = toN > fromN ? "up" : "down";
+  return {
+    ok: true,
+    room,
+    stair: best.id,
+    legs: [
+      { floorId: start.floorId, ids: best.a.ids, points: best.a.points },
+      { floorId: room.floorId, ids: b.ids, points: b.points },
+    ],
+    steps: [
+      { floorId: start.floorId, text: `Walk to the ${stairName(best.id)}` },
+      { floorId: room.floorId, text: `Go ${dir} to ${label(room.floorId)}` },
+      { floorId: room.floorId, text: `Walk to ${target}` },
+    ],
+  };
+}

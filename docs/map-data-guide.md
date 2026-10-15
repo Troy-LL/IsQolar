@@ -2,7 +2,7 @@
 
 How to turn a floor-plan photo into a pin on Room TBA. The rules are in [floorplans/ROOM-TBA-PLAN.md](floorplans/ROOM-TBA-PLAN.md) and [decisions/007-room-tba-2d.md](decisions/007-room-tba-2d.md). Tasks are in [plan-room-tba.md](plan-room-tba.md).
 
-`public/map.html` is not in the repo until RT3. `map.html?edit=1` logs clicks only after RT4. The steps below are the ones those tasks implement.
+`public/map.html` was added by RT14 (routing). RT3 and RT4 build on it. `map.html?edit=1` logs clicks only after RT4. The steps below are the ones those tasks implement.
 
 ## Files
 
@@ -15,6 +15,8 @@ How to turn a floor-plan photo into a pin on Room TBA. The rules are in [floorpl
 | `data/floors.json` | One row per floor the page can open. Added by RT2. |
 | `data/locations.json` | One row per pin. Added by RT5. |
 | `data/station-locations.json` | Station or stall id to location id. Empty until the gym layout exists (RT6, then RT9). |
+| `data/stairs.json` | Shared stairwell ids and one `x,y` per floor for each (RT13). |
+| `data/paths.json` | Walk graph per floor: corridor nodes, edges, stair and room points (RT13). |
 
 `kind` in the transcription is one of: `room`, `office`, `other`, `cr`, `exit`, `assembly`, `elevator`, `stairs`. The v2 plan spells the same set. An unknown kind fails the validator.
 
@@ -52,6 +54,14 @@ Leave these out of tonight:
 `data/locations.json` is a list of objects with `id`, `floorId`, `label`, `kind`, `x`, `y`, `aliases`, `source`, and `verified`. Copy `label`, `kind`, and `source` from the matching `rooms.json` row. `floorId` matches a floor `id`. `aliases` is `[]`. `x` and `y` are fractions of the image width and height, from 0 to 1.
 
 `data/station-locations.json` starts empty. It later maps a station or stall id from the contract (`checkin`, `docs`, `validation`, `main`, `stall`, `enrolled`, or a stall id such as `BSCS-1`) to a location `id`. No gym mapping until RT9.
+
+## Stairs and walk paths
+
+The stairs are in the same physical place on every Main Building floor, so every floor uses the same stairwell ids in `data/stairs.json` (for example `stair-east-dome`). Each floor still stores its own `x,y`, because each floor image is a different poster. The 4F poster is turned compared with 1F and 5F (South is at the top), so match a stairwell by which wing it is in and which end, not by where it sits on the page. Only add a stairwell that is drawn on that plan. If one is missing, leave it out and say so with a `?` in that floor's `notes`.
+
+`data/paths.json` has, per floor, corridor nodes along each wing and around the dome, edges between neighbors, and room and stair points. Each room and stair point links to its nearest corridor node, so a route never cuts through a room. All `x` and `y` values are 0..1 of the image. Room labels come from `rooms.json` only. On 4F the same classroom numbers repeat in every wing, so those rows carry a `wing` field. The route finder (`public/route.js`) goes from the start to the nearest stairwell that exists on both floors, then from that same stairwell to the room. `npm run check` fails if a node is outside 0..1, an edge points at a missing node, or a floor graph is not connected.
+
+To move a point, open `map.html?edit=1`, click the spot, copy the logged `x,y`, and edit the JSON.
 
 ## Place pins with `map.html?edit=1`
 
