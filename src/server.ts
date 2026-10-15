@@ -2,7 +2,7 @@ import express from "express";
 import { randomUUID } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { join, dirname } from "node:path";
-import type { Ticket, TicketDetail, Stall, AdminSummary, HealthResponse, Station } from "./contract.js";
+import type { Ticket, TicketDetail, Stall, AdminSummary, HealthResponse, Station, GuardianStatus, TicketStatus } from "./contract.js";
 import { getStore, hubFileLoaded, type StoredTicket } from "./store.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -274,9 +274,43 @@ app.get("/api/admin/summary", async (_req, res) => {
   res.json(summary);
 });
 
+// GET /api/guardian/:code
+app.get("/api/guardian/:code", async (req, res) => {
+  const store = getStore();
+  const code = req.params.code;
+  const ticket = (await store.getTickets()).find((t) => t.code === code);
+  if (!ticket) {
+    res.status(404).json({ error: "not found" });
+    return;
+  }
+  const body: GuardianStatus = {
+    ticketId: ticket.id,
+    station: ticket.station,
+    label: guardianLabel(ticket.status, ticket.station),
+  };
+  res.json(body);
+});
+
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
+
+function guardianLabel(status: TicketStatus, station: Station): string {
+  switch (status) {
+    case "waiting":
+      return `Waiting at ${station}`;
+    case "called":
+      return `Called at ${station}`;
+    case "done":
+      return `Done at ${station}`;
+    case "cancelled":
+      return `Cancelled at ${station}`;
+    default: {
+      const neverStatus: never = status;
+      return neverStatus;
+    }
+  }
+}
 
 function toTicket(t: StoredTicket): Ticket {
   const ticket: Ticket = {

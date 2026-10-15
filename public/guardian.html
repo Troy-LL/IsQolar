@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guardian - IsQolar</title>
+</head>
+<body>
+  <main>
+    <p id="station"></p>
+    <p id="label"></p>
+  </main>
+  <script src="/poll.js"></script>
+  <script>
+    var params = new URLSearchParams(window.location.search);
+    var code = params.get("code");
+    var stationEl = document.getElementById("station");
+    var labelEl = document.getElementById("label");
+    if (!code) {
+      labelEl.textContent = "Missing code.";
+    } else {
+      window.IsQolar.poll("/api/guardian/" + encodeURIComponent(code), function (status) {
+        if (!status || typeof status.station !== "string") return;
+        stationEl.textContent = status.station;
+        labelEl.textContent = status.label;
+      });
+    }
+  </script>
+</body>
+</html>
