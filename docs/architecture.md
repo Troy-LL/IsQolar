@@ -1,7 +1,7 @@
 # Architecture
 
 IsQolar is a Node 20 + Express server that serves plain HTML/JS pages.
-It runs on one laptop (localhost) or a venue LAN.
+It runs on one laptop (localhost) or a venue LAN, and can also be reached over the internet when a student is outside the venue network.
 There is no build step and no framework.
 
 The shared data types and endpoint shapes are in [src/contract.ts](../src/contract.ts).
