@@ -20,7 +20,7 @@
   <label class="pill">
     <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
     <span class="sr">Search rooms and buildings</span>
-    <input id="q" type="search" placeholder="Search a room, e.g. S513" autocomplete="off" enterkeyhint="search">
+    <input id="q" type="search" aria-label="Search rooms and buildings" placeholder="Search a room, e.g. S513" autocomplete="off" enterkeyhint="search">
     <button type="button" id="clear" class="clear" aria-label="Clear search" hidden>×</button>
   </label>
   <ul id="results" class="results" hidden></ul>
@@ -58,7 +58,7 @@
     <button type="button" id="next" class="primary">Next step</button>
   </div>
 </section>
-<script src="vendor/maplibre/maplibre-gl.js"></script>
+<script src="vendor/maplibre/maplibre-gl.js" defer></script>
 <script type="module" src="map.js"></script>
 </body>
 </html>
