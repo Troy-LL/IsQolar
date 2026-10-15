@@ -1,5 +1,5 @@
 # PUP Sta. Mesa floor-plan photo catalog (2026-10-15)
-Priority 1: Main building lobby (IBM_7739), 4F (IBM_7741), 5F (IBM_7742). Priority 2: Gym (IBM_7734), Library 2F (IBM_7721?), Library 3F (missing), Campus (IBM_7737 + 7738).
+Priority 1: Main building lobby (IBM_7739), 4F (IBM_7741), 5F (IBM_7742). Priority 2: Gym (IBM_7734), Library 2F (IBM_7721?), Library 3F (library-3F.png), Campus (IBM_7737 + 7738).
 Full label lists for each image are in rooms.json. A `?` marks a label that is only partly legible.
 
 | id | shows | legibility | key labels |
@@ -33,7 +33,7 @@ Full label lists for each image are in rooms.json. A `?` marks a label that is o
 | 5th floor | IBM_7742 | good |
 | Gymnasium | IBM_7734 | good |
 | Library 2F | MISSING? | IBM_7721 is a 2F plan that mentions the NALLRC lobby, but it is titled ICT Office |
-| Library 3F | MISSING | none |
+| Library 3F | library-3F.png | 30 rows in rooms.json, building Library (NALRC), floor 3F. Not a tonight floor. |
 | Campus overview | IBM_7737 + IBM_7738 legend | IBM_7730/7733 are glare-heavy duplicates |
 
 ## Best base-map images

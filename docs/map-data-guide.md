@@ -39,7 +39,7 @@ Leave these out of tonight:
 
 - `IBM_7734.JPG`, the gym. Held until the table layout exists.
 - `IBM_7721.JPG`, library 2F. Unconfirmed. The catalog titles it PUP ICT Office 2F. Building and floor in `rooms.json` are `Ninoy Aquino Learning Resource Center? (ICT Office wing)` and `2F?` (24 rows).
-- `library-3F.png`. The plan calls Library (NALRC) 3F Good, and `rooms.json` has 30 rows from this file. `catalog.md` still says Library 3F is MISSING. Leave that conflict as it is. Do not add a floor to close it, and do not add it tonight.
+- `library-3F.png`. The plan calls Library (NALRC) 3F Good, and `rooms.json` has 30 rows from this file. `catalog.md` lists that image as present. It is not a tonight floor. Do not add it to `data/floors.json` or `public/maps/` in the tonight tasks.
 - Campus overview `IBM_7737.JPG` and legend `IBM_7738.JPG`. Not tonight.
 - Extras, not in `rooms.json`: `IBM_7740` (Main 2F), `IBM_7726`.
 - Not plans: `IBM_7723`, `IBM_7724`.
