@@ -88,8 +88,13 @@
       var courseEl = document.getElementById("ticket-course");
 
       IsQolar.poll("/api/tickets/" + encodeURIComponent(id), function (ticket) {
+        if (!ticket || typeof ticket.code !== "string") {
+          codeEl.textContent = "";
+          courseEl.textContent = "";
+          return;
+        }
         codeEl.textContent = ticket.code;
-        courseEl.textContent = ticket.course;
+        courseEl.textContent = typeof ticket.course === "string" ? ticket.course : "";
       });
     })();
   </script>
