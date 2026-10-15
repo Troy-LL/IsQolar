@@ -35,6 +35,20 @@
       font-weight: 600;
     }
 
+    .ticket__qr {
+      margin-top: 16px;
+    }
+
+    .ticket__qr:empty {
+      display: none;
+    }
+
+    .ticket__qr img {
+      width: 30mm;
+      height: 30mm;
+      image-rendering: pixelated;
+    }
+
     @media print {
       body {
         background: #fff;
@@ -47,7 +61,8 @@
       }
 
       .ticket__code,
-      .ticket__course {
+      .ticket__course,
+      .ticket__qr {
         visibility: visible;
         position: fixed;
         left: 0;
@@ -55,6 +70,11 @@
         margin: 0;
         color: #000;
         background: transparent;
+      }
+
+      .ticket__qr,
+      .ticket__qr * {
+        visibility: visible;
       }
 
       .ticket__code {
@@ -69,6 +89,10 @@
         font-size: 14pt;
         font-weight: 600;
       }
+
+      .ticket__qr {
+        top: 78pt;
+      }
     }
   </style>
 </head>
@@ -76,7 +100,9 @@
   <main id="app">
     <p class="ticket__code" id="ticket-code"></p>
     <p class="ticket__course" id="ticket-course"></p>
+    <div class="ticket__qr" id="ticket-qr"></div>
   </main>
+  <script src="/qrcode.js"></script>
   <script src="/poll.js"></script>
   <script>
     (function () {
@@ -86,15 +112,27 @@
 
       var codeEl = document.getElementById("ticket-code");
       var courseEl = document.getElementById("ticket-course");
+      var qrEl = document.getElementById("ticket-qr");
 
       IsQolar.poll("/api/tickets/" + encodeURIComponent(id), function (ticket) {
         if (!ticket || typeof ticket.code !== "string") {
           codeEl.textContent = "";
           courseEl.textContent = "";
+          qrEl.replaceChildren();
           return;
         }
         codeEl.textContent = ticket.code;
         courseEl.textContent = typeof ticket.course === "string" ? ticket.course : "";
+        qrEl.replaceChildren();
+        if (typeof ticket.id !== "string" || typeof qrcode !== "function") return;
+        var phoneUrl = "/phone.html?id=" + encodeURIComponent(ticket.id);
+        var qr = qrcode(0, "M");
+        qr.addData(phoneUrl);
+        qr.make();
+        var img = document.createElement("img");
+        img.src = qr.createDataURL(4, 8);
+        img.alt = "Phone page for ticket " + ticket.code;
+        qrEl.replaceChildren(img);
       });
     })();
   </script>
