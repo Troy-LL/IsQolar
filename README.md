@@ -14,6 +14,7 @@ Viv (front end), Justin (back end).
 ## Running the prototype
 
 ```
+cd source
 python3 -m http.server 8080
 # then open http://localhost:8080/
 ```
@@ -31,8 +32,9 @@ The single-file build (`IsQolar.html`, double-click, offline) is produced in M7 
 | Student | Permit number | `2026-00123-MN-0` |
 | Student | First name | `Juan` |
 | Student | Course | `BSIT` |
-| Guardian | Guardian code | `JUAN47` |
-| Guardian | Guardian mobile | `09171234567` |
+| Guardian | Sign in with student permit, OTP (shown on screen) | `482913` |
+| Student | Guardian share code (Profile, ticket) | `JUAN47` |
+| Student | Guardian mobile (optional) | `09171234567` |
 | Staff | PIN | `1234` |
 
 ---
@@ -40,6 +42,7 @@ The single-file build (`IsQolar.html`, double-click, offline) is produced in M7 
 ## File structure
 
 ```
+source/                 (all paths below are inside source/)
 index.html              entry point + hash router shell
 app.js                  hash router, store init, a11y init
 js/
