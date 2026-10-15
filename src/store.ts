@@ -181,7 +181,8 @@ export class MemoryStore implements Store {
       )
       .sort(
         (a, b) =>
-          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+          new Date(a.skippedAt ?? a.createdAt).getTime() -
+          new Date(b.skippedAt ?? b.createdAt).getTime()
       );
     const idx = waiting.findIndex((t) => t.id === ticketId);
     return idx === -1 ? 1 : idx + 1;

@@ -93,7 +93,7 @@ app.get("/api/stalls/:stall/queue", async (req, res) => {
         t.station === "stall" &&
         t.status === "waiting"
     )
-    .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+    .sort((a, b) => stallLineMs(a) - stallLineMs(b))
     .map(toTicket);
   res.json(queue);
 });
@@ -115,7 +115,7 @@ app.post("/api/stalls/:stall/next", async (req, res) => {
         t.station === "stall" &&
         t.status === "waiting"
     )
-    .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())[0];
+    .sort((a, b) => stallLineMs(a) - stallLineMs(b))[0];
   if (!oldest) {
     res.status(404).json({ error: "queue is empty" });
     return;
@@ -234,6 +234,28 @@ app.post("/api/tickets/:id/undo", async (req, res) => {
   res.json(toTicket(restored));
 });
 
+// POST /api/tickets/:id/skip
+app.post("/api/tickets/:id/skip", async (req, res) => {
+  const store = getStore();
+  const ticket = await store.getTicket(req.params.id);
+  if (!ticket) {
+    res.status(404).json({ error: "not found" });
+    return;
+  }
+  const prev = snapshot(ticket);
+  const updated: StoredTicket = ticket.skippedAt
+    ? { ...ticket, status: "cancelled", previous: prev }
+    : {
+        ...ticket,
+        status: "waiting",
+        skippedAt: new Date().toISOString(),
+        previous: prev,
+      };
+  await store.setTicket(updated);
+  if (ticket.stall) await refreshStall(ticket.stall);
+  res.json(toTicket(updated));
+});
+
 // GET /api/admin/summary
 app.get("/api/admin/summary", async (_req, res) => {
   const store = getStore();
@@ -257,7 +279,7 @@ app.get("/api/admin/summary", async (_req, res) => {
 // ---------------------------------------------------------------------------
 
 function toTicket(t: StoredTicket): Ticket {
-  return {
+  const ticket: Ticket = {
     id: t.id,
     code: t.code,
     name: t.name,
@@ -269,10 +291,16 @@ function toTicket(t: StoredTicket): Ticket {
     createdAt: t.createdAt,
     calledAt: t.calledAt,
   };
+  if (t.skippedAt) ticket.skippedAt = t.skippedAt;
+  return ticket;
 }
 
 function snapshot(t: StoredTicket): Ticket {
   return toTicket(t);
+}
+
+function stallLineMs(t: StoredTicket): number {
+  return new Date(t.skippedAt ?? t.createdAt).getTime();
 }
 
 async function withLiveStall(s: Stall): Promise<Stall> {

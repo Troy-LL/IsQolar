@@ -138,6 +138,76 @@ describe("IsQolar server", () => {
     await close();
   });
 
+  it("POST /api/tickets/:id/skip places the ticket at the back of its stall line, then cancels it", async () => {
+    try {
+      const names = ["Ana Reyes", "Ben Santos", "Cara Lim"];
+      const ids: string[] = [];
+      const codes: string[] = [];
+      for (const name of names) {
+        const joinRes = await fetch(`${url}/api/tickets`, {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ name, course: "BSCS" }),
+        });
+        assert.equal(joinRes.status, 201);
+        const ticket = await json<{ id: string; code: string }>(joinRes);
+        ids.push(ticket.id);
+        codes.push(ticket.code);
+        for (let step = 0; step < 4; step++) {
+          const doneRes = await fetch(`${url}/api/tickets/${ticket.id}/done`, { method: "POST" });
+          assert.equal(doneRes.status, 200);
+          const advanced = await json<{ station: string }>(doneRes);
+          if (step === 3) assert.equal(advanced.station, "stall");
+        }
+      }
+
+      const nextRes = await fetch(`${url}/api/stalls/BSCS-1/next`, { method: "POST" });
+      assert.equal(nextRes.status, 200);
+      const called = await json<{ id: string; code: string; station: string }>(nextRes);
+      assert.equal(called.id, ids[0]);
+      assert.equal(called.code, codes[0]);
+      assert.equal(called.station, "stall");
+
+      const skipRes = await fetch(`${url}/api/tickets/${called.id}/skip`, { method: "POST" });
+      assert.equal(skipRes.status, 200);
+      const skipped = await json<{
+        code: string;
+        station: string;
+        status: string;
+        skippedAt?: string;
+      }>(skipRes);
+      assert.equal(skipped.code, codes[0]);
+      assert.equal(skipped.station, "stall");
+      assert.equal(skipped.status, "waiting");
+      assert.equal(typeof skipped.skippedAt, "string");
+
+      const queueRes = await fetch(`${url}/api/stalls/BSCS-1/queue`);
+      const queue = await json<Array<{ code: string }>>(queueRes);
+      assert.deepEqual(queue.map((t) => t.code), [codes[1], codes[2], codes[0]]);
+
+      const detailRes = await fetch(`${url}/api/tickets/${called.id}`);
+      const detail = await json<{ code: string; station: string; position: number }>(detailRes);
+      assert.equal(detail.code, codes[0]);
+      assert.equal(detail.station, "stall");
+      assert.equal(detail.position, 3);
+
+      assert.equal(getStore().nextStation("stall"), "enrolled");
+
+      const secondRes = await fetch(`${url}/api/tickets/${called.id}/skip`, { method: "POST" });
+      assert.equal(secondRes.status, 200);
+      const cancelled = await json<{ code: string; station: string; status: string }>(secondRes);
+      assert.equal(cancelled.code, codes[0]);
+      assert.equal(cancelled.station, "stall");
+      assert.equal(cancelled.status, "cancelled");
+
+      const afterRes = await fetch(`${url}/api/stalls/BSCS-1/queue`);
+      const after = await json<Array<{ code: string }>>(afterRes);
+      assert.deepEqual(after.map((t) => t.code), [codes[1], codes[2]]);
+    } finally {
+      await close();
+    }
+  });
+
   it("estWaitMin defaults to 3 minutes per position when no history", async () => {
     for (let i = 0; i < 3; i++) {
       const joinRes = await fetch(`${url}/api/tickets`, {
