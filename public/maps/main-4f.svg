@@ -7,7 +7,7 @@
     </pattern>
   </defs>
   <g class="plan">
-    <path class="wing" fill="#FFFFFF" stroke="#6B5E57" stroke-width="2" stroke-linejoin="round" fill-rule="evenodd" d="M1126.28,210.00 L441.38,210.00 L441.38,550.00 L749.35,550.00 L749.35,774.90 L421.99,545.67 L339.39,663.63 L713.35,925.48 L713.35,1422.00 L857.35,1422.00 L857.35,925.48 L1231.31,663.63 L1148.72,545.67 L821.35,774.90 L821.35,550.00 L1126.28,550.00 Z"/>
+    <path class="wing" fill="#F3EDE8" stroke="#6B5E57" stroke-width="2" stroke-linejoin="round" fill-rule="evenodd" d="M1126.28,210.00 L441.38,210.00 L441.38,550.00 L749.35,550.00 L749.35,774.90 L421.99,545.67 L339.39,663.63 L713.35,925.48 L713.35,1422.00 L857.35,1422.00 L857.35,925.48 L1231.31,663.63 L1148.72,545.67 L821.35,774.90 L821.35,550.00 L1126.28,550.00 Z"/>
     <polygon class="corridor" fill="#F3EDE8" stroke="none" points="813.35,888.00 813.35,1418.00 757.35,1418.00 757.35,888.00"/>
     <polygon class="corridor" fill="#F3EDE8" stroke="none" points="769.29,910.94 367.91,629.88 400.03,584.01 801.41,865.06"/>
     <polygon class="corridor" fill="#F3EDE8" stroke="none" points="769.29,865.06 1170.68,584.01 1202.80,629.88 801.41,910.94"/>

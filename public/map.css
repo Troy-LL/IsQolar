@@ -64,6 +64,9 @@ button:focus-visible, a:focus-visible, .maplibregl-canvas:focus-visible { outlin
 .sheet[data-snap="peek"] .steps li:not(:has(> [aria-current])) { display: none; }
 .sheet[data-snap="peek"] .steps li::before { display: none; }
 .sheet[data-snap="peek"] .steps button { padding: 6px 4px; }
+/* Goal step (Bode RT23): peek keeps the title and the Back/Done row */
+.sheet.goal[data-snap="peek"] .steps { display: none; }
+.sheet.goal[data-snap="peek"] .stepnav { display: flex; margin-top: 8px; }
 .handle { display: block; width: 44px; height: 5px; margin: 4px auto 10px; border: 0; padding: 0; border-radius: 3px; background: var(--line); cursor: pointer; }
 .crumb { margin: 0; font-size: 13px; color: var(--ink-soft); }
 .head { display: flex; align-items: flex-start; gap: 8px; }
@@ -171,3 +174,6 @@ button:focus-visible, a:focus-visible, .maplibregl-canvas:focus-visible { outlin
   .floors button { width: 44px; height: 36px; font-size: 14px; }
   .floors button small { font-size: 9px; }
 }
+/* RT23: From value never clips mid-word: ellipsis on phone, room for "Main gate" on desktop */
+.pill.from select { text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }
+@media (min-width: 900px) { .top .pill.from { flex: 0 0 188px; } }

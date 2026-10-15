@@ -12,51 +12,57 @@
           "kind": "corridor"
         },
         {
+          "id": "c-Ex-1",
+          "x": 0.38999,
+          "y": 0.47003,
+          "kind": "corridor"
+        },
+        {
           "id": "c-E-1",
-          "x": 0.39411,
-          "y": 0.51862,
+          "x": 0.35924,
+          "y": 0.57839,
           "kind": "corridor"
         },
         {
           "id": "c-E-2",
-          "x": 0.38791,
-          "y": 0.53106,
+          "x": 0.3544,
+          "y": 0.59542,
           "kind": "corridor"
         },
         {
           "id": "c-E-3",
-          "x": 0.35139,
-          "y": 0.60438,
+          "x": 0.3436,
+          "y": 0.63348,
           "kind": "corridor"
         },
         {
           "id": "c-E-4",
-          "x": 0.33456,
-          "y": 0.63817,
+          "x": 0.31792,
+          "y": 0.72394,
           "kind": "corridor"
         },
         {
           "id": "c-E-5",
-          "x": 0.31773,
-          "y": 0.67196,
+          "x": 0.29225,
+          "y": 0.81441,
           "kind": "corridor"
         },
         {
           "id": "c-E-6",
-          "x": 0.3009,
-          "y": 0.70576,
+          "x": 0.26657,
+          "y": 0.90486,
           "kind": "corridor"
         },
         {
           "id": "c-E-7",
-          "x": 0.2971,
-          "y": 0.71338,
+          "x": 0.25678,
+          "y": 0.93934,
           "kind": "corridor"
         },
         {
           "id": "c-E-8",
-          "x": 0.29125,
-          "y": 0.72513,
+          "x": 0.25292,
+          "y": 0.95296,
           "kind": "corridor"
         },
         {
@@ -67,32 +73,32 @@
         },
         {
           "id": "c-N-2",
-          "x": 0.48442,
-          "y": 0.48873,
+          "x": 0.48932,
+          "y": 0.489,
           "kind": "corridor"
         },
         {
           "id": "c-N-3",
-          "x": 0.50607,
-          "y": 0.48992,
+          "x": 0.51048,
+          "y": 0.49016,
           "kind": "corridor"
         },
         {
           "id": "c-N-4",
-          "x": 0.57098,
-          "y": 0.49347,
+          "x": 0.57392,
+          "y": 0.49363,
           "kind": "corridor"
         },
         {
           "id": "c-N-5",
-          "x": 0.63591,
-          "y": 0.49703,
+          "x": 0.63738,
+          "y": 0.49711,
           "kind": "corridor"
         },
         {
           "id": "c-N-6",
-          "x": 0.65754,
-          "y": 0.49821,
+          "x": 0.65852,
+          "y": 0.49826,
           "kind": "corridor"
         },
         {
@@ -116,13 +122,13 @@
         {
           "id": "c-W-2",
           "x": 0.34368,
-          "y": 0.3018,
+          "y": 0.30179,
           "kind": "corridor"
         },
         {
           "id": "c-W-3",
           "x": 0.28189,
-          "y": 0.13393,
+          "y": 0.13394,
           "kind": "corridor"
         },
         {
@@ -235,14 +241,14 @@
         },
         {
           "id": "stair-east-dome",
-          "x": 0.38791,
-          "y": 0.53106,
+          "x": 0.3544,
+          "y": 0.59542,
           "kind": "stairs"
         },
         {
           "id": "stair-east-end",
-          "x": 0.2971,
-          "y": 0.71338,
+          "x": 0.25678,
+          "y": 0.93934,
           "kind": "stairs"
         },
         {
@@ -289,21 +295,21 @@
         },
         {
           "id": "start",
-          "x": 0.38721,
-          "y": 0.51016,
+          "x": 0.3537,
+          "y": 0.57452,
           "kind": "start",
           "label": "You Are Here"
         },
         {
           "id": "main-1f-lobby-admission-and-registration-office-w2",
-          "x": 0.32896,
-          "y": 0.31513,
+          "x": 0.3584,
+          "y": 0.28846,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-office-for-scholarship-and-financial-assistance-w4",
-          "x": 0.26717,
-          "y": 0.14726,
+          "x": 0.29662,
+          "y": 0.1206,
           "kind": "room"
         },
         {
@@ -362,80 +368,80 @@
         },
         {
           "id": "main-1f-lobby-procurement-office-n1",
-          "x": 0.50666,
-          "y": 0.46326,
+          "x": 0.51107,
+          "y": 0.4635,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-central-records-office-n2",
-          "x": 0.6365,
-          "y": 0.47038,
+          "x": 0.63797,
+          "y": 0.47046,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-commission-on-audit-office-n3",
-          "x": 0.48383,
-          "y": 0.51538,
+          "x": 0.48873,
+          "y": 0.51565,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-campus-ministry-office-n4",
-          "x": 0.57039,
-          "y": 0.52012,
+          "x": 0.57333,
+          "y": 0.52028,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-security-office-n5",
-          "x": 0.65695,
-          "y": 0.52486,
+          "x": 0.65793,
+          "y": 0.52492,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-free-pup-office-e1",
-          "x": 0.36479,
-          "y": 0.6208,
+          "x": 0.32806,
+          "y": 0.62264,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-hrd-records-office-e2",
-          "x": 0.34796,
-          "y": 0.65459,
+          "x": 0.30239,
+          "y": 0.7131,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-department-of-military-science-and-tactics-office-e3",
-          "x": 0.33113,
-          "y": 0.68838,
+          "x": 0.27671,
+          "y": 0.80356,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-corps-of-cadets-headquarters-e4",
-          "x": 0.3143,
-          "y": 0.72218,
+          "x": 0.25104,
+          "y": 0.89401,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-medical-clinic-services-e5",
-          "x": 0.338,
-          "y": 0.58797,
+          "x": 0.2821,
+          "y": 0.91571,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-dental-clinic-services-e6",
-          "x": 0.32117,
-          "y": 0.62176,
+          "x": 0.30777,
+          "y": 0.82525,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-office-of-the-director-medical-health-services-e7",
-          "x": 0.30433,
-          "y": 0.65555,
+          "x": 0.33345,
+          "y": 0.73479,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-office-of-the-director-public-affairs-office-e8",
-          "x": 0.2875,
-          "y": 0.68934,
+          "x": 0.35913,
+          "y": 0.64433,
           "kind": "room"
         },
         {
@@ -446,6 +452,10 @@
         }
       ],
       "edges": [
+        [
+          "c-dome",
+          "c-Ex-1"
+        ],
         [
           "c-dome",
           "c-E-1"
@@ -716,19 +726,19 @@
         ],
         [
           "main-1f-lobby-medical-clinic-services-e5",
-          "c-E-3"
+          "c-E-6"
         ],
         [
           "main-1f-lobby-dental-clinic-services-e6",
-          "c-E-4"
-        ],
-        [
-          "main-1f-lobby-office-of-the-director-medical-health-services-e7",
           "c-E-5"
         ],
         [
+          "main-1f-lobby-office-of-the-director-medical-health-services-e7",
+          "c-E-4"
+        ],
+        [
           "main-1f-lobby-office-of-the-director-public-affairs-office-e8",
-          "c-E-6"
+          "c-E-3"
         ],
         [
           "main-1f-lobby-university-consumers-cooperative-dome",
@@ -740,16 +750,16 @@
           "id": "main-1f-lobby-admission-and-registration-office-w2",
           "label": "Admission and Registration Office (W2)",
           "kind": "office",
-          "x": 0.3138,
-          "y": 0.3288,
+          "x": 0.3736,
+          "y": 0.2747,
           "node": "c-W-2"
         },
         {
           "id": "main-1f-lobby-office-for-scholarship-and-financial-assistance-w4",
           "label": "Office for Scholarship and Financial Assistance (W4)",
           "kind": "office",
-          "x": 0.252,
-          "y": 0.161,
+          "x": 0.3118,
+          "y": 0.1069,
           "node": "c-W-3"
         },
         {
@@ -764,7 +774,7 @@
           "id": "main-1f-lobby-accounting-division-students-services-section-s8",
           "label": "Accounting Division - Students Services Section (S8)",
           "kind": "office",
-          "x": 0.2379,
+          "x": 0.2425,
           "y": 0.5733,
           "node": "c-S-10"
         },
@@ -772,7 +782,7 @@
           "id": "main-1f-lobby-payroll-section-s9",
           "label": "Payroll Section (S9)",
           "kind": "office",
-          "x": 0.2228,
+          "x": 0.2305,
           "y": 0.6722,
           "node": "c-S-12"
         },
@@ -828,105 +838,105 @@
           "id": "main-1f-lobby-procurement-office-n1",
           "label": "Procurement Office (N1)",
           "kind": "office",
-          "x": 0.5073,
-          "y": 0.4358,
+          "x": 0.5117,
+          "y": 0.4361,
           "node": "c-N-3"
         },
         {
           "id": "main-1f-lobby-central-records-office-n2",
           "label": "Central Records Office (N2)",
           "kind": "office",
-          "x": 0.6371,
-          "y": 0.4429,
+          "x": 0.6386,
+          "y": 0.443,
           "node": "c-N-5"
         },
         {
           "id": "main-1f-lobby-commission-on-audit-office-n3",
           "label": "Commission on Audit Office (N3)",
           "kind": "office",
-          "x": 0.4832,
-          "y": 0.5428,
+          "x": 0.4881,
+          "y": 0.5431,
           "node": "c-N-2"
         },
         {
           "id": "main-1f-lobby-campus-ministry-office-n4",
           "label": "Campus Ministry Office (N4)",
           "kind": "office",
-          "x": 0.5698,
-          "y": 0.5475,
+          "x": 0.5727,
+          "y": 0.5477,
           "node": "c-N-4"
         },
         {
           "id": "main-1f-lobby-security-office-n5",
           "label": "Security Office (N5)",
           "kind": "office",
-          "x": 0.6563,
-          "y": 0.5523,
+          "x": 0.6573,
+          "y": 0.5524,
           "node": "c-N-6"
         },
         {
           "id": "main-1f-lobby-free-pup-office-e1",
           "label": "FREE - PUP Office (E1)",
           "kind": "office",
-          "x": 0.3786,
-          "y": 0.6377,
+          "x": 0.3121,
+          "y": 0.6115,
           "node": "c-E-3"
         },
         {
           "id": "main-1f-lobby-hrd-records-office-e2",
           "label": "HRD Records Office (E2)",
           "kind": "office",
-          "x": 0.3618,
-          "y": 0.6715,
+          "x": 0.2864,
+          "y": 0.7019,
           "node": "c-E-4"
         },
         {
           "id": "main-1f-lobby-department-of-military-science-and-tactics-office-e3",
           "label": "Department of Military Science and Tactics Office (E3)",
           "kind": "office",
-          "x": 0.3449,
-          "y": 0.7053,
+          "x": 0.2607,
+          "y": 0.7924,
           "node": "c-E-5"
         },
         {
           "id": "main-1f-lobby-corps-of-cadets-headquarters-e4",
           "label": "Corps of Cadets Headquarters (E4)",
           "kind": "office",
-          "x": 0.3281,
-          "y": 0.7391,
+          "x": 0.2351,
+          "y": 0.8829,
           "node": "c-E-6"
         },
         {
           "id": "main-1f-lobby-medical-clinic-services-e5",
           "label": "Medical Clinic Services (E5)",
           "kind": "office",
-          "x": 0.3242,
-          "y": 0.5711,
-          "node": "c-E-3"
+          "x": 0.2981,
+          "y": 0.9269,
+          "node": "c-E-6"
         },
         {
           "id": "main-1f-lobby-dental-clinic-services-e6",
           "label": "Dental Clinic Services (E6)",
           "kind": "office",
-          "x": 0.3074,
-          "y": 0.6049,
-          "node": "c-E-4"
+          "x": 0.3238,
+          "y": 0.8364,
+          "node": "c-E-5"
         },
         {
           "id": "main-1f-lobby-office-of-the-director-medical-health-services-e7",
           "label": "Office of the Director - Medical Health Services (E7)",
           "kind": "office",
-          "x": 0.2905,
-          "y": 0.6387,
-          "node": "c-E-5"
+          "x": 0.3494,
+          "y": 0.746,
+          "node": "c-E-4"
         },
         {
           "id": "main-1f-lobby-office-of-the-director-public-affairs-office-e8",
           "label": "Office of the Director - Public Affairs Office (E8)",
           "kind": "office",
-          "x": 0.2737,
-          "y": 0.6724,
-          "node": "c-E-6"
+          "x": 0.3751,
+          "y": 0.6555,
+          "node": "c-E-3"
         },
         {
           "id": "main-1f-lobby-university-consumers-cooperative-dome",
@@ -3009,8 +3019,8 @@
         },
         {
           "id": "c-N-7",
-          "x": 0.61557,
-          "y": 0.48067,
+          "x": 0.61567,
+          "y": 0.48068,
           "kind": "corridor"
         },
         {
@@ -3063,14 +3073,14 @@
         },
         {
           "id": "c-W-2",
-          "x": 0.36404,
-          "y": 0.36789,
+          "x": 0.36553,
+          "y": 0.37048,
           "kind": "corridor"
         },
         {
           "id": "c-W-3",
-          "x": 0.3322,
-          "y": 0.31249,
+          "x": 0.33369,
+          "y": 0.31507,
           "kind": "corridor"
         },
         {
@@ -3099,8 +3109,8 @@
         },
         {
           "id": "c-E-3",
-          "x": 0.36874,
-          "y": 0.57944,
+          "x": 0.36787,
+          "y": 0.58117,
           "kind": "corridor"
         },
         {
@@ -3382,8 +3392,8 @@
         },
         {
           "id": "main-5f-comfort-room-west",
-          "x": 0.3322,
-          "y": 0.31703,
+          "x": 0.33369,
+          "y": 0.31961,
           "kind": "room"
         },
         {
@@ -3622,8 +3632,8 @@
         },
         {
           "id": "main-5f-comfort-room-north",
-          "x": 0.36874,
-          "y": 0.58397,
+          "x": 0.3673,
+          "y": 0.58686,
           "kind": "room"
         },
         {
@@ -3748,8 +3758,8 @@
         },
         {
           "id": "main-5f-comfort-room-east",
-          "x": 0.61557,
-          "y": 0.48521,
+          "x": 0.61567,
+          "y": 0.48522,
           "kind": "room"
         },
         {
@@ -3760,8 +3770,8 @@
         },
         {
           "id": "main-5f-elevator-south-wing",
-          "x": 0.36404,
-          "y": 0.37243,
+          "x": 0.36553,
+          "y": 0.37502,
           "kind": "room"
         },
         {

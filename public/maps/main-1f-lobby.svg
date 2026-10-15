@@ -7,28 +7,30 @@
     </pattern>
   </defs>
   <g class="plan">
-    <path class="wing" fill="#FFFFFF" stroke="#6B5E57" stroke-width="2" stroke-linejoin="round" fill-rule="evenodd" d="M505.61,270.00 L160.00,270.00 L160.00,940.00 L580.00,940.00 L580.00,935.27 L655.15,993.98 L869.43,719.72 L1412.15,738.67 L1419.13,538.79 L880.89,520.00 L581.60,1.62 L408.40,101.62 Z"/>
-    <polygon class="corridor" fill="#F3EDE8" stroke="none" points="853.52,642.63 610.33,953.89 547.29,904.64 790.48,593.37"/>
+    <path class="wing" fill="#F3EDE8" stroke="#6B5E57" stroke-width="2" stroke-linejoin="round" fill-rule="evenodd" d="M160.00,270.00 L160.00,940.00 L518.82,940.00 L410.41,1183.48 L593.12,1264.83 L836.34,718.56 L1412.15,738.67 L1419.13,538.79 L880.89,520.00 L581.60,1.62 L408.40,101.62 L505.61,270.00 Z"/>
+    <polygon class="corridor" fill="#F3EDE8" stroke="none" points="816.52,615.56 539.94,1236.77 466.85,1204.23 743.44,583.02"/>
     <polygon class="corridor" fill="#F3EDE8" stroke="none" points="823.40,578.02 1413.04,598.62 1410.24,678.57 820.60,657.98"/>
     <polygon class="corridor" fill="#F3EDE8" stroke="none" points="787.36,638.00 462.36,75.08 531.64,35.08 856.64,598.00"/>
     <polygon class="corridor" fill="#F3EDE8" stroke="none" points="346.00,278.00 394.00,278.00 394.00,932.00 346.00,932.00"/>
     <polygon class="corridor" fill="#F3EDE8" stroke="none" points="370.00,572.00 822.00,572.00 822.00,664.00 370.00,664.00"/>
     <g class="rooms">
-      <polygon class="room" data-room="main-1f-lobby-free-pup-office-e1" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="796.35,810.01 763.67,851.84 717.97,816.13 750.64,774.31"/>
-      <polygon class="room" data-room="main-1f-lobby-hrd-records-office-e2" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="762.69,853.10 730.01,894.92 684.30,859.21 716.98,817.39"/>
-      <polygon class="room" data-room="main-1f-lobby-department-of-military-science-and-tactics-office-e3" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="729.02,896.18 696.35,938.00 650.64,902.30 683.32,860.47"/>
-      <polygon class="room" data-room="main-1f-lobby-corps-of-cadets-headquarters-e4" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="695.36,939.27 662.69,981.09 616.98,945.38 649.66,903.56"/>
-      <polygon class="room" data-room="main-1f-lobby-medical-clinic-services-e5" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="687.60,725.05 654.92,766.88 609.22,731.17 641.90,689.34"/>
-      <polygon class="room" data-room="main-1f-lobby-dental-clinic-services-e6" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="653.94,768.14 621.26,809.96 575.56,774.25 608.24,732.43"/>
-      <polygon class="room" data-room="main-1f-lobby-office-of-the-director-medical-health-services-e7" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="620.28,811.22 587.60,853.04 541.90,817.33 574.57,775.51"/>
-      <polygon class="room" data-room="main-1f-lobby-office-of-the-director-public-affairs-office-e8" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="586.62,854.30 553.94,896.13 508.24,860.42 540.91,818.60"/>
-      <polygon class="room" data-room="main-1f-lobby-procurement-office-n1" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="886.51,522.19 1144.59,531.21 1142.56,589.17 884.48,580.16"/>
-      <polygon class="room" data-room="main-1f-lobby-central-records-office-n2" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1146.19,531.26 1404.27,540.27 1402.24,598.24 1144.16,589.23"/>
-      <polygon class="room" data-room="main-1f-lobby-commission-on-audit-office-n3" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="881.69,660.11 1053.21,666.10 1051.19,724.06 879.66,718.07"/>
-      <polygon class="room" data-room="main-1f-lobby-campus-ministry-office-n4" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1054.81,666.15 1226.33,672.14 1224.31,730.11 1052.79,724.12"/>
-      <polygon class="room" data-room="main-1f-lobby-security-office-n5" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1227.93,672.20 1399.45,678.19 1397.43,736.15 1225.91,730.16"/>
-      <polygon class="room" data-room="main-1f-lobby-admission-and-registration-office-w2" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="663.87,540.11 541.10,327.47 591.33,298.47 714.10,511.11"/>
-      <polygon class="room" data-room="main-1f-lobby-office-for-scholarship-and-financial-assistance-w4" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="540.30,326.08 417.53,113.44 467.76,84.44 590.53,297.08"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="663.87,540.11 541.10,327.47 591.33,298.47 714.10,511.11"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="540.30,326.08 417.53,113.44 467.76,84.44 590.53,297.08"/>
+      <polygon class="room" data-room="main-1f-lobby-free-pup-office-e1" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="676.00,734.49 625.30,848.36 572.31,824.77 623.01,710.90"/>
+      <polygon class="room" data-room="main-1f-lobby-hrd-records-office-e2" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="624.65,849.82 573.95,963.70 520.96,940.10 571.66,826.23"/>
+      <polygon class="room" data-room="main-1f-lobby-department-of-military-science-and-tactics-office-e3" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="573.30,965.16 522.60,1079.03 469.61,1055.44 520.31,941.57"/>
+      <polygon class="room" data-room="main-1f-lobby-corps-of-cadets-headquarters-e4" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="521.95,1080.49 471.25,1194.37 418.26,1170.77 468.96,1056.90"/>
+      <polygon class="room" data-room="main-1f-lobby-office-of-the-director-public-affairs-office-e8" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="802.07,790.62 751.37,904.49 698.38,880.90 749.08,767.03"/>
+      <polygon class="room" data-room="main-1f-lobby-office-of-the-director-medical-health-services-e7" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="750.72,905.95 700.02,1019.82 647.03,996.23 697.73,882.36"/>
+      <polygon class="room" data-room="main-1f-lobby-dental-clinic-services-e6" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="699.37,1021.29 648.67,1135.16 595.68,1111.57 646.38,997.70"/>
+      <polygon class="room" data-room="main-1f-lobby-medical-clinic-services-e5" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="648.02,1136.62 597.32,1250.49 544.33,1226.90 595.03,1113.03"/>
+      <polygon class="room" data-room="main-1f-lobby-procurement-office-n1" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="898.28,522.60 1150.47,531.41 1148.45,589.38 896.25,580.57"/>
+      <polygon class="room" data-room="main-1f-lobby-central-records-office-n2" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1152.07,531.47 1404.27,540.27 1402.24,598.24 1150.05,589.43"/>
+      <polygon class="room" data-room="main-1f-lobby-commission-on-audit-office-n3" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="893.46,660.52 1061.06,666.37 1059.03,724.34 891.44,718.48"/>
+      <polygon class="room" data-room="main-1f-lobby-campus-ministry-office-n4" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1062.66,666.43 1230.25,672.28 1228.23,730.25 1060.63,724.39"/>
+      <polygon class="room" data-room="main-1f-lobby-security-office-n5" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1231.85,672.34 1399.45,678.19 1397.43,736.15 1229.83,730.30"/>
+      <polygon class="room" data-room="main-1f-lobby-admission-and-registration-office-w2" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="783.38,471.11 660.61,258.47 710.84,229.47 833.61,442.11"/>
+      <polygon class="room" data-room="main-1f-lobby-office-for-scholarship-and-financial-assistance-w4" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="659.81,257.08 537.04,44.44 587.27,15.44 710.04,228.08"/>
       <polygon class="room" data-room="main-1f-lobby-office-of-the-university-registrar-s1" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="166.00,291.00 344.00,291.00 344.00,446.50 166.00,446.50"/>
       <polygon class="room" data-room="main-1f-lobby-students-records-office-s2" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="166.00,448.50 344.00,448.50 344.00,604.00 166.00,604.00"/>
       <polygon class="room" data-room="main-1f-lobby-human-resource-management-division-s3" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="166.00,606.00 344.00,606.00 344.00,761.50 166.00,761.50"/>
@@ -36,27 +38,27 @@
       <polygon class="room" data-room="main-1f-lobby-property-extension-office-s5" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="515.35,291.00 515.35,415.00 396.00,415.00 396.00,291.00"/>
       <polygon class="room" data-room="main-1f-lobby-cashier-s6" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="396.00,417.00 574.00,417.00 574.00,541.00 396.00,541.00"/>
       <polygon class="room" data-room="main-1f-lobby-accounting-office-s7" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="396.00,543.00 574.00,543.00 574.00,570.00 396.00,570.00"/>
-      <polygon class="room" data-room="main-1f-lobby-accounting-division-students-services-section-s8" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="555.82,669.00 555.82,793.00 396.00,793.00 396.00,669.00"/>
-      <polygon class="room" data-room="main-1f-lobby-payroll-section-s9" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="495.01,795.00 495.01,919.00 396.00,919.00 396.00,795.00"/>
+      <polygon class="room" data-room="main-1f-lobby-accounting-division-students-services-section-s8" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="396.00,669.00 574.00,669.00 574.00,793.00 396.00,793.00"/>
+      <polygon class="room" data-room="main-1f-lobby-payroll-section-s9" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="525.83,795.00 525.83,919.00 396.00,919.00 396.00,795.00"/>
       <polygon class="room" data-room="main-1f-lobby-university-consumers-cooperative-dome" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="792.00,588.00 852.00,588.00 852.00,648.00 792.00,648.00"/>
     </g>
     <circle class="dome" cx="822.0" cy="618.0" r="52" fill="#EDE4DC" stroke="#6B5E57" stroke-width="2"/>
     <g class="room-nums">
-      <text x="757.2" y="813.1" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">E1</text>
-      <text x="723.5" y="856.2" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">E2</text>
-      <text x="689.8" y="899.2" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">E3</text>
-      <text x="656.2" y="942.3" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">E4</text>
-      <text x="648.4" y="728.1" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">E5</text>
-      <text x="614.7" y="771.2" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">E6</text>
-      <text x="581.1" y="814.3" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">E7</text>
-      <text x="547.4" y="857.4" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">E8</text>
-      <text x="1014.5" y="555.7" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">N1</text>
-      <text x="1274.2" y="564.7" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">N2</text>
-      <text x="966.4" y="692.1" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">N3</text>
-      <text x="1139.6" y="698.1" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">N4</text>
-      <text x="1312.7" y="704.2" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">N5</text>
-      <text x="627.6" y="419.3" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">W2</text>
-      <text x="504.0" y="205.3" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">W4</text>
+      <text x="624.2" y="779.6" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">E1</text>
+      <text x="572.8" y="895.0" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">E2</text>
+      <text x="521.5" y="1010.3" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">E3</text>
+      <text x="470.1" y="1125.6" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">E4</text>
+      <text x="750.2" y="835.8" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">E8</text>
+      <text x="698.9" y="951.1" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">E7</text>
+      <text x="647.5" y="1066.4" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">E6</text>
+      <text x="596.2" y="1181.8" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">E5</text>
+      <text x="1023.4" y="556.0" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">N1</text>
+      <text x="1277.2" y="564.9" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">N2</text>
+      <text x="976.2" y="692.4" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">N3</text>
+      <text x="1145.4" y="698.3" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">N4</text>
+      <text x="1314.6" y="704.2" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">N5</text>
+      <text x="747.1" y="350.3" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">W2</text>
+      <text x="623.5" y="136.3" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">W4</text>
       <text x="255.0" y="368.8" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">S1</text>
       <text x="255.0" y="526.2" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">S2</text>
       <text x="255.0" y="683.8" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">S3</text>
@@ -64,8 +66,8 @@
       <text x="455.7" y="353.0" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">S5</text>
       <text x="485.0" y="479.0" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">S6</text>
       <text x="485.0" y="556.5" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">S7</text>
-      <text x="475.9" y="731.0" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">S8</text>
-      <text x="445.5" y="857.0" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">S9</text>
+      <text x="485.0" y="731.0" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">S8</text>
+      <text x="460.9" y="857.0" fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">S9</text>
     </g>
   </g>
 </svg>

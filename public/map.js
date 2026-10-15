@@ -70,7 +70,10 @@ function insets() {
   const top = desk ? 72 : S.inside ? 140 : 88;
   const left = desk && open ? 420 : 12;
   const right = S.inside && desk ? 88 : 12;
-  const bottom = !desk && open ? snapPx() + 20 : 16;
+  // Sheet closed: centre the plan between the top chrome and the zoom controls.
+  const zc = document.querySelector(".zoomctl");
+  const zt = zc && !zc.hidden ? zc.getBoundingClientRect().top : 0;
+  const bottom = !desk && open ? snapPx() + 20 : zt > 0 && !desk ? Math.max(16, H - zt + 12) : 16;
   return { W, H, top, left, right, bottom };
 }
 function fitCam(box, padPx = 0, bottomPx) {
@@ -486,7 +489,8 @@ async function drawIndoor(floorId) {
   const indoorLegs = S.route ? S.route.legs.filter((l) => l.floorId !== "outdoor") : [];
   const startFloor = indoorLegs.length ? indoorLegs[0].floorId : S.floors[0].id;
   const start = f.start && floorId === startFloor ? N.get(f.start) : null;
-  const arrive = leg && leg.arrive && floorId !== startFloor ? { p: t(leg.points[0].x, leg.points[0].y), text: `Arrive ${floorShort(S.floors.find((x) => x.id === floorId))} · ${leg.arrive}` } : null;
+  const onGoal = S.route && S.step === S.route.steps.length - 1;
+  const arrive = leg && leg.arrive && floorId !== startFloor && !onGoal ? { p: t(leg.points[0].x, leg.points[0].y), text: `Arrive ${floorShort(S.floors.find((x) => x.id === floorId))} · ${leg.arrive}` } : null;
   const lab = svg("g", { id: "labs" });
   // icons and labels sit under the route line so a short leg is never hidden by its own stairs icon
   const line = root.querySelector("g[opacity]");
@@ -650,9 +654,11 @@ function drawLabels() {
     const q = scr(ix.start);
     // label goes left when the nearest stairs are to the right
     const near = ix.stairs.reduce((m, s) => (!m || Math.hypot(s.p.x - ix.start.x, s.p.y - ix.start.y) < Math.hypot(m.p.x - ix.start.x, m.p.y - ix.start.y) ? s : m), null);
-    const left = near && near.p.x > ix.start.x;
+    // Prefer the lobby side (right of the entrance dot) so the label never covers a room code; fall back to left.
     const w = ix.startText.length * 6.4;
-    const b = { x: left ? q.x - 12 - w : q.x + 12, y: q.y - 8, w, h: 16 };
+    const R = { x: q.x + 12, y: q.y - 8, w, h: 16 };
+    const left = !free(R) && !!near;
+    const b = left ? { x: q.x - 12 - w, y: q.y - 8, w, h: 16 } : R;
     if (free(b)) g.append(svg("text", { x: ix.start.x + (left ? -13 : 13) * u, y: ix.start.y + 4 * u, class: "b-lab", style: `font-size:${11 * u}px;fill:#1b6e3f;stroke-width:${3 * u}px;text-anchor:${left ? "end" : "start"}` }, ix.startText));
   }
   pin.hidden = !(S.inside && ix.dest);
@@ -773,8 +779,11 @@ function focusIndoor() {
     const last = S.route.steps.length - 1;
     if (S.step === last && S.floorId === S.route.legs.at(-1).floorId && S.sel && S.sel.room) {
       // goal: the destination wing at about zoom 20.5, pin in the middle of the free area
+      // Goal (Bode RT23): fit arrival stairs + goal room; on phone the sheet is at peek, so pad by peek + 24.
       const d = t(S.sel.room.x, S.sel.room.y);
-      return tween("indoor", fitCamPad({ x: d.x - 1, y: d.y - 1, w: 2, h: 2 }, legPad(), GOAL_ZOOM), 600, EASE_IO);
+      const pad = legPad();
+      if (innerWidth < 900) pad.bottom = PEEK + 24;
+      return tween("indoor", fitCamPad(bbox([pts[0], d], 24), pad, GOAL_ZOOM), 600, EASE_IO);
     }
     return tween("indoor", fitCamPad(bbox(pts, 0), legPad(), LEG_MAX_ZOOM), 600, EASE_IO);
   }
@@ -805,6 +814,7 @@ function snapPx(name = $("sheet").dataset.snap) {
   return name === "peek" ? PEEK : name === "full" ? innerHeight * 0.88 : innerHeight * 0.5;
 }
 function setSnap(name) {
+  if (name !== "peek") $("sheet").classList.remove("goal");
   $("sheet").dataset.snap = name;
   syncSheet();
 }
@@ -931,6 +941,14 @@ async function goStep(i) {
     if (map) await fitLeg(leg.points.map((q) => [q.x, q.y]));
     return;
   }
+  // Goal step on phone: sheet drops to peek with Back/Done kept visible; other steps restore half.
+  const goal = S.step === n - 1;
+  const sh = $("sheet");
+  if (innerWidth < 900) {
+    if (goal) setSnap("peek");
+    else if (sh.classList.contains("goal")) setSnap("half");
+  }
+  sh.classList.toggle("goal", goal);
   await enterBuilding(s.floorId);
   await drawIndoor(s.floorId);
   await focusIndoor();
