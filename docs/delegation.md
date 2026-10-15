@@ -14,20 +14,17 @@ Queue owners stay as in the 4:19 PM note and docs/plan.md. RT owners that differ
 
 ## Conflicts to know
 
-- plan.md day-1 bands and the Oct 16 3:30 to 5:00 ship band are not this clock. Follow 11:00, 12:30, and 2:00. R1 and K1 are not start-now tasks. K2 is not the freeze.
-- V2 admin is tomorrow (4:19 note). plan.md puts V2 tonight after W1.
-- A3 pitch is tomorrow (4:19 note). plan.md puts A3 tonight after K1.
-- D3 undo is tonight after D1 (4:19 note bundles undo with the staff tablet). plan.md puts D3 after W1. POST /api/tickets/:id/undo already exists.
-- P0 path in plan.md is public/js/poll.js. The file is public/poll.js.
+- docs/plan.md uses these same clocks: tonight, 11:00 dry run, 12:30 freeze, 2:00 submit. R1 and K1 are not start-now tasks. K2 is not the freeze.
+- D3 is tonight after D1. POST /api/tickets/:id/undo already exists. Lookup matches the printed code on GET /api/stalls/:stall/queue.
 - J1 target is about 40 tickets. src/store.ts and docs/product.md still have 5.
 - RT1 owner is Viv, not Donita. RT2 owner is Troy, not Justin. RT6 owner is Ayen, not Justin. Reason: those files do not touch that person's queue files, and Justin and Donita already own the staff, seed, and ticket work.
 - RT3, RT4, RT5, RT7, and RT8 start tomorrow morning. plan-room-tba.md originally marked RT1 through RT8 as tonight. They wait on earlier PRs.
 - RT8 also waits on A4, because the enrolled screen is A4, which plan.md schedules tomorrow.
-- Only L2 may edit src/contract.ts. G1 and H2 wait for L2. H2 in plan.md depends only on P0. The sync fields are a contract addition, so this list also depends on L2.
-- O2 in plan.md includes the printed ticket. This list limits O2 to README.md. J3 owns the ticket file.
+- Only L2 may edit src/contract.ts. G1 and H2 wait for L2.
+- O2 is the public URL in README.md. J3 owns the printed ticket.
 - AdminSummary.byStation is the only admin aggregate in the contract. V2 derives the slowest stall from GET /api/stalls queueLength.
 - GuardianStatus exists. GET /api/guardian/:code does not.
-- UP1 is the health pinger from the 4:19 note. It is not a plan.md id. The app must not make the outbound call. A scheduled GitHub Actions GET of the public /health is the pinger, and only after T4 has a real URL.
+- UP1 is the health pinger. The app must not make the outbound call. A scheduled GitHub Actions GET of the public /health is the pinger, and only after T4 has a real URL.
 - src/server.ts serves public/ only. RT3 may add a static mount for data/ so the map can fetch JSON. That mount must not change ticket or stall routes.
 - Library 3F: docs/floorplans/library-3F.png exists and docs/floorplans/rooms.json has 30 rows with source library-3F.png, building Library (NALRC), floor 3F. catalog.md now lists that image as present. It is not a tonight floor.
 
