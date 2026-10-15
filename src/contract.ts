@@ -1,7 +1,23 @@
-// contract.ts
+// IsQolar — contract.ts
 // Frozen at 11:15, October 15, 2026.
 // Only the project manager may change this file after that time.
 // See docs/decisions/003-contract-freeze-at-11-15.md
+
+// ---------------------------------------------------------------------------
+// Branding copy
+// ---------------------------------------------------------------------------
+
+export const BRAND = {
+  name: "IsQolar",
+  tagline: "Every Iskolar, in the right line.",
+  taglineFil: "Alam mo kung nasaan ka sa pila.",
+  boardHeader: "IsQolar Live Board",
+  /** Ticket page title. Replace {number} and {course} at render time. */
+  ticketTitle: "Your IsQolar Ticket · #{number} at {course} stall",
+  callScreen: "Ikaw na, Iskolar!",
+  enrolledFinal: "You're fully enrolled. Welcome, Iskolar ng Bayan.",
+  pitch: "IsQolar shows every freshman where they are in line, when they can step away, and when they're truly done.",
+} as const;
 
 // ---------------------------------------------------------------------------
 // Enumerations

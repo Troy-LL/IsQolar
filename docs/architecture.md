@@ -1,6 +1,6 @@
 # Architecture
 
-PUP Enrollment Queue is a Node 20 + Express server that serves plain HTML/JS pages.
+IsQolar is a Node 20 + Express server that serves plain HTML/JS pages.
 It runs on one laptop (localhost) or a venue LAN.
 There is no build step and no framework.
 
@@ -12,11 +12,11 @@ The shared data types and endpoint shapes are in [src/contract.ts](../src/contra
 
 ```mermaid
 C4Context
-  title PUP Enrollment Queue — System Context
+  title IsQolar — System Context
   Person(student, "Freshman", "Joins queue, views ticket and position")
   Person(staff, "Stall staff", "Calls next student, marks done, looks up by permit")
   Person(coord, "Coordinator", "Monitors queue lengths and average wait")
-  System(app, "PUP Enrollment Queue", "Local web app on venue LAN, Node 20 + Express")
+  System(app, "IsQolar", "Local web app on venue LAN, Node 20 + Express")
   Rel(student, app, "Opens browser on phone or uses printed ticket")
   Rel(staff, app, "Opens browser on laptop or tablet")
   Rel(coord, app, "Opens admin dashboard in browser")
@@ -28,7 +28,7 @@ C4Context
 
 ```mermaid
 C4Container
-  title PUP Enrollment Queue — Containers
+  title IsQolar — Containers
   Person(student, "Freshman")
   Person(staff, "Stall staff / coordinator")
 
