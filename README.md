@@ -53,9 +53,11 @@ See [docs/architecture.md](docs/architecture.md) for data flow between stations.
 ## Limits
 
 - Designed for 200 to 300 freshmen on one enrollment day.
-- Runs on localhost or the venue LAN only. No internet is needed or used.
+- Runs on localhost or the venue LAN by default. No internet is needed or used for day-1 operation.
+- An optional Vercel deploy (day 2) can extend reach beyond the venue; the app itself still makes no outbound calls.
 - Pages poll the server every 2 seconds. There is no push or live connection.
 - No native mobile app. Students use a browser on their phone or a printed ticket.
+- No live AI at runtime. Bob (AI coding assistant) is development-only.
 - First-year students only. Continuing students, transferees, and graduate students are out of scope.
 - Does not connect to PUP's enrollment system (SIS) or handle payments.
 - Guardian outbound sync (viewing status from outside the venue) is not in the MVP.
