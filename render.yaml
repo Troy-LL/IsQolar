@@ -6,6 +6,7 @@ services:
     buildCommand: npm ci --include=dev
     startCommand: npm start
     autoDeploy: true
+    healthCheckPath: /health
     envVars:
       - key: SEED
         value: "1"
