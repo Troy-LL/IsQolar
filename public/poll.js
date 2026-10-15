@@ -1,10 +1,20 @@
 /**
  * poll.js — shared poller for IsQolar browser pages.
  * No build step, no dependencies.
- * Exported via window.IsQolar = { poll }.
+ * Exported via window.IsQolar = { poll, lastUpdated, online }.
+ *
+ * State (readable by all three pages):
+ *   window.IsQolar.online      {boolean|null}  true = server reachable, false = offline, null = not yet known
+ *   window.IsQolar.lastUpdated {Date|null}      time of the last successful response, null until first success
  */
 
 (function () {
+  // Shared state — pages read these directly.
+  var state = {
+    online: null,
+    lastUpdated: null,
+  };
+
   /**
    * Start polling a URL at a fixed interval.
    *
@@ -30,12 +40,15 @@
         })
         .then(function (json) {
           if (!running) return;
+          state.online = true;
+          state.lastUpdated = new Date();
           document.body.dataset.online = "true";
           onData(json);
         })
         .catch(function () {
           if (!running) return;
-          // Keep the last good data in place; just mark offline.
+          state.online = false;
+          // lastUpdated keeps the time of the last *successful* response.
           document.body.dataset.online = "false";
         })
         .finally(function () {
@@ -56,5 +69,14 @@
 
   var IsQolar = window.IsQolar || {};
   IsQolar.poll = poll;
+  // Expose shared state as direct properties so pages can read them at any time.
+  Object.defineProperty(IsQolar, "online", {
+    get: function () { return state.online; },
+    enumerable: true,
+  });
+  Object.defineProperty(IsQolar, "lastUpdated", {
+    get: function () { return state.lastUpdated; },
+    enumerable: true,
+  });
   window.IsQolar = IsQolar;
 })();
