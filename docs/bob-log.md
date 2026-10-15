@@ -12,3 +12,4 @@ One entry per Bob session. Format: `Date | Time | Who | Mode | What was done`.
 | 2026-10-15 | afternoon | Bob | Agent | troy/fix-seed — seed() exported, POST /api/admin/seed, SEED=1 startup, 409 on missing stall, pickStallForCourse fix, 2 new tests · https://github.com/Troy-LL/bobathon/pull/5 |
 | 2026-10-15 | afternoon | Bob | Agent | troy/public-shells (F0) — serve public/ statically, add staff/phone/board shells + tests, docs 001 + README limits consistency |
 | 2026-10-15 | afternoon | Bob | Agent | troy/store-interface (T3) — Store interface + MemoryStore class + getStore() factory; server/seed/tests migrated to async store; static.test fixed to single before/after |
+| 2026-10-15 | afternoon | Bob | Agent | troy/poll-js — shared poll.js poller (window.IsQolar.poll), script tags live in all 3 shells, poll.test.ts, ADR 006 store-interface, render.yaml healthCheckPath |

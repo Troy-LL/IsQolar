@@ -14,6 +14,7 @@ Read this first. Then read the doc that owns the topic you are working on.
   - [002-polling-over-websockets.md](docs/decisions/002-polling-over-websockets.md)
   - [003-contract-freeze-at-11-15.md](docs/decisions/003-contract-freeze-at-11-15.md)
   - [004-simulated-morning-labeled.md](docs/decisions/004-simulated-morning-labeled.md)
+  - [006-store-interface.md](docs/decisions/006-store-interface.md)
 - **Team, two-day tasks, and dependency graph (temporary):** [docs/plan.md](docs/plan.md)
 - **Bob run log:** [docs/bob-log.md](docs/bob-log.md)
 
