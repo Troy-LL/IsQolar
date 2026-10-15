@@ -19,6 +19,7 @@ const EASE_IO = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 
 const PEEK = 132;
 const LEG_PAD = 48;
 // Indoor zoom is relative to the whole-floor fit, and a wide screen fits the floor far larger, so desktop stops a step earlier.
+const LEG_MAX_ZOOM = 19.5;
 const GOAL_ZOOM = innerWidth >= 900 ? 19.5 : 20.5;
 // Every leg clears the floor chip (top), the floor stack (right) and the sheet (bottom).
 function legPad() {
@@ -422,6 +423,7 @@ function drawIndoor(floorId) {
   const line = root.querySelector("g[opacity]");
   if (line) root.insertBefore(lab, line);
   else root.append(lab);
+  root.append(svg("g", { id: "over" }));
   S.ix = { floorId, wings, labels, stairs, start, startText: floorId === S.floors[0].id ? "You are here (entrance)" : "You are here", legStart: leg && !arrive ? t(leg.points[0].x, leg.points[0].y) : null, arrive, dest, destText: S.sel && S.sel.room ? shortLabel(S.sel.room) : "" };
   queueLabels();
 }
@@ -470,22 +472,28 @@ function drawLabels() {
   if (ix.arrive) {
     const a = scr(ix.arrive.p);
     arr.querySelector("span").textContent = ix.arrive.text;
+    // desktop: keep the chip clear of the side panel (panel width plus 16px)
+    const panel = innerWidth >= 900 && !$("sheet").hidden ? $("sheet").getBoundingClientRect().right + 16 : 0;
+    a.x = Math.max(a.x, panel - 8);
     arr.style.transform = `translate(${a.x + 8}px, ${a.y + 8}px)`;
     const r = arr.getBoundingClientRect();
     taken.push({ x: a.x + 8, y: a.y + 8, w: r.width || 160, h: r.height || 26 });
   }
-  // stairs icons, fixed 18px
+  // stairs icons, fixed 20px, drawn above the route line
+  const over = document.getElementById("over");
+  if (over) over.replaceChildren();
   for (const s of ix.stairs) {
     const q = scr(s.p);
     const b = { x: q.x - 9, y: q.y - 9, w: 18, h: 18 };
     if (z >= 19 && !free(b)) continue;
     taken.push(b);
-    const k = u;
+    let k = u;
     const sg = svg("g", { class: "stair" });
+    k *= 20 / 18;
     sg.append(svg("rect", { x: s.p.x - 9 * k, y: s.p.y - 9 * k, width: 18 * k, height: 18 * k, rx: 3 * k, fill: "#1f1a1a" }));
     sg.append(svg("path", { d: `M${s.p.x - 5 * k} ${s.p.y + 5 * k} h${4 * k} v${-4 * k} h${4 * k} v${-4 * k} h${3 * k}`, fill: "none", stroke: "#fff", "stroke-width": 1.8 * k }));
     sg.append(svg("title", {}, s.name));
-    g.append(sg);
+    (over || g).append(sg);
   }
   const dot = (p, color) => g.append(svg("circle", { cx: p.x, cy: p.y, r: 8 * u, fill: color, stroke: "#fff", "stroke-width": 3 * u }));
   if (ix.start) {
@@ -520,8 +528,12 @@ function drawLabels() {
   }
   if (ix.start) {
     const q = scr(ix.start);
-    const b = { x: q.x + 12, y: q.y - 8, w: ix.startText.length * 6.4, h: 16 };
-    if (free(b)) g.append(svg("text", { x: ix.start.x + 13 * u, y: ix.start.y + 4 * u, class: "b-lab", style: `font-size:${11 * u}px;fill:#1b6e3f;stroke-width:${3 * u}px` }, ix.startText));
+    // label goes left when the nearest stairs are to the right
+    const near = ix.stairs.reduce((m, s) => (!m || Math.hypot(s.p.x - ix.start.x, s.p.y - ix.start.y) < Math.hypot(m.p.x - ix.start.x, m.p.y - ix.start.y) ? s : m), null);
+    const left = near && near.p.x > ix.start.x;
+    const w = ix.startText.length * 6.4;
+    const b = { x: left ? q.x - 12 - w : q.x + 12, y: q.y - 8, w, h: 16 };
+    if (free(b)) g.append(svg("text", { x: ix.start.x + (left ? -13 : 13) * u, y: ix.start.y + 4 * u, class: "b-lab", style: `font-size:${11 * u}px;fill:#1b6e3f;stroke-width:${3 * u}px;text-anchor:${left ? "end" : "start"}` }, ix.startText));
   }
   pin.hidden = !(S.inside && ix.dest);
   if (ix.dest) {
@@ -565,6 +577,11 @@ async function enterBuilding(floorId) {
     const fade = async () => {
       stage("crossfade");
       const chip = $("where");
+      // selected roof red fades out over the first 200ms of the crossfade
+      if (map && map.getLayer("pup-roof-sel")) {
+        map.setPaintProperty("pup-roof-sel", "fill-extrusion-opacity-transition", { duration: RM ? 0 : 200 * SLOW, delay: 0 });
+        map.setPaintProperty("pup-roof-sel", "fill-extrusion-opacity", 0);
+      }
       if (!RM) await chip.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 150 * SLOW, fill: "forwards" }).finished;
       drawIndoor(floorId);
       setCam("indoor", fitCam(floorBox(floorId)));
@@ -600,6 +617,7 @@ async function enterBuilding(floorId) {
   stage("indoor");
 }
 async function exitBuilding() {
+  if (map && map.getLayer("pup-roof-sel")) map.setPaintProperty("pup-roof-sel", "fill-extrusion-opacity", 0.8);
   if (!S.inside) return;
   stage("leaving");
   drawOutdoor();
@@ -629,7 +647,7 @@ function focusIndoor() {
       const d = t(S.sel.room.x, S.sel.room.y);
       return tween("indoor", fitCamPad({ x: d.x - 1, y: d.y - 1, w: 2, h: 2 }, legPad(), GOAL_ZOOM), 600, EASE_IO);
     }
-    return tween("indoor", fitCamPad(bbox(pts, 0), legPad(), GOAL_ZOOM), 600, EASE_IO);
+    return tween("indoor", fitCamPad(bbox(pts, 0), legPad(), LEG_MAX_ZOOM), 600, EASE_IO);
   }
   if (S.sel && S.sel.room && S.sel.room.floorId === S.floorId) {
     const p = t(S.sel.room.x, S.sel.room.y);
