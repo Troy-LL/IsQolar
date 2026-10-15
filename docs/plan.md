@@ -24,7 +24,7 @@ Paste-ready prompts are in [delegation.md](delegation.md). This file is the task
 | Viv | Front end | TV board, admin desktop |
 | Justin | Back end | Simulated morning, poll client, printable ticket + QR, guardian API |
 
-Rule: work starts from a fresh main, one task per PR, `npm run check` before every PR, auto-merge on.
+Rule: work starts from a fresh main, one task per PR, `npm run check` before every PR.
 
 ---
 

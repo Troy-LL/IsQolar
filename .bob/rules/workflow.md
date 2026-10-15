@@ -10,6 +10,6 @@
 
 - Before opening a PR, run `npm run check`. If it fails, fix it before pushing.
 - Every new endpoint or logic function gets at least one test in a `*.test.ts` file next to it.
-- After opening a PR, turn on auto-merge: `gh pr merge --auto --squash --delete-branch`
+- Never run gh pr merge and never turn on auto-merge. Troy reviews and merges.
 - If CI fails on your PR, read only the failing step's log and fix that one thing. Do not re-review the whole repo.
 - Do not run /review on your own PR. CI and Troy review it.
