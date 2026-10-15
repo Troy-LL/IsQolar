@@ -4,7 +4,7 @@
   "description": "Every Iskolar, in the right line.",
   "type": "module",
   "engines": {
-    "node": ">=20"
+    "node": "20.x"
   },
   "scripts": {
     "dev": "SEED=1 tsx src/server.ts",
@@ -21,10 +21,10 @@
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
     "eslint": "^9.0.0",
-    "tsx": "^4.0.0",
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "express": "^5.3.0"
+    "express": "^5.3.0",
+    "tsx": "^4.0.0"
   }
 }

@@ -296,8 +296,8 @@ async function refreshStall(stallId: string): Promise<void> {
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const PORT = Number(process.env.PORT) || 3000;
-  app.listen(PORT, () => {
-    console.log(`IsQolar listening on http://localhost:${PORT}`);
+  app.listen(PORT, "0.0.0.0", () => {
+    console.log(`IsQolar listening on http://0.0.0.0:${PORT}`);
     if (process.env.SEED === "1") {
       getStore().seed().then(() => console.log("Auto-seeded on startup."));
     }
