@@ -32,6 +32,8 @@ Who runs each task tonight and tomorrow morning is in [delegation.md](delegation
 | RT10 | Ayen | Alias text | RT5 | Held | Every `aliases` array stays empty until the team supplies at least five real other names. Only those supplied names are added. Search may use an alias only after it is on the row. |
 | RT11 | Troy | Library 2F | none | Held | `IBM_7721` stays out of `data/floors.json` and `public/maps/` until the team confirms that image is the library. If it is confirmed, use the `rooms.json` labels for that image and no others. The building and floor in that file are marked `?`. |
 | RT12 | Troy | 12:30 cut | RT8 | Cut | At 12:30 PM on Oct 16, either RT1 through RT8 are merged and a search on a tonight floor lands on a pin, or the map link and the map files are removed and the queue is unchanged. |
+| RT13 | Troy | Stairs and walk paths | RT1, RT2 | Tonight, droppable at the 12:30 cut | `data/stairs.json` lists shared stairwell ids with an `x,y` per floor. `data/paths.json` has a hand-placed walk graph per floor, with room points placed on their visible labels from [rooms.json](floorplans/rooms.json). `public/route.js` finds the route, and `src/route.test.ts` covers one floor, a floor change through a shared stairwell, and a room that is not on the map yet. |
+| RT14 | Troy | Campus 3D map to floor plans with route | RT13 | Tonight, droppable at the 12:30 cut | `public/map.html` opens on a tilted MapLibre map of PUP Main (OpenFreeMap tiles, no key) with the campus buildings from `data/campus-osm.json` extruded in 3D, a search pill ("Where is 412?"), and a bottom sheet with the room, floor, building and a Directions button. Picking a room flies to the Main Building and crossfades into a flat floor plan drawn from `data/paths.json`, with 1F, 4F and 5F tabs. Back returns to the campus. Directions lists main gate to entrance, lobby, stairs, floor change and room, and tapping a step moves the map there. RT3 and RT4 build on this page. |
 
 "Tonight" in the done-when text means floors 1 to 3 only: Main lobby (`IBM_7739`), Main 4F (`IBM_7741`), Main 5F (`IBM_7742`), pins for labels already transcribed. Library 3F and the campus overview are not tonight work. `IBM_7740` and `IBM_7726` are extras and are not in `rooms.json`.
 
@@ -80,6 +82,8 @@ RT6 and RT11 have no upstream task. RT11 waits on a confirmation, not on code.
 - RT9. Gym pins and station links. Blocked on the gym table layout. `IBM_7734` is the gym photo. It is not a table layout.
 - RT10. Alias search text. Blocked on at least five real other names from the team. The repo has no alias examples.
 - RT11. Library 2F. Blocked on confirmation that `IBM_7721` is the library. The catalog titles it PUP ICT Office 2F.
+
+**Routing (RT13, RT14).** Troy builds these tonight. They change no queue route and no contract. If they are not working at 12:30, remove `data/stairs.json`, `data/paths.json`, `public/route.js`, `public/route.d.ts`, `data/campus-osm.json`, `src/route.test.ts`, the `maplibre-gl` dependency and its `/vendor/maplibre` mount in `src/server.ts` and the route parts of `public/map.html`, `public/map.js` and `public/map.css`.
 
 **Cut (RT12).** 12:30 PM on Oct 16. If the tonight tasks are not in and a search does not land on a pin, remove the map link and the map files. The queue is untouched. Ask PUP before a merge that would publish floor plan images on the public Render URL. See [decisions/007-room-tba-2d.md](decisions/007-room-tba-2d.md).
 

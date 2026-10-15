@@ -1,0 +1,166 @@
+{
+ "note": "Stairwells are in the same physical place on every Main Building floor, so every floor uses the same ids. x and y are 0..1 of each floor image, because each floor is a different poster.",
+ "stairs": [
+  {
+   "id": "stair-west-end",
+   "name": "West wing far-end stairs"
+  },
+  {
+   "id": "stair-west-dome",
+   "name": "West wing stairs by the dome"
+  },
+  {
+   "id": "stair-south-north",
+   "name": "South wing stairs (West side)"
+  },
+  {
+   "id": "stair-south-mid",
+   "name": "South wing middle stairs"
+  },
+  {
+   "id": "stair-south-south",
+   "name": "South wing stairs (East side)"
+  },
+  {
+   "id": "stair-north-end",
+   "name": "North wing far-end stairs"
+  },
+  {
+   "id": "stair-north-dome",
+   "name": "North wing stairs by the dome"
+  },
+  {
+   "id": "stair-east-end",
+   "name": "East wing far-end stairs"
+  },
+  {
+   "id": "stair-east-dome",
+   "name": "East wing stairs by the dome"
+  }
+ ],
+ "floors": {
+  "main-1f-lobby": {
+   "stairs": {
+    "stair-west-end": {
+     "x": 0.219,
+     "y": 0.051
+    },
+    "stair-west-dome": {
+     "x": 0.381,
+     "y": 0.313
+    },
+    "stair-south-north": {
+     "x": 0.154,
+     "y": 0.291
+    },
+    "stair-south-mid": {
+     "x": 0.154,
+     "y": 0.47
+    },
+    "stair-south-south": {
+     "x": 0.154,
+     "y": 0.701
+    },
+    "stair-north-end": {
+     "x": 0.735,
+     "y": 0.455
+    },
+    "stair-north-dome": {
+     "x": 0.507,
+     "y": 0.545
+    },
+    "stair-east-dome": {
+     "x": 0.31,
+     "y": 0.616
+    },
+    "stair-east-end": {
+     "x": 0.248,
+     "y": 0.959
+    }
+   },
+   "notes": "all nine stairwells found on this plan"
+  },
+  "main-4f": {
+   "stairs": {
+    "stair-south-south": {
+     "x": 0.3771,
+     "y": 0.1728
+    },
+    "stair-south-mid": {
+     "x": 0.5198,
+     "y": 0.198
+    },
+    "stair-south-north": {
+     "x": 0.6473,
+     "y": 0.1728
+    },
+    "stair-east-end": {
+     "x": 0.082,
+     "y": 0.3022
+    },
+    "stair-east-dome": {
+     "x": 0.4451,
+     "y": 0.3773
+    },
+    "stair-west-end": {
+     "x": 0.8966,
+     "y": 0.2441
+    },
+    "stair-west-dome": {
+     "x": 0.6216,
+     "y": 0.4436
+    },
+    "stair-north-dome": {
+     "x": 0.4691,
+     "y": 0.5223
+    },
+    "stair-north-end": {
+     "x": 0.5584,
+     "y": 0.8006
+    }
+   },
+   "notes": "all nine stairwells found on this plan"
+  },
+  "main-5f": {
+   "stairs": {
+    "stair-west-end": {
+     "x": 0.2299,
+     "y": 0.0537
+    },
+    "stair-west-dome": {
+     "x": 0.3996,
+     "y": 0.3014
+    },
+    "stair-south-north": {
+     "x": 0.1683,
+     "y": 0.285
+    },
+    "stair-south-mid": {
+     "x": 0.1711,
+     "y": 0.4559
+    },
+    "stair-south-south": {
+     "x": 0.1739,
+     "y": 0.6839
+    },
+    "stair-north-end": {
+     "x": 0.767,
+     "y": 0.4413
+    },
+    "stair-north-dome": {
+     "x": 0.527,
+     "y": 0.5298
+    },
+    "stair-east-dome": {
+     "x": 0.333,
+     "y": 0.5974
+    },
+    "stair-east-end": {
+     "x": 0.2761,
+     "y": 0.9511
+    }
+   },
+   "notes": "all nine stairwells found on this plan"
+  }
+ }
+}

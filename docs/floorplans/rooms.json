@@ -464,7 +464,7 @@
  {
   "building": "Main Academic Building",
   "floor": "5F",
-  "label": "Bayan Muna/NNARA/Gabriela Office (W51?)",
+  "label": "Bayan Muna/NNARA/Gabriela Office (W519)",
   "kind": "office",
   "source": "IBM_7742"
  },
@@ -842,7 +842,7 @@
  {
   "building": "Main Academic Building",
   "floor": "5F",
-  "label": "S505?",
+  "label": "S505",
   "kind": "room",
   "source": "IBM_7742"
  },

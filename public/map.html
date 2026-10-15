@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Room TBA · IsQolar</title>
+<link rel="stylesheet" href="vendor/maplibre/maplibre-gl.css">
+<link rel="stylesheet" href="map.css">
+</head>
+<body data-stage="outdoor">
+<div id="viewport" class="viewport">
+  <div id="outdoor" class="layer" role="region" aria-label="PUP Main campus map"></div>
+  <svg id="indoor" class="layer" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Floor plan"></svg>
+</div>
+
+<header class="top">
+  <button type="button" id="back" class="round" aria-label="Back to campus" hidden>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <label class="pill">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <span class="sr">Search rooms and buildings</span>
+    <input id="q" type="search" placeholder="Search a room, e.g. S513" autocomplete="off" enterkeyhint="search">
+    <button type="button" id="clear" class="clear" aria-label="Clear search" hidden>×</button>
+  </label>
+  <ul id="results" class="results" hidden></ul>
+</header>
+
+<div id="where" class="where">PUP Main · Sta. Mesa</div>
+<nav id="floors" class="floors" aria-label="Floors" hidden></nav>
+<button type="button" id="compass" class="compass" aria-label="Reset map to north" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l4 9h-8z" fill="#8B0000"/><path d="M12 21l-4-9h8z" fill="#b9aca5"/></svg></button>
+<div id="arrive" class="arrive" hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13h3.5V9.5H10V6h3" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span></span></div>
+<div id="pin" class="dpin" hidden><span class="ring"></span><span class="drop"></span></div>
+<div class="zoomctl">
+  <button type="button" id="zoomIn" class="round" aria-label="Zoom in">+</button>
+  <button type="button" id="zoomOut" class="round" aria-label="Zoom out">−</button>
+</div>
+
+<section id="sheet" class="sheet" data-snap="half" hidden aria-live="polite">
+  <button type="button" id="handle" class="handle" aria-label="Expand or collapse"></button>
+  <p id="crumb" class="crumb"></p>
+  <div class="head">
+    <h1 id="title"></h1>
+    <button type="button" id="close" class="x" aria-label="Close">×</button>
+  </div>
+  <p id="sub" class="sub"></p>
+  <p id="flag" class="flag" hidden></p>
+  <div class="actions">
+    <button type="button" id="dir" class="primary">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19V12a3 3 0 013-3h9M14 5l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Directions
+    </button>
+    <button type="button" id="inside" class="quiet" hidden>Go inside</button>
+  </div>
+  <ol id="steps" class="steps" hidden></ol>
+  <div id="stepnav" class="stepnav" hidden>
+    <button type="button" id="prev" class="quiet">Back</button>
+    <button type="button" id="next" class="primary">Next step</button>
+  </div>
+</section>
+<script src="vendor/maplibre/maplibre-gl.js"></script>
+<script type="module" src="map.js"></script>
+</body>
+</html>
