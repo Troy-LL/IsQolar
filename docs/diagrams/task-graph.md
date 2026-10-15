@@ -27,6 +27,7 @@ flowchart TD
   subgraph tonight ["Tonight"]
     subgraph troyN ["Troy"]
       T4["T4 · Troy · connect Render"]
+      RT1["RT1 · Troy · clean floor images"]
       RT2["RT2 · Troy · floors file"]
     end
     subgraph donitaN ["Donita"]
@@ -45,7 +46,6 @@ flowchart TD
     end
     subgraph vivN ["Viv"]
       V1["V1 · Viv · TV board"]
-      RT1["RT1 · Viv · clean floor images"]
     end
   end
 
