@@ -33,6 +33,7 @@ npm start
 The server starts on port 3000.
 Open `http://localhost:3000` on the host laptop.
 Other devices on the venue LAN open `http://<laptop-ip>:3000`.
+The public URL is https://isqolar.onrender.com.
 Check the server is up: `GET /health` returns `{"ok":true}`.
 
 ### Load the simulated morning
