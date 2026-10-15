@@ -54,6 +54,21 @@ describe("static pages", () => {
     assert.equal(res.status, 404);
   });
 
+  it("GET /phone.html prints a QR for this ticket phone page", async () => {
+    const res = await fetch(`${url}/phone.html`);
+    const html = await res.text();
+    assert.match(html, /src="\/qrcode\.js"/);
+    assert.doesNotMatch(html, /https?:\/\//);
+    assert.match(html, /\/phone\.html\?id=/);
+    const printCss = html.slice(html.indexOf("@media print"));
+    assert.match(printCss, /ticket__qr/);
+  });
+
+  it("GET /qrcode.js is served from the hub", async () => {
+    const res = await fetch(`${url}/qrcode.js`);
+    assert.equal(res.status, 200);
+  });
+
   it("GET /board.html returns 200", async () => {
     const res = await fetch(`${url}/board.html`);
     assert.equal(res.status, 200);
