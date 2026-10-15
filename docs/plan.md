@@ -12,7 +12,7 @@ Both days follow the same schedule: start about 10:45, 3:30 checkpoint, wrap-up 
 
 | Person | Role | Owns |
 |---|---|---|
-| Troy | Project manager, full stack | Contract, merges, online: Vercel deploy + shared store adapter |
+| Troy | Project manager, full stack | Contract, merges, online: Render deploy |
 | Donita | Full stack | Hub: laptop server, offline-first, persistence, offline staff queue, design tokens |
 | Ayen | Product manager, front end | Student phone (join, ticket, call banner), demo script, checks |
 | Viv | Front end | TV board, admin desktop |
@@ -63,8 +63,8 @@ Rule: work starts from a fresh main, one task per PR, `npm run check` before eve
 | D3 | Donita | Staff lookup by ticket code + Undo button | W1 |
 | V2 | Viv | Admin desktop: counts per station, slowest stall | W1 |
 | J2 | Justin | Printable ticket page (print CSS), code + course | W1 |
-| T2 | Troy | Docs: ADR 005 online-optional (supersedes 001), ADR 006 Vercel + shared store, README/AGENTS wording | — |
-| T4 | Troy | Vercel spike: deploy as is, confirm the in-memory store loses state between requests, pick Upstash Redis (or Vercel KV) | T3 |
+| T2 | Troy | Docs: ADR 006 store interface, README/AGENTS wording (ADR 005 Render is done) | — |
+| T4 | Troy | Render spike: connect the repo, deploy main as is, open the public URL and run one ticket through | T3 |
 | A3 | Ayen | Pitch draft v1 + day 2 demo script with online and offline beats | K1 |
 
 ---
@@ -81,8 +81,8 @@ Rule: work starts from a fresh main, one task per PR, `npm run check` before eve
 
 | ID | Owner | Task | Needs |
 |---|---|---|---|
-| O1 | Troy | Online store adapter (Redis) behind the T3 interface, chosen by env var | T3 T4 |
-| O2 | Troy | Vercel deploy: Express as one function + static `public/`, env vars, public URL | O1 |
+| O1 | Troy | Online hardening: health check, seed on deploy with `SEED=1`, wake the instance before demos | T4 |
+| O2 | Troy | Render auto-deploy from main, public URL shared in README and on the printed ticket | O1 |
 | H1 | Donita | Hub persistence: snapshot state to a JSON file every change, reload on start | T3 |
 | H2 | Donita | Offline staff queue: Call next / Mark done saved locally while offline, replayed when the hub returns, "synced later" mark (same pattern as Tapat) | P0 |
 | G1 | Justin | Guardian API `GET /api/guardian/:code` read-only + page | L2 |
@@ -95,7 +95,7 @@ Rule: work starts from a fresh main, one task per PR, `npm run check` before eve
 | ID | Owner | Task | Needs | By |
 |---|---|---|---|---|
 | X1 | Donita | Offline test: unplug the router mid-demo, staff keep working, sync on reconnect | H1 H2 | 2:00 |
-| X2 | Troy | Online test: guardian on mobile data opens the Vercel URL | O2 G1 | 2:00 |
+| X2 | Troy | Online test: guardian on mobile data opens the Render URL | O2 G1 | 2:00 |
 | A5 | Ayen | Demo check 2, both modes | X1 X2 | 2:30 |
 | R2 | All | Full dry run ×2 with timing | A5 | 3:15 |
 | K2 | — | **3:30 checkpoint (hard)** | R2 | 3:30 |
@@ -156,7 +156,7 @@ flowchart TD
       V2["V2 Viv: admin desktop"]
       J2["J2 Justin: printable ticket"]
       T2["T2 Troy: ADR 005 + 006"]
-      T4["T4 Troy: Vercel spike"]
+      T4["T4 Troy: Render spike"]
       A3["A3 Ayen: pitch draft v1"]
     end
 
@@ -169,8 +169,8 @@ flowchart TD
     end
 
     subgraph Band6["11:15 to 1:00"]
-      O1["O1 Troy: Redis adapter"]
-      O2["O2 Troy: Vercel deploy"]
+      O1["O1 Troy: online hardening"]
+      O2["O2 Troy: Render auto-deploy"]
       H1["H1 Donita: hub persistence"]
       H2["H2 Donita: offline queue"]
       G1["G1 Justin: guardian API + page"]
