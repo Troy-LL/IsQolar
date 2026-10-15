@@ -48,7 +48,6 @@ button:focus-visible, a:focus-visible, .maplibregl-canvas:focus-visible { outlin
 .compass { position: fixed; right: 16px; top: 136px; z-index: 4; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,.15); display: grid; place-items: center; cursor: pointer; padding: 0; }
 .compass svg { width: 24px; height: 24px; transition: transform .3s var(--ease); }
 .dpin { position: fixed; left: 0; top: 0; z-index: 3; width: 0; height: 0; pointer-events: none; }
-.maplibregl-marker .dpin { position: absolute; z-index: auto; }
 .dpin .drop { position: absolute; left: -14px; top: -38px; width: 28px; height: 28px; background: #8B0000; border: 2px solid #fff; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); box-shadow: 0 2px 6px rgba(0,0,0,.3); box-sizing: border-box; }
 .dpin .drop::after { content: ""; position: absolute; left: 50%; top: 50%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #FFC72C; }
 .dpin .ring { position: absolute; left: -14px; top: -14px; width: 28px; height: 28px; border-radius: 50%; border: 3px solid #8B0000; box-sizing: border-box; animation: pulse 1.6s ease-out infinite; }
@@ -215,10 +214,23 @@ button:focus-visible, a:focus-visible, .maplibregl-canvas:focus-visible { outlin
   .from-layer.open .from-panel { transform: none; opacity: 1; }
 }
 
-.opin { width: 44px; height: 44px; margin: 0; padding: 0; border: 0; background: transparent; appearance: none; cursor: pointer; display: block; line-height: 0; }
+.map-pins { position: fixed; inset: 0; z-index: 3; pointer-events: none; --lab: 12px; }
+.map-pins[data-step="0"] { --lab: 11px; }
+.map-pins[data-step="1"] { --lab: 12px; }
+.map-pins[data-step="2"] { --lab: 13px; }
+.map-pins[data-step="3"] { --lab: 15px; }
+.map-pins[data-step="0"] .opin svg { transform: scale(.86); transform-origin: 22px 40px; }
+.map-pins[data-step="2"] .opin svg { transform: scale(1.08); transform-origin: 22px 40px; }
+.map-pins[data-step="3"] .opin svg { transform: scale(1.16); transform-origin: 22px 40px; }
+.opin { position: absolute; width: 44px; height: 44px; min-width: 44px; min-height: 44px; margin: 0; padding: 0; border: 0; background: transparent; appearance: none; cursor: pointer; display: block; line-height: 0; pointer-events: auto; overflow: visible; }
 .opin svg { display: block; width: 44px; height: 44px; overflow: visible; filter: drop-shadow(0 1px 1.5px rgba(31, 26, 26, .35)); }
 .opin-fill { fill: #8B0000; stroke: #fff; stroke-width: 2; stroke-linejoin: round; }
 .opin[data-state="selected"] .opin-fill,
 .opin[data-state="destination"] .opin-fill { fill: #FFC72C; }
 .opin-ring { fill: #fff; }
 .opin:focus-visible { outline: 3px solid var(--maroon-deep); outline-offset: 2px; }
+.opin-label { position: absolute; pointer-events: none; max-width: calc(100vw - 80px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 800; font-size: var(--lab); line-height: 1.2; color: #1f1a1a; text-shadow: 0 0 1px #fff, 0 0 2px #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff, 1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff; }
+.bldg-chip { position: absolute; pointer-events: none; max-width: calc(100vw - 80px); padding: 8px 12px; background: #fff; color: #8B0000; font-size: 13px; font-weight: 800; line-height: 1.2; border-radius: 16px; border-bottom: 3px solid #FFC72C; box-shadow: 0 1px 4px rgba(31,26,26,.2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dpin.pin-replaced .drop, .dpin.pin-replaced .ring { visibility: hidden; }
+.pin-mk.pin-replaced { pointer-events: none; }
+.pin-mk.pin-replaced > * { visibility: hidden; }
