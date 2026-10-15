@@ -20,7 +20,8 @@ Queue owners stay as in the 4:19 PM note and docs/plan.md. RT owners that differ
 - RT1 owner is Troy, taken from Viv (it had been Viv, not Donita). RT2 owner is Troy, not Justin. RT6 owner is Ayen, not Justin. Reason: those files do not touch that person's queue files, and Justin and Donita already own the staff, seed, and ticket work.
 - RT3, RT4, RT5, RT7, and RT8 start tomorrow morning. plan-room-tba.md originally marked RT1 through RT8 as tonight. They wait on earlier PRs.
 - RT8 also waits on A4, because the enrolled screen is A4, which plan.md schedules tomorrow.
-- Only L2 may edit src/contract.ts. G1 and H2 wait for L2.
+- Only Troy may edit src/contract.ts. L2 is on main. UJ1 is the next edit, and it adds Skip only. G1 and H2 waited for L2. UJ2 waits for UJ1.
+- The phone rail uses five step names on the existing stations. Server order stays checkin, docs, validation, main, stall, enrolled. docs is shown as Step 1. Only stall shows place in line and wait. See docs/user-journey.md.
 - O2 is the public URL in README.md. J3 owns the printed ticket.
 - AdminSummary.byStation is the only admin aggregate in the contract. V2 derives the slowest stall from GET /api/stalls queueLength.
 - GuardianStatus exists. GET /api/guardian/:code does not.
@@ -32,11 +33,11 @@ Queue owners stay as in the 4:19 PM note and docs/plan.md. RT owners that differ
 
 | Person | Tonight | Tomorrow AM |
 | --- | --- | --- |
-| Troy | T4, RT1, RT2 | L2, O1, O2, UP1, RT7, X2, RT12, S4, and R2 at 11:00 |
-| Donita | H0, D1, D3 | D2, H1, H2, W1, X1, S5 |
-| Justin | J1, P0, J2 | RT5, G1, J3 |
-| Ayen | A1, RT6 | A4, A3, RT8, A2, A5, S1 |
-| Viv | V1 | RT3, RT4, V3, V2, S2 |
+| Troy | T4, RT1, RT2 | L2 (done), UJ1, UJ2, O1, O2, UP1, RT7, X2, RT12, S4, and R2 at 11:00 |
+| Donita | H0, D1, D3 | D2, UJ4, UJ3, H1, H2, W1, X1, S5 |
+| Justin | J1, P0, J2 | RT5, G1, UJ5, J3 |
+| Ayen | A1, RT6 | A4, UJ6, UJ7, UJ8, A3, RT8, UJ9, A2, A5, S1 |
+| Viv | V1 | RT3, RT4, UJ10, V3, V2, S2 |
 
 Viv's tomorrow order is RT3, RT4, V3, V2. Justin's long task tomorrow is RT5 (27 + 39 + 76 labels).
 
@@ -392,6 +393,43 @@ Held, do not start: RT11 library 2F waits until the team confirms IBM_7721 is th
 
 Do not start R1, K1, or K2: R1 and K1 were the Oct 15 3:00 and 3:30 clocks, K2 is plan.md's 3:30 PM Oct 16 checkpoint, and this pass uses 11:00, 12:30, and 2:00 instead.
 
+## User journey
+
+Do not build live course slots, the stuck-ticket reminder, lines at every step, course after Step 1, Accept, Change course, venue code, Restore, Remove, Profile, or gym exits. Those are written in docs/user-journey.md for after the Bobathon.
+
+### UJ1. Skip in the contract
+- Goal: The contract describes Skip, and nothing else new.
+- Files: src/contract.ts only.
+- Depends on: L2, which is on main.
+- Done when: The contract documents POST /api/tickets/:id/skip. The first Skip returns the ticket to waiting at the back of its stall line. The second Skip cancels it. Finished steps stay finished. Ticket.code does not change. No other new route. Add only the status or field Skip needs to tell a first skip from a second skip and to place the ticket at the back of its stall line.
+- Branch: `troy/uj1-skip-contract`
+
+```
+Branch from a fresh main using `troy/uj1-skip-contract`.
+Read docs/delegation.md for UJ1 and the Decisions section of docs/user-journey.md.
+You are the project manager. Edit src/contract.ts only. Document POST /api/tickets/:id/skip. The first Skip returns the ticket to waiting at the back of its stall line. The second Skip cancels it. The contract must be able to tell a first skip from a second skip, and the stall queue must be able to place that ticket after the other waiting tickets at that stall. Ticket.code does not change. Finished steps stay finished. Do not add Restore, Remove, Accept, Change course, venue code, slots, or a line at any station except stall.
+Do not edit docs/DESIGN-PUP-Enrollment-Queue.md.
+Run npm run check.
+Open the PR with gh pr create --fill --base main, report the link, and stop. No auto-merge and no bob log.
+```
+
+### UJ2. Skip route
+- Goal: The server performs the Skip the contract describes.
+- Files: src/server.ts, src/server.test.ts.
+- Depends on: UJ1.
+- Done when: A test shows the first POST /api/tickets/:id/skip places the ticket after the other waiting tickets at its stall, and a second POST cancels it. The printed code is unchanged. nextStation is unchanged. Finished steps stay finished.
+- Branch: `troy/uj2-skip-route`
+
+```
+Branch from a fresh main using `troy/uj2-skip-route`.
+Read docs/delegation.md for UJ2 and the Decisions section of docs/user-journey.md.
+Implement POST /api/tickets/:id/skip in src/server.ts as UJ1 documented it. The stall queue is sorted by createdAt today. The first Skip must leave this ticket after the other waiting tickets at that stall without changing Ticket.code. The second Skip cancels it. Finished steps stay finished. Do not change nextStation. Add the test in src/server.test.ts.
+Do not edit src/contract.ts. Do not edit docs/DESIGN-PUP-Enrollment-Queue.md.
+Do not build live course slots, the stuck-ticket reminder, lines at every step, course after Step 1, Accept, Change course, venue code, Restore, Remove, Profile, or gym exits.
+Run npm run check.
+Open the PR with gh pr create --fill --base main, report the link, and stop. No auto-merge and no bob log.
+```
+
 # Donita
 
 Staff tablet, the hub laptop, and tomorrow's offline queue. Floor images are Troy's RT1, taken from Viv, so this night stays on `public/staff.html` and the hub.
@@ -535,6 +573,41 @@ Do not change product code after the 12:30 freeze. Confirm the hub laptop and a 
 
 RT9 is held. Do not start gym pins until the team supplies the gym table layout. `IBM_7734` is the gym photo, not that layout. Branch later would be `donita/rt9-gym-pins`.
 
+## User journey
+
+### UJ4. State tokens
+- Goal: The new phone states have class names in tokens.css, using colors the design file already names.
+- Files: public/tokens.css.
+- Depends on: D2.
+- Done when: tokens.css names Almost, Go now, Skipped once, Cancelled, and the step-rail check, and it adds no hex value that is not already in docs/DESIGN-PUP-Enrollment-Queue.md. That design file is unchanged.
+- Branch: `donita/uj4-state-tokens`
+
+```
+Branch from a fresh main using `donita/uj4-state-tokens`.
+Read docs/delegation.md for UJ4. Read the design-file conflicts in docs/user-journey.md. Do not edit docs/DESIGN-PUP-Enrollment-Queue.md.
+In public/tokens.css, name classes for Almost, Go now, Skipped once, Cancelled, and the step-rail check. Use only colors that file already names. Add no new hex. Do not resolve the conflicts by editing the design file.
+Do not edit src/contract.ts.
+Run npm run check.
+Open the PR with gh pr create --fill --base main, report the link, and stop. No auto-merge and no bob log.
+```
+
+### UJ3. Staff Skip
+- Goal: Staff can Skip the ticket they just called.
+- Files: public/staff.html.
+- Depends on: D1, UJ2.
+- Done when: While a ticket is called, Skip posts POST /api/tickets/:id/skip. The page does not add Hold, Recall, Restore, Remove, Accept, or Change course.
+- Branch: `donita/uj3-staff-skip`
+
+```
+Branch from a fresh main using `donita/uj3-staff-skip`.
+Read docs/delegation.md for UJ3 and the Decisions section of docs/user-journey.md.
+On public/staff.html, while a ticket is called, add Skip. It posts POST /api/tickets/:id/skip from UJ2. Do not add Hold, Recall, Restore, Remove, Accept, or Change course.
+Do not edit src/contract.ts. Do not edit docs/DESIGN-PUP-Enrollment-Queue.md.
+Do not build live course slots, the stuck-ticket reminder, lines at every step, course after Step 1, Accept, Change course, venue code, Restore, Remove, Profile, or gym exits.
+Run npm run check.
+Open the PR with gh pr create --fill --base main, report the link, and stop. No auto-merge and no bob log.
+```
+
 # Justin
 
 ## Tonight
@@ -647,6 +720,25 @@ Run npm run check.
 Open a pull request into main.
 Append one line to docs/bob-log.md with the task id, branch, and PR link. Create the file if it is missing.
 Then run gh pr merge --auto --squash --delete-branch.
+```
+
+## User journey
+
+### UJ5. Guardian copy
+- Goal: The guardian page uses the journey's sentences on top of G1.
+- Files: public/guardian.html.
+- Depends on: G1.
+- Done when: The page maps the station to Step N of 5 using the table in docs/user-journey.md. It shows the journey's guardian sentences for waiting, being served, finished, skipped once, cancelled, and fully enrolled. Place in line and the estimate show only at stall, and only when the guardian payload already includes them. It does not show a ticket number, a QR, a permit number, or course slots. It does not show gym exits.
+- Branch: `justin/uj5-guardian-copy`
+
+```
+Branch from a fresh main using `justin/uj5-guardian-copy`.
+Read docs/delegation.md for UJ5 and sections 4 and the Decisions of docs/user-journey.md.
+On public/guardian.html, on top of G1, map the station to Step N of 5: checkin and docs are Step 1 Admission, stall is Step 2 College / Department, validation is Step 3 Medical, main is Step 4 Registration Card, enrolled is Step 5 ID. Use the guardian sentences in section 4 for waiting, being served, finished, skipped once, cancelled, and fully enrolled. Show place in line and the estimate only when the station is stall and the payload already has those numbers. Do not add fields to the contract. Do not show a ticket number, a QR, a permit number, or course slots. Do not show gym exits. Stale copy is "Not updating since" plus the last time G1 already shows.
+Do not edit src/contract.ts. Do not edit docs/DESIGN-PUP-Enrollment-Queue.md.
+Do not build live course slots, the stuck-ticket reminder, lines at every step, course after Step 1, Accept, Change course, venue code, Restore, Remove, Profile, or gym exits.
+Run npm run check.
+Open the PR with gh pr create --fill --base main, report the link, and stop. No auto-merge and no bob log.
 ```
 
 # Ayen
@@ -796,6 +888,75 @@ Do not run gh pr merge --auto --squash --delete-branch.
 
 Held, no task prompt: RT10 alias text waits until the team supplies at least five real other names. Do not invent aliases.
 
+## User journey
+
+### UJ6. Phone states
+- Goal: The phone shows the five-step rail and the states from the decisions.
+- Files: public/phone.html.
+- Depends on: A4, UJ2.
+- Done when: The rail reads Step N of 5 with a check on each finished step. checkin and docs show Step 1 Admission. stall shows Step 2 College / Department. validation shows Step 3 Medical. main shows Step 4 Registration Card. enrolled shows Step 5 ID and the contract enrolled sentence. Place in line and estWaitMin show only on stall. Waiting, Almost, Go now, Called, Finished, Skipped once, Cancelled, and Fully enrolled are distinct. Almost is estWaitMin 30 or less, or 5 or fewer people ahead. Go now is estWaitMin 10 or less, or 2 or fewer people ahead, and "You're next." when nobody is ahead. Called shows Ikaw na, Iskolar!. Almost, Go now, and Called vibrate where the browser allows it. The server station order is unchanged.
+- Branch: `ayen/uj6-phone-states`
+
+```
+Branch from a fresh main using `ayen/uj6-phone-states`.
+Read docs/delegation.md for UJ6 and the Decisions section of docs/user-journey.md.
+In public/phone.html, show a step rail, "Step N of 5", with a check on each finished step. Map stations like this: checkin and docs are Step 1 Admission, stall is Step 2 College / Department, validation is Step 3 Medical, main is Step 4 Registration Card, enrolled is Step 5 ID. People ahead is TicketDetail.position minus 1. Show place in line and estWaitMin only when the station is stall. States: Waiting; Almost when estWaitMin is 30 or less or people ahead is 5 or fewer; Go now when estWaitMin is 10 or less or people ahead is 2 or fewer, and "You're next." when people ahead is 0; Called when status is called, using BRAND.callScreen (Ikaw na, Iskolar!); Finished when staff mark a step done; Skipped once and Cancelled from the Skip route; Fully enrolled uses BRAND.enrolledFinal and no second sentence. Go now wins over Almost. Called wins over Go now. Vibrate on Almost, Go now, and Called where the browser allows it, using the pattern already in the design file (200ms, pause 100ms, 200ms). Do not change nextStation. Do not show a line on Steps 1, 3, 4, or 5.
+Do not edit src/contract.ts. Do not edit docs/DESIGN-PUP-Enrollment-Queue.md.
+Do not build live course slots, the stuck-ticket reminder, lines at every step, course after Step 1, Accept, Change course, venue code, Restore, Remove, Profile, or gym exits.
+Run npm run check.
+Open the PR with gh pr create --fill --base main, report the link, and stop. No auto-merge and no bob log.
+```
+
+### UJ7. Stay-near copy
+- Goal: The phone shows the stay-near rule and the EN/FIL sentences from the journey.
+- Files: public/phone.html.
+- Depends on: UJ6.
+- Done when: The ticket shows the English stay-near paragraph from section 3.1 of docs/user-journey.md, and the Filipino paragraph under it when FIL is selected. The state sentences for Almost, Go now, Skipped once, and Cancelled match section 3.2 in the selected language. The Filipino lines are copied as written. The called line stays Ikaw na, Iskolar!. The enrolled line stays the contract string.
+- Branch: `ayen/uj7-stay-near-copy`
+
+```
+Branch from a fresh main using `ayen/uj7-stay-near-copy`.
+Read docs/delegation.md for UJ7 and sections 3.1 and 3.2 of docs/user-journey.md.
+On public/phone.html, show the English stay-near paragraph from section 3.1, and the Filipino paragraph when FIL is selected. Use the section 3.2 sentences for Almost, Go now, Skipped once, and Cancelled in the selected language, including "Go to Step N." Copy the Filipino lines as written. Do not rewrite them. Keep BRAND.callScreen and BRAND.enrolledFinal as they are. Do not add gym exits.
+Do not edit src/contract.ts. Do not edit docs/DESIGN-PUP-Enrollment-Queue.md.
+Run npm run check.
+Open the PR with gh pr create --fill --base main, report the link, and stop. No auto-merge and no bob log.
+```
+
+### UJ8. Live Count of Courses
+- Goal: The phone lists the courses in data/courses.csv, with PUP links only when the phone is online.
+- Files: public/phone.html, src/server.ts only if the phone cannot read data/courses.csv yet.
+- Depends on: data/courses.csv on main.
+- Done when: The page groups the CSV by college, leaves out Juris Doctor, and keeps every other row, including rows whose notes say to confirm. It shows no slot count. Course names link to https://www.pup.edu.ph/academic/undergrad, college names link to https://www.pup.edu.ph/academic/colleges, and the iTech section links to https://www.pup.edu.ph/itech/, only when the phone is online. Offline, those names are plain text. The server does not request pup.edu.ph.
+- Branch: `ayen/uj8-live-count`
+
+```
+Branch from a fresh main using `ayen/uj8-live-count`.
+Read docs/delegation.md for UJ8 and section 3.4 of docs/user-journey.md.
+Show a static Live Count of Courses from data/courses.csv on public/phone.html. Follow section 3.4 for grouping, order, and the three PUP links. Leave out Juris Doctor. Keep every other row, including diploma rows whose notes say to confirm. Show no slot number and no "Full". Show the links only when the phone is online. When it is not, show the names as plain text. If the phone cannot read the CSV, serve that file and do not change ticket or stall routes. The server must not request pup.edu.ph.
+Do not edit src/contract.ts. Do not edit docs/DESIGN-PUP-Enrollment-Queue.md. Do not edit data/courses.csv.
+Do not build live course slots.
+Run npm run check.
+Open the PR with gh pr create --fill --base main, report the link, and stop. No auto-merge and no bob log.
+```
+
+### UJ9. Explore PUP
+- Goal: The phone opens the Room TBA map and shows how many are waiting at each stall.
+- Files: public/phone.html.
+- Depends on: RT3, RT8.
+- Done when: Explore PUP has a Find your classes link to map.html and lists each stall from GET /api/stalls with its queueLength. It adds no stall, room, alias, or exit.
+- Branch: `ayen/uj9-explore-pup`
+
+```
+Branch from a fresh main using `ayen/uj9-explore-pup`.
+Read docs/delegation.md for UJ9 and section 3.5 of docs/user-journey.md.
+On public/phone.html, Explore PUP links Find your classes to map.html and lists every stall returned by GET /api/stalls with its queueLength. Do not add a stall, a room, an alias, or an exit. The queue pages still load if the map link and the map files are removed.
+Do not edit src/contract.ts. Do not edit docs/DESIGN-PUP-Enrollment-Queue.md.
+Do not build gym exits or lines at every step.
+Run npm run check.
+Open the PR with gh pr create --fill --base main, report the link, and stop. No auto-merge and no bob log.
+```
+
 # Viv
 
 ## Tonight
@@ -910,6 +1071,25 @@ Run npm run check.
 Open a pull request into main.
 Append one line to docs/bob-log.md with the task id, branch, and PR link. Create the file if it is missing.
 Then run gh pr merge --auto --squash --delete-branch.
+```
+
+## User journey
+
+### UJ10. Projector on the board
+- Goal: The board is the projector for the five steps, and only the stall line has numbers.
+- Files: public/board.html.
+- Depends on: V1, P0.
+- Done when: The page shows "Now serving · Tinatawag na" and five columns, Steps 1 to 5, using the names in docs/user-journey.md. Step 2 lists each stall from GET /api/stalls with nowServing, the first three codes from that stall's queue, and queueLength. When nowServing is null, that spot shows "—". Steps 1, 3, 4, and 5 show no waiting count. If poll.js has had no successful poll for 60 seconds, the page shows "Not updating since" and the last time. No stall is invented.
+- Branch: `viv/uj10-projector`
+
+```
+Branch from a fresh main using `viv/uj10-projector`.
+Read docs/delegation.md for UJ10 and the Decisions section of docs/user-journey.md.
+On public/board.html, show "Now serving · Tinatawag na" and five columns in order: Step 1 Admission, Step 2 College / Department, Step 3 Medical, Step 4 Registration Card, Step 5 ID. Step 2 lists each stall from GET /api/stalls. For each stall show nowServing, the first three codes from GET /api/stalls/:stall/queue in that array's order, and queueLength. When nowServing is null, show "—". Steps 1, 3, 4, and 5 do not show a waiting count. Keep BRAND.boardHeader. Poll with public/poll.js. If there has been no successful poll for 60 seconds, show "Not updating since" and the last time P0 exposes. Do not invent a stall. Do not add a venue code.
+Do not edit src/contract.ts. Do not edit docs/DESIGN-PUP-Enrollment-Queue.md.
+Do not build lines at every step.
+Run npm run check.
+Open the PR with gh pr create --fill --base main, report the link, and stop. No auto-merge and no bob log.
 ```
 
 ## Dependency graph
@@ -1098,5 +1278,11 @@ PR 12 is merged. T1b, F0, T3, and T2 are on main. Pages are shells. Seed is 5 ti
 - Justin: About 40 simulated tickets (J1), poll last-updated text (P0), printable ticket (J2).
 - Ayen: Phone ticket and the Ikaw na, Iskolar! banner (A1). Empty station file (RT6) in parallel.
 - Viv: TV board (V1). RT1 moved to Troy.
+User journey, after this doc is on main. Do not build the after-Bobathon list in docs/user-journey.md.
+- Troy: Skip in the contract (UJ1), then the Skip route (UJ2).
+- Donita: State tokens (UJ4) after D2. Staff Skip (UJ3) after UJ2.
+- Justin: Guardian copy (UJ5) after G1.
+- Ayen: Phone states (UJ6), stay-near copy (UJ7), Live Count of Courses (UJ8), Explore PUP (UJ9).
+- Viv: Projector on the board (UJ10) after V1.
 ⚠️ Render is not connected yet. Gym layout, five real aliases, a real lobby plan, library 2F confirmation, and the 4F ? names stay held.
 ⏰ 11:00 AM Oct 16, full dry run. Code freeze 12:30 PM. Submit 2:00 PM.
