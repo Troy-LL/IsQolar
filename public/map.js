@@ -1,4 +1,4 @@
-import { planCampusRoute, allRooms, roomName, roomCode, roomDisplay, parseRoomQuery, searchRooms, wingName, floorShort, SEARCH_LIMIT } from "./route.js";
+import { planCampusRoute, campusStarts, GATE_START, allRooms, roomName, roomCode, roomDisplay, parseRoomQuery, searchRooms, wingName, floorShort, SEARCH_LIMIT } from "./route.js";
 
 const $ = (id) => document.getElementById(id);
 const NS = "http://www.w3.org/2000/svg";
@@ -740,9 +740,27 @@ async function selectBuilding(f) {
   if (map) await fitTo(p.main ? mainCoords() : featCoords(f), { maxZoom: 18.6 });
 }
 
+function selectedFrom() {
+  const sel = $("from");
+  return sel && sel.value ? sel.value : GATE_START;
+}
+function mountFrom() {
+  const sel = el("select", { id: "from" });
+  sel.style.cssText = "flex:1;min-width:0;border:0;outline:0;background:transparent;color:inherit;font:inherit;font-size:17px;width:100%";
+  for (const s of campusStarts(S.campus)) sel.append(el("option", { value: s.id }, s.label));
+  sel.value = GATE_START;
+  const pill = el("label", { class: "pill" });
+  pill.style.flex = "1 1 180px";
+  pill.append(el("span", {}, "From"), sel);
+  const search = $("q").closest("label");
+  search.parentElement.insertBefore(pill, search);
+  sel.addEventListener("change", () => {
+    if (S.sel && S.sel.room && S.route) directions();
+  });
+}
 function directions() {
   if (!S.sel || !S.sel.room) return;
-  const r = planCampusRoute(S.paths, S.stairs, S.floors, S.campus, S.sel.room.id);
+  const r = planCampusRoute(S.paths, S.stairs, S.floors, S.campus, S.sel.room.id, selectedFrom());
   const list = $("steps");
   list.replaceChildren();
   if (!r.ok) {
@@ -948,6 +966,7 @@ async function load() {
     ["data/floors.json", "data/paths.json", "data/stairs.json", "data/campus-osm.json"].map((u) => fetch(u).then((r) => r.json()))
   );
   Object.assign(S, { floors, paths, stairs, campus, rooms: allRooms(paths) });
+  mountFrom();
   setCam("indoor", { x: 0, y: 0, w: 1000, h: 1000 });
   if (window.maplibregl) await initMap();
   if (SLOW > 1) document.body.classList.add("slow");
