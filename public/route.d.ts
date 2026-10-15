@@ -19,6 +19,7 @@ export function wingName(letter: string): string | null;
 export function isValidRoomCode(code: string | null | undefined): boolean;
 export function roomCode(room: PathRoom): { code: string; unsure: boolean; letter: string | null; number: string } | null;
 export function roomDisplay(room: PathRoom): string;
+export function roomListed(room: PathRoom | null | undefined): boolean;
 export function parseRoomQuery(query: string): { letter: string | null; number: string | null; bare: boolean; letterOnly: boolean } | null;
 export function isClassroom(room: PathRoom): boolean;
 export function sortSearchHits<T extends PathRoom & { floorId: string }>(hits: T[]): T[];

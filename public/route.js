@@ -73,6 +73,11 @@ export function roomDisplay(room) {
   return c ? c.code : roomName(room);
 }
 
+export function roomListed(room) {
+  if (!room || typeof room.label !== "string" || room.label.includes("?")) return false;
+  return !roomDisplay(room).includes("?");
+}
+
 // "N412", "N 412", "north 412" → letter + number. Bare "412" → which-wing chooser.
 // A lone wing letter ("S") is letterOnly: show a hint, do not list rooms yet.
 export function parseRoomQuery(query) {
@@ -219,6 +224,7 @@ export function searchRooms(paths, query) {
   if (parsed && parsed.letterOnly) return [];
   if (parsed && parsed.number) {
     const hits = rooms.filter((r) => {
+      if (!roomListed(r)) return false;
       const c = roomCode(r);
       if (!c) return false;
       // Wing prefix must match exactly: S never returns W rooms.
@@ -231,7 +237,7 @@ export function searchRooms(paths, query) {
   const q = query.trim().toLowerCase();
   if (!q) return [];
   // Free-text: match real names and ids, not a lone letter inside a code.
-  const hits = rooms.filter((r) => roomName(r).toLowerCase().includes(q) || r.id.toLowerCase().includes(q));
+  const hits = rooms.filter((r) => roomListed(r) && (roomName(r).toLowerCase().includes(q) || r.id.toLowerCase().includes(q)));
   return sortSearchHits(hits);
 }
 
@@ -363,23 +369,12 @@ function closestSegs(a, b, c, d) {
   };
 }
 
-function buildingStartLabel(feature) {
-  const name = feature.properties.name;
-  const source = feature.properties.heightSource || "";
-  const base = name || "Unnamed building";
-  const flagged = !name || source.includes("?") || base.includes("?");
-  return flagged && !base.includes("?") ? `${base} ?` : base;
-}
-
 export const GATE_START = "gate";
 
 export function campusStarts(campus) {
-  const rows = campus.buildings.features.map((f) => ({ id: f.properties.osm, label: buildingStartLabel(f) }));
-  const counts = new Map();
-  for (const row of rows) counts.set(row.label, (counts.get(row.label) || 0) + 1);
-  for (const row of rows) {
-    if (counts.get(row.label) > 1) row.label = `${row.label} (${row.id})`;
-  }
+  const rows = campus.buildings.features
+    .filter((f) => f.properties.name && !f.properties.name.includes("?"))
+    .map((f) => ({ id: f.properties.osm, label: f.properties.name }));
   rows.sort((a, b) => a.label.localeCompare(b.label, "en") || a.id.localeCompare(b.id));
   return [{ id: GATE_START, label: "Main gate" }, ...rows];
 }
@@ -409,21 +404,23 @@ function routeAlongWalk(campus, feature) {
 }
 
 function outdoorFrom(campus, fromId) {
+  const entrance = campus.entrance.label;
   if (!fromId || fromId === GATE_START) {
     return {
       ok: true,
       coordinates: campus.walk.coordinates,
-      text: `Walk from the main gate to the Main Building entrance (${campus.walk.meters} m)`,
+      text: `Walk from the main gate to the ${entrance} (${campus.walk.meters} m)`,
     };
   }
   const feature = campus.buildings.features.find((f) => f.properties.osm === fromId);
   if (!feature) return { ok: false, message: `${fromId} is not a campus building.` };
+  const start = campusStarts(campus).find((s) => s.id === fromId);
+  if (!start) return { ok: false, message: "That building is not in the From list." };
   const walked = routeAlongWalk(campus, feature);
-  const label = campusStarts(campus).find((s) => s.id === fromId).label;
   return {
     ok: true,
     coordinates: walked.coordinates,
-    text: `Walk from the ${label} to the ${campus.entrance.label} (${walked.meters} m)`,
+    text: `Walk from the ${start.label} to the ${entrance} (${walked.meters} m)`,
   };
 }
 

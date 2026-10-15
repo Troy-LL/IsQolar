@@ -2267,65 +2267,58 @@
         },
         {
           "id": "main-4f-inst-of-social-history",
-          "label": "Inst. of Social History?",
+          "label": "Inst. of Social History",
           "kind": "office",
           "x": 0.3781,
           "y": 0.1425,
-          "flag": "?",
           "node": "c-S-2"
         },
         {
           "id": "main-4f-speech-laboratory",
-          "label": "Speech Laboratory?",
+          "label": "Speech Laboratory",
           "kind": "office",
           "x": 0.4238,
           "y": 0.1425,
-          "flag": "?",
           "node": "c-S-3"
         },
         {
           "id": "main-4f-training-center",
-          "label": "Training Center?",
+          "label": "Training Center",
           "kind": "office",
           "x": 0.4694,
           "y": 0.1425,
-          "flag": "?",
           "node": "c-S-4"
         },
         {
           "id": "main-4f-extension-center",
-          "label": "Extension Center?",
+          "label": "Extension Center",
           "kind": "office",
           "x": 0.515,
           "y": 0.1425,
-          "flag": "?",
           "node": "c-S-7"
         },
         {
           "id": "main-4f-student-center",
-          "label": "Student Center?",
+          "label": "Student Center",
           "kind": "office",
           "x": 0.5606,
           "y": 0.1425,
-          "flag": "?",
           "node": "c-S-9"
         },
         {
           "id": "main-4f-student-lounge",
-          "label": "Student Lounge?",
+          "label": "Student Lounge",
           "kind": "office",
           "x": 0.6062,
           "y": 0.1425,
-          "flag": "?",
           "node": "c-S-10"
         },
         {
           "id": "main-4f-institutional-planning-office",
-          "label": "Institutional Planning Office?",
+          "label": "Institutional Planning Office",
           "kind": "office",
           "x": 0.6519,
           "y": 0.1425,
-          "flag": "?",
           "node": "c-S-11"
         },
         {
@@ -2348,11 +2341,10 @@
         },
         {
           "id": "main-4f-vacant-room",
-          "label": "Vacant Room?",
+          "label": "Vacant Room",
           "kind": "office",
           "x": 0.3781,
           "y": 0.2375,
-          "flag": "?",
           "node": "c-S-2"
         },
         {
@@ -7085,12 +7077,11 @@
         },
         {
           "id": "gym-gf-fire-pump-room",
-          "label": "Fire Pump Room?",
+          "label": "EE Pump Room",
           "kind": "other",
           "x": 0.718,
           "y": 0.5536,
-          "node": "r3",
-          "flag": "?"
+          "node": "r3"
         },
         {
           "id": "gym-gf-maintenance-office",
