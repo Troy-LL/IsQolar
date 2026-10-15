@@ -1,7 +1,7 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { planRoute, planCampusRoute, NOT_ON_MAP, type Paths, type Stairs, type Floor, type Campus } from "../public/route.js";
+import { planRoute, planCampusRoute, NOT_ON_MAP, roomCode, roomDisplay, parseRoomQuery, searchRooms, type Paths, type Stairs, type Floor, type Campus } from "../public/route.js";
 
 const paths = JSON.parse(readFileSync("data/paths.json", "utf8")) as Paths;
 const stairs = JSON.parse(readFileSync("data/stairs.json", "utf8")) as Stairs;
@@ -31,7 +31,7 @@ describe("route", () => {
     assert.equal(r.legs[0].ids.at(-1), r.stair);
     assert.equal(r.legs[1].ids[0], r.stair);
     assert.equal(r.steps[1].text, "Go up to 4F");
-    assert.equal(r.steps[2].text, "Walk to Classroom 412 (North wing)");
+    assert.equal(r.steps[2].text, "Walk to N412");
   });
 
   it("routes lobby to 5F", () => {
@@ -52,7 +52,7 @@ describe("route", () => {
       "Enter the lobby (1F)",
       "Walk to the East wing stairs by the dome",
       "Go up to 4F",
-      "Walk to Classroom 412 (North wing)",
+      "Walk to N412",
     ]);
   });
 
@@ -61,6 +61,37 @@ describe("route", () => {
     assert.equal(r.ok, false);
     if (r.ok) return;
     assert.match(r.message, new RegExp(NOT_ON_MAP));
+  });
+});
+
+
+describe("room codes", () => {
+  it("builds wing-letter + number from existing wing data", () => {
+    const n = paths.floors["main-4f"].rooms.find((r) => r.id === "main-4f-north-412")!;
+    const e = paths.floors["main-4f"].rooms.find((r) => r.id === "main-4f-east-412")!;
+    const s = paths.floors["main-5f"].rooms.find((r) => r.id === "main-5f-s513")!;
+    assert.equal(roomCode(n)!.code, "N412");
+    assert.equal(roomCode(e)!.code, "E412");
+    assert.equal(roomCode(s)!.code, "S513");
+    assert.equal(roomDisplay(n), "N412");
+  });
+
+  it("parses N412, 'N 412' and 'north 412', and treats bare 412 as a chooser", () => {
+    assert.deepEqual(parseRoomQuery("N412"), { letter: "N", number: "412", bare: false });
+    assert.deepEqual(parseRoomQuery("N 412"), { letter: "N", number: "412", bare: false });
+    assert.deepEqual(parseRoomQuery("north 412"), { letter: "N", number: "412", bare: false });
+    assert.deepEqual(parseRoomQuery("412"), { letter: null, number: "412", bare: true });
+  });
+
+  it("bare-number search lists each wing; a coded query goes to that room", () => {
+    const bare = searchRooms(paths, "412");
+    assert.equal(bare.length, 3);
+    assert.deepEqual(bare.map((r) => roomCode(r)!.code).sort(), ["E412", "N412", "W412"]);
+    const coded = searchRooms(paths, "N412");
+    assert.equal(coded.length, 1);
+    assert.equal(coded[0].id, "main-4f-north-412");
+    assert.equal(searchRooms(paths, "north 412")[0].id, "main-4f-north-412");
+    assert.equal(searchRooms(paths, "N 412")[0].id, "main-4f-north-412");
   });
 });
 

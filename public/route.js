@@ -13,6 +13,58 @@ export function roomName(room) {
   return room.wing ? `${room.label} (${room.wing})` : room.label;
 }
 
+const WING_LETTER = { "north wing": "N", "south wing": "S", "east wing": "E", "west wing": "W" };
+const WING_NAME = { N: "North wing", S: "South wing", E: "East wing", W: "West wing" };
+
+export function wingLetter(wing) {
+  if (!wing || wing === "?") return null;
+  return WING_LETTER[String(wing).toLowerCase()] || null;
+}
+
+export function wingName(letter) {
+  return WING_NAME[letter] || null;
+}
+
+// Wing-letter + number from data we already have (N412, E412, S513). Never invent a wing.
+// If the wing is unknown ("?"), return the bare number with "?" and mark it unsure (grey in the UI).
+export function roomCode(room) {
+  const label = (room && room.label) || "";
+  const flagged = !!(room && room.flag) || /\?/.test(label);
+  let m = /^([NESW])(\d+[A-Z]?)\??$/i.exec(label.trim());
+  if (m) {
+    return { code: m[1].toUpperCase() + m[2].toUpperCase() + (flagged ? "?" : ""), unsure: flagged, letter: m[1].toUpperCase(), number: m[2].toUpperCase() };
+  }
+  m = /\(([NESW])(\d+[A-Z]?)\??\)\??$/i.exec(label);
+  if (m) {
+    return { code: m[1].toUpperCase() + m[2].toUpperCase() + (flagged ? "?" : ""), unsure: flagged, letter: m[1].toUpperCase(), number: m[2].toUpperCase() };
+  }
+  m = /^Classroom (\d+[A-Z]?)$/i.exec(label);
+  if (m) {
+    const letter = wingLetter(room.wing);
+    if (!letter) return { code: m[1] + "?", unsure: true, letter: null, number: m[1] };
+    return { code: letter + m[1], unsure: flagged, letter, number: m[1] };
+  }
+  return null;
+}
+
+export function roomDisplay(room) {
+  const c = roomCode(room);
+  return c ? c.code : roomName(room);
+}
+
+// "N412", "N 412", "north 412" → letter + number. Bare "412" → which-wing chooser.
+export function parseRoomQuery(query) {
+  const s = String(query || "").trim().toLowerCase().replace(/\s+/g, " ");
+  if (!s) return null;
+  const named = /^(north|south|east|west)\s+(\d+[a-z]?)\??$/.exec(s);
+  if (named) return { letter: named[1][0].toUpperCase(), number: named[2].toUpperCase(), bare: false };
+  const coded = /^([nsew])\s*(\d+[a-z]?)\??$/.exec(s);
+  if (coded) return { letter: coded[1].toUpperCase(), number: coded[2].toUpperCase(), bare: false };
+  const bare = /^(\d+[a-z]?)\??$/.exec(s);
+  if (bare) return { letter: null, number: bare[1].toUpperCase(), bare: true };
+  return null;
+}
+
 function graphFor(paths, floorId) {
   const floor = paths.floors[floorId];
   if (!floor) return null;
@@ -112,9 +164,24 @@ export function allRooms(paths) {
 }
 
 export function searchRooms(paths, query) {
-  const q = String(query || "").trim().toLowerCase();
+  const rooms = allRooms(paths);
+  const parsed = parseRoomQuery(query);
+  if (parsed) {
+    const hits = rooms.filter((r) => {
+      const c = roomCode(r);
+      if (!c || c.number !== parsed.number) return false;
+      if (parsed.letter) return c.letter === parsed.letter;
+      return true;
+    });
+    // Bare numbers and coded queries prefer the code list (empty is fine: nothing matched).
+    return hits;
+  }
+  const q = query.trim().toLowerCase();
   if (!q) return [];
-  return allRooms(paths).filter((r) => roomName(r).toLowerCase().includes(q) || r.id.includes(q));
+  return rooms.filter((r) => {
+    const c = roomCode(r);
+    return roomName(r).toLowerCase().includes(q) || (c && c.code.toLowerCase().includes(q)) || r.id.includes(q);
+  });
 }
 
 function findRoom(paths, roomId) {
@@ -130,7 +197,7 @@ export function planRoute(paths, stairs, floors, start, roomId) {
   }
   const label = (id) => floorShort(floors.find((f) => f.id === id) || id);
   const stairName = (id) => (stairs.stairs.find((s) => s.id === id) || { name: id }).name;
-  const target = roomName(room);
+  const target = roomDisplay(room);
 
   if (start.floorId === room.floorId) {
     const p = shortestPath(paths, room.floorId, start.node, room.id);

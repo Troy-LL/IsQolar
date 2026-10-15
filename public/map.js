@@ -1,4 +1,4 @@
-import { planCampusRoute, allRooms, roomName, floorShort } from "./route.js";
+import { planCampusRoute, allRooms, roomName, roomCode, roomDisplay, parseRoomQuery, searchRooms, wingName, floorShort } from "./route.js";
 
 const $ = (id) => document.getElementById(id);
 const NS = "http://www.w3.org/2000/svg";
@@ -334,12 +334,12 @@ function floorBox(floorId) {
   return bbox(S.paths.floors[floorId].nodes.map((n) => t(n.x, n.y)), 50);
 }
 function shortLabel(r) {
+  const c = roomCode(r);
+  if (c) return c.code;
   const m = /\(([A-Z]+\d+[A-Z]?\??)\)$/.exec(r.label);
   if (m) return m[1];
-  const c = /^Classroom (\d+)$/.exec(r.label);
-  if (c) return c[1];
   if (/Dome/.test(r.label)) return "Dome";
-  const t = r.label.replace(/\s*\(.*\)$/, "");
+  const t = r.label.replace(/\s*\(.*\)$/, "").replace(/\?$/, "");
   return t.length > 14 ? t.slice(0, 13) + "…" : t;
 }
 
@@ -395,10 +395,10 @@ function drawIndoor(floorId) {
     const lab = shortLabel(r);
     const w = lab.length > 5 ? Math.max(44, lab.length * 4.6) : 34;
     const g = svg("g", { class: "room" });
-    g.append(svg("rect", { x: p.x - w / 2, y: p.y - 9, width: w, height: 18, rx: 4, class: `r-tile${r.flag ? " unsure" : ""}${isDest ? " dest" : ""}` }));
+    g.append(svg("rect", { x: p.x - w / 2, y: p.y - 9, width: w, height: 18, rx: 4, class: `r-tile${(r.flag || (roomCode(r) && roomCode(r).unsure)) ? " unsure" : ""}${isDest ? " dest" : ""}` }));
     const n = f.nodes.find((x) => x.id === r.node);
     const route = n && onLeg.has(`${n.x.toFixed(5)},${n.y.toFixed(5)}`);
-    labels.push({ text: lab, p, prio: isDest ? 0 : route ? 2 : 3 });
+    labels.push({ text: lab, p, prio: isDest ? 0 : route ? 2 : 3, unsure: !!(r.flag || (roomCode(r) && roomCode(r).unsure)) });
     g.append(svg("title", {}, roomName(r)));
     g.addEventListener("click", (e) => {
       if (EDIT) return;
@@ -424,7 +424,7 @@ function drawIndoor(floorId) {
   if (line) root.insertBefore(lab, line);
   else root.append(lab);
   root.append(svg("g", { id: "over" }));
-  S.ix = { floorId, wings, labels, stairs, start, startText: floorId === S.floors[0].id ? "You are here (entrance)" : "You are here", legStart: leg && !arrive ? t(leg.points[0].x, leg.points[0].y) : null, arrive, dest, destText: S.sel && S.sel.room ? shortLabel(S.sel.room) : "" };
+  S.ix = { floorId, wings, labels, stairs, start, startText: floorId === S.floors[0].id ? "You are here (entrance)" : "You are here", legStart: leg && !arrive ? t(leg.points[0].x, leg.points[0].y) : null, arrive, dest, destText: S.sel && S.sel.room ? roomDisplay(S.sel.room) : "" };
   queueLabels();
 }
 
@@ -523,7 +523,7 @@ function drawLabels() {
       const b = { x: q.x - w / 2, y: q.y - 8, w, h: 16 };
       if (!free(b)) continue;
       taken.push(b);
-      g.append(svg("text", { x: l.p.x, y: l.p.y, class: `r-lab${l.prio === 0 ? " dest" : ""}`, style: `font-size:${11 * u}px;stroke-width:${3 * u}px` }, l.text));
+      g.append(svg("text", { x: l.p.x, y: l.p.y, class: `r-lab${l.prio === 0 ? " dest" : ""}${l.unsure ? " unsure" : ""}`, style: `font-size:${11 * u}px;stroke-width:${3 * u}px` }, l.text));
     }
   }
   if (ix.start) {
@@ -550,7 +550,7 @@ function drawFloorTabs() {
     const b = el("button", { type: "button", "aria-pressed": String(f.id === S.floorId) }, floorShort(f));
     if (S.route) {
       const indoor = S.route.legs.filter((l) => l.floorId !== "outdoor");
-      const cap = indoor[0] && indoor[0].floorId === f.id ? "Start" : indoor.at(-1) && indoor.at(-1).floorId === f.id ? "Goal" : "";
+      const cap = indoor[0] && indoor[0].floorId === f.id ? "Start" : indoor.at(-1) && indoor.at(-1).floorId === f.id ? (S.sel && S.sel.room ? roomDisplay(S.sel.room) : "Goal") : "";
       if (cap) b.append(el("small", {}, cap));
     }
     b.addEventListener("click", () => showFloor(f.id));
@@ -720,8 +720,8 @@ async function selectRoom(room) {
   const f = S.floors.find((x) => x.id === room.floorId);
   openSheet({
     crumb: "PUP Main Building",
-    title: roomName(room).replace(/^Classroom (\d+) \((.*)\)$/, "Room $1"),
-    sub: `${floorShort(f)}${room.wing ? " · " + room.wing : ""} · PUP Main Building`,
+    title: roomDisplay(room),
+    sub: `${floorShort(f)}${room.wing ? " · " + room.wing : (roomCode(room) && roomCode(room).letter ? " · " + wingName(roomCode(room).letter) : "")} · PUP Main Building`,
     flag: room.flag ? "This label has a ? on the directory poster. Not confirmed." : "",
   });
   await enterBuilding(room.floorId);
@@ -792,7 +792,9 @@ async function goStep(i) {
 function searchAll(q) {
   const s = q.trim().toLowerCase();
   if (!s) return [];
-  const rooms = S.rooms.filter((r) => roomName(r).toLowerCase().includes(s)).map((r) => ({ type: "room", r }));
+  const parsed = parseRoomQuery(q);
+  const rooms = searchRooms(S.paths, q).map((r) => ({ type: "room", r, parsed }));
+  if (parsed) return rooms.slice(0, 40);
   const bs = S.campus.buildings.features.filter((f) => f.properties.name && buildingName(f).toLowerCase().includes(s)).map((b) => ({ type: "building", b }));
   if (!bs.some((x) => x.b.properties.main) && S.campus.wingLabels.features.some((w) => w.properties.name.toLowerCase().includes(s))) bs.unshift({ type: "building", b: mainFeatures()[0] });
   return [...rooms, ...bs].slice(0, 40);
@@ -806,19 +808,40 @@ function renderResults() {
     list.hidden = true;
     return;
   }
+  const parsed = parseRoomQuery(q);
   const hits = searchAll(q);
+  // Coded query with one hit: go straight to the room (skip the which-wing chooser).
+  if (parsed && parsed.letter && hits.length === 1 && hits[0].type === "room") {
+    const code = (roomCode(hits[0].r).code || "").replace(/\?$/, "");
+    const compact = q.trim().toLowerCase().replace(/\s+/g, "").replace(/\?$/, "");
+    const named = /^(north|south|east|west)\s+/i.test(q.trim());
+    if (named || compact === code.toLowerCase() || compact === (parsed.letter + parsed.number).toLowerCase()) {
+      pick(() => selectRoom(hits[0].r));
+      return;
+    }
+  }
   list.hidden = false;
   if (!hits.length) {
     list.append(el("li", { class: "empty" }, `"${q.trim()}" is not on the map yet.`));
     return;
+  }
+  if (parsed && parsed.bare && hits.length > 1) {
+    list.append(el("li", { class: "chooser" }, "Which wing?"));
   }
   for (const h of hits) {
     const b = el("button", { type: "button" });
     const box = el("span");
     if (h.type === "room") {
       const f = S.floors.find((x) => x.id === h.r.floorId);
-      b.append(el("span", { class: "ic" }, floorShort(f)));
-      box.append(el("b", {}, roomName(h.r)), el("small", {}, `PUP Main Building · ${floorShort(f)}${h.r.flag ? " · not confirmed" : ""}`));
+      const c = roomCode(h.r);
+      const title = c ? c.code : roomName(h.r);
+      const wing = h.r.wing || (c && c.letter ? wingName(c.letter) : "");
+      b.append(el("span", { class: `ic${c && c.unsure ? " unsure" : ""}` }, floorShort(f)));
+      if (parsed && parsed.bare && c) {
+        box.append(el("b", {}, title), el("small", {}, `${wing || "Wing ?"}${c.unsure ? " · not confirmed" : ""} · ${floorShort(f)}`));
+      } else {
+        box.append(el("b", {}, title), el("small", {}, `PUP Main Building · ${floorShort(f)}${wing ? " · " + wing : ""}${c && c.unsure ? " · not confirmed" : ""}`));
+      }
       b.addEventListener("click", () => pick(() => selectRoom(h.r)));
     } else {
       b.append(el("span", { class: "ic b" }, "B"));

@@ -14,6 +14,11 @@ export type RouteResult =
 export const NOT_ON_MAP: string;
 export function floorShort(floor: Floor | string): string;
 export function roomName(room: PathRoom): string;
+export function wingLetter(wing: string | undefined | null): string | null;
+export function wingName(letter: string): string | null;
+export function roomCode(room: PathRoom): { code: string; unsure: boolean; letter: string | null; number: string } | null;
+export function roomDisplay(room: PathRoom): string;
+export function parseRoomQuery(query: string): { letter: string | null; number: string; bare: boolean } | null;
 export function shortestPath(paths: Paths, floorId: string, from: string, to: string): { distance: number; ids: string[]; points: Point[] } | null;
 export function allRooms(paths: Paths): (PathRoom & { floorId: string })[];
 export function searchRooms(paths: Paths, query: string): (PathRoom & { floorId: string })[];
