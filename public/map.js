@@ -274,7 +274,9 @@ function initMap() {
         const f = e.features && e.features[0];
         if (!f) return;
         const full = S.campus.buildings.features.find((x) => x.properties.osm === f.properties.osm);
-        if (full) selectBuilding(full);
+        if (!full) return;
+        applyFrom(full.properties.osm);
+        selectBuilding(full);
       });
       map.on("mouseenter", "pup-3d", () => (map.getCanvas().style.cursor = "pointer"));
       map.on("mouseleave", "pup-3d", () => (map.getCanvas().style.cursor = ""));
@@ -873,18 +875,182 @@ function selectedFrom() {
   const sel = $("from");
   return sel && sel.value ? sel.value : GATE_START;
 }
+function strokeIcon(d) {
+  const s = svg("svg", { viewBox: "0 0 24 24", "aria-hidden": "true" });
+  s.append(svg("path", { d, fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }));
+  return s;
+}
+function searchIcon() {
+  const s = svg("svg", { viewBox: "0 0 24 24", "aria-hidden": "true" });
+  s.append(svg("circle", { cx: "11", cy: "11", r: "6.5", fill: "none", stroke: "currentColor", "stroke-width": "2" }));
+  s.append(svg("path", { d: "M16 16.5 20 20.5", fill: "none", stroke: "currentColor", "stroke-width": "2", "stroke-linecap": "round" }));
+  return s;
+}
+function mainOsm() {
+  const main = S.campus.buildings.features.find((f) => f.properties.main);
+  return main ? main.properties.osm : "";
+}
+function fromGroups() {
+  const mainId = mainOsm();
+  const gate = [];
+  const main = [];
+  const rest = [];
+  for (const s of campusStarts(S.campus)) {
+    if (s.id === GATE_START) gate.push(s);
+    else if (s.id === mainId) main.push(s);
+    else rest.push(s);
+  }
+  return { pinned: [...gate, ...main], rest };
+}
+function fromKind(id) {
+  if (id === GATE_START) return "gate";
+  if (id === mainOsm()) return "main";
+  return "building";
+}
+function applyFrom(id) {
+  const sel = $("from");
+  if (!sel) return false;
+  const opt = [...sel.options].find((o) => o.value === id);
+  if (!opt) return false;
+  const changed = sel.value !== id;
+  sel.value = id;
+  const cur = $("from-current");
+  if (cur) cur.textContent = opt.textContent;
+  return changed;
+}
+function setFrom(id) {
+  if (applyFrom(id) && S.sel && S.sel.room && S.route) directions();
+}
+function fromCard(s, on) {
+  const kind = fromKind(s.id);
+  const b = el("button", { type: "button", class: "from-card", "aria-pressed": on ? "true" : "false" });
+  const ic = el("span", { class: `from-ic ${kind}` });
+  const icon = kind === "gate"
+    ? "M6 21V9M18 21V9M6 9a6 6 0 0 1 12 0M12 21v-8"
+    : kind === "main"
+      ? "M4 21h16M6 21V9l6-5 6 5v12M10 21v-6h4v6"
+      : "M5 21V10l7-5 7 5v11M10 21v-6h4v6";
+  ic.append(strokeIcon(icon));
+  const check = el("span", { class: "from-check", "aria-hidden": "true" });
+  check.append(strokeIcon("M5 12.5 9.2 16.8 19 7"));
+  b.append(ic, el("span", { class: "from-name" }, s.label), check);
+  b.addEventListener("click", () => {
+    setFrom(s.id);
+    closeFrom();
+  });
+  return b;
+}
+function renderFromCards() {
+  const q = ($("from-q").value || "").trim().toLowerCase();
+  const { pinned, rest } = fromGroups();
+  const match = (s) => s.label.toLowerCase().includes(q);
+  const pins = pinned.filter(match);
+  const others = rest.filter(match);
+  const list = $("from-list");
+  list.replaceChildren();
+  if (!pins.length && !others.length) {
+    list.append(el("p", { class: "from-empty" }, "No buildings match."));
+    return;
+  }
+  const selected = $("from").value;
+  if (!q && pins.length) list.append(el("p", { class: "from-h" }, "Start here"));
+  for (const s of pins) list.append(fromCard(s, s.id === selected));
+  if (!q && pins.length && others.length) list.append(el("p", { class: "from-h" }, "Other buildings"));
+  for (const s of others) list.append(fromCard(s, s.id === selected));
+}
+let fromGen = 0;
+function openFrom() {
+  const layer = $("from-layer");
+  if (!layer || !layer.hidden) return;
+  const gen = ++fromGen;
+  $("from-q").value = "";
+  $("from-clear").hidden = true;
+  renderFromCards();
+  layer.hidden = false;
+  $("from-open").setAttribute("aria-expanded", "true");
+  const on = $("from-list").querySelector('[aria-pressed="true"]');
+  if (on) on.scrollIntoView({ block: "nearest" });
+  if (RM) layer.classList.add("open");
+  else requestAnimationFrame(() => requestAnimationFrame(() => {
+    if (gen === fromGen) layer.classList.add("open");
+  }));
+  $("from-q").focus();
+}
+function closeFrom() {
+  const layer = $("from-layer");
+  if (!layer || layer.hidden) return;
+  fromGen += 1;
+  $("from-open").setAttribute("aria-expanded", "false");
+  const finish = () => {
+    const back = layer.contains(document.activeElement);
+    layer.hidden = true;
+    layer.classList.remove("open");
+    if (back) $("from-open").focus();
+  };
+  if (RM) {
+    finish();
+    return;
+  }
+  layer.classList.remove("open");
+  const panel = $("from-panel");
+  let done = false;
+  const end = (e) => {
+    if (e && e.target !== panel) return;
+    if (done) return;
+    done = true;
+    panel.removeEventListener("transitionend", end);
+    finish();
+  };
+  panel.addEventListener("transitionend", end);
+  setTimeout(end, 400);
+}
 function mountFrom() {
-  const sel = el("select", { id: "from" });
-  sel.style.cssText = "flex:1;min-width:0;border:0;outline:0;background:transparent;color:inherit;font:inherit;font-size:17px;width:100%";
-  for (const s of campusStarts(S.campus)) sel.append(el("option", { value: s.id }, s.label));
+  const sel = el("select", { id: "from", hidden: "", tabindex: "-1" });
+  const starts = campusStarts(S.campus);
+  for (const s of starts) sel.append(el("option", { value: s.id }, s.label));
   sel.value = GATE_START;
-  const pill = el("label", { class: "pill from" });
-  pill.append(el("span", {}, "From"), sel);
+  const gate = starts.find((s) => s.id === GATE_START);
+  const trigger = el("button", { type: "button", id: "from-open", class: "from-trigger", "aria-haspopup": "dialog", "aria-expanded": "false", "aria-controls": "from-panel" });
+  const chev = el("span", { class: "from-chev", "aria-hidden": "true" });
+  chev.append(strokeIcon("M7 10l5 5 5-5"));
+  trigger.append(el("span", { class: "from-k" }, "From"), el("span", { class: "from-v", id: "from-current" }, gate ? gate.label : ""), chev);
+  const pill = el("div", { class: "pill from" });
+  pill.append(trigger, sel);
   const search = $("q").closest("label");
   search.classList.add("search");
   search.parentElement.insertBefore(pill, search);
-  sel.addEventListener("change", () => {
-    if (S.sel && S.sel.room && S.route) directions();
+
+  const layer = el("div", { id: "from-layer", class: "from-layer", hidden: "" });
+  const scrim = el("button", { type: "button", class: "from-scrim", "aria-label": "Close starting point" });
+  const panel = el("div", { id: "from-panel", class: "from-panel", role: "dialog", "aria-modal": "true", "aria-labelledby": "from-title" });
+  const head = el("div", { class: "from-head" });
+  const x = el("button", { type: "button", class: "from-x", "aria-label": "Close" }, "×");
+  head.append(el("h2", { id: "from-title" }, "Where are you starting?"), x);
+  const filter = el("div", { class: "from-search" });
+  const input = el("input", { id: "from-q", type: "search", placeholder: "Search buildings", autocomplete: "off", "aria-label": "Search buildings", enterkeyhint: "search" });
+  const clear = el("button", { type: "button", id: "from-clear", class: "from-clear", "aria-label": "Clear building search", hidden: "" }, "×");
+  filter.append(searchIcon(), input, clear);
+  panel.append(el("span", { class: "from-grab", "aria-hidden": "true" }), head, filter, el("div", { id: "from-list", class: "from-list", role: "group", "aria-label": "Starting points" }));
+  layer.append(scrim, panel);
+  document.body.append(layer);
+
+  trigger.addEventListener("click", openFrom);
+  scrim.addEventListener("click", closeFrom);
+  x.addEventListener("click", closeFrom);
+  input.addEventListener("input", () => {
+    clear.hidden = !input.value;
+    renderFromCards();
+  });
+  clear.addEventListener("click", () => {
+    input.value = "";
+    clear.hidden = true;
+    renderFromCards();
+    input.focus();
+  });
+  layer.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    e.preventDefault();
+    closeFrom();
   });
 }
 function directions() {
