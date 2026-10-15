@@ -114,10 +114,10 @@ export function ticketPositionAtStall(ticketId: string): number {
 
 export function pickStallForCourse(course: string): Stall | null {
   const candidates = Array.from(store.stalls.values()).filter((s) =>
-    s.id.startsWith(course)
+    s.id.startsWith(course + "-")
   );
   if (candidates.length === 0) return null;
   return candidates.reduce((best, s) =>
-    s.queueLength < best.queueLength ? s : best
+    stallQueueLength(s.id) < stallQueueLength(best.id) ? s : best
   );
 }
