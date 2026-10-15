@@ -8,6 +8,8 @@ Both days follow the same schedule: start about 10:45, 3:30 checkpoint, wrap-up 
 
 Room TBA tasks (find a room on the same phone) are in [plan-room-tba.md](plan-room-tba.md). The one-product story is in [product.md](product.md). If the map is not solid by 12:30 PM on Oct 16, remove the map link and the map files. The queue stays. Photos and labels are in [floorplans/](floorplans/).
 
+The run list for the night of Oct 15 and the morning of Oct 16 is [delegation.md](delegation.md). Where a clock or an RT owner differs, delegation.md wins.
+
 ---
 
 ## Owners

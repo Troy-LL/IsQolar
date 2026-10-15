@@ -14,24 +14,26 @@ Owners are the roles already listed in [plan.md](plan.md):
 
 Rule from the source plan: one task per branch, `npm run check` before the PR, CI `check` must pass. Do not edit [src/contract.ts](../src/contract.ts).
 
+Who runs each task tonight and tomorrow morning is in [delegation.md](delegation.md). Three owners differ from the role table above, so the queue files and the map files are not on the same person: RT1 is Viv, RT2 is Troy, RT6 is Ayen. The table below matches that list.
+
 ## Tasks
 
 | ID | Owner | Task | Needs | Band | Done when |
 |---|---|---|---|---|---|
-| RT1 | Donita | Clean the tonight floor images | none | Tonight | `public/maps/` has a cleaned image for the Main ground lobby from `IBM_7739`, a straightened and cropped Main 4F image from `IBM_7741`, and a Main 5F image from `IBM_7742`. |
-| RT2 | Justin | Write the floors file | RT1 | Tonight | `data/floors.json` lists those three floors with `id`, `building`, `floor`, `label`, `image`, and `approximate`. The lobby row has `approximate: true`. Image fields point at the RT1 files. |
-| RT3 | Viv | Add the map page | RT1, RT2 | Tonight | `public/map.html` and `public/map.js` have a floor switcher, the floor image with an SVG pin overlay, a search box that finds a row by its label, a detail card, and deep links `map.html?loc=<id>` and `map.html?floor=<id>`. Usable at 360 px. |
-| RT4 | Viv | Log pin clicks | RT3 | Tonight | `map.html?edit=1` logs a clicked `x,y` on a 0 to 1 scale to the console. There is no editor UI. |
-| RT5 | Justin | Pin transcribed labels for floors 1 to 3 | RT2, RT4 | Tonight | `data/locations.json` has one row per [rooms.json](floorplans/rooms.json) label on Main 1F (`IBM_7739`, 27 labels), Main 4F (`IBM_7741`, 39), and Main 5F (`IBM_7742`, 76). Each row has `id`, `floorId`, `label`, `kind`, `x`, `y`, `aliases` as an empty array, `source`, and `verified`. `x` and `y` are inside 0..1 and come from edit clicks. Labels that contain `?` stay unverified. |
-| RT6 | Justin | Add an empty station link file | none | Tonight | `data/station-locations.json` exists and maps no station or stall id. |
-| RT7 | Troy | Check map data in `npm run check` | RT2, RT5 | Tonight | `npm run check` fails on a duplicate id, an unknown `floorId`, an `x` or `y` outside 0..1, an unknown `kind`, or a missing image file. It prints the count of `verified: false` rows and the count of labels that contain `?`. |
-| RT8 | Ayen | Link Find your classes | RT3 | Tonight | On the fully enrolled phone screen, a link reads "Find your classes" and opens `map.html`. The queue pages still run if that link is removed. |
+| RT1 | Viv | Clean the tonight floor images | none | Tonight | `public/maps/` has a cleaned image for the Main ground lobby from `IBM_7739`, a straightened and cropped Main 4F image from `IBM_7741`, and a Main 5F image from `IBM_7742`. |
+| RT2 | Troy | Write the floors file | RT1 | Tonight | `data/floors.json` lists those three floors with `id`, `building`, `floor`, `label`, `image`, and `approximate`. The lobby row has `approximate: true`. Image fields point at the RT1 files. |
+| RT3 | Viv | Add the map page | RT1, RT2 | Tomorrow AM | `public/map.html` and `public/map.js` have a floor switcher, the floor image with an SVG pin overlay, a search box that finds a row by its label, a detail card, and deep links `map.html?loc=<id>` and `map.html?floor=<id>`. Usable at 360 px. |
+| RT4 | Viv | Log pin clicks | RT3 | Tomorrow AM | `map.html?edit=1` logs a clicked `x,y` on a 0 to 1 scale to the console. There is no editor UI. |
+| RT5 | Justin | Pin transcribed labels for floors 1 to 3 | RT2, RT4 | Tomorrow AM | `data/locations.json` has one row per [rooms.json](floorplans/rooms.json) label on Main 1F (`IBM_7739`, 27 labels), Main 4F (`IBM_7741`, 39), and Main 5F (`IBM_7742`, 76). Each row has `id`, `floorId`, `label`, `kind`, `x`, `y`, `aliases` as an empty array, `source`, and `verified`. `x` and `y` are inside 0..1 and come from edit clicks. Labels that contain `?` stay unverified. |
+| RT6 | Ayen | Add an empty station link file | none | Tonight | `data/station-locations.json` exists and maps no station or stall id. |
+| RT7 | Troy | Check map data in `npm run check` | RT2, RT5 | Tomorrow AM | `npm run check` fails on a duplicate id, an unknown `floorId`, an `x` or `y` outside 0..1, an unknown `kind`, or a missing image file. It prints the count of `verified: false` rows and the count of labels that contain `?`. |
+| RT8 | Ayen | Link Find your classes | RT3 | Tomorrow AM | On the fully enrolled phone screen, a link reads "Find your classes" and opens `map.html`. The queue pages still run if that link is removed. |
 | RT9 | Donita | Gym pins and station links | RT3, RT6 | Held | Gym pins stay absent, and `data/station-locations.json` stays empty, until the team supplies the gym table layout. After that, pins from `IBM_7734` go in, and the file maps station and stall ids to those location ids. "Show on map" appears for the current station only where a link exists. |
 | RT10 | Ayen | Alias text | RT5 | Held | Every `aliases` array stays empty until the team supplies at least five real other names. Only those supplied names are added. Search may use an alias only after it is on the row. |
 | RT11 | Troy | Library 2F | none | Held | `IBM_7721` stays out of `data/floors.json` and `public/maps/` until the team confirms that image is the library. If it is confirmed, use the `rooms.json` labels for that image and no others. The building and floor in that file are marked `?`. |
 | RT12 | Troy | 12:30 cut | RT8 | Cut | At 12:30 PM on Oct 16, either RT1 through RT8 are merged and a search on a tonight floor lands on a pin, or the map link and the map files are removed and the queue is unchanged. |
 
-Tonight means floors 1 to 3 only: Main lobby (`IBM_7739`), Main 4F (`IBM_7741`), Main 5F (`IBM_7742`), pins for labels already transcribed. Library 3F and the campus overview are not tonight work. `IBM_7740` and `IBM_7726` are extras and are not in `rooms.json`.
+"Tonight" in the done-when text means floors 1 to 3 only: Main lobby (`IBM_7739`), Main 4F (`IBM_7741`), Main 5F (`IBM_7742`), pins for labels already transcribed. Library 3F and the campus overview are not tonight work. `IBM_7740` and `IBM_7726` are extras and are not in `rooms.json`.
 
 The two-day schedule in [plan.md](plan.md) still places submission tasks S1 to S5 in the 3:30 to 5:00 band on Oct 16. The map cut is earlier: 12:30 PM.
 
@@ -39,12 +41,12 @@ The two-day schedule in [plan.md](plan.md) still places submission tasks S1 to S
 
 ```mermaid
 flowchart TD
-  RT1["RT1 Donita: clean images"]
-  RT2["RT2 Justin: floors file"]
+  RT1["RT1 Viv: clean images"]
+  RT2["RT2 Troy: floors file"]
   RT3["RT3 Viv: map page"]
   RT4["RT4 Viv: edit=1 clicks"]
   RT5["RT5 Justin: pin labels"]
-  RT6["RT6 Justin: empty station file"]
+  RT6["RT6 Ayen: empty station file"]
   RT7["RT7 Troy: validator"]
   RT8["RT8 Ayen: Find your classes"]
   RT9["RT9 Donita: gym pins"]
@@ -71,7 +73,7 @@ RT6 and RT11 have no upstream task. RT11 waits on a confirmation, not on code.
 
 ## Held, tonight, and cut
 
-**Tonight (RT1 to RT8).** Clean images, floors file, map page, click logging, pins for transcribed labels on floors 1 to 3, an empty station file, the validator, and the Find your classes link.
+**Before the 12:30 cut (RT1 to RT8).** Clean images, the floors file, and the empty station file tonight. The map page, click logging, pins, the validator, and the Find your classes link start tomorrow morning, after the PR they need is merged.
 
 **Held.**
 
@@ -85,22 +87,22 @@ RT6 and RT11 have no upstream task. RT11 waits on a confirmation, not on code.
 
 Paste one prompt per task. Fill nothing in. The paths below match this repo.
 
-### RT1 Donita
+### RT1 Viv
 
 ```
 Read docs/plan-room-tba.md task RT1, docs/floorplans/ROOM-TBA-PLAN.md, and docs/map-data-guide.md.
-Branch from fresh main: donita/rt1-clean-floors.
+Branch from fresh main: viv/rt1-clean-floors.
 Copy and clean only these three sources from docs/floorplans/ into public/maps/: IBM_7739.JPG (Main ground lobby stand-in), IBM_7741.JPG (straighten and crop), IBM_7742.JPG (already a good straight-on plan).
 Do not add IBM_7721, IBM_7734, IBM_7740, IBM_7726, the glare skips, or library-3F.png.
 Do not edit src/contract.ts. Do not invent rooms or coordinates.
 When the images are in public/maps/, run npm run check, open a PR.
 ```
 
-### RT2 Justin
+### RT2 Troy
 
 ```
 Read docs/plan-room-tba.md task RT2 and docs/map-data-guide.md.
-Branch from fresh main: justin/rt2-floors-json.
+Branch from fresh main: troy/rt2-floors-json.
 Add data/floors.json with the three tonight floors only. Fields: id, building, floor, label, image, approximate.
 The IBM_7739 lobby row has approximate true. Image fields point at the RT1 files in public/maps/.
 Copy building and floor text from docs/floorplans/rooms.json. Do not invent a floor.
@@ -143,11 +145,11 @@ Do not add aliases. Do not edit src/contract.ts. Do not add a label that is not 
 When done, run npm run check, open a PR.
 ```
 
-### RT6 Justin
+### RT6 Ayen
 
 ```
 Read docs/plan-room-tba.md task RT6 and docs/floorplans/ROOM-TBA-PLAN.md.
-Branch from fresh main: justin/rt6-station-locations.
+Branch from fresh main: ayen/rt6-station-locations.
 Add data/station-locations.json as an empty mapping from station or stall id to location id. No gym rows.
 Do not edit src/contract.ts. Do not invent a table layout.
 When done, run npm run check, open a PR.
