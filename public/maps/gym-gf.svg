@@ -130,8 +130,8 @@
         <tspan x="330" dy="16">Dressing Room</tspan>
       </text>
       <text x="180" y="1530" font-size="12" dominant-baseline="central">
-        <tspan x="180" dy="-8">Fire Pump</tspan>
-        <tspan x="180" dy="16">Room?</tspan>
+        <tspan x="180" dy="-8">EE Pump</tspan>
+        <tspan x="180" dy="16">Room</tspan>
       </text>
       <text x="655" y="1400" font-size="16" dominant-baseline="central">Stage</text>
       <text x="655" y="1540" font-size="12" dominant-baseline="central">Back Stage</text>
