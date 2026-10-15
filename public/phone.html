@@ -4,9 +4,99 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Ticket — IsQolar</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      padding: 16px;
+      color: #1F1A1A;
+      background: #fff;
+    }
+
+    .ticket__code,
+    .ticket__course {
+      margin: 0;
+    }
+
+    .ticket__code:empty,
+    .ticket__course:empty {
+      display: none;
+    }
+
+    .ticket__code {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .ticket__course {
+      margin-top: 8px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    @media print {
+      body {
+        background: #fff;
+        margin: 0;
+        padding: 0;
+      }
+
+      body * {
+        visibility: hidden;
+      }
+
+      .ticket__code,
+      .ticket__course {
+        visibility: visible;
+        position: fixed;
+        left: 0;
+        width: 72mm;
+        margin: 0;
+        color: #000;
+        background: transparent;
+      }
+
+      .ticket__code {
+        top: 0;
+        font-size: 48pt;
+        font-weight: 700;
+        line-height: 1;
+      }
+
+      .ticket__course {
+        top: 56pt;
+        font-size: 14pt;
+        font-weight: 600;
+      }
+    }
+  </style>
 </head>
 <body>
-  <main id="app"></main>
+  <main id="app">
+    <p class="ticket__code" id="ticket-code"></p>
+    <p class="ticket__course" id="ticket-course"></p>
+  </main>
   <script src="/poll.js"></script>
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var id = params.get("id");
+      if (!id) return;
+
+      var codeEl = document.getElementById("ticket-code");
+      var courseEl = document.getElementById("ticket-course");
+
+      IsQolar.poll("/api/tickets/" + encodeURIComponent(id), function (ticket) {
+        if (!ticket || typeof ticket.code !== "string") {
+          codeEl.textContent = "";
+          courseEl.textContent = "";
+          return;
+        }
+        codeEl.textContent = ticket.code;
+        courseEl.textContent = typeof ticket.course === "string" ? ticket.course : "";
+      });
+    })();
+  </script>
 </body>
 </html>

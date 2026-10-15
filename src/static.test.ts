@@ -39,6 +39,21 @@ describe("static pages", () => {
     assert.equal(res.status, 200);
   });
 
+  it("GET /phone.html print CSS shows the ticket code and course", async () => {
+    const res = await fetch(`${url}/phone.html`);
+    const html = await res.text();
+    const printCss = html.slice(html.indexOf("@media print"));
+    assert.match(printCss, /@media print/);
+    assert.match(printCss, /ticket__code/);
+    assert.match(printCss, /ticket__course/);
+    assert.match(printCss, /visibility:\s*hidden/);
+  });
+
+  it("GET /ticket.html is not served", async () => {
+    const res = await fetch(`${url}/ticket.html`);
+    assert.equal(res.status, 404);
+  });
+
   it("GET /board.html returns 200", async () => {
     const res = await fetch(`${url}/board.html`);
     assert.equal(res.status, 200);
