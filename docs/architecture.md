@@ -74,9 +74,15 @@ See [docs/decisions/002-polling-over-websockets.md](decisions/002-polling-over-w
 
 ## State
 
-All state lives in memory on the server process.
-Restarting the server or running `npm run seed` resets it.
-There is no database and no file persistence.
+State lives in memory on the server process.
+
+On the hub, `npm run hub` sets `HUB_FILE=hub-state.json`.
+The store saves the whole state to `hub-state.json` after every change and reloads it on start.
+When the file loads successfully, the hub skips the startup seed so tickets survive a restart.
+To start fresh, stop the hub and delete `hub-state.json`, or run `npm run seed` while the hub is running (the seed resets state and the reset is saved back to the file).
+
+Render runs without `HUB_FILE`, so it keeps state in memory only and resets on every restart or redeploy.
+See [docs/decisions/005-online-on-render.md](decisions/005-online-on-render.md) (ADR 005).
 
 ---
 
