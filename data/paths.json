@@ -6,470 +6,512 @@
       "start": "start",
       "nodes": [
         {
-          "id": "main-1f-lobby-admission-and-registration-office-w2",
-          "x": 0.3557,
-          "y": 0.4169,
-          "kind": "room"
-        },
-        {
-          "id": "main-1f-lobby-office-for-scholarship-and-financial-assistance-w4",
-          "x": 0.3056,
-          "y": 0.3165,
-          "kind": "room"
-        },
-        {
-          "id": "main-1f-lobby-accounting-office-s7",
-          "x": 0.174,
-          "y": 0.5137,
-          "kind": "room"
-        },
-        {
-          "id": "main-1f-lobby-accounting-division-students-services-section-s8",
-          "x": 0.174,
-          "y": 0.6242,
-          "kind": "room"
-        },
-        {
-          "id": "main-1f-lobby-payroll-section-s9",
-          "x": 0.174,
-          "y": 0.7346,
-          "kind": "room"
-        },
-        {
-          "id": "main-1f-lobby-office-of-the-university-registrar-s1",
-          "x": 0.156,
-          "y": 0.3067,
-          "kind": "room"
-        },
-        {
-          "id": "main-1f-lobby-students-records-office-s2",
-          "x": 0.156,
-          "y": 0.4447,
-          "kind": "room"
-        },
-        {
-          "id": "main-1f-lobby-human-resource-management-division-s3",
-          "x": 0.156,
-          "y": 0.5827,
-          "kind": "room"
-        },
-        {
-          "id": "main-1f-lobby-budget-services-s4",
-          "x": 0.156,
-          "y": 0.7208,
-          "kind": "room"
-        },
-        {
-          "id": "main-1f-lobby-property-extension-office-s5",
-          "x": 0.174,
-          "y": 0.2929,
-          "kind": "room"
-        },
-        {
-          "id": "main-1f-lobby-cashier-s6",
-          "x": 0.174,
-          "y": 0.4033,
-          "kind": "room"
-        },
-        {
-          "id": "main-1f-lobby-procurement-office-n1",
-          "x": 0.5047,
-          "y": 0.4632,
-          "kind": "room"
-        },
-        {
-          "id": "main-1f-lobby-central-records-office-n2",
-          "x": 0.6358,
-          "y": 0.4703,
-          "kind": "room"
-        },
-        {
-          "id": "main-1f-lobby-commission-on-audit-office-n3",
-          "x": 0.4816,
-          "y": 0.5153,
-          "kind": "room"
-        },
-        {
-          "id": "main-1f-lobby-campus-ministry-office-n4",
-          "x": 0.5691,
-          "y": 0.52,
-          "kind": "room"
-        },
-        {
-          "id": "main-1f-lobby-security-office-n5",
-          "x": 0.6559,
-          "y": 0.5248,
-          "kind": "room"
-        },
-        {
-          "id": "main-1f-lobby-free-pup-office-e1",
-          "x": 0.393,
-          "y": 0.5641,
-          "kind": "room"
-        },
-        {
-          "id": "main-1f-lobby-hrd-records-office-e2",
-          "x": 0.3642,
-          "y": 0.622,
-          "kind": "room"
-        },
-        {
-          "id": "main-1f-lobby-department-of-military-science-and-tactics-office-e3",
-          "x": 0.3353,
-          "y": 0.68,
-          "kind": "room"
-        },
-        {
-          "id": "main-1f-lobby-corps-of-cadets-headquarters-e4",
-          "x": 0.3065,
-          "y": 0.7379,
-          "kind": "room"
-        },
-        {
-          "id": "main-1f-lobby-medical-clinic-services-e5",
-          "x": 0.3387,
-          "y": 0.4975,
-          "kind": "room"
-        },
-        {
-          "id": "main-1f-lobby-dental-clinic-services-e6",
-          "x": 0.3374,
-          "y": 0.5892,
-          "kind": "room"
-        },
-        {
-          "id": "main-1f-lobby-office-of-the-director-medical-health-services-e7",
-          "x": 0.3085,
-          "y": 0.6471,
-          "kind": "room"
-        },
-        {
-          "id": "main-1f-lobby-office-of-the-director-public-affairs-office-e8",
-          "x": 0.2797,
-          "y": 0.7051,
-          "kind": "room"
-        },
-        {
-          "id": "main-1f-lobby-university-consumers-cooperative-dome",
-          "x": 0.411,
-          "y": 0.4847,
-          "kind": "room"
-        },
-        {
-          "id": "stair-west-end",
-          "x": 0.2986,
-          "y": 0.2591,
-          "kind": "stairs"
-        },
-        {
-          "id": "stair-west-dome",
-          "x": 0.3956,
-          "y": 0.4538,
-          "kind": "stairs"
-        },
-        {
-          "id": "stair-south-north",
-          "x": 0.165,
-          "y": 0.2471,
-          "kind": "stairs"
-        },
-        {
-          "id": "stair-south-mid",
-          "x": 0.165,
-          "y": 0.5137,
-          "kind": "stairs"
-        },
-        {
-          "id": "stair-south-south",
-          "x": 0.165,
-          "y": 0.7804,
-          "kind": "stairs"
-        },
-        {
-          "id": "stair-north-end",
-          "x": 0.6933,
-          "y": 0.5002,
-          "kind": "stairs"
-        },
-        {
-          "id": "stair-north-dome",
-          "x": 0.4385,
-          "y": 0.4862,
-          "kind": "stairs"
-        },
-        {
-          "id": "stair-east-dome",
-          "x": 0.3956,
-          "y": 0.5156,
-          "kind": "stairs"
-        },
-        {
-          "id": "stair-east-end",
-          "x": 0.2833,
-          "y": 0.7412,
-          "kind": "stairs"
-        },
-        {
           "id": "c-dome",
           "x": 0.411,
-          "y": 0.4847,
+          "y": 0.48471,
           "kind": "corridor"
         },
         {
-          "id": "c-W-0",
-          "x": 0.4066,
-          "y": 0.4778,
+          "id": "c-E-1",
+          "x": 0.39411,
+          "y": 0.51862,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-E-2",
+          "x": 0.38791,
+          "y": 0.53106,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-E-3",
+          "x": 0.35518,
+          "y": 0.59678,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-E-4",
+          "x": 0.33727,
+          "y": 0.63274,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-E-5",
+          "x": 0.31935,
+          "y": 0.66871,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-E-6",
+          "x": 0.30144,
+          "y": 0.70466,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-E-7",
+          "x": 0.2971,
+          "y": 0.71338,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-E-8",
+          "x": 0.29125,
+          "y": 0.72513,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-N-1",
+          "x": 0.44598,
+          "y": 0.48663,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-N-2",
+          "x": 0.48345,
+          "y": 0.48868,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-N-3",
+          "x": 0.5052,
+          "y": 0.48987,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-N-4",
+          "x": 0.5704,
+          "y": 0.49344,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-N-5",
+          "x": 0.63562,
+          "y": 0.49701,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-N-6",
+          "x": 0.65735,
+          "y": 0.4982,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-N-7",
+          "x": 0.69333,
+          "y": 0.50017,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-N-8",
+          "x": 0.70282,
+          "y": 0.50069,
           "kind": "corridor"
         },
         {
           "id": "c-W-1",
-          "x": 0.4022,
-          "y": 0.4708,
+          "x": 0.38791,
+          "y": 0.43835,
           "kind": "corridor"
         },
         {
           "id": "c-W-2",
-          "x": 0.3977,
-          "y": 0.4639,
+          "x": 0.3466,
+          "y": 0.35542,
           "kind": "corridor"
         },
         {
           "id": "c-W-3",
-          "x": 0.3933,
-          "y": 0.457,
+          "x": 0.31155,
+          "y": 0.28505,
           "kind": "corridor"
         },
         {
           "id": "c-W-4",
-          "x": 0.4012,
-          "y": 0.3928,
+          "x": 0.29864,
+          "y": 0.25912,
           "kind": "corridor"
         },
         {
           "id": "c-W-5",
-          "x": 0.4092,
-          "y": 0.3285,
+          "x": 0.29279,
+          "y": 0.24738,
           "kind": "corridor"
         },
         {
-          "id": "c-W-6",
-          "x": 0.4171,
-          "y": 0.2642,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-W-7",
-          "x": 0.425,
-          "y": 0.2,
+          "id": "c-D-1",
+          "x": 0.165,
+          "y": 0.48471,
           "kind": "corridor"
         },
         {
           "id": "c-S-0",
-          "x": 0.3495,
-          "y": 0.4959,
+          "x": 0.165,
+          "y": 0.22667,
           "kind": "corridor"
         },
         {
           "id": "c-S-1",
-          "x": 0.288,
-          "y": 0.5071,
+          "x": 0.165,
+          "y": 0.24706,
           "kind": "corridor"
         },
         {
           "id": "c-S-2",
-          "x": 0.2265,
-          "y": 0.5182,
+          "x": 0.165,
+          "y": 0.28784,
           "kind": "corridor"
         },
         {
           "id": "c-S-3",
           "x": 0.165,
-          "y": 0.5294,
+          "y": 0.30196,
           "kind": "corridor"
         },
         {
           "id": "c-S-4",
           "x": 0.165,
-          "y": 0.45,
+          "y": 0.40078,
           "kind": "corridor"
         },
         {
           "id": "c-S-5",
           "x": 0.165,
-          "y": 0.3706,
+          "y": 0.44314,
           "kind": "corridor"
         },
         {
           "id": "c-S-6",
           "x": 0.165,
-          "y": 0.2912,
+          "y": 0.45882,
           "kind": "corridor"
         },
         {
           "id": "c-S-7",
           "x": 0.165,
-          "y": 0.2118,
+          "y": 0.48471,
           "kind": "corridor"
         },
         {
           "id": "c-S-8",
           "x": 0.165,
-          "y": 0.3706,
+          "y": 0.53882,
           "kind": "corridor"
         },
         {
           "id": "c-S-9",
           "x": 0.165,
-          "y": 0.5294,
+          "y": 0.58431,
           "kind": "corridor"
         },
         {
           "id": "c-S-10",
           "x": 0.165,
-          "y": 0.6883,
+          "y": 0.62667,
           "kind": "corridor"
         },
         {
           "id": "c-S-11",
           "x": 0.165,
-          "y": 0.8471,
+          "y": 0.72549,
           "kind": "corridor"
         },
         {
-          "id": "c-N-0",
-          "x": 0.4178,
-          "y": 0.4855,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-1",
-          "x": 0.4247,
-          "y": 0.4862,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-2",
-          "x": 0.4315,
-          "y": 0.4869,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-3",
-          "x": 0.4384,
-          "y": 0.4877,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-4",
-          "x": 0.507,
-          "y": 0.4952,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-5",
-          "x": 0.5756,
-          "y": 0.5028,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-6",
-          "x": 0.6442,
-          "y": 0.5103,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-7",
-          "x": 0.7128,
-          "y": 0.5178,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-8",
-          "x": 0.5758,
-          "y": 0.4413,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-9",
-          "x": 0.4389,
-          "y": 0.3648,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-10",
-          "x": 0.302,
-          "y": 0.2883,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-11",
+          "id": "c-S-12",
           "x": 0.165,
-          "y": 0.2118,
+          "y": 0.73961,
           "kind": "corridor"
         },
         {
-          "id": "c-E-0",
-          "x": 0.407,
-          "y": 0.4922,
+          "id": "c-S-13",
+          "x": 0.165,
+          "y": 0.78039,
           "kind": "corridor"
         },
         {
-          "id": "c-E-1",
-          "x": 0.4029,
-          "y": 0.4997,
+          "id": "c-S-14",
+          "x": 0.165,
+          "y": 0.80078,
           "kind": "corridor"
         },
         {
-          "id": "c-E-2",
-          "x": 0.3989,
-          "y": 0.5072,
-          "kind": "corridor"
+          "id": "stair-east-dome",
+          "x": 0.38791,
+          "y": 0.53106,
+          "kind": "stairs"
         },
         {
-          "id": "c-E-3",
-          "x": 0.3949,
-          "y": 0.5147,
-          "kind": "corridor"
+          "id": "stair-east-end",
+          "x": 0.2971,
+          "y": 0.71338,
+          "kind": "stairs"
         },
         {
-          "id": "c-E-4",
-          "x": 0.3616,
-          "y": 0.5771,
-          "kind": "corridor"
+          "id": "stair-north-dome",
+          "x": 0.44598,
+          "y": 0.48662,
+          "kind": "stairs"
         },
         {
-          "id": "c-E-5",
-          "x": 0.3282,
-          "y": 0.6394,
-          "kind": "corridor"
+          "id": "stair-north-end",
+          "x": 0.69333,
+          "y": 0.50017,
+          "kind": "stairs"
         },
         {
-          "id": "c-E-6",
-          "x": 0.2949,
-          "y": 0.7017,
-          "kind": "corridor"
+          "id": "stair-west-dome",
+          "x": 0.38791,
+          "y": 0.43835,
+          "kind": "stairs"
         },
         {
-          "id": "c-E-7",
-          "x": 0.2616,
-          "y": 0.7641,
-          "kind": "corridor"
+          "id": "stair-west-end",
+          "x": 0.29864,
+          "y": 0.25912,
+          "kind": "stairs"
+        },
+        {
+          "id": "stair-south-north",
+          "x": 0.165,
+          "y": 0.24706,
+          "kind": "stairs"
+        },
+        {
+          "id": "stair-south-mid",
+          "x": 0.165,
+          "y": 0.45882,
+          "kind": "stairs"
+        },
+        {
+          "id": "stair-south-south",
+          "x": 0.165,
+          "y": 0.78039,
+          "kind": "stairs"
         },
         {
           "id": "start",
-          "x": 0.3949,
-          "y": 0.4947,
+          "x": 0.38721,
+          "y": 0.51016,
           "kind": "start",
           "label": "You Are Here"
+        },
+        {
+          "id": "main-1f-lobby-admission-and-registration-office-w2",
+          "x": 0.33321,
+          "y": 0.37184,
+          "kind": "room"
+        },
+        {
+          "id": "main-1f-lobby-office-for-scholarship-and-financial-assistance-w4",
+          "x": 0.29816,
+          "y": 0.30146,
+          "kind": "room"
+        },
+        {
+          "id": "main-1f-lobby-accounting-office-s7",
+          "x": 0.174,
+          "y": 0.53882,
+          "kind": "room"
+        },
+        {
+          "id": "main-1f-lobby-accounting-division-students-services-section-s8",
+          "x": 0.174,
+          "y": 0.62667,
+          "kind": "room"
+        },
+        {
+          "id": "main-1f-lobby-payroll-section-s9",
+          "x": 0.174,
+          "y": 0.73961,
+          "kind": "room"
+        },
+        {
+          "id": "main-1f-lobby-office-of-the-university-registrar-s1",
+          "x": 0.156,
+          "y": 0.30196,
+          "kind": "room"
+        },
+        {
+          "id": "main-1f-lobby-students-records-office-s2",
+          "x": 0.156,
+          "y": 0.44314,
+          "kind": "room"
+        },
+        {
+          "id": "main-1f-lobby-human-resource-management-division-s3",
+          "x": 0.156,
+          "y": 0.58431,
+          "kind": "room"
+        },
+        {
+          "id": "main-1f-lobby-budget-services-s4",
+          "x": 0.156,
+          "y": 0.72549,
+          "kind": "room"
+        },
+        {
+          "id": "main-1f-lobby-property-extension-office-s5",
+          "x": 0.174,
+          "y": 0.28784,
+          "kind": "room"
+        },
+        {
+          "id": "main-1f-lobby-cashier-s6",
+          "x": 0.174,
+          "y": 0.40078,
+          "kind": "room"
+        },
+        {
+          "id": "main-1f-lobby-procurement-office-n1",
+          "x": 0.50579,
+          "y": 0.46322,
+          "kind": "room"
+        },
+        {
+          "id": "main-1f-lobby-central-records-office-n2",
+          "x": 0.63621,
+          "y": 0.47036,
+          "kind": "room"
+        },
+        {
+          "id": "main-1f-lobby-commission-on-audit-office-n3",
+          "x": 0.48286,
+          "y": 0.51533,
+          "kind": "room"
+        },
+        {
+          "id": "main-1f-lobby-campus-ministry-office-n4",
+          "x": 0.56981,
+          "y": 0.52009,
+          "kind": "room"
+        },
+        {
+          "id": "main-1f-lobby-security-office-n5",
+          "x": 0.65676,
+          "y": 0.52485,
+          "kind": "room"
+        },
+        {
+          "id": "main-1f-lobby-free-pup-office-e1",
+          "x": 0.36858,
+          "y": 0.6132,
+          "kind": "room"
+        },
+        {
+          "id": "main-1f-lobby-hrd-records-office-e2",
+          "x": 0.35066,
+          "y": 0.64916,
+          "kind": "room"
+        },
+        {
+          "id": "main-1f-lobby-department-of-military-science-and-tactics-office-e3",
+          "x": 0.33275,
+          "y": 0.68513,
+          "kind": "room"
+        },
+        {
+          "id": "main-1f-lobby-corps-of-cadets-headquarters-e4",
+          "x": 0.31484,
+          "y": 0.72109,
+          "kind": "room"
+        },
+        {
+          "id": "main-1f-lobby-medical-clinic-services-e5",
+          "x": 0.34178,
+          "y": 0.58036,
+          "kind": "room"
+        },
+        {
+          "id": "main-1f-lobby-dental-clinic-services-e6",
+          "x": 0.32387,
+          "y": 0.61633,
+          "kind": "room"
+        },
+        {
+          "id": "main-1f-lobby-office-of-the-director-medical-health-services-e7",
+          "x": 0.30596,
+          "y": 0.65229,
+          "kind": "room"
+        },
+        {
+          "id": "main-1f-lobby-office-of-the-director-public-affairs-office-e8",
+          "x": 0.28805,
+          "y": 0.68825,
+          "kind": "room"
+        },
+        {
+          "id": "main-1f-lobby-university-consumers-cooperative-dome",
+          "x": 0.411,
+          "y": 0.48471,
+          "kind": "room"
         }
       ],
       "edges": [
         [
           "c-dome",
-          "c-W-0"
+          "c-E-1"
         ],
         [
-          "c-W-0",
+          "c-E-1",
+          "c-E-2"
+        ],
+        [
+          "c-E-2",
+          "c-E-3"
+        ],
+        [
+          "c-E-3",
+          "c-E-4"
+        ],
+        [
+          "c-E-4",
+          "c-E-5"
+        ],
+        [
+          "c-E-5",
+          "c-E-6"
+        ],
+        [
+          "c-E-6",
+          "c-E-7"
+        ],
+        [
+          "c-E-7",
+          "c-E-8"
+        ],
+        [
+          "c-dome",
+          "c-N-1"
+        ],
+        [
+          "c-N-1",
+          "c-N-2"
+        ],
+        [
+          "c-N-2",
+          "c-N-3"
+        ],
+        [
+          "c-N-3",
+          "c-N-4"
+        ],
+        [
+          "c-N-4",
+          "c-N-5"
+        ],
+        [
+          "c-N-5",
+          "c-N-6"
+        ],
+        [
+          "c-N-6",
+          "c-N-7"
+        ],
+        [
+          "c-N-7",
+          "c-N-8"
+        ],
+        [
+          "c-dome",
           "c-W-1"
         ],
         [
@@ -489,32 +531,8 @@
           "c-W-5"
         ],
         [
-          "c-W-5",
-          "c-W-6"
-        ],
-        [
-          "c-W-6",
-          "c-W-7"
-        ],
-        [
-          "stair-west-end",
-          "c-W-7"
-        ],
-        [
-          "stair-west-dome",
-          "c-W-3"
-        ],
-        [
-          "main-1f-lobby-admission-and-registration-office-w2",
-          "c-W-3"
-        ],
-        [
-          "main-1f-lobby-office-for-scholarship-and-financial-assistance-w4",
-          "c-W-5"
-        ],
-        [
           "c-dome",
-          "c-S-0"
+          "c-D-1"
         ],
         [
           "c-S-0",
@@ -561,20 +579,72 @@
           "c-S-11"
         ],
         [
-          "stair-south-north",
+          "c-S-11",
+          "c-S-12"
+        ],
+        [
+          "c-S-12",
+          "c-S-13"
+        ],
+        [
+          "c-S-13",
+          "c-S-14"
+        ],
+        [
+          "c-D-1",
           "c-S-7"
         ],
         [
+          "stair-east-dome",
+          "c-E-2"
+        ],
+        [
+          "stair-east-end",
+          "c-E-7"
+        ],
+        [
+          "stair-north-dome",
+          "c-N-1"
+        ],
+        [
+          "stair-north-end",
+          "c-N-7"
+        ],
+        [
+          "stair-west-dome",
+          "c-W-1"
+        ],
+        [
+          "stair-west-end",
+          "c-W-4"
+        ],
+        [
+          "stair-south-north",
+          "c-S-1"
+        ],
+        [
           "stair-south-mid",
-          "c-S-3"
+          "c-S-6"
         ],
         [
           "stair-south-south",
-          "c-S-11"
+          "c-S-13"
+        ],
+        [
+          "start",
+          "c-E-1"
+        ],
+        [
+          "main-1f-lobby-admission-and-registration-office-w2",
+          "c-W-2"
+        ],
+        [
+          "main-1f-lobby-office-for-scholarship-and-financial-assistance-w4",
+          "c-W-3"
         ],
         [
           "main-1f-lobby-accounting-office-s7",
-          "c-S-2"
+          "c-S-8"
         ],
         [
           "main-1f-lobby-accounting-division-students-services-section-s8",
@@ -582,19 +652,19 @@
         ],
         [
           "main-1f-lobby-payroll-section-s9",
-          "c-S-11"
+          "c-S-12"
         ],
         [
           "main-1f-lobby-office-of-the-university-registrar-s1",
-          "c-S-6"
+          "c-S-3"
         ],
         [
           "main-1f-lobby-students-records-office-s2",
-          "c-S-4"
+          "c-S-5"
         ],
         [
           "main-1f-lobby-human-resource-management-division-s3",
-          "c-S-10"
+          "c-S-9"
         ],
         [
           "main-1f-lobby-budget-services-s4",
@@ -602,147 +672,51 @@
         ],
         [
           "main-1f-lobby-property-extension-office-s5",
-          "c-S-6"
+          "c-S-2"
         ],
         [
           "main-1f-lobby-cashier-s6",
-          "c-S-5"
-        ],
-        [
-          "c-dome",
-          "c-N-0"
-        ],
-        [
-          "c-N-0",
-          "c-N-1"
-        ],
-        [
-          "c-N-1",
-          "c-N-2"
-        ],
-        [
-          "c-N-2",
-          "c-N-3"
-        ],
-        [
-          "c-N-3",
-          "c-N-4"
-        ],
-        [
-          "c-N-4",
-          "c-N-5"
-        ],
-        [
-          "c-N-5",
-          "c-N-6"
-        ],
-        [
-          "c-N-6",
-          "c-N-7"
-        ],
-        [
-          "c-N-7",
-          "c-N-8"
-        ],
-        [
-          "c-N-8",
-          "c-N-9"
-        ],
-        [
-          "c-N-9",
-          "c-N-10"
-        ],
-        [
-          "c-N-10",
-          "c-N-11"
-        ],
-        [
-          "stair-north-end",
-          "c-N-7"
-        ],
-        [
-          "stair-north-dome",
-          "c-N-3"
+          "c-S-4"
         ],
         [
           "main-1f-lobby-procurement-office-n1",
-          "c-N-4"
+          "c-N-3"
         ],
         [
           "main-1f-lobby-central-records-office-n2",
-          "c-N-6"
+          "c-N-5"
         ],
         [
           "main-1f-lobby-commission-on-audit-office-n3",
-          "c-N-4"
+          "c-N-2"
         ],
         [
           "main-1f-lobby-campus-ministry-office-n4",
-          "c-N-5"
+          "c-N-4"
         ],
         [
           "main-1f-lobby-security-office-n5",
           "c-N-6"
         ],
         [
-          "c-dome",
-          "c-E-0"
-        ],
-        [
-          "c-E-0",
-          "c-E-1"
-        ],
-        [
-          "c-E-1",
-          "c-E-2"
-        ],
-        [
-          "c-E-2",
-          "c-E-3"
-        ],
-        [
-          "c-E-3",
-          "c-E-4"
-        ],
-        [
-          "c-E-4",
-          "c-E-5"
-        ],
-        [
-          "c-E-5",
-          "c-E-6"
-        ],
-        [
-          "c-E-6",
-          "c-E-7"
-        ],
-        [
-          "stair-east-dome",
-          "c-E-3"
-        ],
-        [
-          "stair-east-end",
-          "c-E-7"
-        ],
-        [
           "main-1f-lobby-free-pup-office-e1",
-          "c-E-4"
+          "c-E-3"
         ],
         [
           "main-1f-lobby-hrd-records-office-e2",
-          "c-E-5"
+          "c-E-4"
         ],
         [
           "main-1f-lobby-department-of-military-science-and-tactics-office-e3",
-          "c-E-6"
+          "c-E-5"
         ],
         [
           "main-1f-lobby-corps-of-cadets-headquarters-e4",
-          "c-E-7"
+          "c-E-6"
         ],
         [
           "main-1f-lobby-medical-clinic-services-e5",
-          "c-S-0"
+          "c-E-3"
         ],
         [
           "main-1f-lobby-dental-clinic-services-e6",
@@ -759,10 +733,6 @@
         [
           "main-1f-lobby-university-consumers-cooperative-dome",
           "c-dome"
-        ],
-        [
-          "start",
-          "c-E-1"
         ]
       ],
       "rooms": [
@@ -770,32 +740,32 @@
           "id": "main-1f-lobby-admission-and-registration-office-w2",
           "label": "Admission and Registration Office (W2)",
           "kind": "office",
-          "x": 0.3419,
-          "y": 0.4338,
-          "node": "c-W-3"
+          "x": 0.3194,
+          "y": 0.3887,
+          "node": "c-W-2"
         },
         {
           "id": "main-1f-lobby-office-for-scholarship-and-financial-assistance-w4",
           "label": "Office for Scholarship and Financial Assistance (W4)",
           "kind": "office",
-          "x": 0.2918,
-          "y": 0.3334,
-          "node": "c-W-5"
+          "x": 0.2844,
+          "y": 0.3184,
+          "node": "c-W-3"
         },
         {
           "id": "main-1f-lobby-accounting-office-s7",
           "label": "Accounting Office (S7)",
           "kind": "office",
           "x": 0.2112,
-          "y": 0.5137,
-          "node": "c-S-2"
+          "y": 0.5388,
+          "node": "c-S-8"
         },
         {
           "id": "main-1f-lobby-accounting-division-students-services-section-s8",
           "label": "Accounting Division - Students Services Section (S8)",
           "kind": "office",
           "x": 0.2112,
-          "y": 0.6242,
+          "y": 0.6267,
           "node": "c-S-10"
         },
         {
@@ -803,39 +773,39 @@
           "label": "Payroll Section (S9)",
           "kind": "office",
           "x": 0.2112,
-          "y": 0.7346,
-          "node": "c-S-11"
+          "y": 0.7396,
+          "node": "c-S-12"
         },
         {
           "id": "main-1f-lobby-office-of-the-university-registrar-s1",
           "label": "Office of the University Registrar (S1)",
           "kind": "office",
           "x": 0.1187,
-          "y": 0.3067,
-          "node": "c-S-6"
+          "y": 0.302,
+          "node": "c-S-3"
         },
         {
           "id": "main-1f-lobby-students-records-office-s2",
           "label": "Students Records Office (S2)",
           "kind": "office",
           "x": 0.1187,
-          "y": 0.4447,
-          "node": "c-S-4"
+          "y": 0.4431,
+          "node": "c-S-5"
         },
         {
           "id": "main-1f-lobby-human-resource-management-division-s3",
           "label": "Human Resource Management Division (S3)",
           "kind": "office",
           "x": 0.1187,
-          "y": 0.5827,
-          "node": "c-S-10"
+          "y": 0.5843,
+          "node": "c-S-9"
         },
         {
           "id": "main-1f-lobby-budget-services-s4",
           "label": "Budget Services (S4)",
           "kind": "office",
           "x": 0.1187,
-          "y": 0.7208,
+          "y": 0.7255,
           "node": "c-S-11"
         },
         {
@@ -843,54 +813,54 @@
           "label": "Property Extension Office (S5)",
           "kind": "office",
           "x": 0.2112,
-          "y": 0.2929,
-          "node": "c-S-6"
+          "y": 0.2878,
+          "node": "c-S-2"
         },
         {
           "id": "main-1f-lobby-cashier-s6",
           "label": "Cashier (S6)",
           "kind": "office",
           "x": 0.2112,
-          "y": 0.4033,
-          "node": "c-S-5"
+          "y": 0.4008,
+          "node": "c-S-4"
         },
         {
           "id": "main-1f-lobby-procurement-office-n1",
           "label": "Procurement Office (N1)",
           "kind": "office",
-          "x": 0.5053,
-          "y": 0.4357,
-          "node": "c-N-4"
+          "x": 0.5064,
+          "y": 0.4358,
+          "node": "c-N-3"
         },
         {
           "id": "main-1f-lobby-central-records-office-n2",
           "label": "Central Records Office (N2)",
           "kind": "office",
-          "x": 0.6364,
+          "x": 0.6368,
           "y": 0.4429,
-          "node": "c-N-6"
+          "node": "c-N-5"
         },
         {
           "id": "main-1f-lobby-commission-on-audit-office-n3",
           "label": "Commission on Audit Office (N3)",
           "kind": "office",
-          "x": 0.481,
-          "y": 0.5427,
-          "node": "c-N-4"
+          "x": 0.4823,
+          "y": 0.5428,
+          "node": "c-N-2"
         },
         {
           "id": "main-1f-lobby-campus-ministry-office-n4",
           "label": "Campus Ministry Office (N4)",
           "kind": "office",
-          "x": 0.5684,
+          "x": 0.5692,
           "y": 0.5475,
-          "node": "c-N-5"
+          "node": "c-N-4"
         },
         {
           "id": "main-1f-lobby-security-office-n5",
           "label": "Security Office (N5)",
           "kind": "office",
-          "x": 0.6559,
+          "x": 0.6562,
           "y": 0.5523,
           "node": "c-N-6"
         },
@@ -898,64 +868,64 @@
           "id": "main-1f-lobby-free-pup-office-e1",
           "label": "FREE - PUP Office (E1)",
           "kind": "office",
-          "x": 0.4068,
-          "y": 0.581,
-          "node": "c-E-4"
+          "x": 0.3824,
+          "y": 0.6301,
+          "node": "c-E-3"
         },
         {
           "id": "main-1f-lobby-hrd-records-office-e2",
           "label": "HRD Records Office (E2)",
           "kind": "office",
-          "x": 0.378,
-          "y": 0.6389,
-          "node": "c-E-5"
+          "x": 0.3644,
+          "y": 0.6661,
+          "node": "c-E-4"
         },
         {
           "id": "main-1f-lobby-department-of-military-science-and-tactics-office-e3",
           "label": "Department of Military Science and Tactics Office (E3)",
           "kind": "office",
-          "x": 0.3491,
-          "y": 0.6969,
-          "node": "c-E-6"
+          "x": 0.3465,
+          "y": 0.702,
+          "node": "c-E-5"
         },
         {
           "id": "main-1f-lobby-corps-of-cadets-headquarters-e4",
           "label": "Corps of Cadets Headquarters (E4)",
           "kind": "office",
-          "x": 0.3202,
-          "y": 0.7548,
-          "node": "c-E-7"
+          "x": 0.3286,
+          "y": 0.738,
+          "node": "c-E-6"
         },
         {
           "id": "main-1f-lobby-medical-clinic-services-e5",
           "label": "Medical Clinic Services (E5)",
           "kind": "office",
-          "x": 0.3525,
-          "y": 0.5144,
-          "node": "c-S-0"
+          "x": 0.328,
+          "y": 0.5635,
+          "node": "c-E-3"
         },
         {
           "id": "main-1f-lobby-dental-clinic-services-e6",
           "label": "Dental Clinic Services (E6)",
           "kind": "office",
-          "x": 0.3236,
-          "y": 0.5723,
+          "x": 0.3101,
+          "y": 0.5994,
           "node": "c-E-4"
         },
         {
           "id": "main-1f-lobby-office-of-the-director-medical-health-services-e7",
           "label": "Office of the Director - Medical Health Services (E7)",
           "kind": "office",
-          "x": 0.2947,
-          "y": 0.6302,
+          "x": 0.2922,
+          "y": 0.6354,
           "node": "c-E-5"
         },
         {
           "id": "main-1f-lobby-office-of-the-director-public-affairs-office-e8",
           "label": "Office of the Director - Public Affairs Office (E8)",
           "kind": "office",
-          "x": 0.2659,
-          "y": 0.6882,
+          "x": 0.2743,
+          "y": 0.6714,
           "node": "c-E-6"
         },
         {
@@ -977,478 +947,304 @@
       "start": null,
       "nodes": [
         {
-          "id": "main-4f-pup-pem-center",
-          "x": 0.3422,
-          "y": 0.15,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-inst-of-social-history",
-          "x": 0.3867,
-          "y": 0.15,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-speech-laboratory",
-          "x": 0.4311,
-          "y": 0.15,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-training-center",
-          "x": 0.4756,
-          "y": 0.15,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-extension-center",
-          "x": 0.52,
-          "y": 0.15,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-student-center",
-          "x": 0.5644,
-          "y": 0.15,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-student-lounge",
-          "x": 0.6089,
-          "y": 0.15,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-institutional-planning-office",
-          "x": 0.6533,
-          "y": 0.15,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-ou-audio-visual-room",
-          "x": 0.6978,
-          "y": 0.15,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-ou-library",
-          "x": 0.3422,
-          "y": 0.23,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-vacant-room",
-          "x": 0.3867,
-          "y": 0.23,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-faculty-office-lounge",
-          "x": 0.4311,
-          "y": 0.23,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-dept-of-advertising-and-public-relations",
-          "x": 0.4756,
-          "y": 0.23,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-accenture-ideas-exchange",
-          "x": 0.52,
-          "y": 0.23,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-canteen",
-          "x": 0.5644,
-          "y": 0.23,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-office-north-wing",
-          "x": 0.6089,
-          "y": 0.23,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-female-toilet-east",
-          "x": 0.6533,
-          "y": 0.23,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-male-toilet-west",
-          "x": 0.6978,
-          "y": 0.23,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-4th-floor-dome",
+          "id": "c-dome",
           "x": 0.516,
           "y": 0.444,
-          "kind": "room"
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-north-401",
-          "x": 0.5015,
-          "y": 0.4844,
-          "kind": "room"
+          "id": "c-N-1",
+          "x": 0.516,
+          "y": 0.469,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-north-403",
-          "x": 0.5015,
-          "y": 0.5102,
-          "kind": "room"
+          "id": "c-N-2",
+          "x": 0.516,
+          "y": 0.49528,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-north-405",
-          "x": 0.5015,
-          "y": 0.5361,
-          "kind": "room"
+          "id": "c-N-3",
+          "x": 0.516,
+          "y": 0.51983,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-north-407",
-          "x": 0.5015,
-          "y": 0.5619,
-          "kind": "room"
+          "id": "c-N-4",
+          "x": 0.516,
+          "y": 0.54439,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-north-409",
-          "x": 0.5015,
-          "y": 0.5877,
-          "kind": "room"
+          "id": "c-N-5",
+          "x": 0.516,
+          "y": 0.56894,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-north-411",
-          "x": 0.5015,
-          "y": 0.6136,
-          "kind": "room"
+          "id": "c-N-6",
+          "x": 0.516,
+          "y": 0.5935,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-north-413",
-          "x": 0.5015,
-          "y": 0.6394,
-          "kind": "room"
+          "id": "c-N-7",
+          "x": 0.516,
+          "y": 0.61806,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-north-415",
-          "x": 0.5015,
-          "y": 0.6653,
-          "kind": "room"
+          "id": "c-N-8",
+          "x": 0.516,
+          "y": 0.64261,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-north-417",
-          "x": 0.5015,
-          "y": 0.6911,
-          "kind": "room"
+          "id": "c-N-9",
+          "x": 0.516,
+          "y": 0.66717,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-north-402",
-          "x": 0.5305,
-          "y": 0.4844,
-          "kind": "room"
+          "id": "c-N-10",
+          "x": 0.516,
+          "y": 0.69172,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-north-404",
-          "x": 0.5305,
-          "y": 0.5102,
-          "kind": "room"
+          "id": "c-N-11",
+          "x": 0.516,
+          "y": 0.6965,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-north-406",
-          "x": 0.5305,
-          "y": 0.5361,
-          "kind": "room"
+          "id": "c-N-12",
+          "x": 0.516,
+          "y": 0.706,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-north-408",
-          "x": 0.5305,
-          "y": 0.5619,
-          "kind": "room"
+          "id": "c-E-1",
+          "x": 0.4864,
+          "y": 0.42823,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-north-410",
-          "x": 0.5305,
-          "y": 0.5877,
-          "kind": "room"
+          "id": "c-E-2",
+          "x": 0.44235,
+          "y": 0.40475,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-north-412",
-          "x": 0.5305,
-          "y": 0.6136,
-          "kind": "room"
+          "id": "c-E-3",
+          "x": 0.42062,
+          "y": 0.39318,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-north-414",
-          "x": 0.5305,
-          "y": 0.6394,
-          "kind": "room"
+          "id": "c-E-4",
+          "x": 0.39889,
+          "y": 0.3816,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-north-416",
-          "x": 0.5305,
-          "y": 0.6653,
-          "kind": "room"
+          "id": "c-E-5",
+          "x": 0.37716,
+          "y": 0.37002,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-north-418",
-          "x": 0.5305,
-          "y": 0.6911,
-          "kind": "room"
+          "id": "c-E-6",
+          "x": 0.35544,
+          "y": 0.35844,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-east-417",
-          "x": 0.4744,
-          "y": 0.4084,
-          "kind": "room"
+          "id": "c-E-7",
+          "x": 0.33371,
+          "y": 0.34686,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-east-415",
-          "x": 0.4498,
-          "y": 0.3953,
-          "kind": "room"
+          "id": "c-E-8",
+          "x": 0.31199,
+          "y": 0.33528,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-east-413",
-          "x": 0.4253,
-          "y": 0.3823,
-          "kind": "room"
+          "id": "c-E-9",
+          "x": 0.29026,
+          "y": 0.32371,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-east-411",
-          "x": 0.4008,
-          "y": 0.3692,
-          "kind": "room"
+          "id": "c-E-10",
+          "x": 0.26853,
+          "y": 0.31213,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-east-409",
-          "x": 0.3763,
-          "y": 0.3561,
-          "kind": "room"
+          "id": "c-E-11",
+          "x": 0.25551,
+          "y": 0.30519,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-east-407",
-          "x": 0.3518,
-          "y": 0.3431,
-          "kind": "room"
+          "id": "c-W-1",
+          "x": 0.5456,
+          "y": 0.42823,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-east-405",
-          "x": 0.3272,
-          "y": 0.33,
-          "kind": "room"
+          "id": "c-W-2",
+          "x": 0.58965,
+          "y": 0.40475,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-east-403",
-          "x": 0.3027,
-          "y": 0.3169,
-          "kind": "room"
+          "id": "c-W-3",
+          "x": 0.61138,
+          "y": 0.39318,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-east-401",
-          "x": 0.2782,
-          "y": 0.3039,
-          "kind": "room"
+          "id": "c-W-4",
+          "x": 0.63311,
+          "y": 0.3816,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-east-418",
-          "x": 0.4578,
-          "y": 0.4264,
-          "kind": "room"
+          "id": "c-W-5",
+          "x": 0.65484,
+          "y": 0.37002,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-east-416",
-          "x": 0.4333,
-          "y": 0.4133,
-          "kind": "room"
+          "id": "c-W-6",
+          "x": 0.67656,
+          "y": 0.35844,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-east-414",
-          "x": 0.4087,
-          "y": 0.4003,
-          "kind": "room"
+          "id": "c-W-7",
+          "x": 0.69829,
+          "y": 0.34686,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-east-412",
-          "x": 0.3842,
-          "y": 0.3872,
-          "kind": "room"
+          "id": "c-W-8",
+          "x": 0.72001,
+          "y": 0.33528,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-east-410",
-          "x": 0.3597,
-          "y": 0.3741,
-          "kind": "room"
+          "id": "c-W-9",
+          "x": 0.74174,
+          "y": 0.32371,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-east-408",
-          "x": 0.3352,
-          "y": 0.3611,
-          "kind": "room"
+          "id": "c-W-10",
+          "x": 0.76348,
+          "y": 0.31213,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-east-406",
-          "x": 0.3107,
-          "y": 0.348,
-          "kind": "room"
+          "id": "c-W-11",
+          "x": 0.77649,
+          "y": 0.30519,
+          "kind": "corridor"
         },
         {
-          "id": "main-4f-east-404",
-          "x": 0.2861,
-          "y": 0.3349,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-east-402",
-          "x": 0.2616,
-          "y": 0.3219,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-west-418",
-          "x": 0.5576,
-          "y": 0.4084,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-west-416",
-          "x": 0.5822,
-          "y": 0.3953,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-west-414",
-          "x": 0.6067,
-          "y": 0.3823,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-west-412",
-          "x": 0.6312,
-          "y": 0.3692,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-west-410",
-          "x": 0.6557,
-          "y": 0.3561,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-west-408",
-          "x": 0.6802,
-          "y": 0.3431,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-west-406",
-          "x": 0.7048,
-          "y": 0.33,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-west-404",
-          "x": 0.7293,
-          "y": 0.3169,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-west-417",
-          "x": 0.5742,
-          "y": 0.4264,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-west-415",
-          "x": 0.5987,
-          "y": 0.4133,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-west-413",
-          "x": 0.6233,
-          "y": 0.4003,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-west-411",
-          "x": 0.6478,
-          "y": 0.3872,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-west-409",
-          "x": 0.6723,
-          "y": 0.3741,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-west-407",
-          "x": 0.6968,
-          "y": 0.3611,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-west-405",
-          "x": 0.7213,
-          "y": 0.348,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-west-403",
-          "x": 0.7459,
-          "y": 0.3349,
-          "kind": "room"
-        },
-        {
-          "id": "main-4f-west-401",
-          "x": 0.7704,
-          "y": 0.3219,
-          "kind": "room"
-        },
-        {
-          "id": "stair-south-south",
-          "x": 0.5544,
+          "id": "c-D-1",
+          "x": 0.516,
           "y": 0.19,
-          "kind": "stairs"
+          "kind": "corridor"
         },
         {
-          "id": "stair-south-mid",
+          "id": "c-S-0",
+          "x": 0.2992,
+          "y": 0.19,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-1",
+          "x": 0.33252,
+          "y": 0.19,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-2",
+          "x": 0.37814,
+          "y": 0.19,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-3",
+          "x": 0.42376,
+          "y": 0.19,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-4",
+          "x": 0.46938,
+          "y": 0.19,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-5",
+          "x": 0.47558,
+          "y": 0.19,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-6",
+          "x": 0.49194,
+          "y": 0.19,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-7",
           "x": 0.515,
           "y": 0.19,
-          "kind": "stairs"
+          "kind": "corridor"
         },
         {
-          "id": "stair-south-north",
-          "x": 0.4756,
+          "id": "c-S-8",
+          "x": 0.55442,
           "y": 0.19,
-          "kind": "stairs"
+          "kind": "corridor"
         },
         {
-          "id": "stair-east-end",
-          "x": 0.2684,
-          "y": 0.3121,
-          "kind": "stairs"
+          "id": "c-S-9",
+          "x": 0.56062,
+          "y": 0.19,
+          "kind": "corridor"
         },
         {
-          "id": "stair-east-dome",
-          "x": 0.4864,
-          "y": 0.4282,
-          "kind": "stairs"
+          "id": "c-S-10",
+          "x": 0.60624,
+          "y": 0.19,
+          "kind": "corridor"
         },
         {
-          "id": "stair-west-end",
-          "x": 0.7636,
-          "y": 0.3121,
-          "kind": "stairs"
+          "id": "c-S-11",
+          "x": 0.65186,
+          "y": 0.19,
+          "kind": "corridor"
         },
         {
-          "id": "stair-west-dome",
-          "x": 0.5456,
-          "y": 0.4282,
-          "kind": "stairs"
+          "id": "c-S-12",
+          "x": 0.69748,
+          "y": 0.19,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-13",
+          "x": 0.7308,
+          "y": 0.19,
+          "kind": "corridor"
         },
         {
           "id": "stair-north-dome",
@@ -1463,205 +1259,483 @@
           "kind": "stairs"
         },
         {
-          "id": "c-dome",
-          "x": 0.516,
-          "y": 0.444,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-0",
-          "x": 0.516,
-          "y": 0.4502,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-1",
-          "x": 0.516,
-          "y": 0.4565,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-2",
-          "x": 0.516,
-          "y": 0.4627,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-3",
-          "x": 0.516,
-          "y": 0.469,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-4",
-          "x": 0.516,
-          "y": 0.5259,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-5",
-          "x": 0.516,
-          "y": 0.5827,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-6",
-          "x": 0.516,
-          "y": 0.6396,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-7",
-          "x": 0.516,
-          "y": 0.6965,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-8",
-          "x": 0.5059,
-          "y": 0.5699,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-9",
-          "x": 0.4958,
-          "y": 0.4433,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-10",
-          "x": 0.4857,
-          "y": 0.3166,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-11",
-          "x": 0.4756,
-          "y": 0.19,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-E-0",
-          "x": 0.5086,
-          "y": 0.44,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-E-1",
-          "x": 0.5012,
-          "y": 0.4361,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-E-2",
-          "x": 0.4938,
-          "y": 0.4322,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-E-3",
+          "id": "stair-east-dome",
           "x": 0.4864,
-          "y": 0.4282,
-          "kind": "corridor"
+          "y": 0.42823,
+          "kind": "stairs"
         },
         {
-          "id": "c-E-4",
-          "x": 0.4319,
-          "y": 0.3992,
-          "kind": "corridor"
+          "id": "stair-east-end",
+          "x": 0.26842,
+          "y": 0.31208,
+          "kind": "stairs"
         },
         {
-          "id": "c-E-5",
-          "x": 0.3774,
-          "y": 0.3701,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-E-6",
-          "x": 0.3229,
-          "y": 0.3411,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-E-7",
-          "x": 0.2684,
-          "y": 0.3121,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-W-0",
-          "x": 0.5234,
-          "y": 0.44,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-W-1",
-          "x": 0.5308,
-          "y": 0.4361,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-W-2",
-          "x": 0.5382,
-          "y": 0.4322,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-W-3",
+          "id": "stair-west-dome",
           "x": 0.5456,
-          "y": 0.4282,
-          "kind": "corridor"
+          "y": 0.42823,
+          "kind": "stairs"
         },
         {
-          "id": "c-W-4",
-          "x": 0.6001,
-          "y": 0.3992,
-          "kind": "corridor"
+          "id": "stair-west-end",
+          "x": 0.76358,
+          "y": 0.31208,
+          "kind": "stairs"
         },
         {
-          "id": "c-W-5",
-          "x": 0.6546,
-          "y": 0.3701,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-W-6",
-          "x": 0.7091,
-          "y": 0.3411,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-W-7",
-          "x": 0.7636,
-          "y": 0.3121,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-S-0",
-          "x": 0.4756,
+          "id": "stair-south-north",
+          "x": 0.47558,
           "y": 0.19,
-          "kind": "corridor"
+          "kind": "stairs"
         },
         {
-          "id": "c-S-1",
+          "id": "stair-south-mid",
           "x": 0.515,
           "y": 0.19,
-          "kind": "corridor"
+          "kind": "stairs"
         },
         {
-          "id": "c-S-2",
-          "x": 0.5544,
+          "id": "stair-south-south",
+          "x": 0.55442,
           "y": 0.19,
-          "kind": "corridor"
+          "kind": "stairs"
+        },
+        {
+          "id": "main-4f-pup-pem-center",
+          "x": 0.33252,
+          "y": 0.182,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-inst-of-social-history",
+          "x": 0.37814,
+          "y": 0.182,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-speech-laboratory",
+          "x": 0.42376,
+          "y": 0.182,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-training-center",
+          "x": 0.46938,
+          "y": 0.182,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-extension-center",
+          "x": 0.515,
+          "y": 0.182,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-student-center",
+          "x": 0.56062,
+          "y": 0.182,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-student-lounge",
+          "x": 0.60624,
+          "y": 0.182,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-institutional-planning-office",
+          "x": 0.65186,
+          "y": 0.182,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-ou-audio-visual-room",
+          "x": 0.69748,
+          "y": 0.182,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-ou-library",
+          "x": 0.33252,
+          "y": 0.198,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-vacant-room",
+          "x": 0.37814,
+          "y": 0.198,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-faculty-office-lounge",
+          "x": 0.42376,
+          "y": 0.198,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-dept-of-advertising-and-public-relations",
+          "x": 0.46938,
+          "y": 0.198,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-accenture-ideas-exchange",
+          "x": 0.49194,
+          "y": 0.198,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-canteen",
+          "x": 0.56187,
+          "y": 0.198,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-office-north-wing",
+          "x": 0.60624,
+          "y": 0.198,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-female-toilet-east",
+          "x": 0.65186,
+          "y": 0.198,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-male-toilet-west",
+          "x": 0.69748,
+          "y": 0.198,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-4th-floor-dome",
+          "x": 0.516,
+          "y": 0.444,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-north-401",
+          "x": 0.50155,
+          "y": 0.49528,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-north-403",
+          "x": 0.50155,
+          "y": 0.51983,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-north-405",
+          "x": 0.50155,
+          "y": 0.54439,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-north-407",
+          "x": 0.50155,
+          "y": 0.56894,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-north-409",
+          "x": 0.50155,
+          "y": 0.5935,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-north-411",
+          "x": 0.50155,
+          "y": 0.61806,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-north-413",
+          "x": 0.50155,
+          "y": 0.64261,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-north-415",
+          "x": 0.50155,
+          "y": 0.66717,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-north-417",
+          "x": 0.50155,
+          "y": 0.69172,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-north-402",
+          "x": 0.53045,
+          "y": 0.49528,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-north-404",
+          "x": 0.53045,
+          "y": 0.51983,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-north-406",
+          "x": 0.53045,
+          "y": 0.54439,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-north-408",
+          "x": 0.53045,
+          "y": 0.56894,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-north-410",
+          "x": 0.53045,
+          "y": 0.5935,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-north-412",
+          "x": 0.53045,
+          "y": 0.61806,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-north-414",
+          "x": 0.53045,
+          "y": 0.64261,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-north-416",
+          "x": 0.53045,
+          "y": 0.66717,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-north-418",
+          "x": 0.53045,
+          "y": 0.69172,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-east-417",
+          "x": 0.45064,
+          "y": 0.39574,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-east-415",
+          "x": 0.42891,
+          "y": 0.38417,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-east-413",
+          "x": 0.40718,
+          "y": 0.37259,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-east-411",
+          "x": 0.38545,
+          "y": 0.36101,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-east-409",
+          "x": 0.36373,
+          "y": 0.34943,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-east-407",
+          "x": 0.342,
+          "y": 0.33785,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-east-405",
+          "x": 0.32027,
+          "y": 0.32628,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-east-403",
+          "x": 0.29854,
+          "y": 0.3147,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-east-401",
+          "x": 0.27682,
+          "y": 0.30312,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-east-418",
+          "x": 0.43406,
+          "y": 0.41376,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-east-416",
+          "x": 0.41233,
+          "y": 0.40219,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-east-414",
+          "x": 0.3906,
+          "y": 0.39061,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-east-412",
+          "x": 0.36887,
+          "y": 0.37903,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-east-410",
+          "x": 0.34715,
+          "y": 0.36745,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-east-408",
+          "x": 0.32542,
+          "y": 0.35587,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-east-406",
+          "x": 0.30369,
+          "y": 0.3443,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-east-404",
+          "x": 0.28196,
+          "y": 0.33272,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-east-402",
+          "x": 0.26023,
+          "y": 0.32114,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-west-418",
+          "x": 0.58136,
+          "y": 0.39574,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-west-416",
+          "x": 0.60309,
+          "y": 0.38417,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-west-414",
+          "x": 0.62482,
+          "y": 0.37259,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-west-412",
+          "x": 0.64655,
+          "y": 0.36101,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-west-410",
+          "x": 0.66827,
+          "y": 0.34943,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-west-408",
+          "x": 0.69,
+          "y": 0.33785,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-west-406",
+          "x": 0.71173,
+          "y": 0.32628,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-west-404",
+          "x": 0.73346,
+          "y": 0.3147,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-west-417",
+          "x": 0.59794,
+          "y": 0.41376,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-west-415",
+          "x": 0.61967,
+          "y": 0.40219,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-west-413",
+          "x": 0.6414,
+          "y": 0.39061,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-west-411",
+          "x": 0.66313,
+          "y": 0.37903,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-west-409",
+          "x": 0.68485,
+          "y": 0.36745,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-west-407",
+          "x": 0.70658,
+          "y": 0.35587,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-west-405",
+          "x": 0.72831,
+          "y": 0.3443,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-west-403",
+          "x": 0.75004,
+          "y": 0.33272,
+          "kind": "room"
+        },
+        {
+          "id": "main-4f-west-401",
+          "x": 0.77177,
+          "y": 0.32114,
+          "kind": "room"
         }
       ],
       "edges": [
         [
           "c-dome",
-          "c-N-0"
-        ],
-        [
-          "c-N-0",
           "c-N-1"
         ],
         [
@@ -1705,99 +1779,11 @@
           "c-N-11"
         ],
         [
-          "stair-south-north",
-          "c-N-11"
-        ],
-        [
-          "stair-north-dome",
-          "c-N-3"
-        ],
-        [
-          "stair-north-end",
-          "c-N-7"
-        ],
-        [
-          "main-4f-office-north-wing",
-          "c-N-11"
-        ],
-        [
-          "main-4f-north-401",
-          "c-N-3"
-        ],
-        [
-          "main-4f-north-403",
-          "c-N-4"
-        ],
-        [
-          "main-4f-north-405",
-          "c-N-4"
-        ],
-        [
-          "main-4f-north-407",
-          "c-N-8"
-        ],
-        [
-          "main-4f-north-409",
-          "c-N-8"
-        ],
-        [
-          "main-4f-north-411",
-          "c-N-6"
-        ],
-        [
-          "main-4f-north-413",
-          "c-N-6"
-        ],
-        [
-          "main-4f-north-415",
-          "c-N-6"
-        ],
-        [
-          "main-4f-north-417",
-          "c-N-7"
-        ],
-        [
-          "main-4f-north-402",
-          "c-N-3"
-        ],
-        [
-          "main-4f-north-404",
-          "c-N-4"
-        ],
-        [
-          "main-4f-north-406",
-          "c-N-4"
-        ],
-        [
-          "main-4f-north-408",
-          "c-N-5"
-        ],
-        [
-          "main-4f-north-410",
-          "c-N-5"
-        ],
-        [
-          "main-4f-north-412",
-          "c-N-6"
-        ],
-        [
-          "main-4f-north-414",
-          "c-N-6"
-        ],
-        [
-          "main-4f-north-416",
-          "c-N-6"
-        ],
-        [
-          "main-4f-north-418",
-          "c-N-7"
+          "c-N-11",
+          "c-N-12"
         ],
         [
           "c-dome",
-          "c-E-0"
-        ],
-        [
-          "c-E-0",
           "c-E-1"
         ],
         [
@@ -1825,95 +1811,23 @@
           "c-E-7"
         ],
         [
-          "stair-east-end",
-          "c-E-7"
+          "c-E-7",
+          "c-E-8"
         ],
         [
-          "stair-east-dome",
-          "c-E-3"
+          "c-E-8",
+          "c-E-9"
         ],
         [
-          "main-4f-female-toilet-east",
-          "c-N-11"
+          "c-E-9",
+          "c-E-10"
         ],
         [
-          "main-4f-east-417",
-          "c-E-3"
-        ],
-        [
-          "main-4f-east-415",
-          "c-E-4"
-        ],
-        [
-          "main-4f-east-413",
-          "c-E-4"
-        ],
-        [
-          "main-4f-east-411",
-          "c-E-5"
-        ],
-        [
-          "main-4f-east-409",
-          "c-E-5"
-        ],
-        [
-          "main-4f-east-407",
-          "c-E-6"
-        ],
-        [
-          "main-4f-east-405",
-          "c-E-6"
-        ],
-        [
-          "main-4f-east-403",
-          "c-E-6"
-        ],
-        [
-          "main-4f-east-401",
-          "c-E-7"
-        ],
-        [
-          "main-4f-east-418",
-          "c-E-3"
-        ],
-        [
-          "main-4f-east-416",
-          "c-E-4"
-        ],
-        [
-          "main-4f-east-414",
-          "c-E-4"
-        ],
-        [
-          "main-4f-east-412",
-          "c-E-5"
-        ],
-        [
-          "main-4f-east-410",
-          "c-E-5"
-        ],
-        [
-          "main-4f-east-408",
-          "c-E-6"
-        ],
-        [
-          "main-4f-east-406",
-          "c-E-6"
-        ],
-        [
-          "main-4f-east-404",
-          "c-E-7"
-        ],
-        [
-          "main-4f-east-402",
-          "c-E-7"
+          "c-E-10",
+          "c-E-11"
         ],
         [
           "c-dome",
-          "c-W-0"
-        ],
-        [
-          "c-W-0",
           "c-W-1"
         ],
         [
@@ -1941,1760 +1855,24 @@
           "c-W-7"
         ],
         [
-          "stair-west-end",
-          "c-W-7"
+          "c-W-7",
+          "c-W-8"
         ],
         [
-          "stair-west-dome",
-          "c-W-3"
+          "c-W-8",
+          "c-W-9"
         ],
         [
-          "main-4f-male-toilet-west",
-          "c-W-7"
+          "c-W-9",
+          "c-W-10"
         ],
         [
-          "main-4f-west-418",
-          "c-W-3"
-        ],
-        [
-          "main-4f-west-416",
-          "c-W-4"
-        ],
-        [
-          "main-4f-west-414",
-          "c-W-4"
-        ],
-        [
-          "main-4f-west-412",
-          "c-W-5"
-        ],
-        [
-          "main-4f-west-410",
-          "c-W-5"
-        ],
-        [
-          "main-4f-west-408",
-          "c-W-6"
-        ],
-        [
-          "main-4f-west-406",
-          "c-W-6"
-        ],
-        [
-          "main-4f-west-404",
-          "c-W-6"
-        ],
-        [
-          "main-4f-west-417",
-          "c-W-3"
-        ],
-        [
-          "main-4f-west-415",
-          "c-W-4"
-        ],
-        [
-          "main-4f-west-413",
-          "c-W-4"
-        ],
-        [
-          "main-4f-west-411",
-          "c-W-5"
-        ],
-        [
-          "main-4f-west-409",
-          "c-W-5"
-        ],
-        [
-          "main-4f-west-407",
-          "c-W-6"
-        ],
-        [
-          "main-4f-west-405",
-          "c-W-6"
-        ],
-        [
-          "main-4f-west-403",
-          "c-W-7"
-        ],
-        [
-          "main-4f-west-401",
-          "c-W-7"
-        ],
-        [
-          "main-4f-pup-pem-center",
-          "c-N-11"
-        ],
-        [
-          "main-4f-inst-of-social-history",
-          "c-N-11"
-        ],
-        [
-          "main-4f-speech-laboratory",
-          "c-N-11"
-        ],
-        [
-          "main-4f-training-center",
-          "c-N-11"
-        ],
-        [
-          "main-4f-extension-center",
-          "c-N-11"
-        ],
-        [
-          "main-4f-student-center",
-          "c-N-11"
-        ],
-        [
-          "main-4f-student-lounge",
-          "c-N-11"
-        ],
-        [
-          "main-4f-institutional-planning-office",
-          "c-N-11"
-        ],
-        [
-          "main-4f-ou-audio-visual-room",
-          "c-W-7"
-        ],
-        [
-          "main-4f-ou-library",
-          "c-E-7"
-        ],
-        [
-          "main-4f-vacant-room",
-          "c-N-11"
-        ],
-        [
-          "main-4f-faculty-office-lounge",
-          "c-N-11"
-        ],
-        [
-          "main-4f-dept-of-advertising-and-public-relations",
-          "c-N-11"
-        ],
-        [
-          "main-4f-accenture-ideas-exchange",
-          "c-N-11"
-        ],
-        [
-          "main-4f-canteen",
-          "c-N-11"
-        ],
-        [
-          "main-4f-4th-floor-dome",
-          "c-dome"
+          "c-W-10",
+          "c-W-11"
         ],
         [
           "c-dome",
-          "c-S-0"
-        ],
-        [
-          "c-S-0",
-          "c-S-1"
-        ],
-        [
-          "c-S-1",
-          "c-S-2"
-        ],
-        [
-          "stair-south-south",
-          "c-S-2"
-        ],
-        [
-          "stair-south-mid",
-          "c-S-1"
-        ],
-        [
-          "main-4f-pup-pem-center",
-          "c-S-0"
-        ],
-        [
-          "main-4f-inst-of-social-history",
-          "c-S-0"
-        ],
-        [
-          "main-4f-speech-laboratory",
-          "c-S-0"
-        ],
-        [
-          "main-4f-training-center",
-          "c-S-0"
-        ],
-        [
-          "main-4f-extension-center",
-          "c-S-1"
-        ],
-        [
-          "main-4f-student-center",
-          "c-S-2"
-        ],
-        [
-          "main-4f-student-lounge",
-          "c-S-2"
-        ],
-        [
-          "main-4f-institutional-planning-office",
-          "c-S-2"
-        ],
-        [
-          "main-4f-ou-audio-visual-room",
-          "c-S-2"
-        ],
-        [
-          "main-4f-ou-library",
-          "c-S-0"
-        ],
-        [
-          "main-4f-vacant-room",
-          "c-S-0"
-        ],
-        [
-          "main-4f-faculty-office-lounge",
-          "c-S-0"
-        ],
-        [
-          "main-4f-dept-of-advertising-and-public-relations",
-          "c-S-0"
-        ],
-        [
-          "main-4f-accenture-ideas-exchange",
-          "c-S-1"
-        ],
-        [
-          "main-4f-canteen",
-          "c-S-2"
-        ],
-        [
-          "main-4f-office-north-wing",
-          "c-S-2"
-        ],
-        [
-          "main-4f-female-toilet-east",
-          "c-S-2"
-        ],
-        [
-          "main-4f-male-toilet-west",
-          "c-S-2"
-        ],
-        [
-          "main-4f-east-401",
-          "c-S-0"
-        ]
-      ],
-      "rooms": [
-        {
-          "id": "main-4f-pup-pem-center",
-          "label": "PUP PEM Center?",
-          "kind": "office",
-          "x": 0.3422,
-          "y": 0.15,
-          "flag": "?",
-          "node": "c-S-0"
-        },
-        {
-          "id": "main-4f-inst-of-social-history",
-          "label": "Inst. of Social History?",
-          "kind": "office",
-          "x": 0.3867,
-          "y": 0.15,
-          "flag": "?",
-          "node": "c-S-0"
-        },
-        {
-          "id": "main-4f-speech-laboratory",
-          "label": "Speech Laboratory?",
-          "kind": "office",
-          "x": 0.4311,
-          "y": 0.15,
-          "flag": "?",
-          "node": "c-S-0"
-        },
-        {
-          "id": "main-4f-training-center",
-          "label": "Training Center?",
-          "kind": "office",
-          "x": 0.4756,
-          "y": 0.15,
-          "flag": "?",
-          "node": "c-S-0"
-        },
-        {
-          "id": "main-4f-extension-center",
-          "label": "Extension Center?",
-          "kind": "office",
-          "x": 0.52,
-          "y": 0.15,
-          "flag": "?",
-          "node": "c-S-1"
-        },
-        {
-          "id": "main-4f-student-center",
-          "label": "Student Center?",
-          "kind": "office",
-          "x": 0.5644,
-          "y": 0.15,
-          "flag": "?",
-          "node": "c-S-2"
-        },
-        {
-          "id": "main-4f-student-lounge",
-          "label": "Student Lounge?",
-          "kind": "office",
-          "x": 0.6089,
-          "y": 0.15,
-          "flag": "?",
-          "node": "c-S-2"
-        },
-        {
-          "id": "main-4f-institutional-planning-office",
-          "label": "Institutional Planning Office?",
-          "kind": "office",
-          "x": 0.6533,
-          "y": 0.15,
-          "flag": "?",
-          "node": "c-S-2"
-        },
-        {
-          "id": "main-4f-ou-audio-visual-room",
-          "label": "OU Audio Visual Room?",
-          "kind": "office",
-          "x": 0.6978,
-          "y": 0.15,
-          "flag": "?",
-          "node": "c-S-2"
-        },
-        {
-          "id": "main-4f-ou-library",
-          "label": "OU Library?",
-          "kind": "office",
-          "x": 0.3422,
-          "y": 0.23,
-          "flag": "?",
-          "node": "c-S-0"
-        },
-        {
-          "id": "main-4f-vacant-room",
-          "label": "Vacant Room?",
-          "kind": "office",
-          "x": 0.3867,
-          "y": 0.23,
-          "flag": "?",
-          "node": "c-S-0"
-        },
-        {
-          "id": "main-4f-faculty-office-lounge",
-          "label": "Faculty Office/Lounge?",
-          "kind": "office",
-          "x": 0.4311,
-          "y": 0.23,
-          "flag": "?",
-          "node": "c-S-0"
-        },
-        {
-          "id": "main-4f-dept-of-advertising-and-public-relations",
-          "label": "Dept. of Advertising and Public Relations?",
-          "kind": "office",
-          "x": 0.4756,
-          "y": 0.23,
-          "flag": "?",
-          "node": "c-S-0"
-        },
-        {
-          "id": "main-4f-accenture-ideas-exchange",
-          "label": "Accenture Ideas Exchange?",
-          "kind": "office",
-          "x": 0.52,
-          "y": 0.23,
-          "flag": "?",
-          "node": "c-S-1"
-        },
-        {
-          "id": "main-4f-canteen",
-          "label": "Canteen?",
-          "kind": "office",
-          "x": 0.5644,
-          "y": 0.23,
-          "flag": "?",
-          "node": "c-S-2"
-        },
-        {
-          "id": "main-4f-office-north-wing",
-          "label": "Office (North wing)",
-          "kind": "office",
-          "x": 0.6089,
-          "y": 0.23,
-          "node": "c-S-2"
-        },
-        {
-          "id": "main-4f-female-toilet-east",
-          "label": "Female toilet? (East)",
-          "kind": "cr",
-          "x": 0.6533,
-          "y": 0.23,
-          "flag": "?",
-          "node": "c-S-2"
-        },
-        {
-          "id": "main-4f-male-toilet-west",
-          "label": "Male toilet? (West)",
-          "kind": "cr",
-          "x": 0.6978,
-          "y": 0.23,
-          "flag": "?",
-          "node": "c-S-2"
-        },
-        {
-          "id": "main-4f-4th-floor-dome",
-          "label": "4th Floor Dome",
-          "kind": "room",
-          "x": 0.516,
-          "y": 0.444,
-          "node": "c-dome"
-        },
-        {
-          "id": "main-4f-north-401",
-          "label": "Classroom 401",
-          "wing": "North wing",
-          "kind": "room",
-          "x": 0.4838,
-          "y": 0.4844,
-          "node": "c-N-3",
-          "code": "N401"
-        },
-        {
-          "id": "main-4f-north-403",
-          "label": "Classroom 403",
-          "wing": "North wing",
-          "kind": "room",
-          "x": 0.4838,
-          "y": 0.5102,
-          "node": "c-N-4",
-          "code": "N403"
-        },
-        {
-          "id": "main-4f-north-405",
-          "label": "Classroom 405",
-          "wing": "North wing",
-          "kind": "room",
-          "x": 0.4838,
-          "y": 0.5361,
-          "node": "c-N-4",
-          "code": "N405"
-        },
-        {
-          "id": "main-4f-north-407",
-          "label": "Classroom 407",
-          "wing": "North wing",
-          "kind": "room",
-          "x": 0.4838,
-          "y": 0.5619,
-          "node": "c-N-8",
-          "code": "N407"
-        },
-        {
-          "id": "main-4f-north-409",
-          "label": "Classroom 409",
-          "wing": "North wing",
-          "kind": "room",
-          "x": 0.4838,
-          "y": 0.5877,
-          "node": "c-N-8",
-          "code": "N409"
-        },
-        {
-          "id": "main-4f-north-411",
-          "label": "Classroom 411",
-          "wing": "North wing",
-          "kind": "room",
-          "x": 0.4838,
-          "y": 0.6136,
-          "node": "c-N-6",
-          "code": "N411"
-        },
-        {
-          "id": "main-4f-north-413",
-          "label": "Classroom 413",
-          "wing": "North wing",
-          "kind": "room",
-          "x": 0.4838,
-          "y": 0.6394,
-          "node": "c-N-6",
-          "code": "N413"
-        },
-        {
-          "id": "main-4f-north-415",
-          "label": "Classroom 415",
-          "wing": "North wing",
-          "kind": "room",
-          "x": 0.4838,
-          "y": 0.6653,
-          "node": "c-N-6",
-          "code": "N415"
-        },
-        {
-          "id": "main-4f-north-417",
-          "label": "Classroom 417",
-          "wing": "North wing",
-          "kind": "room",
-          "x": 0.4838,
-          "y": 0.6911,
-          "node": "c-N-7",
-          "code": "N417"
-        },
-        {
-          "id": "main-4f-north-402",
-          "label": "Classroom 402",
-          "wing": "North wing",
-          "kind": "room",
-          "x": 0.5482,
-          "y": 0.4844,
-          "node": "c-N-3",
-          "code": "N402"
-        },
-        {
-          "id": "main-4f-north-404",
-          "label": "Classroom 404",
-          "wing": "North wing",
-          "kind": "room",
-          "x": 0.5482,
-          "y": 0.5102,
-          "node": "c-N-4",
-          "code": "N404"
-        },
-        {
-          "id": "main-4f-north-406",
-          "label": "Classroom 406",
-          "wing": "North wing",
-          "kind": "room",
-          "x": 0.5482,
-          "y": 0.5361,
-          "node": "c-N-4",
-          "code": "N406"
-        },
-        {
-          "id": "main-4f-north-408",
-          "label": "Classroom 408",
-          "wing": "North wing",
-          "kind": "room",
-          "x": 0.5482,
-          "y": 0.5619,
-          "node": "c-N-5",
-          "code": "N408"
-        },
-        {
-          "id": "main-4f-north-410",
-          "label": "Classroom 410",
-          "wing": "North wing",
-          "kind": "room",
-          "x": 0.5482,
-          "y": 0.5877,
-          "node": "c-N-5",
-          "code": "N410"
-        },
-        {
-          "id": "main-4f-north-412",
-          "label": "Classroom 412",
-          "wing": "North wing",
-          "kind": "room",
-          "x": 0.5482,
-          "y": 0.6136,
-          "node": "c-N-6",
-          "code": "N412"
-        },
-        {
-          "id": "main-4f-north-414",
-          "label": "Classroom 414",
-          "wing": "North wing",
-          "kind": "room",
-          "x": 0.5482,
-          "y": 0.6394,
-          "node": "c-N-6",
-          "code": "N414"
-        },
-        {
-          "id": "main-4f-north-416",
-          "label": "Classroom 416",
-          "wing": "North wing",
-          "kind": "room",
-          "x": 0.5482,
-          "y": 0.6653,
-          "node": "c-N-6",
-          "code": "N416"
-        },
-        {
-          "id": "main-4f-north-418",
-          "label": "Classroom 418",
-          "wing": "North wing",
-          "kind": "room",
-          "x": 0.5482,
-          "y": 0.6911,
-          "node": "c-N-7",
-          "code": "N418"
-        },
-        {
-          "id": "main-4f-east-417",
-          "label": "Classroom 417",
-          "wing": "East wing",
-          "kind": "room",
-          "x": 0.4845,
-          "y": 0.3973,
-          "node": "c-E-3",
-          "code": "E417"
-        },
-        {
-          "id": "main-4f-east-415",
-          "label": "Classroom 415",
-          "wing": "East wing",
-          "kind": "room",
-          "x": 0.46,
-          "y": 0.3843,
-          "node": "c-E-4",
-          "code": "E415"
-        },
-        {
-          "id": "main-4f-east-413",
-          "label": "Classroom 413",
-          "wing": "East wing",
-          "kind": "room",
-          "x": 0.4355,
-          "y": 0.3712,
-          "node": "c-E-4",
-          "code": "E413"
-        },
-        {
-          "id": "main-4f-east-411",
-          "label": "Classroom 411",
-          "wing": "East wing",
-          "kind": "room",
-          "x": 0.411,
-          "y": 0.3581,
-          "node": "c-E-5",
-          "code": "E411"
-        },
-        {
-          "id": "main-4f-east-409",
-          "label": "Classroom 409",
-          "wing": "East wing",
-          "kind": "room",
-          "x": 0.3865,
-          "y": 0.3451,
-          "node": "c-E-5",
-          "code": "E409"
-        },
-        {
-          "id": "main-4f-east-407",
-          "label": "Classroom 407",
-          "wing": "East wing",
-          "kind": "room",
-          "x": 0.3619,
-          "y": 0.332,
-          "node": "c-E-6",
-          "code": "E407"
-        },
-        {
-          "id": "main-4f-east-405",
-          "label": "Classroom 405",
-          "wing": "East wing",
-          "kind": "room",
-          "x": 0.3374,
-          "y": 0.3189,
-          "node": "c-E-6",
-          "code": "E405"
-        },
-        {
-          "id": "main-4f-east-403",
-          "label": "Classroom 403",
-          "wing": "East wing",
-          "kind": "room",
-          "x": 0.3129,
-          "y": 0.3059,
-          "node": "c-E-6",
-          "code": "E403"
-        },
-        {
-          "id": "main-4f-east-401",
-          "label": "Classroom 401",
-          "wing": "East wing",
-          "kind": "room",
-          "x": 0.2884,
-          "y": 0.2928,
-          "node": "c-S-0",
-          "code": "E401"
-        },
-        {
-          "id": "main-4f-east-418",
-          "label": "Classroom 418",
-          "wing": "East wing",
-          "kind": "room",
-          "x": 0.4476,
-          "y": 0.4375,
-          "node": "c-E-3",
-          "code": "E418"
-        },
-        {
-          "id": "main-4f-east-416",
-          "label": "Classroom 416",
-          "wing": "East wing",
-          "kind": "room",
-          "x": 0.4231,
-          "y": 0.4244,
-          "node": "c-E-4",
-          "code": "E416"
-        },
-        {
-          "id": "main-4f-east-414",
-          "label": "Classroom 414",
-          "wing": "East wing",
-          "kind": "room",
-          "x": 0.3986,
-          "y": 0.4113,
-          "node": "c-E-4",
-          "code": "E414"
-        },
-        {
-          "id": "main-4f-east-412",
-          "label": "Classroom 412",
-          "wing": "East wing",
-          "kind": "room",
-          "x": 0.374,
-          "y": 0.3983,
-          "node": "c-E-5",
-          "code": "E412"
-        },
-        {
-          "id": "main-4f-east-410",
-          "label": "Classroom 410",
-          "wing": "East wing",
-          "kind": "room",
-          "x": 0.3495,
-          "y": 0.3852,
-          "node": "c-E-5",
-          "code": "E410"
-        },
-        {
-          "id": "main-4f-east-408",
-          "label": "Classroom 408",
-          "wing": "East wing",
-          "kind": "room",
-          "x": 0.325,
-          "y": 0.3721,
-          "node": "c-E-6",
-          "code": "E408"
-        },
-        {
-          "id": "main-4f-east-406",
-          "label": "Classroom 406",
-          "wing": "East wing",
-          "kind": "room",
-          "x": 0.3005,
-          "y": 0.3591,
-          "node": "c-E-6",
-          "code": "E406"
-        },
-        {
-          "id": "main-4f-east-404",
-          "label": "Classroom 404",
-          "wing": "East wing",
-          "kind": "room",
-          "x": 0.276,
-          "y": 0.346,
-          "node": "c-E-7",
-          "code": "E404"
-        },
-        {
-          "id": "main-4f-east-402",
-          "label": "Classroom 402",
-          "wing": "East wing",
-          "kind": "room",
-          "x": 0.2515,
-          "y": 0.3329,
-          "node": "c-E-7",
-          "code": "E402"
-        },
-        {
-          "id": "main-4f-west-418",
-          "label": "Classroom 418",
-          "wing": "West wing",
-          "kind": "room",
-          "x": 0.5475,
-          "y": 0.3973,
-          "node": "c-W-3",
-          "code": "W418"
-        },
-        {
-          "id": "main-4f-west-416",
-          "label": "Classroom 416",
-          "wing": "West wing",
-          "kind": "room",
-          "x": 0.572,
-          "y": 0.3843,
-          "node": "c-W-4",
-          "code": "W416"
-        },
-        {
-          "id": "main-4f-west-414",
-          "label": "Classroom 414",
-          "wing": "West wing",
-          "kind": "room",
-          "x": 0.5965,
-          "y": 0.3712,
-          "node": "c-W-4",
-          "code": "W414"
-        },
-        {
-          "id": "main-4f-west-412",
-          "label": "Classroom 412",
-          "wing": "West wing",
-          "kind": "room",
-          "x": 0.621,
-          "y": 0.3581,
-          "node": "c-W-5",
-          "code": "W412"
-        },
-        {
-          "id": "main-4f-west-410",
-          "label": "Classroom 410",
-          "wing": "West wing",
-          "kind": "room",
-          "x": 0.6455,
-          "y": 0.3451,
-          "node": "c-W-5",
-          "code": "W410"
-        },
-        {
-          "id": "main-4f-west-408",
-          "label": "Classroom 408",
-          "wing": "West wing",
-          "kind": "room",
-          "x": 0.6701,
-          "y": 0.332,
-          "node": "c-W-6",
-          "code": "W408"
-        },
-        {
-          "id": "main-4f-west-406",
-          "label": "Classroom 406",
-          "wing": "West wing",
-          "kind": "room",
-          "x": 0.6946,
-          "y": 0.3189,
-          "node": "c-W-6",
-          "code": "W406"
-        },
-        {
-          "id": "main-4f-west-404",
-          "label": "Classroom 404",
-          "wing": "West wing",
-          "kind": "room",
-          "x": 0.7191,
-          "y": 0.3059,
-          "node": "c-W-6",
-          "code": "W404"
-        },
-        {
-          "id": "main-4f-west-417",
-          "label": "Classroom 417",
-          "wing": "West wing",
-          "kind": "room",
-          "x": 0.5844,
-          "y": 0.4375,
-          "node": "c-W-3",
-          "code": "W417"
-        },
-        {
-          "id": "main-4f-west-415",
-          "label": "Classroom 415",
-          "wing": "West wing",
-          "kind": "room",
-          "x": 0.6089,
-          "y": 0.4244,
-          "node": "c-W-4",
-          "code": "W415"
-        },
-        {
-          "id": "main-4f-west-413",
-          "label": "Classroom 413",
-          "wing": "West wing",
-          "kind": "room",
-          "x": 0.6334,
-          "y": 0.4113,
-          "node": "c-W-4",
-          "code": "W413"
-        },
-        {
-          "id": "main-4f-west-411",
-          "label": "Classroom 411",
-          "wing": "West wing",
-          "kind": "room",
-          "x": 0.658,
-          "y": 0.3983,
-          "node": "c-W-5",
-          "code": "W411"
-        },
-        {
-          "id": "main-4f-west-409",
-          "label": "Classroom 409",
-          "wing": "West wing",
-          "kind": "room",
-          "x": 0.6825,
-          "y": 0.3852,
-          "node": "c-W-5",
-          "code": "W409"
-        },
-        {
-          "id": "main-4f-west-407",
-          "label": "Classroom 407",
-          "wing": "West wing",
-          "kind": "room",
-          "x": 0.707,
-          "y": 0.3721,
-          "node": "c-W-6",
-          "code": "W407"
-        },
-        {
-          "id": "main-4f-west-405",
-          "label": "Classroom 405",
-          "wing": "West wing",
-          "kind": "room",
-          "x": 0.7315,
-          "y": 0.3591,
-          "node": "c-W-6",
-          "code": "W405"
-        },
-        {
-          "id": "main-4f-west-403",
-          "label": "Classroom 403",
-          "wing": "West wing",
-          "kind": "room",
-          "x": 0.756,
-          "y": 0.346,
-          "node": "c-W-7",
-          "code": "W403"
-        },
-        {
-          "id": "main-4f-west-401",
-          "label": "Classroom 401",
-          "wing": "West wing",
-          "kind": "room",
-          "x": 0.7805,
-          "y": 0.3329,
-          "node": "c-W-7",
-          "code": "W401"
-        }
-      ],
-      "svgSize": [
-        1522,
-        2000
-      ]
-    },
-    "main-5f": {
-      "aspect": 1.512859,
-      "start": "start",
-      "nodes": [
-        {
-          "id": "main-5f-bayan-muna-nnara-gabriela-office-w51",
-          "x": 0.35,
-          "y": 0.28,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-comfort-room-west",
-          "x": 0.35,
-          "y": 0.28,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-s506",
-          "x": 0.161,
-          "y": 0.5163,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-s505",
-          "x": 0.161,
-          "y": 0.4671,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-s504",
-          "x": 0.161,
-          "y": 0.4179,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-s507",
-          "x": 0.161,
-          "y": 0.5654,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-s508",
-          "x": 0.161,
-          "y": 0.6146,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-s503a",
-          "x": 0.4088,
-          "y": 0.1082,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-s509",
-          "x": 0.161,
-          "y": 0.6638,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-s502",
-          "x": 0.161,
-          "y": 0.3196,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-s510",
-          "x": 0.161,
-          "y": 0.7129,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-s501",
-          "x": 0.161,
-          "y": 0.2704,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-s511",
-          "x": 0.179,
-          "y": 0.2732,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-s512a",
-          "x": 0.179,
-          "y": 0.3278,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-s518",
-          "x": 0.179,
-          "y": 0.7102,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-s517",
-          "x": 0.179,
-          "y": 0.6556,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-s512b",
-          "x": 0.179,
-          "y": 0.3824,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-s516",
-          "x": 0.179,
-          "y": 0.6009,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-s513",
-          "x": 0.179,
-          "y": 0.437,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-s514",
-          "x": 0.179,
-          "y": 0.4917,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-s515",
-          "x": 0.179,
-          "y": 0.5463,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-n500",
-          "x": 0.4722,
-          "y": 0.4564,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-n502",
-          "x": 0.505,
-          "y": 0.4582,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-n504",
-          "x": 0.5377,
-          "y": 0.4599,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-n506",
-          "x": 0.5704,
-          "y": 0.4616,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-n508",
-          "x": 0.6031,
-          "y": 0.4634,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-n510",
-          "x": 0.6359,
-          "y": 0.4651,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-n512",
-          "x": 0.6686,
-          "y": 0.4668,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-n514",
-          "x": 0.7013,
-          "y": 0.4686,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-n516",
-          "x": 0.7341,
-          "y": 0.4703,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-n518",
-          "x": 0.7668,
-          "y": 0.472,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-n501",
-          "x": 0.4715,
-          "y": 0.4897,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-n503",
-          "x": 0.5042,
-          "y": 0.4914,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-n505",
-          "x": 0.5369,
-          "y": 0.4932,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-n507",
-          "x": 0.5697,
-          "y": 0.4949,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-n509",
-          "x": 0.6024,
-          "y": 0.4966,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-n511",
-          "x": 0.6351,
-          "y": 0.4984,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-n513",
-          "x": 0.6678,
-          "y": 0.5001,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-n515",
-          "x": 0.7006,
-          "y": 0.5018,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-n517",
-          "x": 0.7333,
-          "y": 0.5035,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-n519",
-          "x": 0.766,
-          "y": 0.5053,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-comfort-room-north",
-          "x": 0.5,
-          "y": 0.72,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-e501",
-          "x": 0.3864,
-          "y": 0.5164,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-e503",
-          "x": 0.3728,
-          "y": 0.5435,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-e505",
-          "x": 0.3593,
-          "y": 0.5707,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-e507",
-          "x": 0.3458,
-          "y": 0.5979,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-e509",
-          "x": 0.3322,
-          "y": 0.6251,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-e511",
-          "x": 0.3187,
-          "y": 0.6523,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-e513",
-          "x": 0.3051,
-          "y": 0.6795,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-e515",
-          "x": 0.2916,
-          "y": 0.7067,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-e517",
-          "x": 0.2781,
-          "y": 0.7338,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-e519",
-          "x": 0.2645,
-          "y": 0.761,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-e500",
-          "x": 0.404,
-          "y": 0.5364,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-e502",
-          "x": 0.3904,
-          "y": 0.5636,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-e504",
-          "x": 0.3769,
-          "y": 0.5908,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-e506",
-          "x": 0.3633,
-          "y": 0.6179,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-e508",
-          "x": 0.3498,
-          "y": 0.6451,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-e510",
-          "x": 0.3362,
-          "y": 0.6723,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-e512",
-          "x": 0.3227,
-          "y": 0.6995,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-e514",
-          "x": 0.3092,
-          "y": 0.7267,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-e516",
-          "x": 0.2956,
-          "y": 0.7539,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-e518",
-          "x": 0.2821,
-          "y": 0.7811,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-comfort-room-east",
-          "x": 0.62,
-          "y": 0.28,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-5th-floor-dome",
-          "x": 0.423,
-          "y": 0.4705,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-elevator-south-wing",
-          "x": 0.5,
-          "y": 0.18,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-ccmit-server-room-s507",
-          "x": 0.5,
-          "y": 0.18,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-college-of-accountancy-faculty-room-n500",
-          "x": 0.5,
-          "y": 0.72,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-college-of-accountancy-student-council-office-e519",
-          "x": 0.62,
-          "y": 0.28,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-college-of-science-accreditation-center-s516",
-          "x": 0.5,
-          "y": 0.18,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-college-of-science-faculty-room-s514",
-          "x": 0.5,
-          "y": 0.18,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-curriculum-planning-and-development-office-s506",
-          "x": 0.5,
-          "y": 0.18,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-jpia-office-e500",
-          "x": 0.62,
-          "y": 0.28,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-samasa-coa-n519",
-          "x": 0.5,
-          "y": 0.72,
-          "kind": "room"
-        },
-        {
-          "id": "main-5f-sci-tech-research-and-development-center-s512a",
-          "x": 0.5,
-          "y": 0.18,
-          "kind": "room"
-        },
-        {
-          "id": "stair-west-end",
-          "x": 0.259,
-          "y": 0.1851,
-          "kind": "stairs"
-        },
-        {
-          "id": "stair-west-dome",
-          "x": 0.405,
-          "y": 0.4391,
-          "kind": "stairs"
-        },
-        {
-          "id": "stair-south-north",
-          "x": 0.17,
-          "y": 0.2572,
-          "kind": "stairs"
-        },
-        {
-          "id": "stair-south-mid",
-          "x": 0.17,
-          "y": 0.4917,
-          "kind": "stairs"
-        },
-        {
-          "id": "stair-south-south",
-          "x": 0.17,
-          "y": 0.7262,
-          "kind": "stairs"
-        },
-        {
-          "id": "stair-north-end",
-          "x": 0.7728,
-          "y": 0.489,
-          "kind": "stairs"
-        },
-        {
-          "id": "stair-north-dome",
-          "x": 0.4505,
-          "y": 0.472,
-          "kind": "stairs"
-        },
-        {
-          "id": "stair-east-dome",
-          "x": 0.4065,
-          "y": 0.5037,
-          "kind": "stairs"
-        },
-        {
-          "id": "stair-east-end",
-          "x": 0.2725,
-          "y": 0.7726,
-          "kind": "stairs"
-        },
-        {
-          "id": "c-dome",
-          "x": 0.423,
-          "y": 0.4705,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-W-0",
-          "x": 0.4182,
-          "y": 0.4631,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-W-1",
-          "x": 0.4133,
-          "y": 0.4558,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-W-2",
-          "x": 0.4084,
-          "y": 0.4485,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-W-3",
-          "x": 0.4036,
-          "y": 0.4411,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-W-4",
-          "x": 0.3607,
-          "y": 0.3762,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-W-5",
-          "x": 0.3179,
-          "y": 0.3114,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-W-6",
-          "x": 0.275,
-          "y": 0.2466,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-W-7",
-          "x": 0.2321,
-          "y": 0.1817,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-S-0",
-          "x": 0.3598,
-          "y": 0.4834,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-S-1",
-          "x": 0.2965,
-          "y": 0.4962,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-S-2",
-          "x": 0.2332,
-          "y": 0.5091,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-S-3",
-          "x": 0.17,
-          "y": 0.5219,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-S-4",
-          "x": 0.17,
-          "y": 0.4425,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-S-5",
-          "x": 0.17,
-          "y": 0.363,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-S-6",
-          "x": 0.17,
-          "y": 0.2836,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-S-7",
-          "x": 0.17,
-          "y": 0.2042,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-S-8",
-          "x": 0.17,
-          "y": 0.363,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-S-9",
-          "x": 0.17,
-          "y": 0.5219,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-S-10",
-          "x": 0.17,
-          "y": 0.6807,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-S-11",
-          "x": 0.17,
-          "y": 0.8396,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-0",
-          "x": 0.4299,
-          "y": 0.4712,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-1",
-          "x": 0.4367,
-          "y": 0.4719,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-2",
-          "x": 0.4435,
-          "y": 0.4727,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-3",
-          "x": 0.4504,
-          "y": 0.4734,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-4",
-          "x": 0.5308,
-          "y": 0.4819,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-5",
-          "x": 0.6113,
-          "y": 0.4904,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-6",
-          "x": 0.6917,
-          "y": 0.4989,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-7",
-          "x": 0.7721,
-          "y": 0.5074,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-8",
-          "x": 0.6216,
-          "y": 0.4316,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-9",
-          "x": 0.4711,
-          "y": 0.3558,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-10",
-          "x": 0.3205,
-          "y": 0.28,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-N-11",
-          "x": 0.17,
-          "y": 0.2042,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-E-0",
-          "x": 0.419,
-          "y": 0.479,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-E-1",
-          "x": 0.4151,
-          "y": 0.4876,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-E-2",
-          "x": 0.4112,
-          "y": 0.4961,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-E-3",
-          "x": 0.4072,
-          "y": 0.5046,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-E-4",
-          "x": 0.3724,
-          "y": 0.5797,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-E-5",
-          "x": 0.3377,
-          "y": 0.6549,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-E-6",
-          "x": 0.3029,
-          "y": 0.73,
-          "kind": "corridor"
-        },
-        {
-          "id": "c-E-7",
-          "x": 0.2681,
-          "y": 0.8051,
-          "kind": "corridor"
-        },
-        {
-          "id": "start",
-          "x": 0.4072,
-          "y": 0.5046,
-          "kind": "start",
-          "label": "You Are Here"
-        }
-      ],
-      "edges": [
-        [
-          "c-dome",
-          "c-W-0"
-        ],
-        [
-          "c-W-0",
-          "c-W-1"
-        ],
-        [
-          "c-W-1",
-          "c-W-2"
-        ],
-        [
-          "c-W-2",
-          "c-W-3"
-        ],
-        [
-          "c-W-3",
-          "c-W-4"
-        ],
-        [
-          "c-W-4",
-          "c-W-5"
-        ],
-        [
-          "c-W-5",
-          "c-W-6"
-        ],
-        [
-          "c-W-6",
-          "c-W-7"
-        ],
-        [
-          "stair-west-end",
-          "c-W-7"
-        ],
-        [
-          "stair-west-dome",
-          "c-W-3"
-        ],
-        [
-          "main-5f-bayan-muna-nnara-gabriela-office-w51",
-          "c-W-5"
-        ],
-        [
-          "main-5f-comfort-room-west",
-          "c-W-5"
-        ],
-        [
-          "c-dome",
-          "c-S-0"
+          "c-D-1"
         ],
         [
           "c-S-0",
@@ -3741,119 +1919,1915 @@
           "c-S-11"
         ],
         [
+          "c-S-11",
+          "c-S-12"
+        ],
+        [
+          "c-S-12",
+          "c-S-13"
+        ],
+        [
+          "c-D-1",
+          "c-S-7"
+        ],
+        [
+          "stair-north-dome",
+          "c-N-1"
+        ],
+        [
+          "stair-north-end",
+          "c-N-11"
+        ],
+        [
+          "stair-east-dome",
+          "c-E-1"
+        ],
+        [
+          "stair-east-end",
+          "c-E-10"
+        ],
+        [
+          "stair-west-dome",
+          "c-W-1"
+        ],
+        [
+          "stair-west-end",
+          "c-W-10"
+        ],
+        [
           "stair-south-north",
-          "c-S-7"
-        ],
-        [
-          "stair-south-mid",
-          "c-S-3"
-        ],
-        [
-          "stair-south-south",
-          "c-S-11"
-        ],
-        [
-          "main-5f-s506",
-          "c-S-3"
-        ],
-        [
-          "main-5f-s505",
-          "c-S-3"
-        ],
-        [
-          "main-5f-s504",
-          "c-S-4"
-        ],
-        [
-          "main-5f-s507",
-          "c-S-10"
-        ],
-        [
-          "main-5f-s508",
-          "c-S-10"
-        ],
-        [
-          "main-5f-s503a",
-          "c-W-7"
-        ],
-        [
-          "main-5f-s509",
-          "c-S-10"
-        ],
-        [
-          "main-5f-s502",
-          "c-S-6"
-        ],
-        [
-          "main-5f-s510",
-          "c-S-11"
-        ],
-        [
-          "main-5f-s501",
-          "c-S-7"
-        ],
-        [
-          "main-5f-s511",
-          "c-W-7"
-        ],
-        [
-          "main-5f-s512a",
-          "c-S-6"
-        ],
-        [
-          "main-5f-s518",
-          "c-S-11"
-        ],
-        [
-          "main-5f-s517",
-          "c-S-10"
-        ],
-        [
-          "main-5f-s512b",
           "c-S-5"
         ],
         [
-          "main-5f-s516",
-          "c-S-10"
+          "stair-south-mid",
+          "c-S-7"
         ],
         [
-          "main-5f-s513",
+          "stair-south-south",
+          "c-S-8"
+        ],
+        [
+          "main-4f-pup-pem-center",
+          "c-S-1"
+        ],
+        [
+          "main-4f-inst-of-social-history",
+          "c-S-2"
+        ],
+        [
+          "main-4f-speech-laboratory",
+          "c-S-3"
+        ],
+        [
+          "main-4f-training-center",
           "c-S-4"
         ],
         [
-          "main-5f-s514",
+          "main-4f-extension-center",
+          "c-S-7"
+        ],
+        [
+          "main-4f-student-center",
+          "c-S-9"
+        ],
+        [
+          "main-4f-student-lounge",
+          "c-S-10"
+        ],
+        [
+          "main-4f-institutional-planning-office",
+          "c-S-11"
+        ],
+        [
+          "main-4f-ou-audio-visual-room",
+          "c-S-12"
+        ],
+        [
+          "main-4f-ou-library",
+          "c-S-1"
+        ],
+        [
+          "main-4f-vacant-room",
           "c-S-2"
         ],
         [
-          "main-5f-s515",
-          "c-S-2"
+          "main-4f-faculty-office-lounge",
+          "c-S-3"
         ],
         [
-          "main-5f-ccmit-server-room-s507",
+          "main-4f-dept-of-advertising-and-public-relations",
+          "c-S-4"
+        ],
+        [
+          "main-4f-accenture-ideas-exchange",
+          "c-S-6"
+        ],
+        [
+          "main-4f-canteen",
+          "c-S-9"
+        ],
+        [
+          "main-4f-office-north-wing",
+          "c-S-10"
+        ],
+        [
+          "main-4f-female-toilet-east",
+          "c-S-11"
+        ],
+        [
+          "main-4f-male-toilet-west",
+          "c-S-12"
+        ],
+        [
+          "main-4f-4th-floor-dome",
+          "c-dome"
+        ],
+        [
+          "main-4f-north-401",
+          "c-N-2"
+        ],
+        [
+          "main-4f-north-403",
+          "c-N-3"
+        ],
+        [
+          "main-4f-north-405",
+          "c-N-4"
+        ],
+        [
+          "main-4f-north-407",
+          "c-N-5"
+        ],
+        [
+          "main-4f-north-409",
+          "c-N-6"
+        ],
+        [
+          "main-4f-north-411",
+          "c-N-7"
+        ],
+        [
+          "main-4f-north-413",
+          "c-N-8"
+        ],
+        [
+          "main-4f-north-415",
+          "c-N-9"
+        ],
+        [
+          "main-4f-north-417",
+          "c-N-10"
+        ],
+        [
+          "main-4f-north-402",
+          "c-N-2"
+        ],
+        [
+          "main-4f-north-404",
+          "c-N-3"
+        ],
+        [
+          "main-4f-north-406",
+          "c-N-4"
+        ],
+        [
+          "main-4f-north-408",
+          "c-N-5"
+        ],
+        [
+          "main-4f-north-410",
+          "c-N-6"
+        ],
+        [
+          "main-4f-north-412",
+          "c-N-7"
+        ],
+        [
+          "main-4f-north-414",
+          "c-N-8"
+        ],
+        [
+          "main-4f-north-416",
+          "c-N-9"
+        ],
+        [
+          "main-4f-north-418",
+          "c-N-10"
+        ],
+        [
+          "main-4f-east-417",
+          "c-E-2"
+        ],
+        [
+          "main-4f-east-415",
+          "c-E-3"
+        ],
+        [
+          "main-4f-east-413",
+          "c-E-4"
+        ],
+        [
+          "main-4f-east-411",
+          "c-E-5"
+        ],
+        [
+          "main-4f-east-409",
+          "c-E-6"
+        ],
+        [
+          "main-4f-east-407",
+          "c-E-7"
+        ],
+        [
+          "main-4f-east-405",
+          "c-E-8"
+        ],
+        [
+          "main-4f-east-403",
+          "c-E-9"
+        ],
+        [
+          "main-4f-east-401",
+          "c-E-10"
+        ],
+        [
+          "main-4f-east-418",
+          "c-E-2"
+        ],
+        [
+          "main-4f-east-416",
+          "c-E-3"
+        ],
+        [
+          "main-4f-east-414",
+          "c-E-4"
+        ],
+        [
+          "main-4f-east-412",
+          "c-E-5"
+        ],
+        [
+          "main-4f-east-410",
+          "c-E-6"
+        ],
+        [
+          "main-4f-east-408",
+          "c-E-7"
+        ],
+        [
+          "main-4f-east-406",
+          "c-E-8"
+        ],
+        [
+          "main-4f-east-404",
+          "c-E-9"
+        ],
+        [
+          "main-4f-east-402",
+          "c-E-10"
+        ],
+        [
+          "main-4f-west-418",
+          "c-W-2"
+        ],
+        [
+          "main-4f-west-416",
+          "c-W-3"
+        ],
+        [
+          "main-4f-west-414",
+          "c-W-4"
+        ],
+        [
+          "main-4f-west-412",
           "c-W-5"
         ],
         [
-          "main-5f-college-of-science-accreditation-center-s516",
+          "main-4f-west-410",
+          "c-W-6"
+        ],
+        [
+          "main-4f-west-408",
+          "c-W-7"
+        ],
+        [
+          "main-4f-west-406",
+          "c-W-8"
+        ],
+        [
+          "main-4f-west-404",
+          "c-W-9"
+        ],
+        [
+          "main-4f-west-417",
+          "c-W-2"
+        ],
+        [
+          "main-4f-west-415",
+          "c-W-3"
+        ],
+        [
+          "main-4f-west-413",
+          "c-W-4"
+        ],
+        [
+          "main-4f-west-411",
           "c-W-5"
         ],
         [
-          "main-5f-college-of-science-faculty-room-s514",
-          "c-W-5"
+          "main-4f-west-409",
+          "c-W-6"
         ],
         [
-          "main-5f-curriculum-planning-and-development-office-s506",
-          "c-W-5"
+          "main-4f-west-407",
+          "c-W-7"
         ],
         [
-          "main-5f-sci-tech-research-and-development-center-s512a",
-          "c-W-5"
+          "main-4f-west-405",
+          "c-W-8"
         ],
+        [
+          "main-4f-west-403",
+          "c-W-9"
+        ],
+        [
+          "main-4f-west-401",
+          "c-W-10"
+        ]
+      ],
+      "rooms": [
+        {
+          "id": "main-4f-pup-pem-center",
+          "label": "PUP PEM Center?",
+          "kind": "office",
+          "x": 0.3325,
+          "y": 0.1425,
+          "flag": "?",
+          "node": "c-S-1"
+        },
+        {
+          "id": "main-4f-inst-of-social-history",
+          "label": "Inst. of Social History?",
+          "kind": "office",
+          "x": 0.3781,
+          "y": 0.1425,
+          "flag": "?",
+          "node": "c-S-2"
+        },
+        {
+          "id": "main-4f-speech-laboratory",
+          "label": "Speech Laboratory?",
+          "kind": "office",
+          "x": 0.4238,
+          "y": 0.1425,
+          "flag": "?",
+          "node": "c-S-3"
+        },
+        {
+          "id": "main-4f-training-center",
+          "label": "Training Center?",
+          "kind": "office",
+          "x": 0.4694,
+          "y": 0.1425,
+          "flag": "?",
+          "node": "c-S-4"
+        },
+        {
+          "id": "main-4f-extension-center",
+          "label": "Extension Center?",
+          "kind": "office",
+          "x": 0.515,
+          "y": 0.1425,
+          "flag": "?",
+          "node": "c-S-7"
+        },
+        {
+          "id": "main-4f-student-center",
+          "label": "Student Center?",
+          "kind": "office",
+          "x": 0.5606,
+          "y": 0.1425,
+          "flag": "?",
+          "node": "c-S-9"
+        },
+        {
+          "id": "main-4f-student-lounge",
+          "label": "Student Lounge?",
+          "kind": "office",
+          "x": 0.6062,
+          "y": 0.1425,
+          "flag": "?",
+          "node": "c-S-10"
+        },
+        {
+          "id": "main-4f-institutional-planning-office",
+          "label": "Institutional Planning Office?",
+          "kind": "office",
+          "x": 0.6519,
+          "y": 0.1425,
+          "flag": "?",
+          "node": "c-S-11"
+        },
+        {
+          "id": "main-4f-ou-audio-visual-room",
+          "label": "OU Audio Visual Room?",
+          "kind": "office",
+          "x": 0.6975,
+          "y": 0.1425,
+          "flag": "?",
+          "node": "c-S-12"
+        },
+        {
+          "id": "main-4f-ou-library",
+          "label": "OU Library?",
+          "kind": "office",
+          "x": 0.3325,
+          "y": 0.2375,
+          "flag": "?",
+          "node": "c-S-1"
+        },
+        {
+          "id": "main-4f-vacant-room",
+          "label": "Vacant Room?",
+          "kind": "office",
+          "x": 0.3781,
+          "y": 0.2375,
+          "flag": "?",
+          "node": "c-S-2"
+        },
+        {
+          "id": "main-4f-faculty-office-lounge",
+          "label": "Faculty Office/Lounge?",
+          "kind": "office",
+          "x": 0.4238,
+          "y": 0.2375,
+          "flag": "?",
+          "node": "c-S-3"
+        },
+        {
+          "id": "main-4f-dept-of-advertising-and-public-relations",
+          "label": "Dept. of Advertising and Public Relations?",
+          "kind": "office",
+          "x": 0.4694,
+          "y": 0.2375,
+          "flag": "?",
+          "node": "c-S-4"
+        },
+        {
+          "id": "main-4f-accenture-ideas-exchange",
+          "label": "Accenture Ideas Exchange?",
+          "kind": "office",
+          "x": 0.4919,
+          "y": 0.2375,
+          "flag": "?",
+          "node": "c-S-6"
+        },
+        {
+          "id": "main-4f-canteen",
+          "label": "Canteen?",
+          "kind": "office",
+          "x": 0.5619,
+          "y": 0.2375,
+          "flag": "?",
+          "node": "c-S-9"
+        },
+        {
+          "id": "main-4f-office-north-wing",
+          "label": "Office (North wing)",
+          "kind": "office",
+          "x": 0.6062,
+          "y": 0.2375,
+          "node": "c-S-10"
+        },
+        {
+          "id": "main-4f-female-toilet-east",
+          "label": "Female toilet? (East)",
+          "kind": "cr",
+          "x": 0.6519,
+          "y": 0.2375,
+          "flag": "?",
+          "node": "c-S-11"
+        },
+        {
+          "id": "main-4f-male-toilet-west",
+          "label": "Male toilet? (West)",
+          "kind": "cr",
+          "x": 0.6975,
+          "y": 0.2375,
+          "flag": "?",
+          "node": "c-S-12"
+        },
+        {
+          "id": "main-4f-4th-floor-dome",
+          "label": "4th Floor Dome",
+          "kind": "room",
+          "x": 0.516,
+          "y": 0.444,
+          "node": "c-dome"
+        },
+        {
+          "id": "main-4f-north-401",
+          "label": "Classroom 401",
+          "wing": "North wing",
+          "kind": "room",
+          "x": 0.4838,
+          "y": 0.4953,
+          "node": "c-N-2",
+          "code": "N401"
+        },
+        {
+          "id": "main-4f-north-403",
+          "label": "Classroom 403",
+          "wing": "North wing",
+          "kind": "room",
+          "x": 0.4838,
+          "y": 0.5198,
+          "node": "c-N-3",
+          "code": "N403"
+        },
+        {
+          "id": "main-4f-north-405",
+          "label": "Classroom 405",
+          "wing": "North wing",
+          "kind": "room",
+          "x": 0.4838,
+          "y": 0.5444,
+          "node": "c-N-4",
+          "code": "N405"
+        },
+        {
+          "id": "main-4f-north-407",
+          "label": "Classroom 407",
+          "wing": "North wing",
+          "kind": "room",
+          "x": 0.4838,
+          "y": 0.5689,
+          "node": "c-N-5",
+          "code": "N407"
+        },
+        {
+          "id": "main-4f-north-409",
+          "label": "Classroom 409",
+          "wing": "North wing",
+          "kind": "room",
+          "x": 0.4838,
+          "y": 0.5935,
+          "node": "c-N-6",
+          "code": "N409"
+        },
+        {
+          "id": "main-4f-north-411",
+          "label": "Classroom 411",
+          "wing": "North wing",
+          "kind": "room",
+          "x": 0.4838,
+          "y": 0.6181,
+          "node": "c-N-7",
+          "code": "N411"
+        },
+        {
+          "id": "main-4f-north-413",
+          "label": "Classroom 413",
+          "wing": "North wing",
+          "kind": "room",
+          "x": 0.4838,
+          "y": 0.6426,
+          "node": "c-N-8",
+          "code": "N413"
+        },
+        {
+          "id": "main-4f-north-415",
+          "label": "Classroom 415",
+          "wing": "North wing",
+          "kind": "room",
+          "x": 0.4838,
+          "y": 0.6672,
+          "node": "c-N-9",
+          "code": "N415"
+        },
+        {
+          "id": "main-4f-north-417",
+          "label": "Classroom 417",
+          "wing": "North wing",
+          "kind": "room",
+          "x": 0.4838,
+          "y": 0.6917,
+          "node": "c-N-10",
+          "code": "N417"
+        },
+        {
+          "id": "main-4f-north-402",
+          "label": "Classroom 402",
+          "wing": "North wing",
+          "kind": "room",
+          "x": 0.5482,
+          "y": 0.4953,
+          "node": "c-N-2",
+          "code": "N402"
+        },
+        {
+          "id": "main-4f-north-404",
+          "label": "Classroom 404",
+          "wing": "North wing",
+          "kind": "room",
+          "x": 0.5482,
+          "y": 0.5198,
+          "node": "c-N-3",
+          "code": "N404"
+        },
+        {
+          "id": "main-4f-north-406",
+          "label": "Classroom 406",
+          "wing": "North wing",
+          "kind": "room",
+          "x": 0.5482,
+          "y": 0.5444,
+          "node": "c-N-4",
+          "code": "N406"
+        },
+        {
+          "id": "main-4f-north-408",
+          "label": "Classroom 408",
+          "wing": "North wing",
+          "kind": "room",
+          "x": 0.5482,
+          "y": 0.5689,
+          "node": "c-N-5",
+          "code": "N408"
+        },
+        {
+          "id": "main-4f-north-410",
+          "label": "Classroom 410",
+          "wing": "North wing",
+          "kind": "room",
+          "x": 0.5482,
+          "y": 0.5935,
+          "node": "c-N-6",
+          "code": "N410"
+        },
+        {
+          "id": "main-4f-north-412",
+          "label": "Classroom 412",
+          "wing": "North wing",
+          "kind": "room",
+          "x": 0.5482,
+          "y": 0.6181,
+          "node": "c-N-7",
+          "code": "N412"
+        },
+        {
+          "id": "main-4f-north-414",
+          "label": "Classroom 414",
+          "wing": "North wing",
+          "kind": "room",
+          "x": 0.5482,
+          "y": 0.6426,
+          "node": "c-N-8",
+          "code": "N414"
+        },
+        {
+          "id": "main-4f-north-416",
+          "label": "Classroom 416",
+          "wing": "North wing",
+          "kind": "room",
+          "x": 0.5482,
+          "y": 0.6672,
+          "node": "c-N-9",
+          "code": "N416"
+        },
+        {
+          "id": "main-4f-north-418",
+          "label": "Classroom 418",
+          "wing": "North wing",
+          "kind": "room",
+          "x": 0.5482,
+          "y": 0.6917,
+          "node": "c-N-10",
+          "code": "N418"
+        },
+        {
+          "id": "main-4f-east-417",
+          "label": "Classroom 417",
+          "wing": "East wing",
+          "kind": "room",
+          "x": 0.4608,
+          "y": 0.3847,
+          "node": "c-E-2",
+          "code": "E417"
+        },
+        {
+          "id": "main-4f-east-415",
+          "label": "Classroom 415",
+          "wing": "East wing",
+          "kind": "room",
+          "x": 0.4391,
+          "y": 0.3731,
+          "node": "c-E-3",
+          "code": "E415"
+        },
+        {
+          "id": "main-4f-east-413",
+          "label": "Classroom 413",
+          "wing": "East wing",
+          "kind": "room",
+          "x": 0.4174,
+          "y": 0.3615,
+          "node": "c-E-4",
+          "code": "E413"
+        },
+        {
+          "id": "main-4f-east-411",
+          "label": "Classroom 411",
+          "wing": "East wing",
+          "kind": "room",
+          "x": 0.3956,
+          "y": 0.3499,
+          "node": "c-E-5",
+          "code": "E411"
+        },
+        {
+          "id": "main-4f-east-409",
+          "label": "Classroom 409",
+          "wing": "East wing",
+          "kind": "room",
+          "x": 0.3739,
+          "y": 0.3384,
+          "node": "c-E-6",
+          "code": "E409"
+        },
+        {
+          "id": "main-4f-east-407",
+          "label": "Classroom 407",
+          "wing": "East wing",
+          "kind": "room",
+          "x": 0.3522,
+          "y": 0.3268,
+          "node": "c-E-7",
+          "code": "E407"
+        },
+        {
+          "id": "main-4f-east-405",
+          "label": "Classroom 405",
+          "wing": "East wing",
+          "kind": "room",
+          "x": 0.3305,
+          "y": 0.3152,
+          "node": "c-E-8",
+          "code": "E405"
+        },
+        {
+          "id": "main-4f-east-403",
+          "label": "Classroom 403",
+          "wing": "East wing",
+          "kind": "room",
+          "x": 0.3087,
+          "y": 0.3036,
+          "node": "c-E-9",
+          "code": "E403"
+        },
+        {
+          "id": "main-4f-east-401",
+          "label": "Classroom 401",
+          "wing": "East wing",
+          "kind": "room",
+          "x": 0.287,
+          "y": 0.2921,
+          "node": "c-E-10",
+          "code": "E401"
+        },
+        {
+          "id": "main-4f-east-418",
+          "label": "Classroom 418",
+          "wing": "East wing",
+          "kind": "room",
+          "x": 0.4239,
+          "y": 0.4248,
+          "node": "c-E-2",
+          "code": "E418"
+        },
+        {
+          "id": "main-4f-east-416",
+          "label": "Classroom 416",
+          "wing": "East wing",
+          "kind": "room",
+          "x": 0.4022,
+          "y": 0.4133,
+          "node": "c-E-3",
+          "code": "E416"
+        },
+        {
+          "id": "main-4f-east-414",
+          "label": "Classroom 414",
+          "wing": "East wing",
+          "kind": "room",
+          "x": 0.3804,
+          "y": 0.4017,
+          "node": "c-E-4",
+          "code": "E414"
+        },
+        {
+          "id": "main-4f-east-412",
+          "label": "Classroom 412",
+          "wing": "East wing",
+          "kind": "room",
+          "x": 0.3587,
+          "y": 0.3901,
+          "node": "c-E-5",
+          "code": "E412"
+        },
+        {
+          "id": "main-4f-east-410",
+          "label": "Classroom 410",
+          "wing": "East wing",
+          "kind": "room",
+          "x": 0.337,
+          "y": 0.3785,
+          "node": "c-E-6",
+          "code": "E410"
+        },
+        {
+          "id": "main-4f-east-408",
+          "label": "Classroom 408",
+          "wing": "East wing",
+          "kind": "room",
+          "x": 0.3152,
+          "y": 0.3669,
+          "node": "c-E-7",
+          "code": "E408"
+        },
+        {
+          "id": "main-4f-east-406",
+          "label": "Classroom 406",
+          "wing": "East wing",
+          "kind": "room",
+          "x": 0.2935,
+          "y": 0.3554,
+          "node": "c-E-8",
+          "code": "E406"
+        },
+        {
+          "id": "main-4f-east-404",
+          "label": "Classroom 404",
+          "wing": "East wing",
+          "kind": "room",
+          "x": 0.2718,
+          "y": 0.3438,
+          "node": "c-E-9",
+          "code": "E404"
+        },
+        {
+          "id": "main-4f-east-402",
+          "label": "Classroom 402",
+          "wing": "East wing",
+          "kind": "room",
+          "x": 0.2501,
+          "y": 0.3322,
+          "node": "c-E-10",
+          "code": "E402"
+        },
+        {
+          "id": "main-4f-west-418",
+          "label": "Classroom 418",
+          "wing": "West wing",
+          "kind": "room",
+          "x": 0.5712,
+          "y": 0.3847,
+          "node": "c-W-2",
+          "code": "W418"
+        },
+        {
+          "id": "main-4f-west-416",
+          "label": "Classroom 416",
+          "wing": "West wing",
+          "kind": "room",
+          "x": 0.5929,
+          "y": 0.3731,
+          "node": "c-W-3",
+          "code": "W416"
+        },
+        {
+          "id": "main-4f-west-414",
+          "label": "Classroom 414",
+          "wing": "West wing",
+          "kind": "room",
+          "x": 0.6146,
+          "y": 0.3615,
+          "node": "c-W-4",
+          "code": "W414"
+        },
+        {
+          "id": "main-4f-west-412",
+          "label": "Classroom 412",
+          "wing": "West wing",
+          "kind": "room",
+          "x": 0.6364,
+          "y": 0.3499,
+          "node": "c-W-5",
+          "code": "W412"
+        },
+        {
+          "id": "main-4f-west-410",
+          "label": "Classroom 410",
+          "wing": "West wing",
+          "kind": "room",
+          "x": 0.6581,
+          "y": 0.3384,
+          "node": "c-W-6",
+          "code": "W410"
+        },
+        {
+          "id": "main-4f-west-408",
+          "label": "Classroom 408",
+          "wing": "West wing",
+          "kind": "room",
+          "x": 0.6798,
+          "y": 0.3268,
+          "node": "c-W-7",
+          "code": "W408"
+        },
+        {
+          "id": "main-4f-west-406",
+          "label": "Classroom 406",
+          "wing": "West wing",
+          "kind": "room",
+          "x": 0.7016,
+          "y": 0.3152,
+          "node": "c-W-8",
+          "code": "W406"
+        },
+        {
+          "id": "main-4f-west-404",
+          "label": "Classroom 404",
+          "wing": "West wing",
+          "kind": "room",
+          "x": 0.7233,
+          "y": 0.3036,
+          "node": "c-W-9",
+          "code": "W404"
+        },
+        {
+          "id": "main-4f-west-417",
+          "label": "Classroom 417",
+          "wing": "West wing",
+          "kind": "room",
+          "x": 0.6081,
+          "y": 0.4248,
+          "node": "c-W-2",
+          "code": "W417"
+        },
+        {
+          "id": "main-4f-west-415",
+          "label": "Classroom 415",
+          "wing": "West wing",
+          "kind": "room",
+          "x": 0.6299,
+          "y": 0.4133,
+          "node": "c-W-3",
+          "code": "W415"
+        },
+        {
+          "id": "main-4f-west-413",
+          "label": "Classroom 413",
+          "wing": "West wing",
+          "kind": "room",
+          "x": 0.6516,
+          "y": 0.4017,
+          "node": "c-W-4",
+          "code": "W413"
+        },
+        {
+          "id": "main-4f-west-411",
+          "label": "Classroom 411",
+          "wing": "West wing",
+          "kind": "room",
+          "x": 0.6733,
+          "y": 0.3901,
+          "node": "c-W-5",
+          "code": "W411"
+        },
+        {
+          "id": "main-4f-west-409",
+          "label": "Classroom 409",
+          "wing": "West wing",
+          "kind": "room",
+          "x": 0.695,
+          "y": 0.3785,
+          "node": "c-W-6",
+          "code": "W409"
+        },
+        {
+          "id": "main-4f-west-407",
+          "label": "Classroom 407",
+          "wing": "West wing",
+          "kind": "room",
+          "x": 0.7168,
+          "y": 0.3669,
+          "node": "c-W-7",
+          "code": "W407"
+        },
+        {
+          "id": "main-4f-west-405",
+          "label": "Classroom 405",
+          "wing": "West wing",
+          "kind": "room",
+          "x": 0.7385,
+          "y": 0.3554,
+          "node": "c-W-8",
+          "code": "W405"
+        },
+        {
+          "id": "main-4f-west-403",
+          "label": "Classroom 403",
+          "wing": "West wing",
+          "kind": "room",
+          "x": 0.7602,
+          "y": 0.3438,
+          "node": "c-W-9",
+          "code": "W403"
+        },
+        {
+          "id": "main-4f-west-401",
+          "label": "Classroom 401",
+          "wing": "West wing",
+          "kind": "room",
+          "x": 0.7819,
+          "y": 0.3322,
+          "node": "c-W-10",
+          "code": "W401"
+        }
+      ],
+      "svgSize": [
+        1522,
+        2000
+      ]
+    },
+    "main-5f": {
+      "aspect": 1.512859,
+      "start": "start",
+      "nodes": [
+        {
+          "id": "c-dome",
+          "x": 0.423,
+          "y": 0.4705,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-N-1",
+          "x": 0.45798,
+          "y": 0.47235,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-N-2",
+          "x": 0.47184,
+          "y": 0.47308,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-N-3",
+          "x": 0.50457,
+          "y": 0.47481,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-N-4",
+          "x": 0.5373,
+          "y": 0.47654,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-N-5",
+          "x": 0.57003,
+          "y": 0.47827,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-N-6",
+          "x": 0.60276,
+          "y": 0.48,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-N-7",
+          "x": 0.61537,
+          "y": 0.48066,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-N-8",
+          "x": 0.63549,
+          "y": 0.48172,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-N-9",
+          "x": 0.66822,
+          "y": 0.48345,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-N-10",
+          "x": 0.70095,
+          "y": 0.48518,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-N-11",
+          "x": 0.73368,
+          "y": 0.48691,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-N-12",
+          "x": 0.76641,
+          "y": 0.48864,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-N-13",
+          "x": 0.77279,
+          "y": 0.48898,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-N-14",
+          "x": 0.78478,
+          "y": 0.48961,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-W-1",
+          "x": 0.39676,
+          "y": 0.42483,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-W-2",
+          "x": 0.36107,
+          "y": 0.36272,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-W-3",
+          "x": 0.32923,
+          "y": 0.30731,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-W-4",
+          "x": 0.25899,
+          "y": 0.18507,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-W-5",
+          "x": 0.25111,
+          "y": 0.17136,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-E-1",
+          "x": 0.39893,
+          "y": 0.51883,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-E-2",
+          "x": 0.3798,
+          "y": 0.55724,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-E-3",
+          "x": 0.37162,
+          "y": 0.57364,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-E-4",
+          "x": 0.36787,
+          "y": 0.58117,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-E-5",
+          "x": 0.35595,
+          "y": 0.60512,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-E-6",
+          "x": 0.34403,
+          "y": 0.62905,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-E-7",
+          "x": 0.3321,
+          "y": 0.65298,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-E-8",
+          "x": 0.32018,
+          "y": 0.67692,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-E-9",
+          "x": 0.30826,
+          "y": 0.70086,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-E-10",
+          "x": 0.29633,
+          "y": 0.72479,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-E-11",
+          "x": 0.28441,
+          "y": 0.74873,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-E-12",
+          "x": 0.27254,
+          "y": 0.77255,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-E-13",
+          "x": 0.26532,
+          "y": 0.78705,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-D-1",
+          "x": 0.17,
+          "y": 0.4705,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-0",
+          "x": 0.17,
+          "y": 0.22995,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-1",
+          "x": 0.17,
+          "y": 0.25719,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-2",
+          "x": 0.17,
+          "y": 0.26021,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-3",
+          "x": 0.17,
+          "y": 0.26307,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-4",
+          "x": 0.17,
+          "y": 0.31165,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-5",
+          "x": 0.17,
+          "y": 0.32022,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-6",
+          "x": 0.17,
+          "y": 0.36309,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-7",
+          "x": 0.17,
+          "y": 0.37737,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-8",
+          "x": 0.17,
+          "y": 0.41452,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-9",
+          "x": 0.17,
+          "y": 0.4265,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-10",
+          "x": 0.17,
+          "y": 0.44629,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-11",
+          "x": 0.17,
+          "y": 0.46596,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-12",
+          "x": 0.17,
+          "y": 0.4705,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-13",
+          "x": 0.17,
+          "y": 0.5071,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-14",
+          "x": 0.17,
+          "y": 0.5174,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-15",
+          "x": 0.17,
+          "y": 0.54883,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-16",
+          "x": 0.17,
+          "y": 0.56884,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-17",
+          "x": 0.17,
+          "y": 0.60598,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-18",
+          "x": 0.17,
+          "y": 0.62027,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-19",
+          "x": 0.17,
+          "y": 0.66314,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-20",
+          "x": 0.17,
+          "y": 0.67171,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-21",
+          "x": 0.17,
+          "y": 0.72029,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-22",
+          "x": 0.17,
+          "y": 0.72315,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-23",
+          "x": 0.17,
+          "y": 0.72617,
+          "kind": "corridor"
+        },
+        {
+          "id": "c-S-24",
+          "x": 0.17,
+          "y": 0.7534,
+          "kind": "corridor"
+        },
+        {
+          "id": "stair-north-dome",
+          "x": 0.45798,
+          "y": 0.47235,
+          "kind": "stairs"
+        },
+        {
+          "id": "stair-north-end",
+          "x": 0.77279,
+          "y": 0.48898,
+          "kind": "stairs"
+        },
+        {
+          "id": "stair-west-dome",
+          "x": 0.39676,
+          "y": 0.42483,
+          "kind": "stairs"
+        },
+        {
+          "id": "stair-west-end",
+          "x": 0.25899,
+          "y": 0.18506,
+          "kind": "stairs"
+        },
+        {
+          "id": "stair-east-dome",
+          "x": 0.39893,
+          "y": 0.51883,
+          "kind": "stairs"
+        },
+        {
+          "id": "stair-east-end",
+          "x": 0.27255,
+          "y": 0.77256,
+          "kind": "stairs"
+        },
+        {
+          "id": "stair-south-north",
+          "x": 0.17,
+          "y": 0.25719,
+          "kind": "stairs"
+        },
+        {
+          "id": "stair-south-mid",
+          "x": 0.17,
+          "y": 0.44629,
+          "kind": "stairs"
+        },
+        {
+          "id": "stair-south-south",
+          "x": 0.17,
+          "y": 0.72617,
+          "kind": "stairs"
+        },
+        {
+          "id": "start",
+          "x": 0.39963,
+          "y": 0.51973,
+          "kind": "start",
+          "label": "You Are Here"
+        },
+        {
+          "id": "main-5f-bayan-muna-nnara-gabriela-office-w51",
+          "x": 0.26708,
+          "y": 0.17377,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-comfort-room-west",
+          "x": 0.32923,
+          "y": 0.31185,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-s506",
+          "x": 0.161,
+          "y": 0.5174,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-s505",
+          "x": 0.161,
+          "y": 0.46596,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-s504",
+          "x": 0.161,
+          "y": 0.41452,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-s507",
+          "x": 0.161,
+          "y": 0.56884,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-s508",
+          "x": 0.161,
+          "y": 0.62027,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-s503a",
+          "x": 0.161,
+          "y": 0.36309,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-s509",
+          "x": 0.161,
+          "y": 0.67171,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-s502",
+          "x": 0.161,
+          "y": 0.31165,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-s510",
+          "x": 0.161,
+          "y": 0.72315,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-s501",
+          "x": 0.161,
+          "y": 0.26021,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-s511",
+          "x": 0.179,
+          "y": 0.26307,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-s512a",
+          "x": 0.179,
+          "y": 0.32022,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-s518",
+          "x": 0.179,
+          "y": 0.72029,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-s517",
+          "x": 0.179,
+          "y": 0.66314,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-s512b",
+          "x": 0.179,
+          "y": 0.37737,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-s516",
+          "x": 0.179,
+          "y": 0.60598,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-s513",
+          "x": 0.179,
+          "y": 0.4265,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-s514",
+          "x": 0.179,
+          "y": 0.5071,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-s515",
+          "x": 0.179,
+          "y": 0.54883,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-n500",
+          "x": 0.47223,
+          "y": 0.45645,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-n502",
+          "x": 0.50496,
+          "y": 0.45818,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-n504",
+          "x": 0.53769,
+          "y": 0.45991,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-n506",
+          "x": 0.57042,
+          "y": 0.46164,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-n508",
+          "x": 0.60315,
+          "y": 0.46336,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-n510",
+          "x": 0.63588,
+          "y": 0.46509,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-n512",
+          "x": 0.66861,
+          "y": 0.46682,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-n514",
+          "x": 0.70134,
+          "y": 0.46855,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-n516",
+          "x": 0.73407,
+          "y": 0.47028,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-n518",
+          "x": 0.7668,
+          "y": 0.47201,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-n501",
+          "x": 0.47146,
+          "y": 0.48971,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-n503",
+          "x": 0.50419,
+          "y": 0.49144,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-n505",
+          "x": 0.53692,
+          "y": 0.49317,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-n507",
+          "x": 0.56965,
+          "y": 0.4949,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-n509",
+          "x": 0.60238,
+          "y": 0.49663,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-n511",
+          "x": 0.63511,
+          "y": 0.49836,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-n513",
+          "x": 0.66784,
+          "y": 0.50009,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-n515",
+          "x": 0.70057,
+          "y": 0.50182,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-n517",
+          "x": 0.7333,
+          "y": 0.50354,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-n519",
+          "x": 0.76603,
+          "y": 0.50527,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-comfort-room-north",
+          "x": 0.37162,
+          "y": 0.57818,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-e501",
+          "x": 0.37101,
+          "y": 0.54722,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-e503",
+          "x": 0.35909,
+          "y": 0.57116,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-e505",
+          "x": 0.34716,
+          "y": 0.5951,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-e507",
+          "x": 0.33524,
+          "y": 0.61903,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-e509",
+          "x": 0.32332,
+          "y": 0.64297,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-e511",
+          "x": 0.3114,
+          "y": 0.66691,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-e513",
+          "x": 0.29947,
+          "y": 0.69084,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-e515",
+          "x": 0.28755,
+          "y": 0.71478,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-e517",
+          "x": 0.27563,
+          "y": 0.73872,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-e519",
+          "x": 0.2637,
+          "y": 0.76265,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-e500",
+          "x": 0.38858,
+          "y": 0.56725,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-e502",
+          "x": 0.37666,
+          "y": 0.59119,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-e504",
+          "x": 0.36473,
+          "y": 0.61513,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-e506",
+          "x": 0.35281,
+          "y": 0.63906,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-e508",
+          "x": 0.34089,
+          "y": 0.663,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-e510",
+          "x": 0.32897,
+          "y": 0.68694,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-e512",
+          "x": 0.31704,
+          "y": 0.71087,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-e514",
+          "x": 0.30512,
+          "y": 0.73481,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-e516",
+          "x": 0.2932,
+          "y": 0.75875,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-e518",
+          "x": 0.28127,
+          "y": 0.78268,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-comfort-room-east",
+          "x": 0.61537,
+          "y": 0.4852,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-5th-floor-dome",
+          "x": 0.423,
+          "y": 0.4705,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-elevator-south-wing",
+          "x": 0.36107,
+          "y": 0.36726,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-ccmit-server-room-s507",
+          "x": 0.161,
+          "y": 0.56884,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-college-of-accountancy-faculty-room-n500",
+          "x": 0.47223,
+          "y": 0.45645,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-college-of-accountancy-student-council-office-e519",
+          "x": 0.2637,
+          "y": 0.76265,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-college-of-science-accreditation-center-s516",
+          "x": 0.179,
+          "y": 0.60598,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-college-of-science-faculty-room-s514",
+          "x": 0.179,
+          "y": 0.5071,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-curriculum-planning-and-development-office-s506",
+          "x": 0.161,
+          "y": 0.5174,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-jpia-office-e500",
+          "x": 0.38858,
+          "y": 0.56725,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-samasa-coa-n519",
+          "x": 0.76603,
+          "y": 0.50527,
+          "kind": "room"
+        },
+        {
+          "id": "main-5f-sci-tech-research-and-development-center-s512a",
+          "x": 0.179,
+          "y": 0.32022,
+          "kind": "room"
+        }
+      ],
+      "edges": [
         [
           "c-dome",
-          "c-N-0"
-        ],
-        [
-          "c-N-0",
           "c-N-1"
         ],
         [
@@ -3897,111 +3871,39 @@
           "c-N-11"
         ],
         [
-          "stair-north-end",
-          "c-N-7"
+          "c-N-11",
+          "c-N-12"
         ],
         [
-          "stair-north-dome",
-          "c-N-3"
+          "c-N-12",
+          "c-N-13"
         ],
         [
-          "main-5f-n500",
-          "c-N-3"
-        ],
-        [
-          "main-5f-n502",
-          "c-N-4"
-        ],
-        [
-          "main-5f-n504",
-          "c-N-4"
-        ],
-        [
-          "main-5f-n506",
-          "c-N-4"
-        ],
-        [
-          "main-5f-n508",
-          "c-N-5"
-        ],
-        [
-          "main-5f-n510",
-          "c-N-8"
-        ],
-        [
-          "main-5f-n512",
-          "c-N-6"
-        ],
-        [
-          "main-5f-n514",
-          "c-N-6"
-        ],
-        [
-          "main-5f-n516",
-          "c-N-6"
-        ],
-        [
-          "main-5f-n518",
-          "c-N-7"
-        ],
-        [
-          "main-5f-n501",
-          "c-N-3"
-        ],
-        [
-          "main-5f-n503",
-          "c-N-4"
-        ],
-        [
-          "main-5f-n505",
-          "c-N-4"
-        ],
-        [
-          "main-5f-n507",
-          "c-N-5"
-        ],
-        [
-          "main-5f-n509",
-          "c-N-5"
-        ],
-        [
-          "main-5f-n511",
-          "c-N-5"
-        ],
-        [
-          "main-5f-n513",
-          "c-N-6"
-        ],
-        [
-          "main-5f-n515",
-          "c-N-6"
-        ],
-        [
-          "main-5f-n517",
-          "c-N-7"
-        ],
-        [
-          "main-5f-n519",
-          "c-N-7"
-        ],
-        [
-          "main-5f-comfort-room-north",
-          "c-N-4"
-        ],
-        [
-          "main-5f-college-of-accountancy-faculty-room-n500",
-          "c-N-4"
-        ],
-        [
-          "main-5f-samasa-coa-n519",
-          "c-N-4"
+          "c-N-13",
+          "c-N-14"
         ],
         [
           "c-dome",
-          "c-E-0"
+          "c-W-1"
         ],
         [
-          "c-E-0",
+          "c-W-1",
+          "c-W-2"
+        ],
+        [
+          "c-W-2",
+          "c-W-3"
+        ],
+        [
+          "c-W-3",
+          "c-W-4"
+        ],
+        [
+          "c-W-4",
+          "c-W-5"
+        ],
+        [
+          "c-dome",
           "c-E-1"
         ],
         [
@@ -4029,16 +3931,344 @@
           "c-E-7"
         ],
         [
+          "c-E-7",
+          "c-E-8"
+        ],
+        [
+          "c-E-8",
+          "c-E-9"
+        ],
+        [
+          "c-E-9",
+          "c-E-10"
+        ],
+        [
+          "c-E-10",
+          "c-E-11"
+        ],
+        [
+          "c-E-11",
+          "c-E-12"
+        ],
+        [
+          "c-E-12",
+          "c-E-13"
+        ],
+        [
+          "c-dome",
+          "c-D-1"
+        ],
+        [
+          "c-S-0",
+          "c-S-1"
+        ],
+        [
+          "c-S-1",
+          "c-S-2"
+        ],
+        [
+          "c-S-2",
+          "c-S-3"
+        ],
+        [
+          "c-S-3",
+          "c-S-4"
+        ],
+        [
+          "c-S-4",
+          "c-S-5"
+        ],
+        [
+          "c-S-5",
+          "c-S-6"
+        ],
+        [
+          "c-S-6",
+          "c-S-7"
+        ],
+        [
+          "c-S-7",
+          "c-S-8"
+        ],
+        [
+          "c-S-8",
+          "c-S-9"
+        ],
+        [
+          "c-S-9",
+          "c-S-10"
+        ],
+        [
+          "c-S-10",
+          "c-S-11"
+        ],
+        [
+          "c-S-11",
+          "c-S-12"
+        ],
+        [
+          "c-S-12",
+          "c-S-13"
+        ],
+        [
+          "c-S-13",
+          "c-S-14"
+        ],
+        [
+          "c-S-14",
+          "c-S-15"
+        ],
+        [
+          "c-S-15",
+          "c-S-16"
+        ],
+        [
+          "c-S-16",
+          "c-S-17"
+        ],
+        [
+          "c-S-17",
+          "c-S-18"
+        ],
+        [
+          "c-S-18",
+          "c-S-19"
+        ],
+        [
+          "c-S-19",
+          "c-S-20"
+        ],
+        [
+          "c-S-20",
+          "c-S-21"
+        ],
+        [
+          "c-S-21",
+          "c-S-22"
+        ],
+        [
+          "c-S-22",
+          "c-S-23"
+        ],
+        [
+          "c-S-23",
+          "c-S-24"
+        ],
+        [
+          "c-D-1",
+          "c-S-12"
+        ],
+        [
+          "stair-north-dome",
+          "c-N-1"
+        ],
+        [
+          "stair-north-end",
+          "c-N-13"
+        ],
+        [
+          "stair-west-dome",
+          "c-W-1"
+        ],
+        [
+          "stair-west-end",
+          "c-W-4"
+        ],
+        [
           "stair-east-dome",
-          "c-E-3"
+          "c-E-1"
         ],
         [
           "stair-east-end",
-          "c-E-7"
+          "c-E-12"
+        ],
+        [
+          "stair-south-north",
+          "c-S-1"
+        ],
+        [
+          "stair-south-mid",
+          "c-S-10"
+        ],
+        [
+          "stair-south-south",
+          "c-S-23"
+        ],
+        [
+          "start",
+          "c-E-1"
+        ],
+        [
+          "main-5f-bayan-muna-nnara-gabriela-office-w51",
+          "c-W-4"
+        ],
+        [
+          "main-5f-comfort-room-west",
+          "c-W-3"
+        ],
+        [
+          "main-5f-s506",
+          "c-S-14"
+        ],
+        [
+          "main-5f-s505",
+          "c-S-11"
+        ],
+        [
+          "main-5f-s504",
+          "c-S-8"
+        ],
+        [
+          "main-5f-s507",
+          "c-S-16"
+        ],
+        [
+          "main-5f-s508",
+          "c-S-18"
+        ],
+        [
+          "main-5f-s503a",
+          "c-S-6"
+        ],
+        [
+          "main-5f-s509",
+          "c-S-20"
+        ],
+        [
+          "main-5f-s502",
+          "c-S-4"
+        ],
+        [
+          "main-5f-s510",
+          "c-S-22"
+        ],
+        [
+          "main-5f-s501",
+          "c-S-2"
+        ],
+        [
+          "main-5f-s511",
+          "c-S-3"
+        ],
+        [
+          "main-5f-s512a",
+          "c-S-5"
+        ],
+        [
+          "main-5f-s518",
+          "c-S-21"
+        ],
+        [
+          "main-5f-s517",
+          "c-S-19"
+        ],
+        [
+          "main-5f-s512b",
+          "c-S-7"
+        ],
+        [
+          "main-5f-s516",
+          "c-S-17"
+        ],
+        [
+          "main-5f-s513",
+          "c-S-9"
+        ],
+        [
+          "main-5f-s514",
+          "c-S-13"
+        ],
+        [
+          "main-5f-s515",
+          "c-S-15"
+        ],
+        [
+          "main-5f-n500",
+          "c-N-2"
+        ],
+        [
+          "main-5f-n502",
+          "c-N-3"
+        ],
+        [
+          "main-5f-n504",
+          "c-N-4"
+        ],
+        [
+          "main-5f-n506",
+          "c-N-5"
+        ],
+        [
+          "main-5f-n508",
+          "c-N-6"
+        ],
+        [
+          "main-5f-n510",
+          "c-N-8"
+        ],
+        [
+          "main-5f-n512",
+          "c-N-9"
+        ],
+        [
+          "main-5f-n514",
+          "c-N-10"
+        ],
+        [
+          "main-5f-n516",
+          "c-N-11"
+        ],
+        [
+          "main-5f-n518",
+          "c-N-12"
+        ],
+        [
+          "main-5f-n501",
+          "c-N-2"
+        ],
+        [
+          "main-5f-n503",
+          "c-N-3"
+        ],
+        [
+          "main-5f-n505",
+          "c-N-4"
+        ],
+        [
+          "main-5f-n507",
+          "c-N-5"
+        ],
+        [
+          "main-5f-n509",
+          "c-N-6"
+        ],
+        [
+          "main-5f-n511",
+          "c-N-8"
+        ],
+        [
+          "main-5f-n513",
+          "c-N-9"
+        ],
+        [
+          "main-5f-n515",
+          "c-N-10"
+        ],
+        [
+          "main-5f-n517",
+          "c-N-11"
+        ],
+        [
+          "main-5f-n519",
+          "c-N-12"
+        ],
+        [
+          "main-5f-comfort-room-north",
+          "c-E-3"
         ],
         [
           "main-5f-e501",
-          "c-E-3"
+          "c-E-2"
         ],
         [
           "main-5f-e503",
@@ -4046,39 +4276,39 @@
         ],
         [
           "main-5f-e505",
-          "c-E-4"
+          "c-E-5"
         ],
         [
           "main-5f-e507",
-          "c-E-4"
+          "c-E-6"
         ],
         [
           "main-5f-e509",
-          "c-E-5"
-        ],
-        [
-          "main-5f-e511",
-          "c-E-5"
-        ],
-        [
-          "main-5f-e513",
-          "c-E-6"
-        ],
-        [
-          "main-5f-e515",
-          "c-E-6"
-        ],
-        [
-          "main-5f-e517",
-          "c-E-6"
-        ],
-        [
-          "main-5f-e519",
           "c-E-7"
         ],
         [
+          "main-5f-e511",
+          "c-E-8"
+        ],
+        [
+          "main-5f-e513",
+          "c-E-9"
+        ],
+        [
+          "main-5f-e515",
+          "c-E-10"
+        ],
+        [
+          "main-5f-e517",
+          "c-E-11"
+        ],
+        [
+          "main-5f-e519",
+          "c-E-12"
+        ],
+        [
           "main-5f-e500",
-          "c-E-3"
+          "c-E-2"
         ],
         [
           "main-5f-e502",
@@ -4086,59 +4316,83 @@
         ],
         [
           "main-5f-e504",
-          "c-E-4"
+          "c-E-5"
         ],
         [
           "main-5f-e506",
-          "c-E-5"
+          "c-E-6"
         ],
         [
           "main-5f-e508",
-          "c-E-5"
+          "c-E-7"
         ],
         [
           "main-5f-e510",
-          "c-E-5"
+          "c-E-8"
         ],
         [
           "main-5f-e512",
-          "c-E-6"
+          "c-E-9"
         ],
         [
           "main-5f-e514",
-          "c-E-6"
+          "c-E-10"
         ],
         [
           "main-5f-e516",
-          "c-E-7"
+          "c-E-11"
         ],
         [
           "main-5f-e518",
-          "c-E-7"
+          "c-E-12"
         ],
         [
           "main-5f-comfort-room-east",
-          "c-N-8"
-        ],
-        [
-          "main-5f-elevator-south-wing",
-          "c-N-9"
-        ],
-        [
-          "main-5f-college-of-accountancy-student-council-office-e519",
-          "c-N-8"
-        ],
-        [
-          "main-5f-jpia-office-e500",
-          "c-N-8"
+          "c-N-7"
         ],
         [
           "main-5f-5th-floor-dome",
           "c-dome"
         ],
         [
-          "start",
-          "c-E-3"
+          "main-5f-elevator-south-wing",
+          "c-W-2"
+        ],
+        [
+          "main-5f-ccmit-server-room-s507",
+          "c-S-16"
+        ],
+        [
+          "main-5f-college-of-accountancy-faculty-room-n500",
+          "c-N-2"
+        ],
+        [
+          "main-5f-college-of-accountancy-student-council-office-e519",
+          "c-E-12"
+        ],
+        [
+          "main-5f-college-of-science-accreditation-center-s516",
+          "c-S-17"
+        ],
+        [
+          "main-5f-college-of-science-faculty-room-s514",
+          "c-S-13"
+        ],
+        [
+          "main-5f-curriculum-planning-and-development-office-s506",
+          "c-S-14"
+        ],
+        [
+          "main-5f-jpia-office-e500",
+          "c-E-2"
+        ],
+        [
+          "main-5f-samasa-coa-n519",
+          "c-N-12"
+        ],
+        [
+          "main-5f-sci-tech-research-and-development-center-s512a",
+          "c-S-5"
         ]
       ],
       "rooms": [
@@ -4146,9 +4400,9 @@
           "id": "main-5f-bayan-muna-nnara-gabriela-office-w51",
           "label": "Bayan Muna/NNARA/Gabriela Office (W519)",
           "kind": "office",
-          "x": 0.35,
-          "y": 0.28,
-          "node": "c-W-5"
+          "x": 0.2784,
+          "y": 0.1589,
+          "node": "c-W-4"
         },
         {
           "id": "main-5f-comfort-room-west",
@@ -4156,15 +4410,15 @@
           "kind": "cr",
           "x": 0.35,
           "y": 0.28,
-          "node": "c-W-5"
+          "node": "c-W-3"
         },
         {
           "id": "main-5f-s506",
           "label": "S506",
           "kind": "room",
           "x": 0.125,
-          "y": 0.5163,
-          "node": "c-S-3",
+          "y": 0.5174,
+          "node": "c-S-14",
           "code": "S506"
         },
         {
@@ -4172,8 +4426,8 @@
           "label": "S505",
           "kind": "room",
           "x": 0.125,
-          "y": 0.4671,
-          "node": "c-S-3",
+          "y": 0.466,
+          "node": "c-S-11",
           "code": "S505"
         },
         {
@@ -4181,8 +4435,8 @@
           "label": "S504",
           "kind": "room",
           "x": 0.125,
-          "y": 0.4179,
-          "node": "c-S-4",
+          "y": 0.4145,
+          "node": "c-S-8",
           "code": "S504"
         },
         {
@@ -4190,8 +4444,8 @@
           "label": "S507",
           "kind": "room",
           "x": 0.125,
-          "y": 0.5654,
-          "node": "c-S-10",
+          "y": 0.5688,
+          "node": "c-S-16",
           "code": "S507"
         },
         {
@@ -4199,17 +4453,17 @@
           "label": "S508",
           "kind": "room",
           "x": 0.125,
-          "y": 0.6146,
-          "node": "c-S-10",
+          "y": 0.6203,
+          "node": "c-S-18",
           "code": "S508"
         },
         {
           "id": "main-5f-s503a",
           "label": "S503A",
           "kind": "room",
-          "x": 0.4088,
-          "y": 0.1082,
-          "node": "c-W-7",
+          "x": 0.125,
+          "y": 0.3631,
+          "node": "c-S-6",
           "code": "S503A"
         },
         {
@@ -4217,8 +4471,8 @@
           "label": "S509",
           "kind": "room",
           "x": 0.125,
-          "y": 0.6638,
-          "node": "c-S-10",
+          "y": 0.6717,
+          "node": "c-S-20",
           "code": "S509"
         },
         {
@@ -4226,8 +4480,8 @@
           "label": "S502",
           "kind": "room",
           "x": 0.125,
-          "y": 0.3196,
-          "node": "c-S-6",
+          "y": 0.3116,
+          "node": "c-S-4",
           "code": "S502"
         },
         {
@@ -4235,8 +4489,8 @@
           "label": "S510",
           "kind": "room",
           "x": 0.125,
-          "y": 0.7129,
-          "node": "c-S-11",
+          "y": 0.7231,
+          "node": "c-S-22",
           "code": "S510"
         },
         {
@@ -4244,8 +4498,8 @@
           "label": "S501",
           "kind": "room",
           "x": 0.125,
-          "y": 0.2704,
-          "node": "c-S-7",
+          "y": 0.2602,
+          "node": "c-S-2",
           "code": "S501"
         },
         {
@@ -4253,8 +4507,8 @@
           "label": "S511",
           "kind": "room",
           "x": 0.215,
-          "y": 0.2732,
-          "node": "c-W-7",
+          "y": 0.2631,
+          "node": "c-S-3",
           "code": "S511"
         },
         {
@@ -4262,8 +4516,8 @@
           "label": "S512A",
           "kind": "room",
           "x": 0.215,
-          "y": 0.3278,
-          "node": "c-S-6",
+          "y": 0.3202,
+          "node": "c-S-5",
           "code": "S512A"
         },
         {
@@ -4271,8 +4525,8 @@
           "label": "S518",
           "kind": "room",
           "x": 0.215,
-          "y": 0.7102,
-          "node": "c-S-11",
+          "y": 0.7203,
+          "node": "c-S-21",
           "code": "S518"
         },
         {
@@ -4280,8 +4534,8 @@
           "label": "S517",
           "kind": "room",
           "x": 0.215,
-          "y": 0.6556,
-          "node": "c-S-10",
+          "y": 0.6631,
+          "node": "c-S-19",
           "code": "S517"
         },
         {
@@ -4289,8 +4543,8 @@
           "label": "S512B",
           "kind": "room",
           "x": 0.215,
-          "y": 0.3824,
-          "node": "c-S-5",
+          "y": 0.3774,
+          "node": "c-S-7",
           "code": "S512B"
         },
         {
@@ -4298,8 +4552,8 @@
           "label": "S516",
           "kind": "room",
           "x": 0.215,
-          "y": 0.6009,
-          "node": "c-S-10",
+          "y": 0.606,
+          "node": "c-S-17",
           "code": "S516"
         },
         {
@@ -4307,8 +4561,8 @@
           "label": "S513",
           "kind": "room",
           "x": 0.215,
-          "y": 0.437,
-          "node": "c-S-4",
+          "y": 0.4265,
+          "node": "c-S-9",
           "code": "S513"
         },
         {
@@ -4316,8 +4570,8 @@
           "label": "S514",
           "kind": "room",
           "x": 0.215,
-          "y": 0.4917,
-          "node": "c-S-2",
+          "y": 0.5071,
+          "node": "c-S-13",
           "code": "S514"
         },
         {
@@ -4325,8 +4579,8 @@
           "label": "S515",
           "kind": "room",
           "x": 0.215,
-          "y": 0.5463,
-          "node": "c-S-2",
+          "y": 0.5488,
+          "node": "c-S-15",
           "code": "S515"
         },
         {
@@ -4335,7 +4589,7 @@
           "kind": "room",
           "x": 0.4728,
           "y": 0.4338,
-          "node": "c-N-3",
+          "node": "c-N-2",
           "code": "N500"
         },
         {
@@ -4344,7 +4598,7 @@
           "kind": "room",
           "x": 0.5055,
           "y": 0.4355,
-          "node": "c-N-4",
+          "node": "c-N-3",
           "code": "N502"
         },
         {
@@ -4362,7 +4616,7 @@
           "kind": "room",
           "x": 0.5709,
           "y": 0.439,
-          "node": "c-N-4",
+          "node": "c-N-5",
           "code": "N506"
         },
         {
@@ -4371,7 +4625,7 @@
           "kind": "room",
           "x": 0.6037,
           "y": 0.4407,
-          "node": "c-N-5",
+          "node": "c-N-6",
           "code": "N508"
         },
         {
@@ -4389,7 +4643,7 @@
           "kind": "room",
           "x": 0.6691,
           "y": 0.4441,
-          "node": "c-N-6",
+          "node": "c-N-9",
           "code": "N512"
         },
         {
@@ -4398,7 +4652,7 @@
           "kind": "room",
           "x": 0.7019,
           "y": 0.4459,
-          "node": "c-N-6",
+          "node": "c-N-10",
           "code": "N514"
         },
         {
@@ -4407,7 +4661,7 @@
           "kind": "room",
           "x": 0.7346,
           "y": 0.4476,
-          "node": "c-N-6",
+          "node": "c-N-11",
           "code": "N516"
         },
         {
@@ -4416,7 +4670,7 @@
           "kind": "room",
           "x": 0.7673,
           "y": 0.4493,
-          "node": "c-N-7",
+          "node": "c-N-12",
           "code": "N518"
         },
         {
@@ -4425,7 +4679,7 @@
           "kind": "room",
           "x": 0.4709,
           "y": 0.5124,
-          "node": "c-N-3",
+          "node": "c-N-2",
           "code": "N501"
         },
         {
@@ -4434,7 +4688,7 @@
           "kind": "room",
           "x": 0.5037,
           "y": 0.5141,
-          "node": "c-N-4",
+          "node": "c-N-3",
           "code": "N503"
         },
         {
@@ -4442,7 +4696,7 @@
           "label": "N505",
           "kind": "room",
           "x": 0.5364,
-          "y": 0.5158,
+          "y": 0.5159,
           "node": "c-N-4",
           "code": "N505"
         },
@@ -4461,7 +4715,7 @@
           "kind": "room",
           "x": 0.6019,
           "y": 0.5193,
-          "node": "c-N-5",
+          "node": "c-N-6",
           "code": "N509"
         },
         {
@@ -4470,7 +4724,7 @@
           "kind": "room",
           "x": 0.6346,
           "y": 0.521,
-          "node": "c-N-5",
+          "node": "c-N-8",
           "code": "N511"
         },
         {
@@ -4479,7 +4733,7 @@
           "kind": "room",
           "x": 0.6673,
           "y": 0.5228,
-          "node": "c-N-6",
+          "node": "c-N-9",
           "code": "N513"
         },
         {
@@ -4488,7 +4742,7 @@
           "kind": "room",
           "x": 0.7,
           "y": 0.5245,
-          "node": "c-N-6",
+          "node": "c-N-10",
           "code": "N515"
         },
         {
@@ -4497,7 +4751,7 @@
           "kind": "room",
           "x": 0.7328,
           "y": 0.5262,
-          "node": "c-N-7",
+          "node": "c-N-11",
           "code": "N517"
         },
         {
@@ -4506,7 +4760,7 @@
           "kind": "room",
           "x": 0.7655,
           "y": 0.528,
-          "node": "c-N-7",
+          "node": "c-N-12",
           "code": "N519"
         },
         {
@@ -4515,23 +4769,23 @@
           "kind": "cr",
           "x": 0.5,
           "y": 0.72,
-          "node": "c-N-4"
+          "node": "c-E-3"
         },
         {
           "id": "main-5f-e501",
           "label": "E501",
           "kind": "room",
-          "x": 0.3744,
-          "y": 0.5027,
-          "node": "c-E-3",
+          "x": 0.359,
+          "y": 0.5336,
+          "node": "c-E-2",
           "code": "E501"
         },
         {
           "id": "main-5f-e503",
           "label": "E503",
           "kind": "room",
-          "x": 0.3609,
-          "y": 0.5299,
+          "x": 0.3471,
+          "y": 0.5575,
           "node": "c-E-4",
           "code": "E503"
         },
@@ -4539,89 +4793,89 @@
           "id": "main-5f-e505",
           "label": "E505",
           "kind": "room",
-          "x": 0.3473,
-          "y": 0.5571,
-          "node": "c-E-4",
+          "x": 0.3352,
+          "y": 0.5814,
+          "node": "c-E-5",
           "code": "E505"
         },
         {
           "id": "main-5f-e507",
           "label": "E507",
           "kind": "room",
-          "x": 0.3338,
-          "y": 0.5843,
-          "node": "c-E-4",
+          "x": 0.3233,
+          "y": 0.6054,
+          "node": "c-E-6",
           "code": "E507"
         },
         {
           "id": "main-5f-e509",
           "label": "E509",
           "kind": "room",
-          "x": 0.3202,
-          "y": 0.6114,
-          "node": "c-E-5",
+          "x": 0.3113,
+          "y": 0.6293,
+          "node": "c-E-7",
           "code": "E509"
         },
         {
           "id": "main-5f-e511",
           "label": "E511",
           "kind": "room",
-          "x": 0.3067,
-          "y": 0.6386,
-          "node": "c-E-5",
+          "x": 0.2994,
+          "y": 0.6532,
+          "node": "c-E-8",
           "code": "E511"
         },
         {
           "id": "main-5f-e513",
           "label": "E513",
           "kind": "room",
-          "x": 0.2932,
-          "y": 0.6658,
-          "node": "c-E-6",
+          "x": 0.2875,
+          "y": 0.6772,
+          "node": "c-E-9",
           "code": "E513"
         },
         {
           "id": "main-5f-e515",
           "label": "E515",
           "kind": "room",
-          "x": 0.2796,
-          "y": 0.693,
-          "node": "c-E-6",
+          "x": 0.2756,
+          "y": 0.7011,
+          "node": "c-E-10",
           "code": "E515"
         },
         {
           "id": "main-5f-e517",
           "label": "E517",
           "kind": "room",
-          "x": 0.2661,
-          "y": 0.7202,
-          "node": "c-E-6",
+          "x": 0.2636,
+          "y": 0.7251,
+          "node": "c-E-11",
           "code": "E517"
         },
         {
           "id": "main-5f-e519",
           "label": "E519",
           "kind": "room",
-          "x": 0.2525,
-          "y": 0.7474,
-          "node": "c-E-7",
+          "x": 0.2517,
+          "y": 0.749,
+          "node": "c-E-12",
           "code": "E519"
         },
         {
           "id": "main-5f-e500",
           "label": "E500",
           "kind": "room",
-          "x": 0.4159,
-          "y": 0.5501,
-          "node": "c-E-3",
+          "x": 0.4006,
+          "y": 0.5809,
+          "node": "c-E-2",
           "code": "E500"
         },
         {
           "id": "main-5f-e502",
           "label": "E502",
           "kind": "room",
-          "x": 0.4024,
-          "y": 0.5772,
+          "x": 0.3886,
+          "y": 0.6048,
           "node": "c-E-4",
           "code": "E502"
         },
@@ -4629,72 +4883,72 @@
           "id": "main-5f-e504",
           "label": "E504",
           "kind": "room",
-          "x": 0.3888,
-          "y": 0.6044,
-          "node": "c-E-4",
+          "x": 0.3767,
+          "y": 0.6288,
+          "node": "c-E-5",
           "code": "E504"
         },
         {
           "id": "main-5f-e506",
           "label": "E506",
           "kind": "room",
-          "x": 0.3753,
-          "y": 0.6316,
-          "node": "c-E-5",
+          "x": 0.3648,
+          "y": 0.6527,
+          "node": "c-E-6",
           "code": "E506"
         },
         {
           "id": "main-5f-e508",
           "label": "E508",
           "kind": "room",
-          "x": 0.3618,
-          "y": 0.6588,
-          "node": "c-E-5",
+          "x": 0.3529,
+          "y": 0.6767,
+          "node": "c-E-7",
           "code": "E508"
         },
         {
           "id": "main-5f-e510",
           "label": "E510",
           "kind": "room",
-          "x": 0.3482,
-          "y": 0.686,
-          "node": "c-E-5",
+          "x": 0.3409,
+          "y": 0.7006,
+          "node": "c-E-8",
           "code": "E510"
         },
         {
           "id": "main-5f-e512",
           "label": "E512",
           "kind": "room",
-          "x": 0.3347,
-          "y": 0.7132,
-          "node": "c-E-6",
+          "x": 0.329,
+          "y": 0.7245,
+          "node": "c-E-9",
           "code": "E512"
         },
         {
           "id": "main-5f-e514",
           "label": "E514",
           "kind": "room",
-          "x": 0.3211,
-          "y": 0.7403,
-          "node": "c-E-6",
+          "x": 0.3171,
+          "y": 0.7485,
+          "node": "c-E-10",
           "code": "E514"
         },
         {
           "id": "main-5f-e516",
           "label": "E516",
           "kind": "room",
-          "x": 0.3076,
-          "y": 0.7675,
-          "node": "c-E-7",
+          "x": 0.3052,
+          "y": 0.7724,
+          "node": "c-E-11",
           "code": "E516"
         },
         {
           "id": "main-5f-e518",
           "label": "E518",
           "kind": "room",
-          "x": 0.2941,
-          "y": 0.7947,
-          "node": "c-E-7",
+          "x": 0.2933,
+          "y": 0.7963,
+          "node": "c-E-12",
           "code": "E518"
         },
         {
@@ -4703,7 +4957,7 @@
           "kind": "cr",
           "x": 0.62,
           "y": 0.28,
-          "node": "c-N-8"
+          "node": "c-N-7"
         },
         {
           "id": "main-5f-5th-floor-dome",
@@ -4719,79 +4973,79 @@
           "kind": "elevator",
           "x": 0.5,
           "y": 0.18,
-          "node": "c-N-9"
+          "node": "c-W-2"
         },
         {
           "id": "main-5f-ccmit-server-room-s507",
           "label": "CCMIT Server Room (S507)",
           "kind": "office",
-          "x": 0.5,
-          "y": 0.18,
-          "node": "c-W-5"
+          "x": 0.125,
+          "y": 0.5688,
+          "node": "c-S-16"
         },
         {
           "id": "main-5f-college-of-accountancy-faculty-room-n500",
           "label": "College of Accountancy Faculty Room (N500)",
           "kind": "office",
-          "x": 0.5,
-          "y": 0.72,
-          "node": "c-N-4"
+          "x": 0.4728,
+          "y": 0.4338,
+          "node": "c-N-2"
         },
         {
           "id": "main-5f-college-of-accountancy-student-council-office-e519",
           "label": "College of Accountancy Student Council Office (E519)",
           "kind": "office",
-          "x": 0.62,
-          "y": 0.28,
-          "node": "c-N-8"
+          "x": 0.2517,
+          "y": 0.749,
+          "node": "c-E-12"
         },
         {
           "id": "main-5f-college-of-science-accreditation-center-s516",
           "label": "College of Science Accreditation Center (S516)",
           "kind": "office",
-          "x": 0.5,
-          "y": 0.18,
-          "node": "c-W-5"
+          "x": 0.215,
+          "y": 0.606,
+          "node": "c-S-17"
         },
         {
           "id": "main-5f-college-of-science-faculty-room-s514",
           "label": "College of Science Faculty Room (S514)",
           "kind": "office",
-          "x": 0.5,
-          "y": 0.18,
-          "node": "c-W-5"
+          "x": 0.215,
+          "y": 0.5071,
+          "node": "c-S-13"
         },
         {
           "id": "main-5f-curriculum-planning-and-development-office-s506",
           "label": "Curriculum Planning and Development Office (S506)",
           "kind": "office",
-          "x": 0.5,
-          "y": 0.18,
-          "node": "c-W-5"
+          "x": 0.125,
+          "y": 0.5174,
+          "node": "c-S-14"
         },
         {
           "id": "main-5f-jpia-office-e500",
           "label": "JPIA Office (E500)",
           "kind": "office",
-          "x": 0.62,
-          "y": 0.28,
-          "node": "c-N-8"
+          "x": 0.4006,
+          "y": 0.5809,
+          "node": "c-E-2"
         },
         {
           "id": "main-5f-samasa-coa-n519",
           "label": "SAMASA-COA (N519)",
           "kind": "office",
-          "x": 0.5,
-          "y": 0.72,
-          "node": "c-N-4"
+          "x": 0.7655,
+          "y": 0.528,
+          "node": "c-N-12"
         },
         {
           "id": "main-5f-sci-tech-research-and-development-center-s512a",
           "label": "Sci-Tech Research and Development Center (S512A)",
           "kind": "office",
-          "x": 0.5,
-          "y": 0.18,
-          "node": "c-W-5"
+          "x": 0.215,
+          "y": 0.3202,
+          "node": "c-S-5"
         }
       ],
       "svgSize": [
@@ -6266,7 +6520,7 @@
         },
         {
           "id": "main-2f-network-operations-center-server-room-s8",
-          "label": "Network Operations Center – Server Room (S8)",
+          "label": "Network Operations Center \u2013 Server Room (S8)",
           "kind": "office",
           "x": 0.276,
           "y": 0.6696,

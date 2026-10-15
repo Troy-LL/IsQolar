@@ -160,3 +160,12 @@ body.slow .layer { transition-duration: 2.4s; }
   .pill.search { flex: 1 1 0; width: auto; min-width: 0; max-width: none; padding: 0 14px; justify-content: flex-start; }
   .pill.search input { width: auto; flex: 1; opacity: 1; pointer-events: auto; }
 }
+
+/* RT20: corridor network, stair captions, compact phone floor tabs */
+.walk-net line { stroke: #C9BCB1; stroke-width: 2; stroke-dasharray: 1 6; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.stair-lab { fill: #8B0000; font-weight: 700; text-anchor: middle; dominant-baseline: hanging; paint-order: stroke; stroke: #fff; stroke-linejoin: round; }
+@media (max-width: 899px) {
+  .floors { gap: 2px; padding: 4px; }
+  .floors button { width: 44px; height: 36px; font-size: 14px; }
+  .floors button small { font-size: 9px; }
+}
