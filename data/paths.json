@@ -7096,6 +7096,10 @@
     },
     "library-2f": {
       "aspect": 1.3333,
+      "svgSize": [
+        2000,
+        1600
+      ],
       "start": null,
       "nodes": [
         {

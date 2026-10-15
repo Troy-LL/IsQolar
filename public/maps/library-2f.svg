@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 1600" width="2000" height="1600" data-floor="library-2f">
+  <g class="plan">
+    <path class="wing" fill="#FFFFFF" stroke="#6B5E57" stroke-width="2" stroke-linejoin="round" d="M 1326.4,40.4 L 1907.2,40.4 L 1907.2,1532.0 L 107.6,1532.0 L 107.6,1030.4 L 1326.4,1030.4 Z"/>
+    <polygon class="corridor" fill="#F3EDE8" stroke="none" points="1867.6,599.2 1907.2,599.2 1907.2,801.6 1867.6,801.6"/>
+    <polygon class="corridor" fill="#F3EDE8" stroke="none" points="1326.4,955.6 1506.8,955.6 1506.8,1030.4 1326.4,1030.4"/>
+    <polygon class="corridor" fill="#F3EDE8" stroke="none" points="664.2,1188.8 1427.6,1188.8 1427.6,1268.0 664.2,1268.0"/>
+    <polygon class="corridor" fill="#F3EDE8" stroke="none" points="226.4,1417.6 664.2,1417.6 664.2,1527.6 226.4,1527.6"/>
+    <g class="rooms">
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1509.0,49.2 1700.4,49.2 1700.4,115.2 1509.0,115.2"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1700.4,49.2 1845.6,49.2 1845.6,115.2 1700.4,115.2"/>
+      <polygon class="room" data-room="library-2f-computer-lab-2" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1326.4,115.2 1907.2,115.2 1907.2,348.4 1326.4,348.4"/>
+      <polygon class="room" data-room="library-2f-computer-lab-1" data-baked="1" fill="#FFC72C" stroke="#B8ACA3" stroke-width="1" points="1326.4,348.4 1907.2,348.4 1907.2,599.2 1326.4,599.2"/>
+      <polygon class="room" data-room="library-2f-operations-and-support-management" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1326.4,599.2 1572.8,599.2 1572.8,753.2 1326.4,753.2"/>
+      <polygon class="room" data-room="library-2f-it-project-management" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1572.8,599.2 1735.6,599.2 1735.6,753.2 1572.8,753.2"/>
+      <polygon class="room" data-room="library-2f-conference-room" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1735.6,599.2 1867.6,599.2 1867.6,753.2 1735.6,753.2"/>
+      <polygon class="room" data-room="library-2f-administration-room" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1326.4,753.2 1528.8,753.2 1528.8,955.6 1326.4,955.6"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1506.8,982.0 1687.2,982.0 1687.2,1162.4 1506.8,1162.4"/>
+      <polygon class="room" data-room="library-2f-phase-1-pantry" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1687.2,801.6 1907.2,801.6 1907.2,982.0 1687.2,982.0"/>
+      <polygon class="room" data-room="library-2f-icto-director" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1687.2,982.0 1907.2,982.0 1907.2,1162.4 1687.2,1162.4"/>
+      <polygon class="room" data-room="library-2f-icto-helpdesk" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1603.6,1162.4 1757.6,1162.4 1757.6,1329.6 1603.6,1329.6"/>
+      <polygon class="room" data-room="library-2f-quality-assurance-office" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1757.6,1162.4 1907.2,1162.4 1907.2,1329.6 1757.6,1329.6"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="112.0,1030.4 222.0,1030.4 222.0,1184.4 112.0,1184.4"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="112.0,1184.4 222.0,1184.4 222.0,1334.0 112.0,1334.0"/>
+      <polygon class="room" data-room="library-2f-storage-room" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="112.0,1334.0 222.0,1334.0 222.0,1479.2 112.0,1479.2"/>
+      <polygon class="room" data-room="library-2f-information-systems-development" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="226.4,1030.4 442.0,1030.4 442.0,1417.6 226.4,1417.6"/>
+      <polygon class="room" data-room="library-2f-network-and-systems-administration" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="442.0,1030.4 664.2,1030.4 664.2,1417.6 442.0,1417.6"/>
+      <polygon class="room" data-room="library-2f-research-lab-1" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="664.2,1030.4 904.0,1030.4 904.0,1188.8 664.2,1188.8"/>
+      <polygon class="room" data-room="library-2f-phase-2-pantry" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="904.0,1030.4 1454.0,1030.4 1454.0,1188.8 904.0,1188.8"/>
+      <polygon class="room" data-room="library-2f-research-lab-2" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="664.2,1268.0 886.4,1268.0 886.4,1417.6 664.2,1417.6"/>
+      <polygon class="room" data-room="library-2f-pcari-conference-room" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="664.2,1417.6 917.2,1417.6 917.2,1527.6 664.2,1527.6"/>
+      <polygon class="room" data-room="library-2f-assistant-director-x2" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="917.2,1268.0 1185.6,1268.0 1185.6,1417.6 917.2,1417.6"/>
+      <polygon class="room" data-room="library-2f-building-admin" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1185.6,1241.6 1427.6,1241.6 1427.6,1408.8 1185.6,1408.8"/>
+      <polygon class="room" data-room="library-2f-icto-storage-room" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="917.2,1417.6 1137.2,1417.6 1137.2,1527.6 917.2,1527.6"/>
+      <polygon class="room" data-room="library-2f-fulltime-delivery-unit" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1137.2,1408.8 1476.0,1408.8 1476.0,1527.6 1137.2,1527.6"/>
+      <polygon class="room" data-room="library-2f-cr-male-female" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1476.0,1356.0 1652.0,1356.0 1652.0,1527.6 1476.0,1527.6"/>
+      <polygon class="room" data-room="library-2f-icto-lobby" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1427.6,1188.8 1630.0,1188.8 1630.0,1356.0 1427.6,1356.0"/>
+      <polygon class="room" data-room="library-2f-nallrc-lobby" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1652.0,1329.6 1907.2,1329.6 1907.2,1527.6 1652.0,1527.6"/>
+      <line x1="1564.0" y1="1356.0" x2="1564.0" y2="1527.6" stroke="#B8ACA3" stroke-width="1"/>
+    </g>
+    <rect class="stairs" x="1823.6" y="124.0" width="79.2" height="105.6" fill="#FFFFFF" stroke="#6B5E57" stroke-width="1"/>
+    <line x1="1823.6" y1="145.1" x2="1902.8" y2="145.1" stroke="#6B5E57" stroke-width="1"/>
+    <line x1="1823.6" y1="166.2" x2="1902.8" y2="166.2" stroke="#6B5E57" stroke-width="1"/>
+    <line x1="1823.6" y1="187.4" x2="1902.8" y2="187.4" stroke="#6B5E57" stroke-width="1"/>
+    <line x1="1823.6" y1="208.5" x2="1902.8" y2="208.5" stroke="#6B5E57" stroke-width="1"/>
+    <rect class="stairs" x="129.6" y="1461.6" width="79.2" height="66.0" fill="#FFFFFF" stroke="#6B5E57" stroke-width="1"/>
+    <line x1="129.6" y1="1474.8" x2="208.8" y2="1474.8" stroke="#6B5E57" stroke-width="1"/>
+    <line x1="129.6" y1="1488.0" x2="208.8" y2="1488.0" stroke="#6B5E57" stroke-width="1"/>
+    <line x1="129.6" y1="1501.2" x2="208.8" y2="1501.2" stroke="#6B5E57" stroke-width="1"/>
+    <line x1="129.6" y1="1514.4" x2="208.8" y2="1514.4" stroke="#6B5E57" stroke-width="1"/>
+    <rect class="stairs" x="1762.0" y="1444.0" width="140.8" height="83.6" fill="#FFFFFF" stroke="#6B5E57" stroke-width="1"/>
+    <line x1="1762.0" y1="1460.7" x2="1902.8" y2="1460.7" stroke="#6B5E57" stroke-width="1"/>
+    <line x1="1762.0" y1="1477.4" x2="1902.8" y2="1477.4" stroke="#6B5E57" stroke-width="1"/>
+    <line x1="1762.0" y1="1494.2" x2="1902.8" y2="1494.2" stroke="#6B5E57" stroke-width="1"/>
+    <line x1="1762.0" y1="1510.9" x2="1902.8" y2="1510.9" stroke="#6B5E57" stroke-width="1"/>
+    <rect x="147.2" y="1426.4" width="30.8" height="22.0" fill="#8B0000"/>
+    <rect x="1797.2" y="1395.6" width="30.8" height="22.0" fill="#8B0000"/>
+    <rect x="1850.0" y="141.6" width="30.8" height="22.0" fill="#8B0000"/>
+    <g class="room-nums">
+      <text fill="#4A403A" font-family="system-ui,sans-serif" font-size="11" font-weight="600" text-anchor="middle"><tspan x="1604.7" y="75.8">Storage</tspan><tspan x="1604.7" dy="12.6">Room 1</tspan></text>
+      <text fill="#4A403A" font-family="system-ui,sans-serif" font-size="11" font-weight="600" text-anchor="middle"><tspan x="1773.0" y="75.8">Storage</tspan><tspan x="1773.0" dy="12.6">Room 2</tspan></text>
+      <text fill="#4A403A" font-family="system-ui,sans-serif" font-size="16" font-weight="600" text-anchor="middle"><tspan x="1616.8" y="231.8">Computer Lab 2</tspan></text>
+      <text fill="#4A403A" font-family="system-ui,sans-serif" font-size="16" font-weight="600" text-anchor="middle"><tspan x="1616.8" y="473.8">Computer Lab 1</tspan></text>
+      <text fill="#4A403A" font-family="system-ui,sans-serif" font-size="11" font-weight="600" text-anchor="middle"><tspan x="1449.6" y="663.4">Operations and</tspan><tspan x="1449.6" dy="12.6">Support</tspan><tspan x="1449.6" dy="12.6">Management</tspan></text>
+      <text fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle"><tspan x="1654.2" y="669.2">IT Project</tspan><tspan x="1654.2" dy="13.8">Management</tspan></text>
+      <text fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle"><tspan x="1801.6" y="669.2">Conference</tspan><tspan x="1801.6" dy="13.8">Room</tspan></text>
+      <text fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle"><tspan x="1427.6" y="847.4">Administration</tspan><tspan x="1427.6" dy="13.8">Room</tspan></text>
+      <text fill="#4A403A" font-family="system-ui,sans-serif" font-size="11" font-weight="600" text-anchor="middle"><tspan x="1597.0" y="1065.8">Assistant</tspan><tspan x="1597.0" dy="12.6">Director</tspan></text>
+      <text fill="#4A403A" font-family="system-ui,sans-serif" font-size="13" font-weight="600" text-anchor="middle"><tspan x="1797.2" y="891.8">Phase 1 Pantry</tspan></text>
+      <text fill="#4A403A" font-family="system-ui,sans-serif" font-size="13" font-weight="600" text-anchor="middle"><tspan x="1797.2" y="1072.2">ICTO Director</tspan></text>
+      <text fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle"><tspan x="1680.6" y="1239.0">ICTO</tspan><tspan x="1680.6" dy="13.8">Helpdesk</tspan></text>
+      <text fill="#4A403A" font-family="system-ui,sans-serif" font-size="11" font-weight="600" text-anchor="middle"><tspan x="1832.4" y="1233.2">Quality</tspan><tspan x="1832.4" dy="12.6">Assurance</tspan><tspan x="1832.4" dy="12.6">Office</tspan></text>
+      <text fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle"><tspan x="167.0" y="1400.8">Storage</tspan><tspan x="167.0" dy="11.5">Room</tspan></text>
+      <text fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle"><tspan x="334.2" y="1210.1">Information</tspan><tspan x="334.2" dy="13.8">Systems</tspan><tspan x="334.2" dy="13.8">Development</tspan></text>
+      <text fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle"><tspan x="553.1" y="1210.1">Network and</tspan><tspan x="553.1" dy="13.8">Systems</tspan><tspan x="553.1" dy="13.8">Administration</tspan></text>
+      <text fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle"><tspan x="784.1" y="1102.6">Research</tspan><tspan x="784.1" dy="13.8">Lab 1</tspan></text>
+      <text fill="#4A403A" font-family="system-ui,sans-serif" font-size="13" font-weight="600" text-anchor="middle"><tspan x="1179.0" y="1109.6">Phase 2 Pantry</tspan></text>
+      <text fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle"><tspan x="775.3" y="1335.8">Research</tspan><tspan x="775.3" dy="13.8">Lab 2</tspan></text>
+      <text fill="#4A403A" font-family="system-ui,sans-serif" font-size="11" font-weight="600" text-anchor="middle"><tspan x="790.7" y="1466.2">PCARI</tspan><tspan x="790.7" dy="12.6">Conference</tspan></text>
+      <text fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle"><tspan x="1051.4" y="1335.8">Assistant</tspan><tspan x="1051.4" dy="13.8">Director</tspan></text>
+      <text fill="#4A403A" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle"><tspan x="1306.6" y="1318.2">Building</tspan><tspan x="1306.6" dy="13.8">Admin</tspan></text>
+      <text fill="#4A403A" font-family="system-ui,sans-serif" font-size="11" font-weight="600" text-anchor="middle"><tspan x="1027.2" y="1466.2">ICTO</tspan><tspan x="1027.2" dy="12.6">Storage</tspan></text>
+      <text fill="#4A403A" font-family="system-ui,sans-serif" font-size="11" font-weight="600" text-anchor="middle"><tspan x="1306.6" y="1461.8">Fulltime</tspan><tspan x="1306.6" dy="12.6">Delivery</tspan></text>
+      <text fill="#4A403A" font-family="system-ui,sans-serif" font-size="11" font-weight="600" text-anchor="middle"><tspan x="1564.0" y="1435.4">CR</tspan><tspan x="1564.0" dy="12.6">male/female</tspan></text>
+      <text fill="#4A403A" font-family="system-ui,sans-serif" font-size="14" font-weight="600" text-anchor="middle"><tspan x="1528.8" y="1272.4">ICTO Lobby</tspan></text>
+      <text fill="#4A403A" font-family="system-ui,sans-serif" font-size="14" font-weight="600" text-anchor="middle"><tspan x="1779.6" y="1428.6">NALLRC Lobby</tspan></text>
+      <text x="574.0" y="476.0" fill="#4A403A" font-family="system-ui,sans-serif" font-size="64" font-weight="700" text-anchor="start">ICT Office 2F</text>
+      <text x="574.0" y="564.0" fill="#4A403A" font-family="system-ui,sans-serif" font-size="26" font-weight="600" text-anchor="start">PUP Sta. Mesa</text>
+    </g>
+  </g>
+</svg>
