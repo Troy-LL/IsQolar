@@ -1,7 +1,7 @@
 import { describe, it, beforeEach } from "node:test";
 import assert from "node:assert/strict";
 import { app } from "./server.js";
-import { reset, setStall } from "./store.js";
+import { getStore } from "./store.js";
 import type { Stall } from "./contract.js";
 import type { AddressInfo } from "node:net";
 
@@ -26,8 +26,9 @@ describe("IsQolar server", () => {
   let close: () => Promise<void>;
 
   beforeEach(async () => {
-    reset();
-    setStall({ id: "BSCS-1", name: "BS Computer Science — Stall 1", department: "IT & CS", activeInterviewers: 1, queueLength: 0, nowServing: null });
+    const store = getStore();
+    await store.reset();
+    await store.setStall({ id: "BSCS-1", name: "BS Computer Science — Stall 1", department: "IT & CS", activeInterviewers: 1, queueLength: 0, nowServing: null });
     ({ url, close } = await startServer());
   });
 
@@ -144,7 +145,7 @@ describe("POST /api/admin/seed", () => {
   let close: () => Promise<void>;
 
   beforeEach(async () => {
-    reset();
+    await getStore().reset();
     ({ url, close } = await startServer());
   });
 
@@ -168,7 +169,7 @@ describe("POST /api/tickets/:id/done 409 — no stall for course", () => {
   let close: () => Promise<void>;
 
   beforeEach(async () => {
-    reset();
+    await getStore().reset();
     // No stalls at all — any advance to "stall" station must 409
     ({ url, close } = await startServer());
   });
