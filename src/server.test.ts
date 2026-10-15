@@ -2,6 +2,7 @@ import { describe, it, beforeEach } from "node:test";
 import assert from "node:assert/strict";
 import { app } from "./server.js";
 import { reset, setStall } from "./store.js";
+import type { Stall } from "./contract.js";
 import type { AddressInfo } from "node:net";
 
 function startServer(): Promise<{ url: string; close: () => Promise<void> }> {
@@ -133,6 +134,64 @@ describe("IsQolar server", () => {
     const detail = await json<{ position: number; estWaitMin: number }>(detailRes);
     assert.equal(detail.position, 2);
     assert.equal(detail.estWaitMin, 6);
+
+    await close();
+  });
+});
+
+describe("POST /api/admin/seed", () => {
+  let url: string;
+  let close: () => Promise<void>;
+
+  beforeEach(async () => {
+    reset();
+    ({ url, close } = await startServer());
+  });
+
+  it("seeds 3 stalls and GET /api/stalls returns them", async () => {
+    const seedRes = await fetch(`${url}/api/admin/seed`, { method: "POST" });
+    assert.equal(seedRes.status, 200);
+    const summary = await json<{ byStation: Record<string, number> }>(seedRes);
+    assert.ok("byStation" in summary);
+
+    const stallsRes = await fetch(`${url}/api/stalls`);
+    assert.equal(stallsRes.status, 200);
+    const stalls = await json<Stall[]>(stallsRes);
+    assert.equal(stalls.length, 3);
+
+    await close();
+  });
+});
+
+describe("POST /api/tickets/:id/done 409 — no stall for course", () => {
+  let url: string;
+  let close: () => Promise<void>;
+
+  beforeEach(async () => {
+    reset();
+    // No stalls at all — any advance to "stall" station must 409
+    ({ url, close } = await startServer());
+  });
+
+  it("returns 409 when no stall matches the course", async () => {
+    const joinRes = await fetch(`${url}/api/tickets`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ name: "No-Stall Student", course: "BSCS" }),
+    });
+    const ticket = await json<{ id: string }>(joinRes);
+
+    // Advance checkin → docs → validation → main (3 done calls)
+    for (let i = 0; i < 3; i++) {
+      const res = await fetch(`${url}/api/tickets/${ticket.id}/done`, { method: "POST" });
+      assert.equal(res.status, 200);
+    }
+
+    // Next would be main → stall, but no stall exists → 409
+    const doneRes = await fetch(`${url}/api/tickets/${ticket.id}/done`, { method: "POST" });
+    assert.equal(doneRes.status, 409);
+    const body = await json<{ error: string }>(doneRes);
+    assert.equal(body.error, "no stall for course");
 
     await close();
   });

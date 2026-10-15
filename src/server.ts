@@ -19,6 +19,7 @@ import {
   pickStallForCourse,
   type StoredTicket,
 } from "./store.js";
+import { seed } from "./seed.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -138,6 +139,24 @@ app.post("/api/stalls/:stall/next", (req, res) => {
   res.json(toTicket(updated));
 });
 
+// POST /api/admin/seed
+app.post("/api/admin/seed", (_req, res) => {
+  seed();
+  const byStation: Record<Station, number> = {
+    checkin: 0,
+    docs: 0,
+    validation: 0,
+    main: 0,
+    stall: 0,
+    enrolled: 0,
+  };
+  for (const t of getTickets()) {
+    byStation[t.station]++;
+  }
+  const summary: AdminSummary = { byStation };
+  res.json(summary);
+});
+
 // POST /api/tickets/:id/done
 app.post("/api/tickets/:id/done", (req, res) => {
   const ticket = getTicket(req.params.id);
@@ -156,10 +175,12 @@ app.post("/api/tickets/:id/done", (req, res) => {
 
   if (next === "stall") {
     const stallObj = pickStallForCourse(ticket.course);
-    assignedStall = stallObj ? stallObj.id : null;
-    if (stallObj) {
-      setStall({ ...withLiveStall(stallObj) });
+    if (!stallObj) {
+      res.status(409).json({ error: "no stall for course" });
+      return;
     }
+    assignedStall = stallObj.id;
+    setStall({ ...withLiveStall(stallObj) });
   }
 
   if (ticket.station === "stall" && ticket.calledAt) {
@@ -278,5 +299,9 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const PORT = 3000;
   app.listen(PORT, () => {
     console.log(`IsQolar listening on http://localhost:${PORT}`);
+    if (process.env.SEED === "1") {
+      seed();
+      console.log("Auto-seeded on startup.");
+    }
   });
 }
