@@ -8,4 +8,4 @@ One entry per Bob session. Format: `Date | Time | Who | Mode | What was done`.
 | 2026-10-15 | morning | Bob | Agent | workflow-rule — drafted and committed .bob/rules/workflow.md |
 | 2026-10-15 | morning | Bob | Agent | branding — established BRAND copy and contract freeze in src/contract.ts |
 | 2026-10-15 | 11:15 | Bob | Agent | troy/ci-setup — set up testing, typecheck, lint, CI workflow, PR template, smoke test · https://github.com/Troy-LL/bobathon/pull/3 |
-| 2026-10-15 | afternoon | Bob | Agent | troy/server — built IsQolar Express server: store, all contract endpoints, seed stub, tests · PR TBD |
+| 2026-10-15 | afternoon | Bob | Agent | troy/server — built IsQolar Express server: store, all contract endpoints, seed stub, tests · https://github.com/Troy-LL/bobathon/pull/4 |
