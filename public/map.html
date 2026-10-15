@@ -4,11 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Room TBA · IsQolar</title>
+<link rel="stylesheet" href="vendor/maplibre/maplibre-gl.css">
 <link rel="stylesheet" href="map.css">
 </head>
 <body data-stage="outdoor">
 <div id="viewport" class="viewport">
-  <svg id="outdoor" class="layer" preserveAspectRatio="xMidYMid meet" role="img" aria-label="PUP A. Mabini Campus map"></svg>
+  <div id="outdoor" class="layer" role="region" aria-label="PUP Main campus map"></div>
   <svg id="indoor" class="layer" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Floor plan"></svg>
 </div>
 
@@ -25,7 +26,7 @@
   <ul id="results" class="results" hidden></ul>
 </header>
 
-<div id="where" class="where">PUP A. Mabini Campus</div>
+<div id="where" class="where">PUP Main · Sta. Mesa</div>
 <nav id="floors" class="floors" aria-label="Floors" hidden></nav>
 <div class="zoomctl">
   <button type="button" id="zoomIn" class="round" aria-label="Zoom in">+</button>
@@ -53,8 +54,9 @@
     <button type="button" id="prev" class="quiet">Back</button>
     <button type="button" id="next" class="primary">Next step</button>
   </div>
-  <p class="note">Traced from the PUP campus plan and floor directories. ? means not confirmed.</p>
+  <p class="note">Outdoor map: OpenStreetMap buildings and walkways. Floors: traced from the PUP floor directories. ? means not confirmed.</p>
 </section>
+<script src="vendor/maplibre/maplibre-gl.js"></script>
 <script type="module" src="map.js"></script>
 </body>
 </html>

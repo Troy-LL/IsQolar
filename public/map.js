@@ -79,54 +79,158 @@ function bbox(points, pad = 0) {
   const y = Math.min(...ys) - pad;
   return { x, y, w: Math.max(...xs) + pad - x, h: Math.max(...ys) + pad - y };
 }
-function active() { return S.inside ? "indoor" : "outdoor"; }
 
-// ---------- outdoor ----------
-function shapePoints(b) {
-  if (b.shape === "poly") return b.points.map(([x, y]) => ({ x, y }));
-  const r = b.r || Math.max(b.rx, b.ry);
-  return [{ x: b.cx - r, y: b.cy - r }, { x: b.cx + r, y: b.cy + r }];
+// ---------- outdoor (MapLibre + OpenStreetMap) ----------
+const STYLE = "https://tiles.openfreemap.org/styles/liberty";
+let map = null;
+const flyDur = (ms) => ms * SLOW;
+function lngLatBox(coords) {
+  const xs = coords.map((c) => c[0]);
+  const ys = coords.map((c) => c[1]);
+  return [[Math.min(...xs), Math.min(...ys)], [Math.max(...xs), Math.max(...ys)]];
 }
-function centerOf(b) {
-  if (b.shape !== "poly") return { x: b.cx, y: b.cy };
-  const p = shapePoints(b);
-  return { x: p.reduce((a, q) => a + q.x, 0) / p.length, y: p.reduce((a, q) => a + q.y, 0) / p.length };
+function mapPadding() {
+  const { W, H, top, left, right, bottom } = insets();
+  return { top: top + 40, left: left + 20, right: right + 20, bottom: Math.min(bottom + 20, H * 0.6), W, H };
 }
-function mainBuilding() { return S.campus.buildings.find((b) => b.indoor); }
+function moveDone(ms = 1400) {
+  // moveend does not fire when the camera is already there, so also stop waiting after the move time.
+  return new Promise((r) => {
+    const t = setTimeout(r, flyDur(ms) + 400);
+    map.once("moveend", () => {
+      clearTimeout(t);
+      r();
+    });
+  });
+}
+async function flyTo(opts) {
+  const done = moveDone(opts.duration || 1400);
+  const p = mapPadding();
+  map.flyTo({ ...opts, padding: { top: p.top, left: p.left, right: p.right, bottom: p.bottom }, duration: flyDur(opts.duration || 1400), curve: 1.3, easing: (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2), essential: true });
+  await done;
+}
+async function fitTo(coords, extra = {}) {
+  // Fit flat first, then tilt: fitBounds with pitch and a tall phone sheet often refuses to fit.
+  const pad = mapPadding();
+  const padding = { top: pad.top, left: pad.left, right: pad.right, bottom: pad.bottom };
+  const box = lngLatBox(coords);
+  const cam = map.cameraForBounds(box, { padding, bearing: extra.bearing ?? -25, maxZoom: extra.maxZoom ?? 18.5 });
+  const center = cam ? cam.center : [(box[0][0] + box[1][0]) / 2, (box[0][1] + box[1][1]) / 2];
+  const zoom = cam ? cam.zoom - 0.25 : 16.5;
+  await flyTo({ center, zoom, pitch: extra.pitch ?? 50, bearing: extra.bearing ?? -25, duration: extra.duration ?? 1500 });
+}
+function featCoords(f) { return f.geometry.coordinates[0]; }
+function featCenter(f) {
+  const c = featCoords(f);
+  return [c.reduce((a, p) => a + p[0], 0) / c.length, c.reduce((a, p) => a + p[1], 0) / c.length];
+}
+function mainFeatures() { return S.campus.buildings.features.filter((f) => f.properties.main); }
+function mainCoords() { return mainFeatures().flatMap(featCoords); }
+function buildingName(f) {
+  const n = f.properties.name || "Unnamed building";
+  return f.properties.part_of && f.properties.part_of !== n && !n.includes(f.properties.part_of) ? `${n} (${f.properties.part_of})` : n;
+}
+function marker(lngLat, color, text) {
+  const e = el("div", { class: "pin-mk" });
+  const dot = el("i");
+  dot.style.background = color;
+  e.append(dot, el("span", {}, text));
+  return new maplibregl.Marker({ element: e, anchor: "left", offset: [-8, 0] }).setLngLat(lngLat);
+}
 
+function initMap() {
+  return new Promise((resolve) => {
+    const campus = S.campus;
+    map = new maplibregl.Map({
+      container: "outdoor",
+      style: STYLE,
+      center: campus.center,
+      zoom: 16.6,
+      pitch: 55,
+      bearing: -25,
+      maxPitch: 70,
+      attributionControl: false,
+      fadeDuration: 0,
+    });
+    map.addControl(new maplibregl.AttributionControl({ compact: false, customAttribution: "Campus data © OpenStreetMap contributors (ODbL)" }), "bottom-left");
+    let settled = false;
+    const fail = () => {
+      if (settled) return;
+      settled = true;
+      document.body.append(el("p", { class: "offline" }, "The street map needs internet. Search and the floor plans still work."));
+      resolve();
+    };
+    const timer = setTimeout(fail, 15000);
+    map.on("error", (e) => console.warn("map", e && e.error && e.error.message));
+    map.on("load", () => {
+      const ring = campus.campus.geometry;
+      for (const layer of map.getStyle().layers) {
+        if (layer["source-layer"] === "building") {
+          const f = map.getFilter(layer.id);
+          const notCampus = ["!", ["within", ring]];
+          map.setFilter(layer.id, f ? ["all", f, notCampus] : notCampus);
+        }
+      }
+      map.addSource("pup-campus", { type: "geojson", data: campus.campus });
+      map.addSource("pup-buildings", { type: "geojson", data: campus.buildings, promoteId: "osm" });
+      map.addSource("pup-walk", { type: "geojson", data: { type: "FeatureCollection", features: [] } });
+      map.addLayer({ id: "pup-campus-fill", type: "fill", source: "pup-campus", paint: { "fill-color": "#f6e9e9", "fill-opacity": 0.55 } });
+      map.addLayer({ id: "pup-campus-line", type: "line", source: "pup-campus", paint: { "line-color": "#880000", "line-width": 2, "line-dasharray": [2, 1.5] } });
+      map.addLayer({
+        id: "pup-3d",
+        type: "fill-extrusion",
+        source: "pup-buildings",
+        paint: {
+          "fill-extrusion-color": ["case", ["boolean", ["feature-state", "sel"], false], "#ffcc00", ["get", "main"], "#a32626", ["==", ["get", "name"], null], "#d8d0cb", "#e3d5cc"],
+          "fill-extrusion-height": ["get", "height"],
+          "fill-extrusion-base": 0,
+          "fill-extrusion-opacity": 0.92,
+        },
+      });
+      map.addLayer({ id: "pup-walk-case", type: "line", source: "pup-walk", layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": "#ffffff", "line-width": 9 } });
+      map.addLayer({ id: "pup-walk", type: "line", source: "pup-walk", layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": "#880000", "line-width": 5, "line-dasharray": [1.4, 1] } });
+      map.addLayer({
+        id: "pup-names",
+        type: "symbol",
+        source: "pup-buildings",
+        filter: ["!=", ["get", "name"], null],
+        layout: { "text-field": ["get", "name"], "text-font": ["Noto Sans Bold"], "text-size": ["case", ["get", "main"], 14, 11], "text-max-width": 8, "text-allow-overlap": false },
+        paint: { "text-color": ["case", ["get", "main"], "#5c0000", "#1f1a1a"], "text-halo-color": "#ffffff", "text-halo-width": 2 },
+      });
+      map.on("click", "pup-3d", (e) => {
+        const f = e.features && e.features[0];
+        if (!f) return;
+        const full = S.campus.buildings.features.find((x) => x.properties.osm === f.properties.osm);
+        if (full) selectBuilding(full);
+      });
+      map.on("mouseenter", "pup-3d", () => (map.getCanvas().style.cursor = "pointer"));
+      map.on("mouseleave", "pup-3d", () => (map.getCanvas().style.cursor = ""));
+      marker(campus.gate.lngLat, "#1b6e3f", "Main gate").addTo(map);
+      marker(campus.entrance.lngLat, "#ffcc00", "Entrance ?").addTo(map);
+      map.once("idle", () => {
+        clearTimeout(timer);
+        if (!settled) {
+          settled = true;
+          resolve();
+        }
+      });
+    });
+  });
+}
+let selId = null;
+function highlight(f) {
+  if (!map || !map.getSource("pup-buildings")) return;
+  if (selId) map.setFeatureState({ source: "pup-buildings", id: selId }, { sel: false });
+  selId = f ? f.properties.osm : null;
+  if (selId) map.setFeatureState({ source: "pup-buildings", id: selId }, { sel: true });
+}
 function drawOutdoor() {
-  const root = $("outdoor");
-  root.replaceChildren();
-  const [x, y, w, h] = S.campus.viewBox;
-  root.append(svg("rect", { x, y, width: w, height: h, rx: 24, fill: "#f8f6f3", stroke: "#d8cfc9", "stroke-width": 2 }));
-  const shapes = svg("g");
-  const labels = svg("g");
-  for (const b of S.campus.buildings) {
-    let s;
-    const cls = `b-shape${b.fill ? " " + b.fill : ""}${b.indoor ? " main" : ""}`;
-    if (b.shape === "poly") s = svg("polygon", { points: b.points.map((p) => p.join(",")).join(" "), class: cls });
-    else if (b.shape === "circle") s = svg("circle", { cx: b.cx, cy: b.cy, r: b.r, class: cls });
-    else s = svg("ellipse", { cx: b.cx, cy: b.cy, rx: b.rx, ry: b.ry, transform: `rotate(${b.rotate || 0} ${b.cx} ${b.cy})`, class: cls });
-    s.addEventListener("click", () => selectBuilding(b));
-    s.append(svg("title", {}, b.label));
-    shapes.append(s);
-    const c = centerOf(b);
-    if (b.indoor) {
-      labels.append(svg("text", { x: c.x - 4, y: c.y - 74, class: "b-lab main", "text-anchor": "middle" }, "Main Academic Building"));
-    }
-    labels.append(svg("circle", { cx: c.x, cy: c.y, r: 7, class: "b-num" }), svg("text", { x: c.x, y: c.y, class: "b-num-t" }, b.num));
-  }
-  root.append(shapes, labels);
+  if (!map || !map.getSource("pup-walk")) return;
   const leg = S.route && S.route.legs.find((l) => l.floorId === "outdoor");
-  if (leg) drawLine(root, leg.points, 4, 3);
-  const g = S.campus.gate;
-  const e = S.campus.entrance;
-  root.append(
-    svg("circle", { cx: g.x, cy: g.y, r: 6, fill: "#1b6e3f", stroke: "#fff", "stroke-width": 2 }),
-    svg("text", { x: g.x + 9, y: g.y - 8, class: "b-lab" }, "Gate (Guard House)"),
-    svg("circle", { cx: e.x, cy: e.y, r: 5.5, fill: "#ffcc00", stroke: "#880000", "stroke-width": 2 }),
-    svg("text", { x: e.x + 8, y: e.y + 12, class: "b-lab" }, "Entrance ?")
-  );
+  map.getSource("pup-walk").setData({
+    type: "FeatureCollection",
+    features: leg ? [{ type: "Feature", properties: {}, geometry: { type: "LineString", coordinates: leg.points.map((p) => [p.x, p.y]) } }] : [],
+  });
 }
 
 function drawLine(root, pts, width, dash) {
@@ -275,8 +379,12 @@ async function enterBuilding(floorId) {
   S.floorId = floorId;
   if (!S.inside) {
     stage("zooming");
-    const mb = bbox(shapePoints(mainBuilding()), 8);
-    await tween("outdoor", fitCam(mb), 650);
+    highlight(null);
+    if (map) {
+      const c = mainCoords();
+      const [[w, so], [e, n]] = lngLatBox(c);
+      await flyTo({ center: [(w + e) / 2, (so + n) / 2], zoom: 18.4, pitch: 62, bearing: -25, duration: 1600 });
+    }
     stage("crossfade");
     drawIndoor(floorId);
     setCam("indoor", fitCam(floorBox(floorId)));
@@ -284,33 +392,27 @@ async function enterBuilding(floorId) {
     document.body.classList.add("inside");
     $("back").hidden = false;
     $("floors").hidden = false;
-    await wait(470);
+    await wait(650);
   } else {
     drawIndoor(floorId);
   }
   drawFloorTabs();
   const f = S.floors.find((x) => x.id === floorId);
-  $("where").textContent = `Main Academic Building · ${floorShort(f)}`;
+  $("where").textContent = `PUP Main Building · ${floorShort(f)}`;
   stage("indoor");
 }
 async function exitBuilding() {
   if (!S.inside) return;
   stage("leaving");
-  const mb = bbox(shapePoints(mainBuilding()), 8);
-  setCam("outdoor", fitCam(mb));
   drawOutdoor();
   S.inside = false;
   document.body.classList.remove("inside");
   $("back").hidden = true;
   $("floors").hidden = true;
-  $("where").textContent = "PUP A. Mabini Campus";
+  $("where").textContent = "PUP Main · Sta. Mesa";
   await wait(300);
-  await tween("outdoor", fitCam(campusBox()), 650);
+  if (map) await fitTo(featCoords(S.campus.campus), { pitch: 55, maxZoom: 17.2 });
   stage("outdoor");
-}
-function campusBox() {
-  const [x, y, w, h] = S.campus.viewBox;
-  return { x, y, w, h };
 }
 async function showFloor(floorId) {
   await enterBuilding(floorId);
@@ -365,30 +467,28 @@ async function selectRoom(room) {
   S.route = null;
   const f = S.floors.find((x) => x.id === room.floorId);
   openSheet({
-    crumb: "Main Academic Building",
+    crumb: "PUP Main Building",
     title: roomName(room).replace(/^Classroom (\d+) \((.*)\)$/, "Room $1"),
-    sub: `${floorShort(f)}${room.wing ? " · " + room.wing : ""} · Main Academic Building`,
+    sub: `${floorShort(f)}${room.wing ? " · " + room.wing : ""} · PUP Main Building`,
     flag: room.flag ? "This label has a ? on the directory poster. Not confirmed." : "",
   });
   await enterBuilding(room.floorId);
   await focusIndoor();
 }
-async function selectBuilding(b) {
-  if (b.indoor) {
-    S.sel = { building: b };
-    S.route = null;
-    openSheet({ crumb: "PUP A. Mabini Campus", title: "PUP Main Academic Building", sub: `No. ${b.num} on the campus plan · floors 1F, 4F, 5F mapped`, inside: true });
-    $("dir").hidden = true;
-    if (S.inside) return;
-    await tween("outdoor", fitCam(bbox(shapePoints(b), 30)), 500);
-    return;
-  }
-  S.sel = { building: b };
+async function selectBuilding(f) {
+  S.sel = { building: f };
   S.route = null;
-  openSheet({ crumb: "PUP A. Mabini Campus", title: b.label.replace(/^\d+\.\s*/, ""), sub: `No. ${b.num} on the campus plan`, flag: "No floor plan for this building yet. Shape is traced from the campus plan and is approximate." });
+  drawOutdoor();
+  const p = f.properties;
+  if (p.main) {
+    openSheet({ crumb: "PUP Main · Sta. Mesa", title: "PUP Main Building", sub: `${p.name} · floors 1F, 4F, 5F mapped inside`, inside: true, flag: `Height: ${p.heightSource}.` });
+  } else {
+    openSheet({ crumb: "PUP Main · Sta. Mesa", title: p.name || "Unnamed building ?", sub: `OpenStreetMap ${p.osm}`, flag: `No floor plan for this building yet. Height: ${p.heightSource}.` });
+  }
   $("dir").hidden = true;
   if (S.inside) await exitBuilding();
-  await tween("outdoor", fitCam(bbox(shapePoints(b), 60)), 500);
+  highlight(f);
+  if (map) await fitTo(p.main ? mainCoords() : featCoords(f), { maxZoom: 18.6 });
 }
 
 function directions() {
@@ -414,7 +514,6 @@ function directions() {
   list.hidden = false;
   $("stepnav").hidden = false;
   $("dir").hidden = true;
-  $("sheet").classList.add("expanded");
   syncSheet();
   return goStep(0);
 }
@@ -425,12 +524,14 @@ async function goStep(i) {
   document.querySelectorAll("#steps button").forEach((b, j) => (j === S.step ? b.setAttribute("aria-current", "step") : b.removeAttribute("aria-current")));
   $("prev").disabled = S.step === 0;
   $("next").textContent = S.step === n - 1 ? "Done" : "Next step";
+  const cur = document.querySelector('#steps button[aria-current="step"]');
+  if (cur) cur.scrollIntoView({ block: "nearest" });
   const s = S.route.steps[S.step];
   if (s.floorId === "outdoor") {
     if (S.inside) await exitBuilding();
     drawOutdoor();
     const leg = S.route.legs[0];
-    await tween("outdoor", fitCam(bbox(leg.points, 30)), 600);
+    if (map) await fitTo(leg.points.map((q) => [q.x, q.y]), { maxZoom: 18, pitch: 35 });
     return;
   }
   await enterBuilding(s.floorId);
@@ -449,7 +550,7 @@ function searchAll(q) {
   const s = q.trim().toLowerCase();
   if (!s) return [];
   const rooms = S.rooms.filter((r) => roomName(r).toLowerCase().includes(s)).map((r) => ({ type: "room", r }));
-  const bs = S.campus.buildings.filter((b) => b.label.toLowerCase().includes(s) || String(b.num) === s).map((b) => ({ type: "building", b }));
+  const bs = S.campus.buildings.features.filter((f) => f.properties.name && buildingName(f).toLowerCase().includes(s)).map((b) => ({ type: "building", b }));
   return [...rooms, ...bs].slice(0, 40);
 }
 function renderResults() {
@@ -473,11 +574,11 @@ function renderResults() {
     if (h.type === "room") {
       const f = S.floors.find((x) => x.id === h.r.floorId);
       b.append(el("span", { class: "ic" }, floorShort(f)));
-      box.append(el("b", {}, roomName(h.r)), el("small", {}, `Main Academic Building · ${floorShort(f)}${h.r.flag ? " · not confirmed" : ""}`));
+      box.append(el("b", {}, roomName(h.r)), el("small", {}, `PUP Main Building · ${floorShort(f)}${h.r.flag ? " · not confirmed" : ""}`));
       b.addEventListener("click", () => pick(() => selectRoom(h.r)));
     } else {
-      b.append(el("span", { class: "ic b" }, String(h.b.num)));
-      box.append(el("b", {}, h.b.label.replace(/^\d+\.\s*/, "")), el("small", {}, h.b.indoor ? "Building · floor plans" : "Building · campus plan"));
+      b.append(el("span", { class: "ic b" }, "B"));
+      box.append(el("b", {}, buildingName(h.b)), el("small", {}, h.b.properties.main ? "PUP Main Building · floor plans" : "Building · OpenStreetMap"));
       b.addEventListener("click", () => pick(() => selectBuilding(h.b)));
     }
     b.append(box);
@@ -494,7 +595,11 @@ function pick(fn) {
 
 // ---------- pan and zoom ----------
 function zoomBy(k, cx, cy) {
-  const name = active();
+  if (!S.inside) {
+    if (map) map.zoomTo(map.getZoom() + Math.log2(k), { duration: 250 });
+    return;
+  }
+  const name = "indoor";
   const c = S.cam[name];
   const px = cx === undefined ? 0.5 : cx / innerWidth;
   const py = cy === undefined ? 0.5 : cy / innerHeight;
@@ -503,7 +608,7 @@ function zoomBy(k, cx, cy) {
   setCam(name, { x: c.x + (c.w - w) * px, y: c.y + (c.h - h) * py, w, h });
 }
 function setupGestures() {
-  const vp = $("viewport");
+  const vp = $("indoor");
   const pts = new Map();
   let last = null;
   let moved = false;
@@ -516,7 +621,7 @@ function setupGestures() {
     if (!pts.has(e.pointerId)) return;
     const prev = pts.get(e.pointerId);
     pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
-    const name = active();
+    const name = "indoor";
     const c = S.cam[name];
     if (pts.size === 1) {
       const dx = e.clientX - prev.x;
@@ -563,12 +668,11 @@ function setupGestures() {
 // ---------- boot ----------
 async function load() {
   const [floors, paths, stairs, campus] = await Promise.all(
-    ["data/floors.json", "data/paths.json", "data/stairs.json", "data/campus.json"].map((u) => fetch(u).then((r) => r.json()))
+    ["data/floors.json", "data/paths.json", "data/stairs.json", "data/campus-osm.json"].map((u) => fetch(u).then((r) => r.json()))
   );
   Object.assign(S, { floors, paths, stairs, campus, rooms: allRooms(paths) });
-  drawOutdoor();
-  setCam("outdoor", fitCam(campusBox()));
   setCam("indoor", { x: 0, y: 0, w: 1000, h: 1000 });
+  if (window.maplibregl) await initMap();
   if (SLOW > 1) document.body.classList.add("slow");
 
   $("q").addEventListener("input", renderResults);
@@ -599,7 +703,7 @@ async function load() {
   });
   addEventListener("resize", () => {
     syncSheet();
-    setCam(active(), fitCam(S.inside ? floorBox(S.floorId) : campusBox()));
+    if (S.inside) setCam("indoor", fitCam(floorBox(S.floorId)));
   });
   setupGestures();
 
@@ -619,6 +723,9 @@ async function load() {
     }
   } else if (params.get("floor")) {
     await showFloor(params.get("floor"));
+  } else if (params.get("b")) {
+    const f = S.campus.buildings.features.find((x) => x.properties.osm === params.get("b"));
+    if (f) await selectBuilding(f);
   }
   document.body.dataset.ready = "1";
 }

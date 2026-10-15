@@ -17,7 +17,7 @@ How to turn a floor-plan photo into a pin on Room TBA. The rules are in [floorpl
 | `data/station-locations.json` | Station or stall id to location id. Empty until the gym layout exists (RT6, then RT9). |
 | `data/stairs.json` | Shared stairwell ids and one `x,y` per floor for each (RT13). |
 | `data/paths.json` | Walk graph per floor: corridor nodes, edges, stair and room points (RT13). |
-| `data/campus.json` | Campus outline traced from `IBM_7737`, building numbers and names from the `IBM_7738` legend, the gate, the Main Building entrance (`?`) and the outdoor walk (`?`) (RT14). |
+| `data/campus-osm.json` | PUP Main campus outline, building footprints, names and heights, the main gate and the outdoor walk, all from OpenStreetMap (ODbL). Entrance spot and estimated heights are marked `?` (RT14). |
 
 `kind` in the transcription is one of: `room`, `office`, `other`, `cr`, `exit`, `assembly`, `elevator`, `stairs`. The v2 plan spells the same set. An unknown kind fails the validator.
 
@@ -63,6 +63,12 @@ The stairs are in the same physical place on every Main Building floor, so every
 `data/paths.json` has, per floor, corridor nodes along each wing and around the dome, edges between neighbors, and room and stair points. Each room and stair point links to its nearest corridor node, so a route never cuts through a room. All `x` and `y` values are 0..1 of the image. Room labels come from `rooms.json` only. On 4F the same classroom numbers repeat in every wing, so those rows carry a `wing` field. The route finder (`public/route.js`) goes from the start to the nearest stairwell that exists on both floors, then from that same stairwell to the room. `npm run check` fails if a node is outside 0..1, an edge points at a missing node, or a floor graph is not connected.
 
 The map page does not show the poster photos. It draws each floor from this graph: corridors as wide bands, rooms as labeled tiles, stairs as black squares. 4F is drawn a quarter turn back so its wings face the same way as on 1F and 5F. To move a point, open `map.html?edit=1`, go inside, click the spot, copy the logged `x,y` (already turned back to the poster's 0..1), and edit the JSON. Compare with the poster in `public/maps/` while you do it.
+
+## Outdoor map and licenses
+
+The campus view uses MapLibre GL JS (BSD-3-Clause), served from `node_modules` at `/vendor/maplibre`, with the OpenFreeMap "liberty" style (`https://tiles.openfreemap.org/styles/liberty`, no key). Map data is © OpenStreetMap contributors under ODbL, and the page keeps that credit in the corner at all times. The street map needs internet. Without it the page says so, and search plus the floor plans still work.
+
+`data/campus-osm.json` was cut from OpenStreetMap on Oct 15, 2026: every building whose center is inside the PUP campus area (`way/131706188`), the four Main Building wings (relations `6752506`, `6752507`, `8022786`, `8022788`) and the dome (`way/561433438`). Names are the OSM `name` tags. Heights use OSM `height`, else `building:levels` x 3 m, else 9 m marked `?`. OSM tags the wings with 11 levels, which is taller than the floors we have plans for. The outdoor walk is the shortest path on OSM footways and service roads from the main gate (`node/5740861623`, `entrance=main`). OSM has no door on the Main Building, so the entrance is placed at the East Wing corner by the dome and marked `?`. To refresh, re-download that area from OpenStreetMap and keep the same rules: no building or name that is not in OSM or on our posters.
 
 ## Place pins with `map.html?edit=1`
 

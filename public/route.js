@@ -135,8 +135,8 @@ export function planRoute(paths, stairs, floors, start, roomId) {
   };
 }
 
-// Full trip from the campus gate: outdoor walk to the Main Building entrance, the lobby, then planRoute from
-// the lobby You Are Here point. The outdoor leg uses campus coordinates, not floor coordinates.
+// Full trip from the campus main gate: outdoor walk to the Main Building entrance, the lobby, then planRoute
+// from the lobby You Are Here point. The outdoor leg is [lng, lat] from data/campus-osm.json (x = lng, y = lat).
 export function planCampusRoute(paths, stairs, floors, campus, roomId) {
   const lobby = floors.find((f) => paths.floors[f.id] && paths.floors[f.id].start);
   if (!lobby) return { ok: false, message: "The lobby is not on the map yet." };
@@ -145,13 +145,13 @@ export function planCampusRoute(paths, stairs, floors, campus, roomId) {
   const outdoor = {
     floorId: "outdoor",
     ids: [],
-    points: campus.walk.points.map(([x, y]) => ({ x, y })),
+    points: campus.walk.coordinates.map(([x, y]) => ({ x, y })),
   };
   return {
     ...r,
     legs: [outdoor, ...r.legs],
     steps: [
-      { floorId: "outdoor", text: `Walk from the ${campus.gate.label.replace(/^\d+\.\s*/, "")} to the Main Building entrance` },
+      { floorId: "outdoor", text: `Walk from the main gate to the Main Building entrance (${campus.walk.meters} m)` },
       { floorId: lobby.id, text: `Enter the lobby (${floorShort(lobby)})` },
       ...r.steps,
     ],

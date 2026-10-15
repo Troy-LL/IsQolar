@@ -6,7 +6,7 @@ import { planRoute, planCampusRoute, NOT_ON_MAP, type Paths, type Stairs, type F
 const paths = JSON.parse(readFileSync("data/paths.json", "utf8")) as Paths;
 const stairs = JSON.parse(readFileSync("data/stairs.json", "utf8")) as Stairs;
 const floors = JSON.parse(readFileSync("data/floors.json", "utf8")) as Floor[];
-const campus = JSON.parse(readFileSync("data/campus.json", "utf8")) as Campus;
+const campus = JSON.parse(readFileSync("data/campus-osm.json", "utf8")) as Campus;
 const lobby = { floorId: "main-1f-lobby", node: "start" };
 
 describe("route", () => {
@@ -48,7 +48,7 @@ describe("route", () => {
     if (!r.ok) return;
     assert.deepEqual(r.legs.map((l) => l.floorId), ["outdoor", "main-1f-lobby", "main-4f"]);
     assert.deepEqual(r.steps.map((s) => s.text), [
-      "Walk from the Guard House to the Main Building entrance",
+      `Walk from the main gate to the Main Building entrance (${campus.walk.meters} m)`,
       "Enter the lobby (1F)",
       "Walk to the East wing stairs by the dome",
       "Go up to 4F",
@@ -61,6 +61,20 @@ describe("route", () => {
     assert.equal(r.ok, false);
     if (r.ok) return;
     assert.match(r.message, new RegExp(NOT_ON_MAP));
+  });
+});
+
+describe("campus OSM data", () => {
+  it("has PUP Main Building wings from OSM and a walk that starts at the gate", () => {
+    const c = JSON.parse(readFileSync("data/campus-osm.json", "utf8")) as {
+      buildings: { features: { properties: { name: string | null; main: boolean; height: number } }[] };
+      gate: { lngLat: [number, number] };
+      walk: { coordinates: [number, number][] };
+    };
+    const wings = c.buildings.features.filter((f) => f.properties.main).map((f) => f.properties.name);
+    for (const w of ["North Wing", "South Wing", "East Wing", "West Wing"]) assert.ok(wings.includes(w), `${w} missing`);
+    for (const f of c.buildings.features) assert.ok(f.properties.height > 0);
+    assert.deepEqual(c.walk.coordinates[0], c.gate.lngLat);
   });
 });
 
