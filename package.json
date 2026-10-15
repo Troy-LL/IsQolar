@@ -14,7 +14,8 @@
     "test": "find src -name '*.test.ts' -print0 | xargs -0 node --import tsx/esm --test",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
-    "check": "npm run typecheck && npm run lint && npm run test"
+    "check:map": "node --import tsx/esm src/map-check.ts",
+    "check": "npm run typecheck && npm run lint && npm run test && npm run check:map"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",

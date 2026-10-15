@@ -29,9 +29,9 @@ The lobby image `IBM_7739` is a 1st floor directory used as a stand-in. Its floo
 
 ## Consequences
 
-- Runtime files are `public/maps/`, `data/floors.json`, `data/locations.json`, and `data/station-locations.json`. The transcription source is `docs/floorplans/rooms.json` plus `docs/floorplans/catalog.md`. How to fill them is in [../map-data-guide.md](../map-data-guide.md).
+- Runtime files are `public/maps/`, `data/floors.json`, `data/paths.json`, `data/stairs.json`, and `data/campus-osm.json`. Pins are the rooms in `data/paths.json`. `data/locations.json` is not in the repo. The transcription source is `docs/floorplans/rooms.json` plus `docs/floorplans/catalog.md`. How to fill them is in [../map-data-guide.md](../map-data-guide.md).
 - Tasks are RT1 and up in [../plan-room-tba.md](../plan-room-tba.md).
-- `npm run check` includes the map validator once RT7 lands. Until then the check is typecheck, lint, and test only.
+- `npm run check` includes the map validator. The rules are in [../map-data-guide.md](../map-data-guide.md).
 - Floor plan images on `main` ship to the public Render URL, because Render auto-deploys main. Ask PUP before that merge. The hub can serve the images on the venue LAN before then.
 - If the map is not solid by 12:30 PM on Oct 16, remove the map link and the map files. The queue stays.
 - Kept from the earlier spec: one product, an isolated module, deep links, safe text insertion, a validator, offline-safe assets, a page that works at 360 px, and attribution. Ask PUP before publishing the plans.
