@@ -58,12 +58,12 @@
     "main-1f-lobby": {
       "stairs": {
         "stair-west-end": {
-          "x": 0.29864,
-          "y": 0.25912
+          "x": 0.25475,
+          "y": 0.06018
         },
         "stair-west-dome": {
-          "x": 0.38791,
-          "y": 0.43835
+          "x": 0.39225,
+          "y": 0.43376
         },
         "stair-south-north": {
           "x": 0.185,

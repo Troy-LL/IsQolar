@@ -20,7 +20,8 @@ const PEEK = 132;
 const LEG_PAD = 48;
 // Indoor zoom is relative to the whole-floor fit, and a wide screen fits the floor far larger, so desktop stops a step earlier.
 // Phones may zoom further on a leg so very short lobby legs still read as a line.
-const LEG_MAX_ZOOM = innerWidth >= 900 ? 19.5 : 20.5;
+// Phone legs stop at 20 so a short lobby leg still shows the dome and part of a wing (RT23).
+const LEG_MAX_ZOOM = innerWidth >= 900 ? 19.5 : 20;
 const GOAL_ZOOM = innerWidth >= 900 ? 19.5 : 20.5;
 // Every leg clears the floor chip (top), the floor stack (right) and the sheet (bottom).
 function legPad() {
@@ -552,7 +553,15 @@ function drawLabels() {
     const minX = panelL;
     const minY = desk ? 24 : 150;
     const x = Math.min(Math.max(a.x + 8, minX), Math.max(minX, maxX));
-    const y = Math.min(Math.max(a.y + 8, minY), Math.max(minY, maxY));
+    // Keep the chip clear of the goal pin and route stairs: try below, above, then further below (RT23).
+    const clamp = (v) => Math.min(Math.max(v, minY), Math.max(minY, maxY));
+    const near = [];
+    if (ix.dest) { const d = scr(ix.dest); near.push({ x: d.x - 22, y: d.y - 48, w: 44, h: 60 }); }
+    const hit = (yy) => near.some((o) => x < o.x + o.w && o.x < x + cw && yy < o.y + o.h && o.y < yy + ch);
+    let y = clamp(a.y + 8);
+    for (const c of [a.y + 8, a.y - ch - 16, a.y + 44, a.y - ch - 52, a.y + 80]) {
+      if (!hit(clamp(c))) { y = clamp(c); break; }
+    }
     arr.style.transform = `translate(${x}px, ${y}px)`;
     taken.push({ x, y, w: cw, h: ch });
   }
