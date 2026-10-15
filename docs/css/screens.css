@@ -1,0 +1,283 @@
+/* ==========================================================================
+   IsQolar screens — guardian, staff, bento, campus, enrollees
+   Load after gradient.css
+   ========================================================================== */
+
+/* --- Ticket card --- */
+.pq-ticket {
+  background: var(--paper);
+  border: var(--hairline) solid var(--line);
+  border-radius: var(--r-ticket);
+  overflow: hidden;
+}
+.pq-ticket__band {
+  background: var(--maroon);
+  padding: 10px var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.pq-ticket__body {
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.pq-ticket__number {
+  font-family: var(--font-num);
+  font-size: var(--ticket-number);
+  font-weight: 700;
+  line-height: var(--lh-tight);
+  color: var(--ink);
+}
+.pq-ticket__line {
+  font-size: var(--text-m);
+  color: var(--ink);
+}
+.pq-ticket__tear {
+  border-top: var(--outline) dashed var(--line);
+  position: relative;
+  margin: var(--space-3) 0;
+}
+.pq-ticket__stub {
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* --- Call banner --- */
+.pq-call-banner {
+  background: var(--gold);
+  color: var(--ink);
+  padding: var(--space-4);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  box-shadow: var(--shadow-float);
+  transform: translateY(-100%);
+  transition: transform var(--move);
+}
+.pq-call-banner--visible {
+  transform: translateY(0);
+}
+.pq-call-banner__heading {
+  font-size: var(--heading-l);
+  font-weight: 700;
+}
+.pq-call-banner__station {
+  font-size: var(--heading-m);
+  font-weight: 700;
+}
+.pq-call-banner__place {
+  font-size: var(--text-m);
+}
+
+/* --- Enrolled card --- */
+.pq-enrolled {
+  background: var(--green);
+  color: var(--paper);
+  border-radius: var(--r-ticket);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.pq-enrolled__check {
+  font-size: 48px;
+  line-height: 1;
+}
+.pq-enrolled__heading {
+  font-size: var(--heading-l);
+  font-weight: 700;
+}
+.pq-enrolled__when {
+  font-family: var(--font-num);
+  font-size: var(--num-s);
+}
+.pq-enrolled__welcome {
+  font-size: var(--text-m);
+}
+
+/* --- Step checklist --- */
+.pq-checklist {
+  background: var(--paper);
+  border: var(--hairline) solid var(--line);
+  border-radius: var(--r-m);
+  overflow: hidden;
+}
+.pq-checklist__head {
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: var(--hairline) solid var(--line);
+}
+.pq-checklist__row {
+  padding: var(--space-3) var(--space-4);
+  min-height: var(--tap-min);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  border-bottom: var(--hairline) solid var(--line);
+}
+.pq-checklist__row:last-child { border-bottom: none; }
+.pq-checklist__sub {
+  font-size: var(--caption);
+  color: var(--ink-soft);
+}
+
+/* --- Stall staff view --- */
+.pq-staff-view {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+@media (min-width: 768px) {
+  .pq-staff-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+  }
+}
+
+/* --- Board canvas --- */
+.pq-board-wrap {
+  position: relative;
+  overflow: hidden;
+  background: var(--paper);
+  width: 100%;
+}
+.pq-board-canvas {
+  width: 1920px;
+  height: 1080px;
+  transform-origin: top left;
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+}
+.pq-board-header {
+  background: var(--maroon);
+  height: 120px;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-12);
+  gap: var(--space-8);
+  flex-shrink: 0;
+}
+.pq-board-footer {
+  background: var(--shell);
+  height: 100px;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-12);
+  gap: var(--space-8);
+  flex-shrink: 0;
+}
+.pq-board-body {
+  flex: 1;
+  padding: var(--space-12);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  gap: var(--space-8);
+}
+.pq-board-stall {
+  display: flex;
+  flex-direction: column;
+}
+.pq-board-stall__band {
+  background: var(--maroon);
+  color: var(--paper);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--board-station);
+  font-weight: 700;
+}
+.pq-board-stall__serving {
+  font-family: var(--font-num);
+  font-size: var(--board-number);
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  padding: var(--space-4) 0;
+}
+.pq-board-stall--called .pq-board-stall__serving {
+  background: var(--gold);
+  color: var(--ink);
+}
+.pq-board-stall__next {
+  padding: var(--space-2) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.pq-board-stall__next-no {
+  font-family: var(--font-num);
+  font-size: var(--board-next);
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* --- Bento grid (courses tab) --- */
+.pq-bento {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+.pq-bento__tile {
+  background: var(--paper);
+  border: var(--hairline) solid var(--line);
+  border-radius: var(--r-m);
+  padding: var(--space-3);
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  overflow: visible;
+  cursor: pointer;
+}
+.pq-bento__tile--wide {
+  grid-column: span 2;
+}
+.pq-bento__code {
+  font-size: var(--caption);
+  font-weight: 700;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+}
+.pq-bento__name {
+  font-size: var(--text-s);
+  font-weight: 700;
+  line-height: var(--lh-card);
+}
+.pq-bento__count {
+  font-family: var(--font-num);
+  font-size: var(--num-l);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-top: auto;
+}
+.pq-bento__slots {
+  height: 6px;
+  background: var(--line);
+  border-radius: var(--r-round);
+  overflow: hidden;
+  margin-top: var(--space-1);
+}
+.pq-bento__slots-fill {
+  height: 100%;
+  background: var(--maroon);
+  border-radius: var(--r-round);
+  transition: width var(--move);
+}
+.pq-bento__status {
+  font-size: var(--caption);
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+.pq-bento__tile--full .pq-bento__status { color: var(--ink); }

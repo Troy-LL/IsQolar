@@ -1,0 +1,188 @@
+/* ==========================================================================
+   IsQolar landing page — LAST file in the load order.
+   Later files intentionally override earlier ones. Doubled selectors beat
+   earlier rules (specificity gotcha — see HANDOFF.md s9).
+   ========================================================================== */
+
+/* --- Landing shell --- */
+.lp-shell {
+  background: var(--shell);
+  color: var(--ink);
+}
+
+/* --- Floating pill nav --- */
+.lp-navwrap {
+  position: fixed;
+  top: var(--space-4);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  width: min(calc(100% - var(--space-8)), 860px);
+}
+.lp-navwrap.lp-navwrap--static {
+  position: static;
+  transform: none;
+  width: 100%;
+  top: auto;
+  left: auto;
+}
+.lp-nav {
+  background: var(--paper);
+  border: var(--hairline) solid var(--line);
+  border-radius: var(--r-round);
+  padding: var(--space-2) var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow-float);
+  gap: var(--space-4);
+}
+.lp-nav__logo {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  text-decoration: none;
+  color: var(--ink);
+}
+.lp-nav__pup  { font-family: var(--font-mark); font-size: 18px; font-weight: 700; color: var(--maroon); }
+.lp-nav__sub  { font-size: var(--text-s); font-weight: 700; }
+.lp-nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+.lp-nav__link {
+  font-size: var(--text-s);
+  font-weight: 700;
+  color: var(--ink);
+  text-decoration: none;
+}
+.lp-nav__link:hover { color: var(--maroon); }
+.lp-nav__cta {
+  background: var(--maroon);
+  color: var(--paper);
+  border: none;
+  border-radius: var(--r-round);
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--font-text);
+  font-size: var(--label);
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+}
+.lp-nav__cta:hover { background: var(--maroon-deep); }
+
+/* --- Landing sections --- */
+.lp-section {
+  padding: var(--space-12) var(--space-4);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* --- Ghost text pointer fix (HANDOFF.md s9) --- */
+.lp-ghost { pointer-events: none; }
+
+/* --- Persona picker cards --- */
+.lp-picker {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-4);
+}
+.lp-picker__card {
+  background: var(--paper);
+  border: var(--hairline) solid var(--line);
+  border-radius: var(--r-m);
+  padding: var(--space-6) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--ink);
+  transition: box-shadow var(--move), transform var(--move);
+}
+.lp-picker__card:hover {
+  box-shadow: 0 6px 24px rgba(31,26,26,0.12);
+  transform: translateY(-2px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .lp-picker__card:hover { transform: none; }
+}
+.lp-picker__card:focus-visible {
+  outline: var(--focus-width) solid var(--ink);
+  outline-offset: var(--focus-offset);
+}
+.lp-picker__label {
+  font-weight: 700;
+  font-size: var(--heading-s);
+}
+
+/* --- Tools panel --- */
+.lp-tools {
+  background: var(--paper);
+  border: var(--hairline) solid var(--line);
+  border-radius: var(--r-m);
+  padding: var(--space-4);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+/* --- FAQ accordion --- */
+.lp-faq__item {
+  border-bottom: var(--hairline) solid var(--line);
+}
+.lp-faq__q {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: var(--space-4) 0;
+  text-align: left;
+  font-family: var(--font-text);
+  font-size: var(--text-s);
+  font-weight: 700;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+}
+.lp-faq__q:focus-visible {
+  outline: var(--focus-width) solid var(--ink);
+  outline-offset: var(--focus-offset);
+}
+.lp-faq__a {
+  font-size: var(--text-s);
+  line-height: var(--lh-body);
+  color: var(--ink);
+  padding: 0 0 var(--space-4);
+  display: none;
+}
+.lp-faq__item--open .lp-faq__a { display: block; }
+
+/* --- Live count widget --- */
+.lp-live-count {
+  background: var(--paper);
+  border: var(--hairline) solid var(--line);
+  border-radius: var(--r-m);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* --- Footer --- */
+.lp-footer {
+  background: var(--maroon);
+  color: var(--paper);
+  padding: var(--space-8) var(--space-4);
+  text-align: center;
+  font-size: var(--caption);
+}

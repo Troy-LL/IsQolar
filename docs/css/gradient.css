@@ -1,0 +1,35 @@
+/* ==========================================================================
+   IsQolar gradient skin — overrides the flat base in components.css
+   Load after components.css
+   DESIGN NOTE: gradients, gold bands, and soft shadows go beyond the design
+   file spec. Needs Donita's approval before the pilot (see HANDOFF.md s8).
+   ========================================================================== */
+
+/* Hero / landing gradient panels */
+.lp-dark-panel {
+  background: linear-gradient(160deg, var(--maroon-deep) 0%, var(--maroon) 100%);
+  color: var(--paper);
+  border-radius: var(--r-m);
+  padding: var(--space-8) var(--space-6);
+}
+
+/* Gold stat band */
+.lp-gold-band {
+  background: linear-gradient(90deg, #e6b800 0%, var(--gold) 60%, #ffe066 100%);
+  color: var(--ink);
+  padding: var(--space-4) var(--space-6);
+  border-radius: var(--r-m);
+}
+
+/* Soft card shadow (beyond design file) */
+.pq-card--lifted {
+  box-shadow: 0 2px 12px rgba(31, 26, 26, 0.10);
+  transition: box-shadow var(--move), transform var(--move);
+}
+.pq-card--lifted:hover {
+  box-shadow: 0 6px 24px rgba(31, 26, 26, 0.15);
+  transform: translateY(-2px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .pq-card--lifted:hover { transform: none; }
+}

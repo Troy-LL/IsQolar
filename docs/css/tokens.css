@@ -1,0 +1,93 @@
+/* ==========================================================================
+   IsQolar design tokens
+   Source of truth: DESIGN-PUP-Enrollment-Queue.md, Tokens section
+   ========================================================================== */
+
+:root {
+  /* --- Colour --- */
+  --maroon:       #880000;
+  --maroon-deep:  #5C0000;
+  --gold:         #FFCC00;
+  --green:        #1B6E3F;
+  --ink:          #1F1A1A;
+  --ink-soft:     #5E5656;
+  --line:         #E2DCD8;
+  --paper:        #FFFFFF;
+  --shell:        #F7F4F2;
+
+  /* --- Type families --- */
+  --font-text:    "Atkinson Hyperlegible Next", system-ui, sans-serif;
+  --font-num:     "Atkinson Hyperlegible Mono", ui-monospace, monospace;
+  --font-mark:    "Cinzel", Georgia, serif;
+
+  /* --- Type scale (px) --- */
+  --wordmark:     22px;
+  --heading-l:    28px;
+  --heading-m:    20px;
+  --heading-s:    16px;
+  --eyebrow:      14px;
+  --text-m:       18px;
+  --text-s:       16px;
+  --caption:      14px;
+  --label:        16px;
+  --label-l:      20px;
+  --ticket-number: 72px;
+  --num-l:        40px;
+  --num-m:        22px;
+  --num-s:        14px;
+  --board-title:  48px;
+  --board-station: 40px;
+  --board-number: 160px;
+  --board-next:   56px;
+
+  /* --- Line heights --- */
+  --lh-tight:   1;
+  --lh-heading: 1.2;
+  --lh-card:    1.3;
+  --lh-body:    1.5;
+  --lh-caption: 1.4;
+
+  /* --- Tap targets --- */
+  --tap-min:    48px;
+  --tap-staff:  64px;
+
+  /* --- Spacing (4px base) --- */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-12: 48px;
+
+  /* --- Layout --- */
+  --col-max:  480px;
+  --bp-wide:  768px;
+  --board-w:  1920px;
+  --board-h:  1080px;
+
+  /* --- Radius --- */
+  --r-s:      6px;
+  --r-m:      10px;
+  --r-ticket: 16px;
+  --r-round:  999px;
+  --notch:    12px;
+
+  /* --- Border weights --- */
+  --hairline:    1px;
+  --outline:     2px;
+  --rule-gold:   4px;
+  --tab:         6px;
+  --focus-width: 3px;
+  --focus-offset: 2px;
+
+  /* --- Shadow --- */
+  --shadow-float: 0 4px 16px rgba(31, 26, 26, 0.18);
+
+  /* --- Motion --- */
+  --move: 200ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --move: 0ms; }
+}

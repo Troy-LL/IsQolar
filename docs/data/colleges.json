@@ -1,0 +1,177 @@
+[
+  {
+    "code": "CAF",
+    "name": "College of Architecture and Fine Arts",
+    "campus": "NDC Compound",
+    "buildingConfirmed": true,
+    "link": "https://www.pup.edu.ph/academic/colleges",
+    "programs": [
+      { "code": "BSARCH", "name": "Architecture" },
+      { "code": "BSID",   "name": "Industrial Design" },
+      { "code": "BFA",    "name": "Fine Arts" }
+    ]
+  },
+  {
+    "code": "CAL",
+    "name": "College of Arts and Letters",
+    "campus": "Mabini Campus",
+    "buildingConfirmed": false,
+    "link": "https://www.pup.edu.ph/academic/colleges",
+    "programs": [
+      { "code": "ABCS",    "name": "Communication Studies" },
+      { "code": "ABELS",   "name": "English Language Studies" },
+      { "code": "ABFLS",   "name": "Filipino Language Studies" },
+      { "code": "ABLITENG","name": "Literature (English)" },
+      { "code": "ABLITFIL","name": "Literature (Filipino)" }
+    ]
+  },
+  {
+    "code": "CBA",
+    "name": "College of Business Administration",
+    "campus": "Mabini Campus",
+    "buildingConfirmed": false,
+    "link": "https://www.pup.edu.ph/academic/colleges",
+    "programs": [
+      { "code": "BSBA-FM", "name": "Business Administration (Financial Management)" },
+      { "code": "BSBA-HRM","name": "Business Administration (Human Resource Management)" },
+      { "code": "BSBA-MM", "name": "Business Administration (Marketing Management)" },
+      { "code": "BSBA-OM", "name": "Business Administration (Operations Management)" },
+      { "code": "BSBA-BA", "name": "Business Administration (Business Analytics)" },
+      { "code": "BSACCT",  "name": "Accountancy" }
+    ]
+  },
+  {
+    "code": "COC",
+    "name": "College of Communication",
+    "campus": "NDC Compound",
+    "buildingConfirmed": true,
+    "link": "https://www.pup.edu.ph/academic/colleges",
+    "programs": [
+      { "code": "ABCOM",   "name": "Communication" },
+      { "code": "ABBROADCAST", "name": "Broadcasting" },
+      { "code": "ABJOUR",  "name": "Journalism" },
+      { "code": "ABPA",    "name": "Public Administration" }
+    ]
+  },
+  {
+    "code": "CE",
+    "name": "College of Education",
+    "campus": "Mabini Campus",
+    "buildingConfirmed": false,
+    "link": "https://www.pup.edu.ph/academic/colleges",
+    "programs": [
+      { "code": "BSNED",   "name": "Education (Early Childhood Education)" },
+      { "code": "BSELE",   "name": "Education (Elementary Education)" },
+      { "code": "BSSED-ENG","name": "Education (Secondary, English)" },
+      { "code": "BSSED-FIL","name": "Education (Secondary, Filipino)" },
+      { "code": "BSSED-MATH","name": "Education (Secondary, Mathematics)" },
+      { "code": "BSSED-MAPEH","name": "Education (Secondary, MAPEH)" },
+      { "code": "BSSED-SCI","name": "Education (Secondary, Science)" },
+      { "code": "BSSED-SS", "name": "Education (Secondary, Social Studies)" }
+    ]
+  },
+  {
+    "code": "CEA",
+    "name": "College of Engineering and Architecture",
+    "campus": "NDC Compound",
+    "buildingConfirmed": true,
+    "link": "https://www.pup.edu.ph/academic/colleges",
+    "programs": [
+      { "code": "BSCE",   "name": "Civil Engineering" },
+      { "code": "BSCpE",  "name": "Computer Engineering" },
+      { "code": "BSECE",  "name": "Electronics Engineering" },
+      { "code": "BSEE",   "name": "Electrical Engineering" },
+      { "code": "BSME",   "name": "Mechanical Engineering" },
+      { "code": "BSIE",   "name": "Industrial Engineering" }
+    ]
+  },
+  {
+    "code": "CAMP",
+    "name": "College of Political Science and Public Administration",
+    "campus": "Mabini Campus",
+    "buildingConfirmed": false,
+    "link": "https://www.pup.edu.ph/academic/colleges",
+    "programs": [
+      { "code": "ABPS",  "name": "Political Science" },
+      { "code": "BSPA",  "name": "Public Administration" }
+    ]
+  },
+  {
+    "code": "CS",
+    "name": "College of Science",
+    "campus": "Mabini Campus",
+    "buildingConfirmed": false,
+    "link": "https://www.pup.edu.ph/academic/colleges",
+    "programs": [
+      { "code": "BSAPMATH", "name": "Applied Mathematics" },
+      { "code": "BSBIO",    "name": "Biology" },
+      { "code": "BSCHEM",   "name": "Chemistry" },
+      { "code": "BSMATH",   "name": "Mathematics" },
+      { "code": "BSPHYSICS","name": "Physics" },
+      { "code": "BSSTAT",   "name": "Statistics" }
+    ]
+  },
+  {
+    "code": "CSSD",
+    "name": "College of Social Sciences and Development",
+    "campus": "Mabini Campus",
+    "buildingConfirmed": false,
+    "link": "https://www.pup.edu.ph/academic/colleges",
+    "programs": [
+      { "code": "ABECO",  "name": "Economics" },
+      { "code": "ABSOC",  "name": "Sociology" },
+      { "code": "BSDEV",  "name": "Development Studies" },
+      { "code": "BSSW",   "name": "Social Work" }
+    ]
+  },
+  {
+    "code": "CICT",
+    "name": "College of Information and Communications Technology",
+    "campus": "Mabini Campus",
+    "buildingConfirmed": false,
+    "link": "https://www.pup.edu.ph/academic/colleges",
+    "programs": [
+      { "code": "BSCS",  "name": "Computer Science" },
+      { "code": "BSIS",  "name": "Information Systems" },
+      { "code": "BSIT",  "name": "Information Technology" },
+      { "code": "BSEMC", "name": "Entertainment and Multimedia Computing" }
+    ]
+  },
+  {
+    "code": "CHK",
+    "name": "College of Human Kinetics",
+    "campus": "Mabini Campus",
+    "buildingConfirmed": false,
+    "link": "https://www.pup.edu.ph/academic/colleges",
+    "programs": [
+      { "code": "BSPE",     "name": "Physical Education" },
+      { "code": "BSSPORTS", "name": "Sports Science" }
+    ]
+  },
+  {
+    "code": "CTH",
+    "name": "College of Tourism, Hospitality, and Transportation Management",
+    "campus": "M.H. del Pilar Campus",
+    "buildingConfirmed": true,
+    "link": "https://www.pup.edu.ph/academic/colleges",
+    "programs": [
+      { "code": "BSHM",  "name": "Hospitality Management" },
+      { "code": "BSTM",  "name": "Tourism Management" },
+      { "code": "BSTRANS","name": "Transportation Management" }
+    ]
+  },
+  {
+    "code": "ITECH",
+    "name": "Institute of Technology (iTech)",
+    "campus": "Mabini Campus",
+    "buildingConfirmed": false,
+    "link": "https://www.pup.edu.ph/itech/",
+    "note": "Only first-year diploma programs listed. Confirm full list with Registrar.",
+    "programs": [
+      { "code": "DICT",   "name": "Information and Communications Technology" },
+      { "code": "DECE",   "name": "Electronics Technology" },
+      { "code": "DEET",   "name": "Electrical Technology" },
+      { "code": "DMET",   "name": "Mechanical Technology" }
+    ]
+  }
+]

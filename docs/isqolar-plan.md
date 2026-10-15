@@ -49,7 +49,7 @@ everything into one portable `IsQolar.html`.
 
 ## Sub-Task 1 — Foundation, Data and Design Tokens (M1)
 
-**Status:** [ ] pending
+**Status:** [x] done
 
 ### Intent
 Establish every shared file that all later milestones depend on: folder scaffold, fonts,
