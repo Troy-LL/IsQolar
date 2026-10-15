@@ -1,0 +1,40 @@
+# AGENTS.md
+
+Routing guide for Bob and any AI agent working in this repo.
+Read this first. Then read the doc that owns the topic you are working on.
+
+## Docs map
+
+- **What it is, how to run it:** [README.md](README.md)
+- **Data flow, processes, poll interval, state:** [docs/architecture.md](docs/architecture.md)
+- **Shared types and endpoint shapes (the contract):** [src/contract.ts](src/contract.ts)
+- **UI design system, tokens, and components (Donita):** [docs/DESIGN-PUP-Enrollment-Queue.md](docs/DESIGN-PUP-Enrollment-Queue.md)
+- **Architectural decisions:** [docs/decisions/](docs/decisions/)
+  - [001-no-live-ai-lan-only.md](docs/decisions/001-no-live-ai-lan-only.md)
+  - [002-polling-over-websockets.md](docs/decisions/002-polling-over-websockets.md)
+  - [003-contract-freeze-at-11-15.md](docs/decisions/003-contract-freeze-at-11-15.md)
+  - [004-simulated-morning-labeled.md](docs/decisions/004-simulated-morning-labeled.md)
+- **Team, tracks, and timeline (temporary):** [docs/plan.md](docs/plan.md)
+- **Bob run log:** [docs/bob-log.md](docs/bob-log.md)
+
+## Commands
+
+```bash
+npm install       # install dependencies
+npm start         # start the server on port 3000
+npm run seed      # reset state and load the simulated morning
+```
+
+## Rules for every agent run
+
+- Never make live AI calls or outbound internet requests of any kind.
+- Never change [src/contract.ts](src/contract.ts) after 11:15 unless you are the project manager. See [docs/decisions/003-contract-freeze-at-11-15.md](docs/decisions/003-contract-freeze-at-11-15.md).
+- Log every Bob run in [docs/bob-log.md](docs/bob-log.md): date, time, who, mode, and one line describing what was done.
+- Do not create docs/api.md. The contract lives in src/contract.ts.
+- Do not edit [docs/DESIGN-PUP-Enrollment-Queue.md](docs/DESIGN-PUP-Enrollment-Queue.md). UI design is owned by Donita.
+- One owner per fact. If a fact fits two files, put it in the more specific one and link from the other.
+
+## Scratch folder
+
+A `scratch/` folder at the repo root is gitignored and safe to use for throwaway files.
+Do not link to anything inside `scratch/` from any tracked doc.
