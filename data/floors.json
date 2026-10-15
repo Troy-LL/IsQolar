@@ -22,5 +22,37 @@
     "label": "Main Building 5F",
     "image": "public/maps/main-5f.jpg",
     "approximate": false
+  },
+  {
+    "id": "main-2f",
+    "building": "Main Academic Building",
+    "floor": "2F",
+    "label": "Main Building 2F",
+    "image": "public/maps/main-2f.jpg",
+    "approximate": false
+  },
+  {
+    "id": "gym-gf",
+    "building": "Cultural Sports Center (Gymnasium)",
+    "floor": "GF",
+    "label": "Gymnasium ground floor",
+    "image": "public/maps/gym-gf.jpg",
+    "approximate": false
+  },
+  {
+    "id": "library-2f",
+    "building": "Ninoy Aquino Learning Resource Center? (ICT Office wing)",
+    "floor": "2F?",
+    "label": "ICT Office 2F?",
+    "image": "public/maps/library-2f.jpg",
+    "approximate": false
+  },
+  {
+    "id": "library-3f",
+    "building": "Library (NALRC)",
+    "floor": "3F",
+    "label": "Library 3F",
+    "image": "public/maps/library-3f.png",
+    "approximate": false
   }
 ]

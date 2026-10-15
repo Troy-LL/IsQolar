@@ -36,6 +36,22 @@
   {
    "id": "stair-east-dome",
    "name": "East wing stairs by the dome"
+  },
+  {
+   "id": "lib2-stair-ne",
+   "name": "?"
+  },
+  {
+   "id": "lib2-stair-se",
+   "name": "?"
+  },
+  {
+   "id": "lib3-stairs-up",
+   "name": "Stairs (up)"
+  },
+  {
+   "id": "lib3-stair-north",
+   "name": "?"
   }
  ],
  "floors": {
@@ -161,6 +177,77 @@
     }
    },
    "notes": "all nine stairwells found on this plan"
+  },
+  "main-2f": {
+   "stairs": {
+    "stair-west-end": {
+     "x": 0.27,
+     "y": 0.25
+    },
+    "stair-west-dome": {
+     "x": 0.41,
+     "y": 0.45
+    },
+    "stair-south-north": {
+     "x": 0.2,
+     "y": 0.4212
+    },
+    "stair-south-mid": {
+     "x": 0.21,
+     "y": 0.5592
+    },
+    "stair-south-south": {
+     "x": 0.204,
+     "y": 0.688
+    },
+    "stair-north-end": {
+     "x": 0.756,
+     "y": 0.5095
+    },
+    "stair-north-dome": {
+     "x": 0.504,
+     "y": 0.5775
+    },
+    "stair-east-dome": {
+     "x": 0.39,
+     "y": 0.62
+    },
+    "stair-east-end": {
+     "x": 0.395,
+     "y": 0.88
+    }
+   },
+   "notes": "all nine stairwells found on this plan"
+  },
+  "gym-gf": {
+   "stairs": {},
+   "notes": "no stairwell is drawn on this plan ?"
+  },
+  "library-2f": {
+   "stairs": {
+    "lib2-stair-ne": {
+     "x": 0.7048,
+     "y": 0.1976
+    },
+    "lib2-stair-se": {
+     "x": 0.7432,
+     "y": 0.824
+    }
+   },
+   "notes": "two stair icons on the right side of this plan; a stair on the left edge is unclear ?"
+  },
+  "library-3f": {
+   "stairs": {
+    "lib3-stairs-up": {
+     "x": 0.58,
+     "y": 0.76
+    },
+    "lib3-stair-north": {
+     "x": 0.5,
+     "y": 0.06
+    }
+   },
+   "notes": "Stairs (up) is labeled by the lobby. The stair at the north end of the plan is unlabeled ?"
   }
  }
 }

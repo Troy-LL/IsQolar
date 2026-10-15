@@ -8136,6 +8136,3341 @@
           "node": "c81"
         }
       ]
+    },
+    "main-2f": {
+      "aspect": 1.3333,
+      "start": "start",
+      "nodes": [
+        {
+          "id": "w0",
+          "x": 0.28,
+          "y": 0.26,
+          "kind": "corridor"
+        },
+        {
+          "id": "w1",
+          "x": 0.315,
+          "y": 0.31,
+          "kind": "corridor"
+        },
+        {
+          "id": "w2",
+          "x": 0.35,
+          "y": 0.36,
+          "kind": "corridor"
+        },
+        {
+          "id": "w3",
+          "x": 0.385,
+          "y": 0.41,
+          "kind": "corridor"
+        },
+        {
+          "id": "w4",
+          "x": 0.42,
+          "y": 0.46,
+          "kind": "corridor"
+        },
+        {
+          "id": "s0",
+          "x": 0.2,
+          "y": 0.38,
+          "kind": "corridor"
+        },
+        {
+          "id": "s1",
+          "x": 0.202,
+          "y": 0.452,
+          "kind": "corridor"
+        },
+        {
+          "id": "s2",
+          "x": 0.204,
+          "y": 0.524,
+          "kind": "corridor"
+        },
+        {
+          "id": "s3",
+          "x": 0.206,
+          "y": 0.596,
+          "kind": "corridor"
+        },
+        {
+          "id": "s4",
+          "x": 0.208,
+          "y": 0.668,
+          "kind": "corridor"
+        },
+        {
+          "id": "s5",
+          "x": 0.21,
+          "y": 0.74,
+          "kind": "corridor"
+        },
+        {
+          "id": "n0",
+          "x": 0.51,
+          "y": 0.54,
+          "kind": "corridor"
+        },
+        {
+          "id": "n1",
+          "x": 0.57,
+          "y": 0.5375,
+          "kind": "corridor"
+        },
+        {
+          "id": "n2",
+          "x": 0.63,
+          "y": 0.535,
+          "kind": "corridor"
+        },
+        {
+          "id": "n3",
+          "x": 0.69,
+          "y": 0.5325,
+          "kind": "corridor"
+        },
+        {
+          "id": "n4",
+          "x": 0.75,
+          "y": 0.53,
+          "kind": "corridor"
+        },
+        {
+          "id": "e0",
+          "x": 0.39,
+          "y": 0.63,
+          "kind": "corridor"
+        },
+        {
+          "id": "e1",
+          "x": 0.392,
+          "y": 0.678,
+          "kind": "corridor"
+        },
+        {
+          "id": "e2",
+          "x": 0.394,
+          "y": 0.726,
+          "kind": "corridor"
+        },
+        {
+          "id": "e3",
+          "x": 0.396,
+          "y": 0.774,
+          "kind": "corridor"
+        },
+        {
+          "id": "e4",
+          "x": 0.398,
+          "y": 0.822,
+          "kind": "corridor"
+        },
+        {
+          "id": "e5",
+          "x": 0.4,
+          "y": 0.87,
+          "kind": "corridor"
+        },
+        {
+          "id": "dome",
+          "x": 0.455,
+          "y": 0.545,
+          "kind": "corridor"
+        },
+        {
+          "id": "main-2f-w220",
+          "x": 0.305,
+          "y": 0.275,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-w218",
+          "x": 0.3106,
+          "y": 0.2922,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-w216",
+          "x": 0.3161,
+          "y": 0.3094,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-w214",
+          "x": 0.3217,
+          "y": 0.3267,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-w212",
+          "x": 0.3272,
+          "y": 0.3439,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-w210",
+          "x": 0.3328,
+          "y": 0.3611,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-w208",
+          "x": 0.3383,
+          "y": 0.3783,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-w206",
+          "x": 0.3439,
+          "y": 0.3956,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-w204",
+          "x": 0.3494,
+          "y": 0.4128,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-w202",
+          "x": 0.355,
+          "y": 0.43,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-w219",
+          "x": 0.348,
+          "y": 0.262,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-w217",
+          "x": 0.3534,
+          "y": 0.2813,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-w215",
+          "x": 0.3588,
+          "y": 0.3006,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-w213",
+          "x": 0.3642,
+          "y": 0.3199,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-faculty-circle-w211",
+          "x": 0.3696,
+          "y": 0.3392,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-w209",
+          "x": 0.375,
+          "y": 0.3585,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-w207",
+          "x": 0.3804,
+          "y": 0.3778,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-w205",
+          "x": 0.3858,
+          "y": 0.3971,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-pupffai-office-w203",
+          "x": 0.3912,
+          "y": 0.4164,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-research-center-w201",
+          "x": 0.3966,
+          "y": 0.4357,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-w200",
+          "x": 0.402,
+          "y": 0.455,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-college-of-cooperatives-office-e201",
+          "x": 0.348,
+          "y": 0.655,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-cc-extension-services-office-e203",
+          "x": 0.3502,
+          "y": 0.6756,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-cc-academic-research-and-administration-office-e205",
+          "x": 0.3524,
+          "y": 0.6961,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-e207",
+          "x": 0.3547,
+          "y": 0.7167,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-e209",
+          "x": 0.3569,
+          "y": 0.7372,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-e211",
+          "x": 0.3591,
+          "y": 0.7578,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-e213",
+          "x": 0.3613,
+          "y": 0.7783,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-e215",
+          "x": 0.3636,
+          "y": 0.7989,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-e217",
+          "x": 0.3658,
+          "y": 0.8194,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-e219",
+          "x": 0.368,
+          "y": 0.84,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-office-of-the-unyon-ng-mga-guro-sa-pup-e200",
+          "x": 0.412,
+          "y": 0.648,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-national-service-training-program-office-e202",
+          "x": 0.414,
+          "y": 0.6687,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-income-generating-project-office-e204",
+          "x": 0.416,
+          "y": 0.6894,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-e206",
+          "x": 0.418,
+          "y": 0.7101,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-e208",
+          "x": 0.42,
+          "y": 0.7308,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-e210",
+          "x": 0.422,
+          "y": 0.7515,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-e212",
+          "x": 0.424,
+          "y": 0.7722,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-e214",
+          "x": 0.426,
+          "y": 0.7929,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-e216",
+          "x": 0.428,
+          "y": 0.8136,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-e218",
+          "x": 0.43,
+          "y": 0.8343,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-e220",
+          "x": 0.432,
+          "y": 0.855,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-office-of-the-vp-for-academic-affairs-s14",
+          "x": 0.15,
+          "y": 0.3568,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-office-of-the-vp-for-research-extension-and-dev-t-s13",
+          "x": 0.27,
+          "y": 0.3568,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-dr-ofelia-m-carague-conference-room-s12",
+          "x": 0.276,
+          "y": 0.412,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-office-of-the-vp-for-administration-s11",
+          "x": 0.276,
+          "y": 0.481,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-office-of-the-vp-for-student-services-s10",
+          "x": 0.276,
+          "y": 0.5408,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-office-of-the-university-board-secretary-s1",
+          "x": 0.144,
+          "y": 0.4488,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-dr-pablo-t-mateo-jr-conference-room-s2",
+          "x": 0.144,
+          "y": 0.527,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-office-of-the-president-s3",
+          "x": 0.144,
+          "y": 0.6052,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-university-info-system-network-operations-center-s9",
+          "x": 0.276,
+          "y": 0.6328,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-network-operations-center-server-room-s8",
+          "x": 0.276,
+          "y": 0.6696,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-office-of-the-vp-for-finance-s7",
+          "x": 0.276,
+          "y": 0.7064,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-office-of-the-executive-director-s4",
+          "x": 0.15,
+          "y": 0.7432,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-dr-zenaida-a-olonan-conference-room-s5",
+          "x": 0.2,
+          "y": 0.7432,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-office-of-the-executive-vice-president-s6",
+          "x": 0.25,
+          "y": 0.7432,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-college-of-science-office-n1",
+          "x": 0.534,
+          "y": 0.5044,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-college-of-cooperatives-and-social-dev-t-office-n2",
+          "x": 0.582,
+          "y": 0.5044,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-college-of-computer-mgmt-and-info-tech-office-n3",
+          "x": 0.63,
+          "y": 0.5044,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-college-of-business-office-n4",
+          "x": 0.678,
+          "y": 0.5044,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-college-of-education-office-n5",
+          "x": 0.726,
+          "y": 0.5044,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-function-room-n6",
+          "x": 0.54,
+          "y": 0.5724,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-college-of-economics-finance-and-politics-office-n7",
+          "x": 0.588,
+          "y": 0.5724,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-college-of-languages-and-linguistics-office-n8",
+          "x": 0.636,
+          "y": 0.5724,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-college-of-arts-office-n9",
+          "x": 0.684,
+          "y": 0.5724,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-college-of-accountancy-office-n10",
+          "x": 0.732,
+          "y": 0.5724,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-dome",
+          "x": 0.46,
+          "y": 0.548,
+          "kind": "room"
+        },
+        {
+          "id": "main-2f-elevator",
+          "x": 0.19,
+          "y": 0.55,
+          "kind": "room"
+        },
+        {
+          "id": "stair-west-end",
+          "x": 0.27,
+          "y": 0.25,
+          "kind": "stairs"
+        },
+        {
+          "id": "stair-west-dome",
+          "x": 0.41,
+          "y": 0.45,
+          "kind": "stairs"
+        },
+        {
+          "id": "stair-south-north",
+          "x": 0.2,
+          "y": 0.4212,
+          "kind": "stairs"
+        },
+        {
+          "id": "stair-south-mid",
+          "x": 0.21,
+          "y": 0.5592,
+          "kind": "stairs"
+        },
+        {
+          "id": "stair-south-south",
+          "x": 0.204,
+          "y": 0.688,
+          "kind": "stairs"
+        },
+        {
+          "id": "stair-north-end",
+          "x": 0.756,
+          "y": 0.5095,
+          "kind": "stairs"
+        },
+        {
+          "id": "stair-north-dome",
+          "x": 0.504,
+          "y": 0.5775,
+          "kind": "stairs"
+        },
+        {
+          "id": "stair-east-dome",
+          "x": 0.39,
+          "y": 0.62,
+          "kind": "stairs"
+        },
+        {
+          "id": "stair-east-end",
+          "x": 0.395,
+          "y": 0.88,
+          "kind": "stairs"
+        },
+        {
+          "id": "start",
+          "x": 0.335,
+          "y": 0.635,
+          "kind": "start",
+          "label": "You Are Here"
+        }
+      ],
+      "edges": [
+        [
+          "w0",
+          "w1"
+        ],
+        [
+          "w1",
+          "w2"
+        ],
+        [
+          "w2",
+          "w3"
+        ],
+        [
+          "w3",
+          "w4"
+        ],
+        [
+          "s0",
+          "s1"
+        ],
+        [
+          "s1",
+          "s2"
+        ],
+        [
+          "s2",
+          "s3"
+        ],
+        [
+          "s3",
+          "s4"
+        ],
+        [
+          "s4",
+          "s5"
+        ],
+        [
+          "n0",
+          "n1"
+        ],
+        [
+          "n1",
+          "n2"
+        ],
+        [
+          "n2",
+          "n3"
+        ],
+        [
+          "n3",
+          "n4"
+        ],
+        [
+          "e0",
+          "e1"
+        ],
+        [
+          "e1",
+          "e2"
+        ],
+        [
+          "e2",
+          "e3"
+        ],
+        [
+          "e3",
+          "e4"
+        ],
+        [
+          "e4",
+          "e5"
+        ],
+        [
+          "w4",
+          "dome"
+        ],
+        [
+          "s3",
+          "dome"
+        ],
+        [
+          "n0",
+          "dome"
+        ],
+        [
+          "e0",
+          "dome"
+        ],
+        [
+          "w0",
+          "main-2f-w220"
+        ],
+        [
+          "w1",
+          "main-2f-w218"
+        ],
+        [
+          "w1",
+          "main-2f-w216"
+        ],
+        [
+          "w1",
+          "main-2f-w214"
+        ],
+        [
+          "w2",
+          "main-2f-w212"
+        ],
+        [
+          "w2",
+          "main-2f-w210"
+        ],
+        [
+          "w2",
+          "main-2f-w208"
+        ],
+        [
+          "w2",
+          "main-2f-w206"
+        ],
+        [
+          "w3",
+          "main-2f-w204"
+        ],
+        [
+          "w3",
+          "main-2f-w202"
+        ],
+        [
+          "w1",
+          "main-2f-w219"
+        ],
+        [
+          "w1",
+          "main-2f-w217"
+        ],
+        [
+          "w1",
+          "main-2f-w215"
+        ],
+        [
+          "w2",
+          "main-2f-w213"
+        ],
+        [
+          "w2",
+          "main-2f-faculty-circle-w211"
+        ],
+        [
+          "w2",
+          "main-2f-w209"
+        ],
+        [
+          "w3",
+          "main-2f-w207"
+        ],
+        [
+          "w3",
+          "main-2f-w205"
+        ],
+        [
+          "w3",
+          "main-2f-pupffai-office-w203"
+        ],
+        [
+          "w3",
+          "main-2f-research-center-w201"
+        ],
+        [
+          "w4",
+          "main-2f-w200"
+        ],
+        [
+          "e0",
+          "main-2f-college-of-cooperatives-office-e201"
+        ],
+        [
+          "e1",
+          "main-2f-cc-extension-services-office-e203"
+        ],
+        [
+          "e1",
+          "main-2f-cc-academic-research-and-administration-office-e205"
+        ],
+        [
+          "e2",
+          "main-2f-e207"
+        ],
+        [
+          "e2",
+          "main-2f-e209"
+        ],
+        [
+          "e3",
+          "main-2f-e211"
+        ],
+        [
+          "e3",
+          "main-2f-e213"
+        ],
+        [
+          "e3",
+          "main-2f-e215"
+        ],
+        [
+          "e4",
+          "main-2f-e217"
+        ],
+        [
+          "e4",
+          "main-2f-e219"
+        ],
+        [
+          "e0",
+          "main-2f-office-of-the-unyon-ng-mga-guro-sa-pup-e200"
+        ],
+        [
+          "e1",
+          "main-2f-national-service-training-program-office-e202"
+        ],
+        [
+          "e1",
+          "main-2f-income-generating-project-office-e204"
+        ],
+        [
+          "e2",
+          "main-2f-e206"
+        ],
+        [
+          "e2",
+          "main-2f-e208"
+        ],
+        [
+          "e3",
+          "main-2f-e210"
+        ],
+        [
+          "e3",
+          "main-2f-e212"
+        ],
+        [
+          "e3",
+          "main-2f-e214"
+        ],
+        [
+          "e4",
+          "main-2f-e216"
+        ],
+        [
+          "e4",
+          "main-2f-e218"
+        ],
+        [
+          "e5",
+          "main-2f-e220"
+        ],
+        [
+          "s0",
+          "main-2f-office-of-the-vp-for-academic-affairs-s14"
+        ],
+        [
+          "w1",
+          "main-2f-office-of-the-vp-for-research-extension-and-dev-t-s13"
+        ],
+        [
+          "s0",
+          "main-2f-dr-ofelia-m-carague-conference-room-s12"
+        ],
+        [
+          "s1",
+          "main-2f-office-of-the-vp-for-administration-s11"
+        ],
+        [
+          "s2",
+          "main-2f-office-of-the-vp-for-student-services-s10"
+        ],
+        [
+          "s1",
+          "main-2f-office-of-the-university-board-secretary-s1"
+        ],
+        [
+          "s2",
+          "main-2f-dr-pablo-t-mateo-jr-conference-room-s2"
+        ],
+        [
+          "s3",
+          "main-2f-office-of-the-president-s3"
+        ],
+        [
+          "s4",
+          "main-2f-university-info-system-network-operations-center-s9"
+        ],
+        [
+          "s4",
+          "main-2f-network-operations-center-server-room-s8"
+        ],
+        [
+          "s5",
+          "main-2f-office-of-the-vp-for-finance-s7"
+        ],
+        [
+          "s5",
+          "main-2f-office-of-the-executive-director-s4"
+        ],
+        [
+          "s5",
+          "main-2f-dr-zenaida-a-olonan-conference-room-s5"
+        ],
+        [
+          "s5",
+          "main-2f-office-of-the-executive-vice-president-s6"
+        ],
+        [
+          "n0",
+          "main-2f-college-of-science-office-n1"
+        ],
+        [
+          "n1",
+          "main-2f-college-of-cooperatives-and-social-dev-t-office-n2"
+        ],
+        [
+          "n2",
+          "main-2f-college-of-computer-mgmt-and-info-tech-office-n3"
+        ],
+        [
+          "n3",
+          "main-2f-college-of-business-office-n4"
+        ],
+        [
+          "n4",
+          "main-2f-college-of-education-office-n5"
+        ],
+        [
+          "n0",
+          "main-2f-function-room-n6"
+        ],
+        [
+          "n1",
+          "main-2f-college-of-economics-finance-and-politics-office-n7"
+        ],
+        [
+          "n2",
+          "main-2f-college-of-languages-and-linguistics-office-n8"
+        ],
+        [
+          "n3",
+          "main-2f-college-of-arts-office-n9"
+        ],
+        [
+          "n4",
+          "main-2f-college-of-accountancy-office-n10"
+        ],
+        [
+          "dome",
+          "main-2f-dome"
+        ],
+        [
+          "s2",
+          "main-2f-elevator"
+        ],
+        [
+          "w0",
+          "stair-west-end"
+        ],
+        [
+          "w4",
+          "stair-west-dome"
+        ],
+        [
+          "s1",
+          "stair-south-north"
+        ],
+        [
+          "s2",
+          "stair-south-mid"
+        ],
+        [
+          "s4",
+          "stair-south-south"
+        ],
+        [
+          "n4",
+          "stair-north-end"
+        ],
+        [
+          "n0",
+          "stair-north-dome"
+        ],
+        [
+          "e0",
+          "stair-east-dome"
+        ],
+        [
+          "e5",
+          "stair-east-end"
+        ],
+        [
+          "e0",
+          "start"
+        ]
+      ],
+      "rooms": [
+        {
+          "id": "main-2f-w220",
+          "label": "W220",
+          "kind": "room",
+          "x": 0.305,
+          "y": 0.275,
+          "node": "w0",
+          "code": "W220"
+        },
+        {
+          "id": "main-2f-w218",
+          "label": "W218",
+          "kind": "room",
+          "x": 0.3106,
+          "y": 0.2922,
+          "node": "w1",
+          "code": "W218"
+        },
+        {
+          "id": "main-2f-w216",
+          "label": "W216",
+          "kind": "room",
+          "x": 0.3161,
+          "y": 0.3094,
+          "node": "w1",
+          "code": "W216"
+        },
+        {
+          "id": "main-2f-w214",
+          "label": "W214",
+          "kind": "room",
+          "x": 0.3217,
+          "y": 0.3267,
+          "node": "w1",
+          "code": "W214"
+        },
+        {
+          "id": "main-2f-w212",
+          "label": "W212",
+          "kind": "room",
+          "x": 0.3272,
+          "y": 0.3439,
+          "node": "w2",
+          "code": "W212"
+        },
+        {
+          "id": "main-2f-w210",
+          "label": "W210",
+          "kind": "room",
+          "x": 0.3328,
+          "y": 0.3611,
+          "node": "w2",
+          "code": "W210"
+        },
+        {
+          "id": "main-2f-w208",
+          "label": "W208",
+          "kind": "room",
+          "x": 0.3383,
+          "y": 0.3783,
+          "node": "w2",
+          "code": "W208"
+        },
+        {
+          "id": "main-2f-w206",
+          "label": "W206",
+          "kind": "room",
+          "x": 0.3439,
+          "y": 0.3956,
+          "node": "w2",
+          "code": "W206"
+        },
+        {
+          "id": "main-2f-w204",
+          "label": "W204",
+          "kind": "room",
+          "x": 0.3494,
+          "y": 0.4128,
+          "node": "w3",
+          "code": "W204"
+        },
+        {
+          "id": "main-2f-w202",
+          "label": "W202",
+          "kind": "room",
+          "x": 0.355,
+          "y": 0.43,
+          "node": "w3",
+          "code": "W202"
+        },
+        {
+          "id": "main-2f-w219",
+          "label": "W219",
+          "kind": "room",
+          "x": 0.348,
+          "y": 0.262,
+          "node": "w1",
+          "code": "W219"
+        },
+        {
+          "id": "main-2f-w217",
+          "label": "W217",
+          "kind": "room",
+          "x": 0.3534,
+          "y": 0.2813,
+          "node": "w1",
+          "code": "W217"
+        },
+        {
+          "id": "main-2f-w215",
+          "label": "W215",
+          "kind": "room",
+          "x": 0.3588,
+          "y": 0.3006,
+          "node": "w1",
+          "code": "W215"
+        },
+        {
+          "id": "main-2f-w213",
+          "label": "W213",
+          "kind": "room",
+          "x": 0.3642,
+          "y": 0.3199,
+          "node": "w2",
+          "code": "W213"
+        },
+        {
+          "id": "main-2f-faculty-circle-w211",
+          "label": "Faculty Circle (W211)",
+          "kind": "other",
+          "x": 0.3696,
+          "y": 0.3392,
+          "node": "w2",
+          "code": "W211"
+        },
+        {
+          "id": "main-2f-w209",
+          "label": "W209",
+          "kind": "room",
+          "x": 0.375,
+          "y": 0.3585,
+          "node": "w2",
+          "code": "W209"
+        },
+        {
+          "id": "main-2f-w207",
+          "label": "W207",
+          "kind": "room",
+          "x": 0.3804,
+          "y": 0.3778,
+          "node": "w3",
+          "code": "W207"
+        },
+        {
+          "id": "main-2f-w205",
+          "label": "W205",
+          "kind": "room",
+          "x": 0.3858,
+          "y": 0.3971,
+          "node": "w3",
+          "code": "W205"
+        },
+        {
+          "id": "main-2f-pupffai-office-w203",
+          "label": "PUPFFAI Office (W203)",
+          "kind": "office",
+          "x": 0.3912,
+          "y": 0.4164,
+          "node": "w3",
+          "code": "W203"
+        },
+        {
+          "id": "main-2f-research-center-w201",
+          "label": "Research Center (W201)",
+          "kind": "office",
+          "x": 0.3966,
+          "y": 0.4357,
+          "node": "w3",
+          "code": "W201"
+        },
+        {
+          "id": "main-2f-w200",
+          "label": "W200",
+          "kind": "room",
+          "x": 0.402,
+          "y": 0.455,
+          "node": "w4",
+          "code": "W200"
+        },
+        {
+          "id": "main-2f-college-of-cooperatives-office-e201",
+          "label": "College of Cooperatives Office (E201)",
+          "kind": "office",
+          "x": 0.348,
+          "y": 0.655,
+          "node": "e0",
+          "code": "E201"
+        },
+        {
+          "id": "main-2f-cc-extension-services-office-e203",
+          "label": "CC Extension Services Office (E203)",
+          "kind": "office",
+          "x": 0.3502,
+          "y": 0.6756,
+          "node": "e1",
+          "code": "E203"
+        },
+        {
+          "id": "main-2f-cc-academic-research-and-administration-office-e205",
+          "label": "CC Academic Research and Administration Office (E205)",
+          "kind": "office",
+          "x": 0.3524,
+          "y": 0.6961,
+          "node": "e1",
+          "code": "E205"
+        },
+        {
+          "id": "main-2f-e207",
+          "label": "E207",
+          "kind": "room",
+          "x": 0.3547,
+          "y": 0.7167,
+          "node": "e2",
+          "code": "E207"
+        },
+        {
+          "id": "main-2f-e209",
+          "label": "E209",
+          "kind": "room",
+          "x": 0.3569,
+          "y": 0.7372,
+          "node": "e2",
+          "code": "E209"
+        },
+        {
+          "id": "main-2f-e211",
+          "label": "E211",
+          "kind": "room",
+          "x": 0.3591,
+          "y": 0.7578,
+          "node": "e3",
+          "code": "E211"
+        },
+        {
+          "id": "main-2f-e213",
+          "label": "E213",
+          "kind": "room",
+          "x": 0.3613,
+          "y": 0.7783,
+          "node": "e3",
+          "code": "E213"
+        },
+        {
+          "id": "main-2f-e215",
+          "label": "E215",
+          "kind": "room",
+          "x": 0.3636,
+          "y": 0.7989,
+          "node": "e3",
+          "code": "E215"
+        },
+        {
+          "id": "main-2f-e217",
+          "label": "E217",
+          "kind": "room",
+          "x": 0.3658,
+          "y": 0.8194,
+          "node": "e4",
+          "code": "E217"
+        },
+        {
+          "id": "main-2f-e219",
+          "label": "E219",
+          "kind": "room",
+          "x": 0.368,
+          "y": 0.84,
+          "node": "e4",
+          "code": "E219"
+        },
+        {
+          "id": "main-2f-office-of-the-unyon-ng-mga-guro-sa-pup-e200",
+          "label": "Office of the Unyon ng Mga Guro sa PUP (E200)",
+          "kind": "office",
+          "x": 0.412,
+          "y": 0.648,
+          "node": "e0",
+          "code": "E200"
+        },
+        {
+          "id": "main-2f-national-service-training-program-office-e202",
+          "label": "National Service Training Program Office (E202)",
+          "kind": "office",
+          "x": 0.414,
+          "y": 0.6687,
+          "node": "e1",
+          "code": "E202"
+        },
+        {
+          "id": "main-2f-income-generating-project-office-e204",
+          "label": "Income Generating Project Office (E204)",
+          "kind": "office",
+          "x": 0.416,
+          "y": 0.6894,
+          "node": "e1",
+          "code": "E204"
+        },
+        {
+          "id": "main-2f-e206",
+          "label": "E206",
+          "kind": "room",
+          "x": 0.418,
+          "y": 0.7101,
+          "node": "e2",
+          "code": "E206"
+        },
+        {
+          "id": "main-2f-e208",
+          "label": "E208",
+          "kind": "room",
+          "x": 0.42,
+          "y": 0.7308,
+          "node": "e2",
+          "code": "E208"
+        },
+        {
+          "id": "main-2f-e210",
+          "label": "E210",
+          "kind": "room",
+          "x": 0.422,
+          "y": 0.7515,
+          "node": "e3",
+          "code": "E210"
+        },
+        {
+          "id": "main-2f-e212",
+          "label": "E212",
+          "kind": "room",
+          "x": 0.424,
+          "y": 0.7722,
+          "node": "e3",
+          "code": "E212"
+        },
+        {
+          "id": "main-2f-e214",
+          "label": "E214",
+          "kind": "room",
+          "x": 0.426,
+          "y": 0.7929,
+          "node": "e3",
+          "code": "E214"
+        },
+        {
+          "id": "main-2f-e216",
+          "label": "E216",
+          "kind": "room",
+          "x": 0.428,
+          "y": 0.8136,
+          "node": "e4",
+          "code": "E216"
+        },
+        {
+          "id": "main-2f-e218",
+          "label": "E218",
+          "kind": "room",
+          "x": 0.43,
+          "y": 0.8343,
+          "node": "e4",
+          "code": "E218"
+        },
+        {
+          "id": "main-2f-e220",
+          "label": "E220",
+          "kind": "room",
+          "x": 0.432,
+          "y": 0.855,
+          "node": "e5",
+          "code": "E220"
+        },
+        {
+          "id": "main-2f-office-of-the-vp-for-academic-affairs-s14",
+          "label": "Office of the VP for Academic Affairs (S14)",
+          "kind": "office",
+          "x": 0.15,
+          "y": 0.3568,
+          "node": "s0"
+        },
+        {
+          "id": "main-2f-office-of-the-vp-for-research-extension-and-dev-t-s13",
+          "label": "Office of the VP for Research, Extension and Dev't (S13)",
+          "kind": "office",
+          "x": 0.27,
+          "y": 0.3568,
+          "node": "w1"
+        },
+        {
+          "id": "main-2f-dr-ofelia-m-carague-conference-room-s12",
+          "label": "Dr. Ofelia M. Carague Conference Room (S12)",
+          "kind": "room",
+          "x": 0.276,
+          "y": 0.412,
+          "node": "s0"
+        },
+        {
+          "id": "main-2f-office-of-the-vp-for-administration-s11",
+          "label": "Office of the VP for Administration (S11)",
+          "kind": "office",
+          "x": 0.276,
+          "y": 0.481,
+          "node": "s1"
+        },
+        {
+          "id": "main-2f-office-of-the-vp-for-student-services-s10",
+          "label": "Office of the VP for Student Services (S10)",
+          "kind": "office",
+          "x": 0.276,
+          "y": 0.5408,
+          "node": "s2"
+        },
+        {
+          "id": "main-2f-office-of-the-university-board-secretary-s1",
+          "label": "Office of the University Board Secretary (S1)",
+          "kind": "office",
+          "x": 0.144,
+          "y": 0.4488,
+          "node": "s1"
+        },
+        {
+          "id": "main-2f-dr-pablo-t-mateo-jr-conference-room-s2",
+          "label": "Dr. Pablo T. Mateo Jr. Conference Room (S2)",
+          "kind": "room",
+          "x": 0.144,
+          "y": 0.527,
+          "node": "s2"
+        },
+        {
+          "id": "main-2f-office-of-the-president-s3",
+          "label": "Office of the President (S3)",
+          "kind": "office",
+          "x": 0.144,
+          "y": 0.6052,
+          "node": "s3"
+        },
+        {
+          "id": "main-2f-university-info-system-network-operations-center-s9",
+          "label": "University Info. System Network Operations Center (S9)",
+          "kind": "office",
+          "x": 0.276,
+          "y": 0.6328,
+          "node": "s4"
+        },
+        {
+          "id": "main-2f-network-operations-center-server-room-s8",
+          "label": "Network Operations Center – Server Room (S8)",
+          "kind": "office",
+          "x": 0.276,
+          "y": 0.6696,
+          "node": "s4"
+        },
+        {
+          "id": "main-2f-office-of-the-vp-for-finance-s7",
+          "label": "Office of the VP for Finance (S7)",
+          "kind": "office",
+          "x": 0.276,
+          "y": 0.7064,
+          "node": "s5"
+        },
+        {
+          "id": "main-2f-office-of-the-executive-director-s4",
+          "label": "Office of the Executive Director (S4)",
+          "kind": "office",
+          "x": 0.15,
+          "y": 0.7432,
+          "node": "s5"
+        },
+        {
+          "id": "main-2f-dr-zenaida-a-olonan-conference-room-s5",
+          "label": "Dr. Zenaida A. Olonan Conference Room (S5)",
+          "kind": "room",
+          "x": 0.2,
+          "y": 0.7432,
+          "node": "s5"
+        },
+        {
+          "id": "main-2f-office-of-the-executive-vice-president-s6",
+          "label": "Office of the Executive Vice President (S6)",
+          "kind": "office",
+          "x": 0.25,
+          "y": 0.7432,
+          "node": "s5"
+        },
+        {
+          "id": "main-2f-college-of-science-office-n1",
+          "label": "College of Science Office (N1)",
+          "kind": "office",
+          "x": 0.534,
+          "y": 0.5044,
+          "node": "n0"
+        },
+        {
+          "id": "main-2f-college-of-cooperatives-and-social-dev-t-office-n2",
+          "label": "College of Cooperatives and Social Dev't Office (N2)",
+          "kind": "office",
+          "x": 0.582,
+          "y": 0.5044,
+          "node": "n1"
+        },
+        {
+          "id": "main-2f-college-of-computer-mgmt-and-info-tech-office-n3",
+          "label": "College of Computer Mgmt. and Info. Tech. Office (N3)",
+          "kind": "office",
+          "x": 0.63,
+          "y": 0.5044,
+          "node": "n2"
+        },
+        {
+          "id": "main-2f-college-of-business-office-n4",
+          "label": "College of Business Office (N4)",
+          "kind": "office",
+          "x": 0.678,
+          "y": 0.5044,
+          "node": "n3"
+        },
+        {
+          "id": "main-2f-college-of-education-office-n5",
+          "label": "College of Education Office (N5)",
+          "kind": "office",
+          "x": 0.726,
+          "y": 0.5044,
+          "node": "n4"
+        },
+        {
+          "id": "main-2f-function-room-n6",
+          "label": "Function Room (N6)",
+          "kind": "room",
+          "x": 0.54,
+          "y": 0.5724,
+          "node": "n0"
+        },
+        {
+          "id": "main-2f-college-of-economics-finance-and-politics-office-n7",
+          "label": "College of Economics, Finance and Politics Office (N7)",
+          "kind": "office",
+          "x": 0.588,
+          "y": 0.5724,
+          "node": "n1"
+        },
+        {
+          "id": "main-2f-college-of-languages-and-linguistics-office-n8",
+          "label": "College of Languages and Linguistics Office (N8)",
+          "kind": "office",
+          "x": 0.636,
+          "y": 0.5724,
+          "node": "n2"
+        },
+        {
+          "id": "main-2f-college-of-arts-office-n9",
+          "label": "College of Arts Office (N9)",
+          "kind": "office",
+          "x": 0.684,
+          "y": 0.5724,
+          "node": "n3"
+        },
+        {
+          "id": "main-2f-college-of-accountancy-office-n10",
+          "label": "College of Accountancy Office (N10)",
+          "kind": "office",
+          "x": 0.732,
+          "y": 0.5724,
+          "node": "n4"
+        },
+        {
+          "id": "main-2f-dome",
+          "label": "DOME",
+          "kind": "other",
+          "x": 0.46,
+          "y": 0.548,
+          "node": "dome"
+        },
+        {
+          "id": "main-2f-elevator",
+          "label": "Elevator",
+          "kind": "elevator",
+          "x": 0.19,
+          "y": 0.55,
+          "node": "s2"
+        }
+      ]
+    },
+    "gym-gf": {
+      "aspect": 1.3333,
+      "start": "start",
+      "nodes": [
+        {
+          "id": "l0",
+          "x": 0.222,
+          "y": 0.2464,
+          "kind": "corridor"
+        },
+        {
+          "id": "l1",
+          "x": 0.2251,
+          "y": 0.3304,
+          "kind": "corridor"
+        },
+        {
+          "id": "l2",
+          "x": 0.2282,
+          "y": 0.4144,
+          "kind": "corridor"
+        },
+        {
+          "id": "l3",
+          "x": 0.2313,
+          "y": 0.4984,
+          "kind": "corridor"
+        },
+        {
+          "id": "l4",
+          "x": 0.2344,
+          "y": 0.5824,
+          "kind": "corridor"
+        },
+        {
+          "id": "m0",
+          "x": 0.284,
+          "y": 0.3904,
+          "kind": "corridor"
+        },
+        {
+          "id": "m1",
+          "x": 0.3584,
+          "y": 0.3885,
+          "kind": "corridor"
+        },
+        {
+          "id": "m2",
+          "x": 0.4328,
+          "y": 0.3866,
+          "kind": "corridor"
+        },
+        {
+          "id": "m3",
+          "x": 0.5072,
+          "y": 0.3846,
+          "kind": "corridor"
+        },
+        {
+          "id": "m4",
+          "x": 0.5816,
+          "y": 0.3827,
+          "kind": "corridor"
+        },
+        {
+          "id": "m5",
+          "x": 0.656,
+          "y": 0.3808,
+          "kind": "corridor"
+        },
+        {
+          "id": "r0",
+          "x": 0.6808,
+          "y": 0.2464,
+          "kind": "corridor"
+        },
+        {
+          "id": "r1",
+          "x": 0.6849,
+          "y": 0.352,
+          "kind": "corridor"
+        },
+        {
+          "id": "r2",
+          "x": 0.6891,
+          "y": 0.4576,
+          "kind": "corridor"
+        },
+        {
+          "id": "r3",
+          "x": 0.6932,
+          "y": 0.5632,
+          "kind": "corridor"
+        },
+        {
+          "id": "gym-gf-drop-off-area",
+          "x": 0.1724,
+          "y": 0.3904,
+          "kind": "room"
+        },
+        {
+          "id": "gym-gf-stock-room-equipment-storage",
+          "x": 0.2096,
+          "y": 0.2656,
+          "kind": "room"
+        },
+        {
+          "id": "gym-gf-he-male-cr-x2",
+          "x": 0.1972,
+          "y": 0.232,
+          "kind": "room"
+        },
+        {
+          "id": "gym-gf-lobby-porch",
+          "x": 0.2096,
+          "y": 0.3424,
+          "kind": "room"
+        },
+        {
+          "id": "gym-gf-elec-room",
+          "x": 0.2096,
+          "y": 0.496,
+          "kind": "room"
+        },
+        {
+          "id": "gym-gf-she-female-cr-x2",
+          "x": 0.1972,
+          "y": 0.5536,
+          "kind": "room"
+        },
+        {
+          "id": "gym-gf-porch",
+          "x": 0.222,
+          "y": 0.592,
+          "kind": "room"
+        },
+        {
+          "id": "gym-gf-badminton-court-x2",
+          "x": 0.2964,
+          "y": 0.4,
+          "kind": "room"
+        },
+        {
+          "id": "gym-gf-basketball-court",
+          "x": 0.4576,
+          "y": 0.3904,
+          "kind": "room"
+        },
+        {
+          "id": "gym-gf-bleachers-e-w",
+          "x": 0.4204,
+          "y": 0.2464,
+          "kind": "room"
+        },
+        {
+          "id": "gym-gf-lobby",
+          "x": 0.4576,
+          "y": 0.2176,
+          "kind": "room"
+        },
+        {
+          "id": "gym-gf-stage",
+          "x": 0.6684,
+          "y": 0.3616,
+          "kind": "room"
+        },
+        {
+          "id": "gym-gf-male-dressing-room",
+          "x": 0.7056,
+          "y": 0.28,
+          "kind": "room"
+        },
+        {
+          "id": "gym-gf-female-dressing-room",
+          "x": 0.7056,
+          "y": 0.5056,
+          "kind": "room"
+        },
+        {
+          "id": "gym-gf-fire-pump-room",
+          "x": 0.718,
+          "y": 0.5536,
+          "kind": "room"
+        },
+        {
+          "id": "gym-gf-maintenance-office",
+          "x": 0.7304,
+          "y": 0.232,
+          "kind": "room"
+        },
+        {
+          "id": "start",
+          "x": 0.2096,
+          "y": 0.352,
+          "kind": "start",
+          "label": "You Are Here"
+        }
+      ],
+      "edges": [
+        [
+          "l0",
+          "l1"
+        ],
+        [
+          "l1",
+          "l2"
+        ],
+        [
+          "l2",
+          "l3"
+        ],
+        [
+          "l3",
+          "l4"
+        ],
+        [
+          "m0",
+          "m1"
+        ],
+        [
+          "m1",
+          "m2"
+        ],
+        [
+          "m2",
+          "m3"
+        ],
+        [
+          "m3",
+          "m4"
+        ],
+        [
+          "m4",
+          "m5"
+        ],
+        [
+          "r0",
+          "r1"
+        ],
+        [
+          "r1",
+          "r2"
+        ],
+        [
+          "r2",
+          "r3"
+        ],
+        [
+          "l2",
+          "m0"
+        ],
+        [
+          "m5",
+          "r2"
+        ],
+        [
+          "l2",
+          "gym-gf-drop-off-area"
+        ],
+        [
+          "l0",
+          "gym-gf-stock-room-equipment-storage"
+        ],
+        [
+          "l0",
+          "gym-gf-he-male-cr-x2"
+        ],
+        [
+          "l1",
+          "gym-gf-lobby-porch"
+        ],
+        [
+          "l3",
+          "gym-gf-elec-room"
+        ],
+        [
+          "l4",
+          "gym-gf-she-female-cr-x2"
+        ],
+        [
+          "l4",
+          "gym-gf-porch"
+        ],
+        [
+          "m0",
+          "gym-gf-badminton-court-x2"
+        ],
+        [
+          "m2",
+          "gym-gf-basketball-court"
+        ],
+        [
+          "m2",
+          "gym-gf-bleachers-e-w"
+        ],
+        [
+          "m2",
+          "gym-gf-lobby"
+        ],
+        [
+          "r1",
+          "gym-gf-stage"
+        ],
+        [
+          "r0",
+          "gym-gf-male-dressing-room"
+        ],
+        [
+          "r2",
+          "gym-gf-female-dressing-room"
+        ],
+        [
+          "r3",
+          "gym-gf-fire-pump-room"
+        ],
+        [
+          "r0",
+          "gym-gf-maintenance-office"
+        ],
+        [
+          "l1",
+          "start"
+        ]
+      ],
+      "rooms": [
+        {
+          "id": "gym-gf-drop-off-area",
+          "label": "Drop-off Area",
+          "kind": "other",
+          "x": 0.1724,
+          "y": 0.3904,
+          "node": "l2"
+        },
+        {
+          "id": "gym-gf-stock-room-equipment-storage",
+          "label": "Stock Room/Equipment Storage",
+          "kind": "other",
+          "x": 0.2096,
+          "y": 0.2656,
+          "node": "l0"
+        },
+        {
+          "id": "gym-gf-he-male-cr-x2",
+          "label": "HE (male CR) x2",
+          "kind": "cr",
+          "x": 0.1972,
+          "y": 0.232,
+          "node": "l0"
+        },
+        {
+          "id": "gym-gf-lobby-porch",
+          "label": "Lobby Porch",
+          "kind": "other",
+          "x": 0.2096,
+          "y": 0.3424,
+          "node": "l1"
+        },
+        {
+          "id": "gym-gf-elec-room",
+          "label": "Elec Room",
+          "kind": "other",
+          "x": 0.2096,
+          "y": 0.496,
+          "node": "l3"
+        },
+        {
+          "id": "gym-gf-she-female-cr-x2",
+          "label": "SHE (female CR) x2",
+          "kind": "cr",
+          "x": 0.1972,
+          "y": 0.5536,
+          "node": "l4"
+        },
+        {
+          "id": "gym-gf-porch",
+          "label": "Porch",
+          "kind": "other",
+          "x": 0.222,
+          "y": 0.592,
+          "node": "l4"
+        },
+        {
+          "id": "gym-gf-badminton-court-x2",
+          "label": "Badminton Court (x2)",
+          "kind": "other",
+          "x": 0.2964,
+          "y": 0.4,
+          "node": "m0"
+        },
+        {
+          "id": "gym-gf-basketball-court",
+          "label": "Basketball Court",
+          "kind": "other",
+          "x": 0.4576,
+          "y": 0.3904,
+          "node": "m2"
+        },
+        {
+          "id": "gym-gf-bleachers-e-w",
+          "label": "Bleachers (E/W)",
+          "kind": "other",
+          "x": 0.4204,
+          "y": 0.2464,
+          "node": "m2"
+        },
+        {
+          "id": "gym-gf-lobby",
+          "label": "Lobby",
+          "kind": "other",
+          "x": 0.4576,
+          "y": 0.2176,
+          "node": "m2"
+        },
+        {
+          "id": "gym-gf-stage",
+          "label": "Stage",
+          "kind": "other",
+          "x": 0.6684,
+          "y": 0.3616,
+          "node": "r1"
+        },
+        {
+          "id": "gym-gf-male-dressing-room",
+          "label": "Male Dressing Room",
+          "kind": "other",
+          "x": 0.7056,
+          "y": 0.28,
+          "node": "r0"
+        },
+        {
+          "id": "gym-gf-female-dressing-room",
+          "label": "Female Dressing Room",
+          "kind": "other",
+          "x": 0.7056,
+          "y": 0.5056,
+          "node": "r2"
+        },
+        {
+          "id": "gym-gf-fire-pump-room",
+          "label": "Fire Pump Room?",
+          "kind": "other",
+          "x": 0.718,
+          "y": 0.5536,
+          "node": "r3",
+          "flag": "?"
+        },
+        {
+          "id": "gym-gf-maintenance-office",
+          "label": "Maintenance Office?",
+          "kind": "other",
+          "x": 0.7304,
+          "y": 0.232,
+          "node": "r0",
+          "flag": "?"
+        }
+      ]
+    },
+    "library-2f": {
+      "aspect": 1.3333,
+      "start": null,
+      "nodes": [
+        {
+          "id": "h0",
+          "x": 0.276,
+          "y": 0.3416,
+          "kind": "corridor"
+        },
+        {
+          "id": "h1",
+          "x": 0.3566,
+          "y": 0.3387,
+          "kind": "corridor"
+        },
+        {
+          "id": "h2",
+          "x": 0.4373,
+          "y": 0.3358,
+          "kind": "corridor"
+        },
+        {
+          "id": "h3",
+          "x": 0.5179,
+          "y": 0.333,
+          "kind": "corridor"
+        },
+        {
+          "id": "h4",
+          "x": 0.5986,
+          "y": 0.3301,
+          "kind": "corridor"
+        },
+        {
+          "id": "h5",
+          "x": 0.6792,
+          "y": 0.3272,
+          "kind": "corridor"
+        },
+        {
+          "id": "d0",
+          "x": 0.628,
+          "y": 0.3704,
+          "kind": "corridor"
+        },
+        {
+          "id": "d1",
+          "x": 0.6306,
+          "y": 0.4539,
+          "kind": "corridor"
+        },
+        {
+          "id": "d2",
+          "x": 0.6331,
+          "y": 0.5374,
+          "kind": "corridor"
+        },
+        {
+          "id": "d3",
+          "x": 0.6357,
+          "y": 0.621,
+          "kind": "corridor"
+        },
+        {
+          "id": "d4",
+          "x": 0.6382,
+          "y": 0.7045,
+          "kind": "corridor"
+        },
+        {
+          "id": "d5",
+          "x": 0.6408,
+          "y": 0.788,
+          "kind": "corridor"
+        },
+        {
+          "id": "library-2f-computer-lab-2",
+          "x": 0.34,
+          "y": 0.284,
+          "kind": "room"
+        },
+        {
+          "id": "library-2f-computer-lab-1",
+          "x": 0.404,
+          "y": 0.32,
+          "kind": "room"
+        },
+        {
+          "id": "library-2f-it-project-management",
+          "x": 0.468,
+          "y": 0.2696,
+          "kind": "room"
+        },
+        {
+          "id": "library-2f-conference-room",
+          "x": 0.4872,
+          "y": 0.2264,
+          "kind": "room"
+        },
+        {
+          "id": "library-2f-phase-1-pantry",
+          "x": 0.532,
+          "y": 0.2264,
+          "kind": "room"
+        },
+        {
+          "id": "library-2f-icto-director",
+          "x": 0.5768,
+          "y": 0.2408,
+          "kind": "room"
+        },
+        {
+          "id": "library-2f-quality-assurance-office",
+          "x": 0.6152,
+          "y": 0.2264,
+          "kind": "room"
+        },
+        {
+          "id": "library-2f-icto-helpdesk",
+          "x": 0.6152,
+          "y": 0.2984,
+          "kind": "room"
+        },
+        {
+          "id": "library-2f-nallrc-lobby",
+          "x": 0.6792,
+          "y": 0.3416,
+          "kind": "room"
+        },
+        {
+          "id": "library-2f-operations-and-support-management",
+          "x": 0.4488,
+          "y": 0.3704,
+          "kind": "room"
+        },
+        {
+          "id": "library-2f-administration-room",
+          "x": 0.4872,
+          "y": 0.392,
+          "kind": "room"
+        },
+        {
+          "id": "library-2f-assistant-director-x2",
+          "x": 0.5512,
+          "y": 0.3416,
+          "kind": "room"
+        },
+        {
+          "id": "library-2f-icto-lobby",
+          "x": 0.5768,
+          "y": 0.4424,
+          "kind": "room"
+        },
+        {
+          "id": "library-2f-phase-2-pantry",
+          "x": 0.5768,
+          "y": 0.5576,
+          "kind": "room"
+        },
+        {
+          "id": "library-2f-research-lab-1",
+          "x": 0.596,
+          "y": 0.6296,
+          "kind": "room"
+        },
+        {
+          "id": "library-2f-research-lab-2",
+          "x": 0.6408,
+          "y": 0.6584,
+          "kind": "room"
+        },
+        {
+          "id": "library-2f-building-admin",
+          "x": 0.66,
+          "y": 0.4856,
+          "kind": "room"
+        },
+        {
+          "id": "library-2f-fulltime-delivery-unit",
+          "x": 0.7048,
+          "y": 0.536,
+          "kind": "room"
+        },
+        {
+          "id": "library-2f-icto-storage-room",
+          "x": 0.7048,
+          "y": 0.5864,
+          "kind": "room"
+        },
+        {
+          "id": "library-2f-pcari-conference-room",
+          "x": 0.6792,
+          "y": 0.68,
+          "kind": "room"
+        },
+        {
+          "id": "library-2f-network-and-systems-administration",
+          "x": 0.6408,
+          "y": 0.7304,
+          "kind": "room"
+        },
+        {
+          "id": "library-2f-information-systems-development",
+          "x": 0.6152,
+          "y": 0.8024,
+          "kind": "room"
+        },
+        {
+          "id": "library-2f-cr-male-female",
+          "x": 0.724,
+          "y": 0.4712,
+          "kind": "room"
+        },
+        {
+          "id": "library-2f-storage-room",
+          "x": 0.2312,
+          "y": 0.2264,
+          "kind": "room"
+        },
+        {
+          "id": "lib2-stair-ne",
+          "x": 0.7048,
+          "y": 0.1976,
+          "kind": "stairs"
+        },
+        {
+          "id": "lib2-stair-se",
+          "x": 0.7432,
+          "y": 0.824,
+          "kind": "stairs"
+        }
+      ],
+      "edges": [
+        [
+          "h0",
+          "h1"
+        ],
+        [
+          "h1",
+          "h2"
+        ],
+        [
+          "h2",
+          "h3"
+        ],
+        [
+          "h3",
+          "h4"
+        ],
+        [
+          "h4",
+          "h5"
+        ],
+        [
+          "d0",
+          "d1"
+        ],
+        [
+          "d1",
+          "d2"
+        ],
+        [
+          "d2",
+          "d3"
+        ],
+        [
+          "d3",
+          "d4"
+        ],
+        [
+          "d4",
+          "d5"
+        ],
+        [
+          "h5",
+          "d0"
+        ],
+        [
+          "h1",
+          "library-2f-computer-lab-2"
+        ],
+        [
+          "h2",
+          "library-2f-computer-lab-1"
+        ],
+        [
+          "h2",
+          "library-2f-it-project-management"
+        ],
+        [
+          "h3",
+          "library-2f-conference-room"
+        ],
+        [
+          "h3",
+          "library-2f-phase-1-pantry"
+        ],
+        [
+          "h4",
+          "library-2f-icto-director"
+        ],
+        [
+          "h4",
+          "library-2f-quality-assurance-office"
+        ],
+        [
+          "h4",
+          "library-2f-icto-helpdesk"
+        ],
+        [
+          "h5",
+          "library-2f-nallrc-lobby"
+        ],
+        [
+          "h2",
+          "library-2f-operations-and-support-management"
+        ],
+        [
+          "h3",
+          "library-2f-administration-room"
+        ],
+        [
+          "h3",
+          "library-2f-assistant-director-x2"
+        ],
+        [
+          "d1",
+          "library-2f-icto-lobby"
+        ],
+        [
+          "d2",
+          "library-2f-phase-2-pantry"
+        ],
+        [
+          "d3",
+          "library-2f-research-lab-1"
+        ],
+        [
+          "d3",
+          "library-2f-research-lab-2"
+        ],
+        [
+          "d1",
+          "library-2f-building-admin"
+        ],
+        [
+          "d2",
+          "library-2f-fulltime-delivery-unit"
+        ],
+        [
+          "d3",
+          "library-2f-icto-storage-room"
+        ],
+        [
+          "d4",
+          "library-2f-pcari-conference-room"
+        ],
+        [
+          "d4",
+          "library-2f-network-and-systems-administration"
+        ],
+        [
+          "d5",
+          "library-2f-information-systems-development"
+        ],
+        [
+          "d1",
+          "library-2f-cr-male-female"
+        ],
+        [
+          "h0",
+          "library-2f-storage-room"
+        ],
+        [
+          "h5",
+          "lib2-stair-ne"
+        ],
+        [
+          "d5",
+          "lib2-stair-se"
+        ]
+      ],
+      "rooms": [
+        {
+          "id": "library-2f-computer-lab-2",
+          "label": "Computer Lab 2",
+          "kind": "room",
+          "x": 0.34,
+          "y": 0.284,
+          "node": "h1"
+        },
+        {
+          "id": "library-2f-computer-lab-1",
+          "label": "Computer Lab 1",
+          "kind": "room",
+          "x": 0.404,
+          "y": 0.32,
+          "node": "h2"
+        },
+        {
+          "id": "library-2f-it-project-management",
+          "label": "IT Project Management",
+          "kind": "office",
+          "x": 0.468,
+          "y": 0.2696,
+          "node": "h2"
+        },
+        {
+          "id": "library-2f-conference-room",
+          "label": "Conference Room",
+          "kind": "room",
+          "x": 0.4872,
+          "y": 0.2264,
+          "node": "h3"
+        },
+        {
+          "id": "library-2f-phase-1-pantry",
+          "label": "Phase 1 Pantry",
+          "kind": "office",
+          "x": 0.532,
+          "y": 0.2264,
+          "node": "h3"
+        },
+        {
+          "id": "library-2f-icto-director",
+          "label": "ICTO Director",
+          "kind": "office",
+          "x": 0.5768,
+          "y": 0.2408,
+          "node": "h4"
+        },
+        {
+          "id": "library-2f-quality-assurance-office",
+          "label": "Quality Assurance Office",
+          "kind": "office",
+          "x": 0.6152,
+          "y": 0.2264,
+          "node": "h4"
+        },
+        {
+          "id": "library-2f-icto-helpdesk",
+          "label": "ICTO Helpdesk",
+          "kind": "office",
+          "x": 0.6152,
+          "y": 0.2984,
+          "node": "h4"
+        },
+        {
+          "id": "library-2f-nallrc-lobby",
+          "label": "NALLRC Lobby",
+          "kind": "office",
+          "x": 0.6792,
+          "y": 0.3416,
+          "node": "h5"
+        },
+        {
+          "id": "library-2f-operations-and-support-management",
+          "label": "Operations and Support Management",
+          "kind": "office",
+          "x": 0.4488,
+          "y": 0.3704,
+          "node": "h2"
+        },
+        {
+          "id": "library-2f-administration-room",
+          "label": "Administration Room",
+          "kind": "office",
+          "x": 0.4872,
+          "y": 0.392,
+          "node": "h3"
+        },
+        {
+          "id": "library-2f-assistant-director-x2",
+          "label": "Assistant Director (x2)",
+          "kind": "office",
+          "x": 0.5512,
+          "y": 0.3416,
+          "node": "h3"
+        },
+        {
+          "id": "library-2f-icto-lobby",
+          "label": "ICTO Lobby",
+          "kind": "office",
+          "x": 0.5768,
+          "y": 0.4424,
+          "node": "d1"
+        },
+        {
+          "id": "library-2f-phase-2-pantry",
+          "label": "Phase 2 Pantry",
+          "kind": "office",
+          "x": 0.5768,
+          "y": 0.5576,
+          "node": "d2"
+        },
+        {
+          "id": "library-2f-research-lab-1",
+          "label": "Research Lab 1",
+          "kind": "room",
+          "x": 0.596,
+          "y": 0.6296,
+          "node": "d3"
+        },
+        {
+          "id": "library-2f-research-lab-2",
+          "label": "Research Lab 2",
+          "kind": "room",
+          "x": 0.6408,
+          "y": 0.6584,
+          "node": "d3"
+        },
+        {
+          "id": "library-2f-building-admin",
+          "label": "Building Admin",
+          "kind": "office",
+          "x": 0.66,
+          "y": 0.4856,
+          "node": "d1"
+        },
+        {
+          "id": "library-2f-fulltime-delivery-unit",
+          "label": "Fulltime Delivery Unit",
+          "kind": "office",
+          "x": 0.7048,
+          "y": 0.536,
+          "node": "d2"
+        },
+        {
+          "id": "library-2f-icto-storage-room",
+          "label": "ICTO Storage Room",
+          "kind": "room",
+          "x": 0.7048,
+          "y": 0.5864,
+          "node": "d3"
+        },
+        {
+          "id": "library-2f-pcari-conference-room",
+          "label": "PCARI Conference Room",
+          "kind": "room",
+          "x": 0.6792,
+          "y": 0.68,
+          "node": "d4"
+        },
+        {
+          "id": "library-2f-network-and-systems-administration",
+          "label": "Network and Systems Administration",
+          "kind": "room",
+          "x": 0.6408,
+          "y": 0.7304,
+          "node": "d4"
+        },
+        {
+          "id": "library-2f-information-systems-development",
+          "label": "Information Systems Development",
+          "kind": "room",
+          "x": 0.6152,
+          "y": 0.8024,
+          "node": "d5"
+        },
+        {
+          "id": "library-2f-cr-male-female",
+          "label": "CR male/female",
+          "kind": "cr",
+          "x": 0.724,
+          "y": 0.4712,
+          "node": "d1"
+        },
+        {
+          "id": "library-2f-storage-room",
+          "label": "Storage Room",
+          "kind": "room",
+          "x": 0.2312,
+          "y": 0.2264,
+          "node": "h0",
+          "flag": "?"
+        }
+      ]
+    },
+    "library-3f": {
+      "aspect": 1.7352,
+      "start": null,
+      "nodes": [
+        {
+          "id": "v0",
+          "x": 0.5,
+          "y": 0.08,
+          "kind": "corridor"
+        },
+        {
+          "id": "v1",
+          "x": 0.508,
+          "y": 0.18,
+          "kind": "corridor"
+        },
+        {
+          "id": "v2",
+          "x": 0.516,
+          "y": 0.28,
+          "kind": "corridor"
+        },
+        {
+          "id": "v3",
+          "x": 0.524,
+          "y": 0.38,
+          "kind": "corridor"
+        },
+        {
+          "id": "v4",
+          "x": 0.532,
+          "y": 0.48,
+          "kind": "corridor"
+        },
+        {
+          "id": "v5",
+          "x": 0.54,
+          "y": 0.58,
+          "kind": "corridor"
+        },
+        {
+          "id": "h0",
+          "x": 0.1,
+          "y": 0.68,
+          "kind": "corridor"
+        },
+        {
+          "id": "h1",
+          "x": 0.23,
+          "y": 0.6833,
+          "kind": "corridor"
+        },
+        {
+          "id": "h2",
+          "x": 0.36,
+          "y": 0.6867,
+          "kind": "corridor"
+        },
+        {
+          "id": "h3",
+          "x": 0.49,
+          "y": 0.69,
+          "kind": "corridor"
+        },
+        {
+          "id": "h4",
+          "x": 0.62,
+          "y": 0.6933,
+          "kind": "corridor"
+        },
+        {
+          "id": "h5",
+          "x": 0.75,
+          "y": 0.6967,
+          "kind": "corridor"
+        },
+        {
+          "id": "h6",
+          "x": 0.88,
+          "y": 0.7,
+          "kind": "corridor"
+        },
+        {
+          "id": "library-3f-chief-technical-section",
+          "x": 0.46,
+          "y": 0.12,
+          "kind": "room"
+        },
+        {
+          "id": "library-3f-staff",
+          "x": 0.52,
+          "y": 0.1,
+          "kind": "room"
+        },
+        {
+          "id": "library-3f-director-s-office",
+          "x": 0.57,
+          "y": 0.1,
+          "kind": "room"
+        },
+        {
+          "id": "library-3f-materials-processing-section",
+          "x": 0.46,
+          "y": 0.22,
+          "kind": "room"
+        },
+        {
+          "id": "library-3f-silid-pulungan-board-room",
+          "x": 0.55,
+          "y": 0.2,
+          "kind": "room"
+        },
+        {
+          "id": "library-3f-technical-service-stock-rm",
+          "x": 0.46,
+          "y": 0.33,
+          "kind": "room"
+        },
+        {
+          "id": "library-3f-silid-lakandayang",
+          "x": 0.55,
+          "y": 0.34,
+          "kind": "room"
+        },
+        {
+          "id": "library-3f-nalrc-lounging-area",
+          "x": 0.46,
+          "y": 0.4,
+          "kind": "room"
+        },
+        {
+          "id": "library-3f-pup-memorabilia",
+          "x": 0.46,
+          "y": 0.45,
+          "kind": "room"
+        },
+        {
+          "id": "library-3f-archives-special-services-office",
+          "x": 0.55,
+          "y": 0.45,
+          "kind": "room"
+        },
+        {
+          "id": "library-3f-rare-books-collection",
+          "x": 0.55,
+          "y": 0.51,
+          "kind": "room"
+        },
+        {
+          "id": "library-3f-elevator",
+          "x": 0.5,
+          "y": 0.5,
+          "kind": "room"
+        },
+        {
+          "id": "library-3f-third-floor-lobby",
+          "x": 0.58,
+          "y": 0.62,
+          "kind": "room"
+        },
+        {
+          "id": "library-3f-chief-readers-services",
+          "x": 0.38,
+          "y": 0.62,
+          "kind": "room"
+        },
+        {
+          "id": "library-3f-reference-section",
+          "x": 0.22,
+          "y": 0.6,
+          "kind": "room"
+        },
+        {
+          "id": "library-3f-reading-area-west",
+          "x": 0.22,
+          "y": 0.72,
+          "kind": "room"
+        },
+        {
+          "id": "library-3f-circulation-section",
+          "x": 0.08,
+          "y": 0.68,
+          "kind": "room"
+        },
+        {
+          "id": "library-3f-computer-laboratory",
+          "x": 0.38,
+          "y": 0.74,
+          "kind": "room"
+        },
+        {
+          "id": "library-3f-male-cr",
+          "x": 0.43,
+          "y": 0.78,
+          "kind": "room"
+        },
+        {
+          "id": "library-3f-female-cr",
+          "x": 0.47,
+          "y": 0.78,
+          "kind": "room"
+        },
+        {
+          "id": "library-3f-open-below",
+          "x": 0.55,
+          "y": 0.72,
+          "kind": "room"
+        },
+        {
+          "id": "library-3f-discussion-room",
+          "x": 0.65,
+          "y": 0.62,
+          "kind": "room"
+        },
+        {
+          "id": "library-3f-disability-section",
+          "x": 0.7,
+          "y": 0.62,
+          "kind": "room"
+        },
+        {
+          "id": "library-3f-filipiniana-section",
+          "x": 0.82,
+          "y": 0.62,
+          "kind": "room"
+        },
+        {
+          "id": "library-3f-reading-area-east",
+          "x": 0.82,
+          "y": 0.72,
+          "kind": "room"
+        },
+        {
+          "id": "library-3f-serial-section",
+          "x": 0.66,
+          "y": 0.74,
+          "kind": "room"
+        },
+        {
+          "id": "library-3f-stairs-up",
+          "x": 0.58,
+          "y": 0.76,
+          "kind": "room"
+        },
+        {
+          "id": "library-3f-fire-exit-west",
+          "x": 0.08,
+          "y": 0.82,
+          "kind": "room"
+        },
+        {
+          "id": "library-3f-fire-exit-east",
+          "x": 0.9,
+          "y": 0.8,
+          "kind": "room"
+        },
+        {
+          "id": "library-3f-exit-main-stairs",
+          "x": 0.58,
+          "y": 0.7,
+          "kind": "room"
+        },
+        {
+          "id": "lib3-stairs-up",
+          "x": 0.58,
+          "y": 0.76,
+          "kind": "stairs"
+        },
+        {
+          "id": "lib3-stair-north",
+          "x": 0.5,
+          "y": 0.06,
+          "kind": "stairs"
+        }
+      ],
+      "edges": [
+        [
+          "v0",
+          "v1"
+        ],
+        [
+          "v1",
+          "v2"
+        ],
+        [
+          "v2",
+          "v3"
+        ],
+        [
+          "v3",
+          "v4"
+        ],
+        [
+          "v4",
+          "v5"
+        ],
+        [
+          "h0",
+          "h1"
+        ],
+        [
+          "h1",
+          "h2"
+        ],
+        [
+          "h2",
+          "h3"
+        ],
+        [
+          "h3",
+          "h4"
+        ],
+        [
+          "h4",
+          "h5"
+        ],
+        [
+          "h5",
+          "h6"
+        ],
+        [
+          "v5",
+          "h3"
+        ],
+        [
+          "v0",
+          "library-3f-chief-technical-section"
+        ],
+        [
+          "v0",
+          "library-3f-staff"
+        ],
+        [
+          "v0",
+          "library-3f-director-s-office"
+        ],
+        [
+          "v1",
+          "library-3f-materials-processing-section"
+        ],
+        [
+          "v1",
+          "library-3f-silid-pulungan-board-room"
+        ],
+        [
+          "v2",
+          "library-3f-technical-service-stock-rm"
+        ],
+        [
+          "v3",
+          "library-3f-silid-lakandayang"
+        ],
+        [
+          "v3",
+          "library-3f-nalrc-lounging-area"
+        ],
+        [
+          "v4",
+          "library-3f-pup-memorabilia"
+        ],
+        [
+          "v4",
+          "library-3f-archives-special-services-office"
+        ],
+        [
+          "v4",
+          "library-3f-rare-books-collection"
+        ],
+        [
+          "v4",
+          "library-3f-elevator"
+        ],
+        [
+          "v5",
+          "library-3f-third-floor-lobby"
+        ],
+        [
+          "h2",
+          "library-3f-chief-readers-services"
+        ],
+        [
+          "h1",
+          "library-3f-reference-section"
+        ],
+        [
+          "h1",
+          "library-3f-reading-area-west"
+        ],
+        [
+          "h0",
+          "library-3f-circulation-section"
+        ],
+        [
+          "h2",
+          "library-3f-computer-laboratory"
+        ],
+        [
+          "h3",
+          "library-3f-male-cr"
+        ],
+        [
+          "h3",
+          "library-3f-female-cr"
+        ],
+        [
+          "h3",
+          "library-3f-open-below"
+        ],
+        [
+          "h4",
+          "library-3f-discussion-room"
+        ],
+        [
+          "h5",
+          "library-3f-disability-section"
+        ],
+        [
+          "h6",
+          "library-3f-filipiniana-section"
+        ],
+        [
+          "h6",
+          "library-3f-reading-area-east"
+        ],
+        [
+          "h4",
+          "library-3f-serial-section"
+        ],
+        [
+          "h4",
+          "library-3f-stairs-up"
+        ],
+        [
+          "h0",
+          "library-3f-fire-exit-west"
+        ],
+        [
+          "h6",
+          "library-3f-fire-exit-east"
+        ],
+        [
+          "h4",
+          "library-3f-exit-main-stairs"
+        ],
+        [
+          "h4",
+          "lib3-stairs-up"
+        ],
+        [
+          "v0",
+          "lib3-stair-north"
+        ]
+      ],
+      "rooms": [
+        {
+          "id": "library-3f-chief-technical-section",
+          "label": "Chief Technical Section",
+          "kind": "office",
+          "x": 0.46,
+          "y": 0.12,
+          "node": "v0"
+        },
+        {
+          "id": "library-3f-staff",
+          "label": "Staff",
+          "kind": "office",
+          "x": 0.52,
+          "y": 0.1,
+          "node": "v0"
+        },
+        {
+          "id": "library-3f-director-s-office",
+          "label": "Director's Office",
+          "kind": "office",
+          "x": 0.57,
+          "y": 0.1,
+          "node": "v0"
+        },
+        {
+          "id": "library-3f-materials-processing-section",
+          "label": "Materials Processing Section",
+          "kind": "office",
+          "x": 0.46,
+          "y": 0.22,
+          "node": "v1"
+        },
+        {
+          "id": "library-3f-silid-pulungan-board-room",
+          "label": "Silid Pulungan / Board Room",
+          "kind": "room",
+          "x": 0.55,
+          "y": 0.2,
+          "node": "v1"
+        },
+        {
+          "id": "library-3f-technical-service-stock-rm",
+          "label": "Technical Service Stock Rm.",
+          "kind": "room",
+          "x": 0.46,
+          "y": 0.33,
+          "node": "v2"
+        },
+        {
+          "id": "library-3f-silid-lakandayang",
+          "label": "Silid Lakandayang",
+          "kind": "room",
+          "x": 0.55,
+          "y": 0.34,
+          "node": "v3"
+        },
+        {
+          "id": "library-3f-nalrc-lounging-area",
+          "label": "NALRC Lounging Area",
+          "kind": "room",
+          "x": 0.46,
+          "y": 0.4,
+          "node": "v3"
+        },
+        {
+          "id": "library-3f-pup-memorabilia",
+          "label": "PUP Memorabilia",
+          "kind": "room",
+          "x": 0.46,
+          "y": 0.45,
+          "node": "v4"
+        },
+        {
+          "id": "library-3f-archives-special-services-office",
+          "label": "Archives / Special Services Office",
+          "kind": "office",
+          "x": 0.55,
+          "y": 0.45,
+          "node": "v4"
+        },
+        {
+          "id": "library-3f-rare-books-collection",
+          "label": "Rare Books Collection",
+          "kind": "room",
+          "x": 0.55,
+          "y": 0.51,
+          "node": "v4"
+        },
+        {
+          "id": "library-3f-elevator",
+          "label": "Elevator",
+          "kind": "elevator",
+          "x": 0.5,
+          "y": 0.5,
+          "node": "v4"
+        },
+        {
+          "id": "library-3f-third-floor-lobby",
+          "label": "Third Floor Lobby",
+          "kind": "room",
+          "x": 0.58,
+          "y": 0.62,
+          "node": "v5"
+        },
+        {
+          "id": "library-3f-chief-readers-services",
+          "label": "Chief Readers Services",
+          "kind": "office",
+          "x": 0.38,
+          "y": 0.62,
+          "node": "h2"
+        },
+        {
+          "id": "library-3f-reference-section",
+          "label": "Reference Section",
+          "kind": "office",
+          "x": 0.22,
+          "y": 0.6,
+          "node": "h1"
+        },
+        {
+          "id": "library-3f-reading-area-west",
+          "label": "Reading Area (west)",
+          "kind": "room",
+          "x": 0.22,
+          "y": 0.72,
+          "node": "h1"
+        },
+        {
+          "id": "library-3f-circulation-section",
+          "label": "Circulation Section",
+          "kind": "office",
+          "x": 0.08,
+          "y": 0.68,
+          "node": "h0"
+        },
+        {
+          "id": "library-3f-computer-laboratory",
+          "label": "Computer Laboratory",
+          "kind": "room",
+          "x": 0.38,
+          "y": 0.74,
+          "node": "h2"
+        },
+        {
+          "id": "library-3f-male-cr",
+          "label": "Male CR",
+          "kind": "cr",
+          "x": 0.43,
+          "y": 0.78,
+          "node": "h3"
+        },
+        {
+          "id": "library-3f-female-cr",
+          "label": "Female CR",
+          "kind": "cr",
+          "x": 0.47,
+          "y": 0.78,
+          "node": "h3"
+        },
+        {
+          "id": "library-3f-open-below",
+          "label": "Open Below",
+          "kind": "room",
+          "x": 0.55,
+          "y": 0.72,
+          "node": "h3"
+        },
+        {
+          "id": "library-3f-discussion-room",
+          "label": "Discussion Room",
+          "kind": "room",
+          "x": 0.65,
+          "y": 0.62,
+          "node": "h4"
+        },
+        {
+          "id": "library-3f-disability-section",
+          "label": "Disability Section",
+          "kind": "office",
+          "x": 0.7,
+          "y": 0.62,
+          "node": "h5"
+        },
+        {
+          "id": "library-3f-filipiniana-section",
+          "label": "Filipiniana Section",
+          "kind": "office",
+          "x": 0.82,
+          "y": 0.62,
+          "node": "h6"
+        },
+        {
+          "id": "library-3f-reading-area-east",
+          "label": "Reading Area (east)",
+          "kind": "room",
+          "x": 0.82,
+          "y": 0.72,
+          "node": "h6"
+        },
+        {
+          "id": "library-3f-serial-section",
+          "label": "Serial Section",
+          "kind": "office",
+          "x": 0.66,
+          "y": 0.74,
+          "node": "h4"
+        },
+        {
+          "id": "library-3f-stairs-up",
+          "label": "Stairs (up)",
+          "kind": "stairs",
+          "x": 0.58,
+          "y": 0.76,
+          "node": "h4"
+        },
+        {
+          "id": "library-3f-fire-exit-west",
+          "label": "Fire Exit (west)",
+          "kind": "exit",
+          "x": 0.08,
+          "y": 0.82,
+          "node": "h0"
+        },
+        {
+          "id": "library-3f-fire-exit-east",
+          "label": "Fire Exit (east)",
+          "kind": "exit",
+          "x": 0.9,
+          "y": 0.8,
+          "node": "h6"
+        },
+        {
+          "id": "library-3f-exit-main-stairs",
+          "label": "Exit (main stairs)",
+          "kind": "exit",
+          "x": 0.58,
+          "y": 0.7,
+          "node": "h4"
+        }
+      ]
     }
   },
   "unplaced": [
@@ -8152,6 +11487,16 @@
     {
       "floorId": "main-5f",
       "label": "Fire Exit (South wing x2)",
+      "reason": "not drawn as one spot on this plan"
+    },
+    {
+      "floorId": "gym-gf",
+      "label": "EXIT (front x3)",
+      "reason": "not drawn as one spot on this plan"
+    },
+    {
+      "floorId": "gym-gf",
+      "label": "Fire Exit (rear x2)",
       "reason": "not drawn as one spot on this plan"
     }
   ]

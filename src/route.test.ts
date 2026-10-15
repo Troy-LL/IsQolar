@@ -253,6 +253,38 @@ describe("map routing data", () => {
     }
   });
 
+  it("every floor has stairs and a connected path graph", () => {
+    for (const floor of floors) {
+      const graph = paths.floors[floor.id];
+      assert.ok(graph, `${floor.id} has no path graph`);
+      const entry = stairs.floors[floor.id];
+      assert.ok(entry, `${floor.id} has no stairs entry`);
+      const placed = Object.entries(entry.stairs);
+      if (placed.length === 0) assert.match(entry.notes, /\?/, `${floor.id} has no stairs`);
+      const ids = new Set(graph.nodes.map((n) => n.id));
+      for (const [id, p] of placed) {
+        assert.ok(ids.has(id), `${floor.id} stair ${id} is not on the path graph`);
+        const node = graph.nodes.find((n) => n.id === id);
+        assert.equal(node?.x, p.x, `${floor.id} ${id} x`);
+        assert.equal(node?.y, p.y, `${floor.id} ${id} y`);
+      }
+      const adj = new Map<string, string[]>(graph.nodes.map((n) => [n.id, []]));
+      for (const [a, b] of graph.edges) {
+        adj.get(a)?.push(b);
+        adj.get(b)?.push(a);
+      }
+      const seen = new Set<string>();
+      const stack = [graph.nodes[0].id];
+      while (stack.length) {
+        const id = stack.pop() as string;
+        if (seen.has(id)) continue;
+        seen.add(id);
+        stack.push(...(adj.get(id) ?? []));
+      }
+      assert.equal(seen.size, graph.nodes.length, `${floor.id} path graph is not connected`);
+    }
+  });
+
   it("every room label comes from docs/floorplans/rooms.json", () => {
     const labels = new Set((JSON.parse(readFileSync("docs/floorplans/rooms.json", "utf8")) as { label: string }[]).map((r) => r.label));
     for (const floor of Object.values(paths.floors)) {
