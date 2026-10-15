@@ -25,7 +25,14 @@ const GOAL_ZOOM = innerWidth >= 900 ? 19.5 : 20.5;
 function legPad() {
   const desk = innerWidth >= 900;
   const open = !$("sheet").hidden;
-  return { top: desk ? 90 : 140, bottom: desk ? 40 : 160, left: (desk && open ? 420 : 0) + 24, right: 88 };
+  // Clear location chip, floor tabs, zoom, and the live sheet height (RT19 F2/F4/D1–D3).
+  const sheetBottom = !desk && open ? snapPx() + 28 : desk ? 48 : 24;
+  return {
+    top: desk ? 96 : 168,
+    bottom: sheetBottom,
+    left: (desk && open ? 420 : 0) + (desk ? 28 : 72),
+    right: desk ? 96 : 100,
+  };
 }
 const S = { floors: [], paths: null, stairs: null, campus: null, rooms: [], inside: false, floorId: null, sel: null, route: null, step: -1, cam: {} };
 
@@ -57,10 +64,10 @@ function insets() {
   const desk = W >= 900;
   const sheet = $("sheet");
   const open = !sheet.hidden;
-  const top = desk ? 24 : 80;
-  const left = desk && open ? 420 : 12;
-  const right = S.inside ? 76 : 16;
-  const bottom = !desk && open ? snapPx() + 12 : 16;
+  const top = desk ? 32 : 88;
+  const left = desk && open ? 420 : S.inside ? 64 : 12;
+  const right = S.inside ? 88 : 16;
+  const bottom = !desk && open ? snapPx() + 20 : 16;
   return { W, H, top, left, right, bottom };
 }
 function fitCam(box, padPx = 0, bottomPx) {
@@ -101,9 +108,14 @@ function fitCamPad(box, pad, maxZoom = GOAL_ZOOM) {
   const ah = Math.max(80, H - pad.top - pad.bottom);
   // never zoom past maxZoom: grow tiny boxes around their center
   const fw = fitCam(floorBox(S.floorId)).w;
-  const minW = (fw / Math.pow(2, maxZoom - 18)) * (aw / W);
+  let minW = (fw / Math.pow(2, maxZoom - 18)) * (aw / W);
+  // Short lobby/stair legs: keep at least ~140px of the shorter axis on screen (RT19 F4)
+  const minScreen = 140;
+  const worldPerPx = fw / W;
+  const minSpan = minScreen * worldPerPx * (W / aw);
+  if (minSpan > minW) minW = minSpan;
   if (box.w < minW) box = { x: box.x + box.w / 2 - minW / 2, y: box.y, w: minW, h: box.h };
-  const minH = minW * (ah / aw);
+  const minH = Math.max(minW * (ah / aw), minSpan);
   if (box.h < minH) box = { x: box.x, y: box.y + box.h / 2 - minH / 2, w: box.w, h: minH };
   const s = Math.min(aw / box.w, ah / box.h);
   return { x: box.x + box.w / 2 - (pad.left + aw / 2) / s, y: box.y + box.h / 2 - (pad.top + ah / 2) / s, w: W / s, h: H / s };
@@ -493,12 +505,23 @@ function drawLabels() {
   if (ix.arrive) {
     const a = scr(ix.arrive.p);
     arr.querySelector("span").textContent = ix.arrive.text;
-    // desktop: keep the chip clear of the side panel (panel width plus 16px)
-    const panel = innerWidth >= 900 && !$("sheet").hidden ? $("sheet").getBoundingClientRect().right + 16 : 0;
-    a.x = Math.max(a.x, panel - 8);
+    const desk = innerWidth >= 900;
+    const open = !$("sheet").hidden;
+    const panelL = desk && open ? $("sheet").getBoundingClientRect().right + 12 : 12;
+    const sheetTop = !desk && open ? innerHeight - snapPx() : innerHeight;
+    // Measure after a probe place, then clamp into the free map (RT19 F3)
     arr.style.transform = `translate(${a.x + 8}px, ${a.y + 8}px)`;
     const r = arr.getBoundingClientRect();
-    taken.push({ x: a.x + 8, y: a.y + 8, w: r.width || 160, h: r.height || 26 });
+    const cw = r.width || 200;
+    const ch = r.height || 28;
+    const maxX = innerWidth - cw - (S.inside ? 92 : 16);
+    const maxY = sheetTop - ch - 10;
+    const minX = panelL;
+    const minY = desk ? 24 : 150;
+    const x = Math.min(Math.max(a.x + 8, minX), Math.max(minX, maxX));
+    const y = Math.min(Math.max(a.y + 8, minY), Math.max(minY, maxY));
+    arr.style.transform = `translate(${x}px, ${y}px)`;
+    taken.push({ x, y, w: cw, h: ch });
   }
   // Stairs: 24px maroon rounded icons. At fit zoom, on-route full opacity, others 40%.
   const over = document.getElementById("over");
@@ -809,7 +832,8 @@ function directions() {
   list.hidden = false;
   $("stepnav").hidden = false;
   $("dir").hidden = true;
-  setSnap("peek");
+  // Phone: half (50vh) keeps Next step on screen (RT19 F1). Desktop sheet is side panel.
+  setSnap("half");
   return goStep(0);
 }
 async function goStep(i) {
