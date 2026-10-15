@@ -430,6 +430,250 @@ Run npm run check.
 Open the PR with gh pr create --fill --base main, report the link, and stop. No auto-merge and no bob log.
 ```
 
+## Map
+
+Floor traces and the map follow-ups. Owner is Troy on each task.
+
+### RT25. Trace gym GF
+- Goal: Trace the gym ground floor from docs/floorplans/IBM_7734.JPG into the same kind of plan files the main floors use.
+- Files: public/maps/gym-gf.svg, public/maps/gym-gf.webp
+- Depends on: none
+- Done when: public/maps/gym-gf.svg traces that photo, with a viewBox and a data-room polygon only where the id is already a gym-gf room in data/paths.json. public/maps/gym-gf.webp is the cleaned image of that plan. RT9 stays held. Do not fill data/station-locations.json.
+- Branch: `troy/rt25-gym-trace`
+- Owner: Troy
+
+```
+Task RT25. Trace gym GF.
+
+Goal: Trace the gym ground floor from docs/floorplans/IBM_7734.JPG into the same kind of plan files the main floors use.
+
+Files: public/maps/gym-gf.svg, public/maps/gym-gf.webp.
+
+Depends on: none.
+
+Branch from a fresh main: troy/rt25-gym-trace.
+
+Read docs/delegation.md for this task id. Read docs/floorplans/IBM_7734.JPG and the gym-gf room ids in data/paths.json.
+
+public/maps/gym-gf.svg traces that photo. Give it a viewBox. Put data-room only on a polygon whose id is already a gym-gf room in data/paths.json. public/maps/gym-gf.webp is the cleaned image of that plan. RT9 stays held. Do not fill data/station-locations.json. Do not invent a room.
+
+Do not edit src/contract.ts. Do not edit docs/DESIGN-PUP-Enrollment-Queue.md.
+
+Done when: public/maps/gym-gf.svg traces that photo, with a viewBox and a data-room polygon only where the id is already a gym-gf room in data/paths.json. public/maps/gym-gf.webp is the cleaned image of that plan. RT9 stays held.
+
+When the done-when line is true, run npm run check. Open a pull request into main. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
+```
+
+### RT26. Trace Library 3F
+- Goal: Trace Library 3F from docs/floorplans/library-3F.png into the same kind of plan files the main floors use.
+- Files: public/maps/library-3f.svg, public/maps/library-3f.webp
+- Depends on: none
+- Done when: public/maps/library-3f.svg traces that png, with a viewBox and a data-room polygon only where the id is already a library-3f room in data/paths.json. public/maps/library-3f.webp is the cleaned image of that plan. rooms.json has 30 rows for source library-3F.png. Do not invent a room.
+- Branch: `troy/rt26-library3f-trace`
+- Owner: Troy
+
+```
+Task RT26. Trace Library 3F.
+
+Goal: Trace Library 3F from docs/floorplans/library-3F.png into the same kind of plan files the main floors use.
+
+Files: public/maps/library-3f.svg, public/maps/library-3f.webp.
+
+Depends on: none.
+
+Branch from a fresh main: troy/rt26-library3f-trace.
+
+Read docs/delegation.md for this task id. Read docs/floorplans/library-3F.png and the library-3f room ids in data/paths.json. rooms.json has 30 rows for source library-3F.png, building Library (NALRC), floor 3F.
+
+public/maps/library-3f.svg traces that png. Give it a viewBox. Put data-room only on a polygon whose id is already a library-3f room in data/paths.json. public/maps/library-3f.webp is the cleaned image of that plan. Do not invent a room.
+
+Do not edit src/contract.ts. Do not edit docs/DESIGN-PUP-Enrollment-Queue.md.
+
+Done when: public/maps/library-3f.svg traces that png, with a viewBox and a data-room polygon only where the id is already a library-3f room in data/paths.json. public/maps/library-3f.webp is the cleaned image of that plan.
+
+When the done-when line is true, run npm run check. Open a pull request into main. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
+```
+
+### RT27. Trace ICTO 2F
+- Goal: Trace the ICTO 2F plan from docs/floorplans/IBM_7721.JPG into the library-2f plan files. This does not lift the RT11 hold. The catalog still titles that photo PUP ICT Office 2F.
+- Files: public/maps/library-2f.svg, public/maps/library-2f.webp
+- Depends on: none
+- Done when: public/maps/library-2f.svg traces IBM_7721, with a viewBox and a data-room polygon only where the id is already a library-2f room in data/paths.json. public/maps/library-2f.webp is the cleaned image of that plan. The RT11 hold stays. Do not edit the hold to say the photo is confirmed as the library.
+- Branch: `troy/rt27-icto2f-trace`
+- Owner: Troy
+
+```
+Task RT27. Trace ICTO 2F.
+
+Goal: Trace the ICTO 2F plan from docs/floorplans/IBM_7721.JPG into the library-2f plan files. This does not lift the RT11 hold. The catalog still titles that photo PUP ICT Office 2F.
+
+Files: public/maps/library-2f.svg, public/maps/library-2f.webp.
+
+Depends on: none.
+
+Branch from a fresh main: troy/rt27-icto2f-trace.
+
+Read docs/delegation.md for this task id, the RT11 hold, and docs/floorplans/catalog.md. Read docs/floorplans/IBM_7721.JPG and the library-2f room ids in data/paths.json.
+
+public/maps/library-2f.svg traces IBM_7721. Give it a viewBox. Put data-room only on a polygon whose id is already a library-2f room in data/paths.json. public/maps/library-2f.webp is the cleaned image of that plan. The RT11 hold stays. Do not edit the hold to say the photo is confirmed as the library. Do not invent a room.
+
+Do not edit src/contract.ts. Do not edit docs/DESIGN-PUP-Enrollment-Queue.md.
+
+Done when: public/maps/library-2f.svg traces IBM_7721, with a viewBox and a data-room polygon only where the id is already a library-2f room in data/paths.json. public/maps/library-2f.webp is the cleaned image of that plan. The RT11 hold stays.
+
+When the done-when line is true, run npm run check. Open a pull request into main. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
+```
+
+### RT28. Map pin and label redesign
+- Goal: The map pin and its label are drawn by a new script, styled in the map stylesheet, and loaded by one new script tag.
+- Files: public/map-pins.js (new), public/map.css, one script tag in public/map.html
+- Depends on: none. The map page is already on main.
+- Done when: public/map-pins.js draws the pin and the label, public/map.css styles them, and public/map.html adds one script tag for map-pins.js. No other new tag in public/map.html. Do not edit public/map.js. Selecting a room still shows that pin. Usable at 360 px.
+- Branch: `troy/rt28-pins`
+- Owner: Troy
+
+```
+Task RT28. Map pin and label redesign.
+
+Goal: The map pin and its label are drawn by a new script, styled in the map stylesheet, and loaded by one new script tag.
+
+Files: public/map-pins.js (new), public/map.css, one script tag in public/map.html.
+
+Depends on: none. The map page is already on main.
+
+Branch from a fresh main: troy/rt28-pins.
+
+Read docs/delegation.md for this task id.
+
+Create public/map-pins.js and draw the pin and the label there. Style them in public/map.css. In public/map.html add one script tag for map-pins.js. Add no other tag. Do not edit public/map.js. Selecting a room still shows that pin. Usable at 360 px.
+
+Do not edit src/contract.ts. Do not edit docs/DESIGN-PUP-Enrollment-Queue.md.
+
+Done when: public/map-pins.js draws the pin and the label, public/map.css styles them, and public/map.html adds one script tag for map-pins.js. No other new tag in public/map.html. Selecting a room still shows that pin. Usable at 360 px.
+
+When the done-when line is true, run npm run check. Open a pull request into main. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
+```
+
+### RT29. Georeferenced floor overlay
+- Goal: Draw each main floor plan on the campus map from geographic corners stored on the floor row.
+- Files: public/map.js, data/floors.json, src/maps.test.ts
+- Depends on: none. Do not wait on RT25, RT26, RT27, or RT30.
+- Done when: main-1f-lobby, main-4f, and main-5f in data/floors.json each have four [longitude, latitude] corners, in MapLibre image-source order (top-left, top-right, bottom-right, bottom-left). public/map.js draws that floor image on the campus map from those corners. src/maps.test.ts fails if one of those rows is missing corners, if a corner is not finite, or if its image file is missing. The existing image size checks stay.
+- Branch: `troy/rt29-floor-overlay`
+- Owner: Troy
+
+```
+Task RT29. Georeferenced floor overlay.
+
+Goal: Draw each main floor plan on the campus map from geographic corners stored on the floor row.
+
+Files: public/map.js, data/floors.json, src/maps.test.ts.
+
+Depends on: none. Do not wait on RT25, RT26, RT27, or RT30.
+
+Branch from a fresh main: troy/rt29-floor-overlay.
+
+Read docs/delegation.md for this task id.
+
+On main-1f-lobby, main-4f, and main-5f in data/floors.json, store four [longitude, latitude] corners, in MapLibre image-source order (top-left, top-right, bottom-right, bottom-left). In public/map.js, draw that floor image on the campus map from those corners. In src/maps.test.ts, fail if one of those rows is missing corners, if a corner is not finite, or if its image file is missing. Keep the existing image size checks.
+
+Do not edit src/contract.ts. Do not invent a building.
+
+Done when: those three floor rows have the four corners, public/map.js draws the image from them, and src/maps.test.ts fails when a corner or the image file is missing.
+
+When the done-when line is true, run npm run check. Open a pull request into main. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
+```
+
+### RT30. Trace Psych building GF
+- Goal: Trace the Psych building ground floor from docs/floorplans/IBM_7726.JPG. Troy confirmed that photo is this building.
+- Files: public/maps/psych-gf.svg, public/maps/psych-gf.webp
+- Depends on: none
+- Done when: public/maps/psych-gf.svg traces that photo, including the walls and the labels printed on it, and public/maps/psych-gf.webp is the cleaned image. The plan is the Psych building ground floor. Do not use it as the Main Building lobby. Do not add a rooms.json row. Do not add a room the photo does not show.
+- Branch: `troy/rt30-psych-trace`
+- Owner: Troy
+
+```
+Task RT30. Trace Psych building GF.
+
+Goal: Trace the Psych building ground floor from docs/floorplans/IBM_7726.JPG. Troy confirmed that photo is this building.
+
+Files: public/maps/psych-gf.svg, public/maps/psych-gf.webp.
+
+Depends on: none.
+
+Branch from a fresh main: troy/rt30-psych-trace.
+
+Read docs/delegation.md for this task id. Read docs/floorplans/IBM_7726.JPG. Troy confirmed that photo is the Psych building ground floor.
+
+public/maps/psych-gf.svg traces that photo, including the walls and the labels printed on it. public/maps/psych-gf.webp is the cleaned image. Do not use this plan as the Main Building lobby. Do not add a rooms.json row. Do not add a room the photo does not show.
+
+Do not edit src/contract.ts. Do not edit docs/DESIGN-PUP-Enrollment-Queue.md.
+
+Done when: public/maps/psych-gf.svg traces that photo and public/maps/psych-gf.webp is the cleaned image. The plan is the Psych building ground floor.
+
+When the done-when line is true, run npm run check. Open a pull request into main. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
+```
+
+### RT31. Real walking paths
+- Goal: The outdoor walk from the main gate to the East Wing entrance follows OSM footways stored in the repo.
+- Files: data/campus-osm.json, public/route.js, src/route.test.ts, src/route-start.test.ts
+- Depends on: none
+- Done when: The walk in data/campus-osm.json is a sequence of OSM footway positions from the main gate to the East Wing entrance. The straight last step in that file's walk note is gone. src/route.test.ts and src/route-start.test.ts expect the new geometry. The running app does not request OpenStreetMap.
+- Branch: `troy/rt31-osm-footways`
+- Owner: Troy
+
+```
+Task RT31. Real walking paths.
+
+Goal: The outdoor walk from the main gate to the East Wing entrance follows OSM footways stored in the repo.
+
+Files: data/campus-osm.json, public/route.js, src/route.test.ts, src/route-start.test.ts.
+
+Depends on: none.
+
+Branch from a fresh main: troy/rt31-osm-footways.
+
+Read docs/delegation.md for this task id. The walk note in data/campus-osm.json says the path ends in a straight last step to the East Wing entrance.
+
+Replace that walk with OSM footway positions stored in data/campus-osm.json, from the main gate to the East Wing entrance. Remove the straight last step. Update public/route.js only where the step text or the stored line must match. Update src/route.test.ts and src/route-start.test.ts so they expect the new geometry. The running app does not request OpenStreetMap.
+
+Do not edit src/contract.ts.
+
+Done when: The walk is a sequence of OSM footway positions from the main gate to the East Wing entrance, the straight last step is gone, and the route tests expect that geometry.
+
+When the done-when line is true, run npm run check. Open a pull request into main. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
+```
+
+### RT32. Route regression and debug page
+- Goal: A test locks the routes already covered in src/route.test.ts, and a debug page shows the same route.
+- Files: src/route.test.ts, public/route-debug.html (new)
+- Depends on: none. If RT31 has merged, branch from that main so the locked outdoor leg is the footway walk.
+- Done when: src/route.test.ts fails when the steps or the point list of a locked route change. The locked set is the routes that file already covers: one floor, a floor change, and outdoors to a room. public/route-debug.html shows that same route: start, steps, and line. No new queue endpoint.
+- Branch: `troy/rt32-route-regression`
+- Owner: Troy
+
+```
+Task RT32. Route regression and debug page.
+
+Goal: A test locks the routes already covered in src/route.test.ts, and a debug page shows the same route.
+
+Files: src/route.test.ts, public/route-debug.html (new).
+
+Depends on: none. If RT31 has merged, branch from that main so the locked outdoor leg is the footway walk.
+
+Branch from a fresh main: troy/rt32-route-regression.
+
+Read docs/delegation.md for this task id.
+
+In src/route.test.ts, fail when the steps or the point list of a locked route change. Lock the routes that file already covers: one floor, a floor change, and outdoors to a room. Create public/route-debug.html and show that same route: start, steps, and line. Do not add a queue endpoint.
+
+Do not edit src/contract.ts.
+
+Done when: the test fails when a locked route's steps or point list change, and public/route-debug.html shows that same route.
+
+When the done-when line is true, run npm run check. Open a pull request into main. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
+```
+
 # Donita
 
 Staff tablet, the hub laptop, and tomorrow's offline queue. Floor images are Troy's RT1, taken from Viv, so this night stays on `public/staff.html` and the hub.
