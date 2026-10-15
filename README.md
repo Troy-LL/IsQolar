@@ -41,6 +41,7 @@ Check the server is up: `GET /health` returns `{"ok":true}`.
 Open https://isqolar.onrender.com before a demo so the free Render instance is awake.
 Sleep and wake timing is in [ADR 005](docs/decisions/005-online-on-render.md).
 The [keep-awake workflow](.github/workflows/keep-awake.yml) already pings `GET /health` on that URL every 10 minutes.
+A backup external pinger (cron-job.org hitting https://isqolar.onrender.com/health every 10 min) is used.
 The Express app still makes no outbound call.
 
 ### Load the simulated morning
