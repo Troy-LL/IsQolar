@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Route debug, PUP Sta. Mesa</title>
+<style>
+  :root {
+    --maroon: #880000;
+    --maroon-deep: #5c0000;
+    --gold: #ffcc00;
+    --ink: #1f1a1a;
+    --ink-soft: #5e5656;
+    --line: #e2dcd8;
+    --paper: #ffffff;
+    --shell: #f7f4f2;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--shell); color: var(--ink); font-family: system-ui, "Segoe UI", sans-serif; }
+  body { padding: 12px 12px 32px; }
+  header h1 { margin: 0; font-size: 22px; }
+  .where { margin: 0 0 2px; font-size: 13px; font-weight: 700; color: var(--maroon); }
+  .pickers { display: grid; gap: 10px; margin-top: 12px; }
+  .picker { position: relative; }
+  .picker label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+  .picker input {
+    width: 100%; height: 44px; border: 2px solid transparent; border-radius: 12px;
+    padding: 0 12px; font: inherit; font-size: 16px; background: var(--paper);
+    box-shadow: 0 1px 4px rgba(31, 26, 26, .12);
+  }
+  .picker input:focus { outline: 3px solid var(--maroon-deep); border-color: var(--maroon); }
+  .picker ul {
+    list-style: none; margin: 4px 0 0; padding: 4px 0; background: var(--paper);
+    border-radius: 12px; box-shadow: 0 6px 20px rgba(31, 26, 26, .16); max-height: 240px; overflow: auto;
+  }
+  .picker ul:empty { display: none; }
+  .picker button, .hint {
+    width: 100%; text-align: left; border: 0; background: none; padding: 10px 12px; font: inherit; font-size: 15px; color: var(--ink);
+  }
+  .picker button { cursor: pointer; }
+  .picker button:hover, .picker button:focus-visible { background: var(--shell); outline: none; }
+  .picker button[aria-current="true"] { font-weight: 700; color: var(--maroon); }
+  .hint { color: var(--ink-soft); }
+  #status { margin: 12px 0; font-size: 15px; }
+  .map { display: grid; gap: 12px; }
+  svg.campus, svg.floor {
+    width: 100%; display: block; background: #efeae6; border-radius: 14px;
+    box-shadow: 0 1px 4px rgba(31, 26, 26, .08);
+  }
+  svg.campus { height: 52vh; min-height: 280px; }
+  svg.floor { height: 300px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 0; padding: 0; list-style: none; font-size: 13px; color: var(--ink-soft); }
+  .swatch { display: inline-block; width: 18px; height: 6px; border-radius: 3px; background: var(--maroon); vertical-align: middle; margin-right: 4px; }
+  .swatch.stair { width: 12px; height: 12px; background: var(--gold); border: 2px solid var(--maroon); }
+  h2 { margin: 18px 0 8px; font-size: 16px; }
+  .legs, .steps { list-style: none; margin: 0; padding: 0; background: var(--paper); border-radius: 14px; }
+  .legs li, .steps li { display: flex; gap: 8px; align-items: baseline; padding: 10px 12px; border-top: 1px solid var(--line); }
+  .legs li:first-child, .steps li:first-child { border-top: 0; }
+  .steps { counter-reset: step; }
+  .steps li::before {
+    counter-increment: step; content: counter(step);
+    flex: none; width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--maroon);
+    display: grid; place-items: center; font-weight: 800; font-size: 13px; color: var(--maroon);
+  }
+  .meters { margin-left: auto; font-weight: 800; color: var(--maroon); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .stair { background: var(--gold); color: var(--ink); font-weight: 700; border-radius: 8px; padding: 1px 6px; }
+  .note { margin: 8px 0 0; font-size: 12px; color: var(--ink-soft); }
+  @media (min-width: 800px) {
+    body { padding: 20px 24px 40px; }
+    .pickers { grid-template-columns: 1fr 1fr; }
+    .floor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    svg.campus { height: 480px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <p class="where">PUP Sta. Mesa</p>
+  <h1>Route debug</h1>
+  <div class="pickers">
+    <div class="picker" id="start-picker">
+      <label for="start-q">Start</label>
+      <input id="start-q" type="search" autocomplete="off" placeholder="Search a start, for example the main gate" enterkeyhint="search">
+      <ul id="start-list" role="listbox" aria-label="Starts"></ul>
+    </div>
+    <div class="picker" id="end-picker">
+      <label for="end-q">End</label>
+      <input id="end-q" type="search" autocomplete="off" placeholder="Search a room, for example S508" enterkeyhint="search">
+      <ul id="end-list" role="listbox" aria-label="Rooms"></ul>
+    </div>
+  </div>
+</header>
+<p id="status" role="status">Loading the campus map.</p>
+<ul class="legend">
+  <li><span class="swatch"></span>Route</li>
+  <li><span class="swatch stair"></span>Stairs on this route</li>
+</ul>
+<div id="map" class="map"></div>
+<h2>Floor legs</h2>
+<ol id="legs" class="legs"></ol>
+<h2>Steps</h2>
+<ol id="steps" class="steps"></ol>
+<p class="note">Indoor meters are scaled from that floor's walk graph to the building outline in the campus data.</p>
+<script type="module" src="route-debug.js"></script>
+</body>
+</html>
