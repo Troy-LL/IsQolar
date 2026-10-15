@@ -122,8 +122,9 @@
         <tspan x="636" dy="10">BOARD ROOM</tspan>
       </text>
       <text x="529" y="236" font-size="5" dominant-baseline="central">
-        <tspan x="529" dy="-4">TECHNICAL</tspan>
-        <tspan x="529" dy="6">STOCK RM.</tspan>
+        <tspan x="529" dy="-6">TECHNICAL</tspan>
+        <tspan x="529" dy="5">SERVICE</tspan>
+        <tspan x="529" dy="5">STOCK RM.</tspan>
       </text>
       <text x="529" y="266" font-size="4.5" dominant-baseline="central">
         <tspan x="529" dy="-6">NALRC</tspan>
