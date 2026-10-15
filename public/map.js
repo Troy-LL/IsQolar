@@ -5,8 +5,8 @@ const NS = "http://www.w3.org/2000/svg";
 const params = new URLSearchParams(location.search);
 const SLOW = params.get("slow") === "1" ? 5 : 1;
 const EDIT = params.get("edit") === "1";
-// 4F's directory poster is turned a quarter turn compared with 1F and 5F, so draw it turned back.
-const ROTATE = { "main-4f": true };
+// Floor plans are drawn in poster pixel space (see paths.floors[id].svgSize). No rotation.
+const ROTATE = {};
 const WINGS = [
   ["West wing", ["stair-west-end", "stair-west-dome"]],
   ["North wing", ["stair-north-end", "stair-north-dome"]],
@@ -316,18 +316,17 @@ function drawLine(root, pts, current) {
 }
 
 // ---------- indoor ----------
+function floorSize(floorId) {
+  const s = S.paths.floors[floorId].svgSize;
+  return s && s.length === 2 ? s : [1000, Math.round(1000 / (S.paths.floors[floorId].aspect || 1))];
+}
 function tf(floorId) {
-  const a = S.paths.floors[floorId].aspect;
-  return (x, y) => {
-    const X = x * 1000;
-    const Y = (y * 1000) / a;
-    return ROTATE[floorId] ? { x: Y, y: -X } : { x: X, y: Y };
-  };
+  const [W, H] = floorSize(floorId);
+  return (x, y) => ({ x: x * W, y: y * H });
 }
 function untf(floorId, X, Y) {
-  const a = S.paths.floors[floorId].aspect;
-  const [x, y] = ROTATE[floorId] ? [-Y, X] : [X, Y];
-  return { x: x / 1000, y: (y * a) / 1000 };
+  const [W, H] = floorSize(floorId);
+  return { x: X / W, y: Y / H };
 }
 function floorBox(floorId) {
   const t = tf(floorId);
@@ -343,33 +342,61 @@ function shortLabel(r) {
   return t.length > 14 ? t.slice(0, 13) + "…" : t;
 }
 
-function drawIndoor(floorId) {
+const FLOOR_IMG = { "main-1f-lobby": "maps/main-1f-lobby.webp", "main-4f": "maps/main-4f.webp", "main-5f": "maps/main-5f.webp" };
+const FLOOR_SVG = { "main-1f-lobby": "maps/main-1f-lobby.svg", "main-4f": "maps/main-4f.svg", "main-5f": "maps/main-5f.svg" };
+const floorSvgCache = new Map();
+async function floorPlan(floorId) {
+  if (floorSvgCache.has(floorId)) return floorSvgCache.get(floorId).cloneNode(true);
+  const imgUrl = FLOOR_IMG[floorId];
+  const svgUrl = FLOOR_SVG[floorId];
+  if (!imgUrl || !svgUrl) return null;
+  try {
+    const [W, H] = floorSize(floorId);
+    const wrap = svg("g", { class: "floor-svg", "data-floor": floorId });
+    // Polished directory image is the visual base (2x asset scaled to poster pixels).
+    wrap.append(svg("image", { href: imgUrl, width: W, height: H, preserveAspectRatio: "none" }));
+    // Transparent room polygons from the SVG for hit-testing only.
+    const text = await fetch(svgUrl).then((r) => r.text());
+    const doc = new DOMParser().parseFromString(text, "image/svg+xml");
+    const hits = svg("g", { class: "hits", fill: "transparent", stroke: "none", "pointer-events": "all" });
+    doc.querySelectorAll("[data-room]").forEach((el) => {
+      const n = document.importNode(el, true);
+      n.setAttribute("fill", "transparent");
+      n.setAttribute("stroke", "none");
+      n.classList.add("room");
+      hits.append(n);
+    });
+    wrap.append(hits);
+    floorSvgCache.set(floorId, wrap);
+    return wrap.cloneNode(true);
+  } catch (e) {
+    console.warn("floor plan", e);
+    return null;
+  }
+}
+
+async function drawIndoor(floorId) {
   const root = $("indoor");
   root.replaceChildren();
   const f = S.paths.floors[floorId];
   const t = tf(floorId);
   const N = new Map(f.nodes.map((n) => [n.id, { ...n, ...t(n.x, n.y) }]));
-  // Building mass: corridors drawn wide enough to cover the rooms beside them.
-  const offs = f.rooms.map((r) => { const a = N.get(r.id); const b = N.get(r.node); return Math.hypot(a.x - b.x, a.y - b.y); }).sort((x, y) => x - y);
-  const reach = Math.min(70, offs.length ? offs[Math.floor(offs.length * 0.9)] : 30);
-  const width = 2 * reach + 34;
-  const mass = svg("g");
-  const halls = svg("g");
-  for (const [a, b] of f.edges) {
-    const A = N.get(a);
-    const B = N.get(b);
-    if (A.kind !== "corridor" || B.kind !== "corridor") continue;
-    const seg = { x1: A.x, y1: A.y, x2: B.x, y2: B.y, "stroke-linecap": "round" };
-    mass.append(svg("line", { ...seg, stroke: "#D9CFC8", "stroke-width": width + 2 }));
-    halls.append(svg("line", { ...seg, stroke: "#F3EDE8", "stroke-width": width }));
+  const plan = await floorPlan(floorId);
+  if (plan) {
+    root.append(plan);
+    // Click targets on traced room polygons.
+    plan.querySelectorAll("[data-room]").forEach((el) => {
+      const id = el.getAttribute("data-room");
+      const room = f.rooms.find((r) => r.id === id);
+      if (!room) return;
+      el.style.cursor = "pointer";
+      el.addEventListener("click", (e) => {
+        if (EDIT) return;
+        e.stopPropagation();
+        selectRoom({ ...room, floorId });
+      });
+    });
   }
-  const corr = svg("g");
-  for (const [a, b] of f.edges) {
-    const A = N.get(a);
-    const B = N.get(b);
-    if (A.kind === "corridor" && B.kind === "corridor") corr.append(svg("line", { x1: A.x, y1: A.y, x2: B.x, y2: B.y, stroke: "#efe6e1", "stroke-width": 18, "stroke-linecap": "round" }));
-  }
-  root.append(mass, halls, corr);
 
   const st = S.stairs.floors[floorId].stairs;
   const wings = [];
@@ -383,9 +410,13 @@ function drawIndoor(floorId) {
   const onLeg = new Set(leg ? leg.points.map((q) => `${q.x.toFixed(5)},${q.y.toFixed(5)}`) : []);
   const labels = [];
   const destId = S.sel && S.sel.room ? S.sel.room.id : null;
-  const rooms = svg("g");
   const seen = new Set();
   let dest = null;
+  if (plan) {
+    plan.querySelectorAll("[data-room]").forEach((el) => {
+      el.classList.toggle("dest", el.getAttribute("data-room") === destId);
+    });
+  }
   for (const r of f.rooms) {
     const key = `${r.x},${r.y}`;
     const isDest = r.id === destId;
@@ -393,22 +424,11 @@ function drawIndoor(floorId) {
     seen.add(key);
     const p = t(r.x, r.y);
     const lab = shortLabel(r);
-    const w = lab.length > 5 ? Math.max(44, lab.length * 4.6) : 34;
-    const g = svg("g", { class: "room" });
-    g.append(svg("rect", { x: p.x - w / 2, y: p.y - 9, width: w, height: 18, rx: 4, class: `r-tile${(r.flag || (roomCode(r) && roomCode(r).unsure)) ? " unsure" : ""}${isDest ? " dest" : ""}` }));
     const n = f.nodes.find((x) => x.id === r.node);
     const route = n && onLeg.has(`${n.x.toFixed(5)},${n.y.toFixed(5)}`);
     labels.push({ text: lab, p, prio: isDest ? 0 : route ? 2 : 3, unsure: !!(r.flag || (roomCode(r) && roomCode(r).unsure)) });
-    g.append(svg("title", {}, roomName(r)));
-    g.addEventListener("click", (e) => {
-      if (EDIT) return;
-      e.stopPropagation();
-      selectRoom({ ...r, floorId });
-    });
-    rooms.append(g);
     if (isDest) dest = p;
   }
-  root.append(rooms);
   const stairs = Object.entries(st).map(([id, q]) => ({ id, p: t(q.x, q.y), name: (S.stairs.stairs.find((s) => s.id === id) || {}).name || id }));
   if (leg) {
     const cur = S.step >= 0 && S.route.steps[S.step].floorId === floorId;
@@ -458,13 +478,30 @@ function drawLabels() {
   const taken = [];
   const free = (b) => !taken.some((o) => b.x < o.x + o.w && o.x < b.x + b.w && b.y < o.y + o.h && o.y < b.y + b.h);
   const ix = S.ix;
+  // Pin sits on the corridor-side edge of the dest room so the baked room code stays readable
+  // and the 13px dest label pill clears the pin.
+  let destPin = ix.dest;
+  if (ix.dest && S.sel && S.sel.room) {
+    const room = S.sel.room;
+    const f = S.paths.floors[ix.floorId];
+    const cn = f.nodes.find((n) => n.id === room.node);
+    if (cn) {
+      const tfn = tf(ix.floorId);
+      const cxy = tfn(cn.x, cn.y);
+      const dx = cxy.x - ix.dest.x;
+      const dy = cxy.y - ix.dest.y;
+      const len = Math.hypot(dx, dy) || 1;
+      // pull pin ~40% of the way from room centre toward the corridor node
+      destPin = { x: ix.dest.x + dx * 0.4, y: ix.dest.y + dy * 0.4 };
+    }
+  }
   if (ix.dest) {
-    const d = scr(ix.dest);
+    const d = scr(destPin);
     taken.push({ x: d.x - 14, y: d.y - 40, w: 28, h: 40 });
     if (z >= 19 && ix.destText) {
       const w = ix.destText.length * 8 + 4;
       taken.push({ x: d.x + 16, y: d.y - 34, w, h: 18 });
-      g.append(svg("text", { x: ix.dest.x + 18 * u, y: ix.dest.y - 25 * u, class: "r-lab dest", style: `font-size:${13 * u}px;font-weight:800;text-anchor:start;stroke-width:${3 * u}px` }, ix.destText));
+      g.append(svg("text", { x: destPin.x + 18 * u, y: destPin.y - 25 * u, class: "r-lab dest", style: `font-size:${13 * u}px;font-weight:800;text-anchor:start;stroke-width:${3 * u}px` }, ix.destText));
     }
   }
   const arr = $("arrive");
@@ -490,7 +527,7 @@ function drawLabels() {
     let k = u;
     const sg = svg("g", { class: "stair" });
     k *= 20 / 18;
-    sg.append(svg("rect", { x: s.p.x - 9 * k, y: s.p.y - 9 * k, width: 18 * k, height: 18 * k, rx: 3 * k, fill: "#1f1a1a" }));
+    sg.append(svg("rect", { x: s.p.x - 9 * k, y: s.p.y - 9 * k, width: 18 * k, height: 18 * k, rx: 3 * k, fill: "#8B0000" }));
     sg.append(svg("path", { d: `M${s.p.x - 5 * k} ${s.p.y + 5 * k} h${4 * k} v${-4 * k} h${4 * k} v${-4 * k} h${3 * k}`, fill: "none", stroke: "#fff", "stroke-width": 1.8 * k }));
     sg.append(svg("title", {}, s.name));
     (over || g).append(sg);
@@ -502,22 +539,25 @@ function drawLabels() {
     taken.push({ x: q.x - 9, y: q.y - 9, w: 18, h: 18 });
   }
   if (ix.legStart) dot(ix.legStart, "#1b6e3f");
-  if (z < 19) {
+  // Wing names are app overlays at 13px; hide them past zoom 19.5 so they do not clip at goal zoom.
+  // Room codes stay baked on the directory image; only dest gets an overlay pill.
+  const hasImg = !!document.querySelector(".floor-svg image");
+  if (z < 19.5) {
     for (const w of ix.wings) {
       const q = scr(w.p);
       const bw = w.text.length * 9;
       const box = { x: q.x - bw / 2, y: q.y - 9, w: bw, h: 18 };
-      // nudge below a stair icon instead of drawing over it
       const y = free(box) ? w.p.y : w.p.y + 22 * u;
-      // text padding 16px: keep the whole label on screen
       const half = bw / 2 + 16;
       const sx = Math.max(half, Math.min(innerWidth - half, q.x));
       g.append(svg("text", { x: c.x + sx * u, y, class: "w-name", style: `font-size:${13 * u}px;letter-spacing:${0.08 * 13 * u}px` }, w.text));
     }
-  } else {
+  }
+  if (z >= 19) {
     const order = [...ix.labels].sort((a, b) => a.prio - b.prio);
     for (const l of order) {
       if (l.prio === 0 && ix.destText) continue;
+      if (hasImg && l.prio > 0) continue; // baked on the directory image
       const q = scr(l.p);
       const w = l.text.length * 6.4 + 6;
       const b = { x: q.x - w / 2, y: q.y - 8, w, h: 16 };
@@ -537,7 +577,7 @@ function drawLabels() {
   }
   pin.hidden = !(S.inside && ix.dest);
   if (ix.dest) {
-    const d = scr(ix.dest);
+    const d = scr(destPin || ix.dest);
     pin.style.transform = `translate(${d.x}px, ${d.y}px)`;
   }
 }
@@ -583,7 +623,7 @@ async function enterBuilding(floorId) {
         map.setPaintProperty("pup-roof-sel", "fill-extrusion-opacity", 0);
       }
       if (!RM) await chip.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 150 * SLOW, fill: "forwards" }).finished;
-      drawIndoor(floorId);
+      await drawIndoor(floorId);
       setCam("indoor", fitCam(floorBox(floorId)));
       S.inside = true;
       document.body.classList.add("inside");
@@ -604,7 +644,7 @@ async function enterBuilding(floorId) {
       await fade();
     }
   } else {
-    drawIndoor(floorId);
+    await drawIndoor(floorId);
     if (prev && prev !== floorId && !RM) {
       const order = S.floors.map((x) => x.id);
       const dir = order.indexOf(floorId) > order.indexOf(prev) ? 1 : -1;
@@ -702,14 +742,14 @@ function setupSheet() {
   sh.addEventListener("pointercancel", () => (y0 = null));
   $("handle").addEventListener("click", () => setSnap(SNAPS[(SNAPS.indexOf(sh.dataset.snap) + 1) % 3]));
 }
-function closeSheet() {
+async function closeSheet() {
   $("sheet").hidden = true;
   S.sel = null;
   S.route = null;
   S.step = -1;
   syncSheet();
   highlight(null);
-  if (S.inside) drawIndoor(S.floorId);
+  if (S.inside) await drawIndoor(S.floorId);
   else drawOutdoor();
   if (S.inside) drawFloorTabs();
 }
@@ -802,7 +842,7 @@ async function goStep(i) {
     return;
   }
   await enterBuilding(s.floorId);
-  drawIndoor(s.floorId);
+  await drawIndoor(s.floorId);
   await focusIndoor();
 }
 

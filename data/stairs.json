@@ -58,40 +58,40 @@
   "main-1f-lobby": {
    "stairs": {
     "stair-west-end": {
-     "x": 0.219,
-     "y": 0.051
+     "x": 0.425,
+     "y": 0.2
     },
     "stair-west-dome": {
-     "x": 0.381,
-     "y": 0.313
+     "x": 0.3933,
+     "y": 0.457
     },
     "stair-south-north": {
-     "x": 0.154,
-     "y": 0.291
+     "x": 0.165,
+     "y": 0.2118
     },
     "stair-south-mid": {
-     "x": 0.154,
-     "y": 0.47
+     "x": 0.165,
+     "y": 0.5294
     },
     "stair-south-south": {
-     "x": 0.154,
-     "y": 0.701
+     "x": 0.165,
+     "y": 0.8471
     },
     "stair-north-end": {
-     "x": 0.735,
-     "y": 0.455
+     "x": 0.7128,
+     "y": 0.5178
     },
     "stair-north-dome": {
-     "x": 0.507,
-     "y": 0.545
+     "x": 0.4384,
+     "y": 0.4877
     },
     "stair-east-dome": {
-     "x": 0.31,
-     "y": 0.616
+     "x": 0.3949,
+     "y": 0.5147
     },
     "stair-east-end": {
-     "x": 0.248,
-     "y": 0.959
+     "x": 0.2616,
+     "y": 0.7641
     }
    },
    "notes": "all nine stairwells found on this plan"
@@ -99,40 +99,40 @@
   "main-4f": {
    "stairs": {
     "stair-south-south": {
-     "x": 0.3771,
-     "y": 0.1728
+     "x": 0.5544,
+     "y": 0.19
     },
     "stair-south-mid": {
-     "x": 0.5198,
-     "y": 0.198
+     "x": 0.515,
+     "y": 0.19
     },
     "stair-south-north": {
-     "x": 0.6473,
-     "y": 0.1728
+     "x": 0.4756,
+     "y": 0.19
     },
     "stair-east-end": {
-     "x": 0.082,
-     "y": 0.3022
+     "x": 0.2684,
+     "y": 0.3121
     },
     "stair-east-dome": {
-     "x": 0.4451,
-     "y": 0.3773
+     "x": 0.4864,
+     "y": 0.4282
     },
     "stair-west-end": {
-     "x": 0.8966,
-     "y": 0.2441
+     "x": 0.7636,
+     "y": 0.3121
     },
     "stair-west-dome": {
-     "x": 0.6216,
-     "y": 0.4436
+     "x": 0.5456,
+     "y": 0.4282
     },
     "stair-north-dome": {
-     "x": 0.4691,
-     "y": 0.5223
+     "x": 0.516,
+     "y": 0.469
     },
     "stair-north-end": {
-     "x": 0.5584,
-     "y": 0.8006
+     "x": 0.516,
+     "y": 0.6965
     }
    },
    "notes": "all nine stairwells found on this plan"
@@ -140,40 +140,40 @@
   "main-5f": {
    "stairs": {
     "stair-west-end": {
-     "x": 0.2299,
-     "y": 0.0537
+     "x": 0.2321,
+     "y": 0.1817
     },
     "stair-west-dome": {
-     "x": 0.3996,
-     "y": 0.3014
+     "x": 0.4036,
+     "y": 0.4411
     },
     "stair-south-north": {
-     "x": 0.1683,
-     "y": 0.285
+     "x": 0.17,
+     "y": 0.2042
     },
     "stair-south-mid": {
-     "x": 0.1711,
-     "y": 0.4559
+     "x": 0.17,
+     "y": 0.5219
     },
     "stair-south-south": {
-     "x": 0.1739,
-     "y": 0.6839
+     "x": 0.17,
+     "y": 0.8396
     },
     "stair-north-end": {
-     "x": 0.767,
-     "y": 0.4413
+     "x": 0.7721,
+     "y": 0.5074
     },
     "stair-north-dome": {
-     "x": 0.527,
-     "y": 0.5298
+     "x": 0.4504,
+     "y": 0.4734
     },
     "stair-east-dome": {
-     "x": 0.333,
-     "y": 0.5974
+     "x": 0.4072,
+     "y": 0.5046
     },
     "stair-east-end": {
-     "x": 0.2761,
-     "y": 0.9511
+     "x": 0.2681,
+     "y": 0.8051
     }
    },
    "notes": "all nine stairwells found on this plan"

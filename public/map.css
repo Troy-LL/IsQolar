@@ -133,3 +133,15 @@ body.slow .layer { transition-duration: 2.4s; }
 
 .results .hint { padding: 14px 16px; color: var(--ink-soft); font-size: 15px; }
 .results .more { padding: 10px 16px 12px; color: var(--ink-soft); font-size: 13px; font-weight: 600; }
+
+/* Traced floor SVG (RT17) */
+.floor-svg .room { fill: transparent; stroke: none; cursor: pointer; }
+.floor-svg .room.unsure { fill: transparent; }
+.floor-svg .room.dest { fill: rgba(139, 0, 0, 0.18); stroke: #8B0000; stroke-width: 2.5; vector-effect: non-scaling-stroke; }
+.floor-svg image { pointer-events: none; }
+.floor-svg .corridor { fill: #F3EDE8; }
+.floor-svg .floor-fill { fill: #E7E1DB; }
+.floor-svg .wall { fill: none; stroke: #6B5E57; stroke-width: 2; vector-effect: non-scaling-stroke; }
+.floor-svg .dome { fill: #F7F1EE; stroke: #6B5E57; stroke-width: 2; vector-effect: non-scaling-stroke; }
+.floor-svg .dome-ring { fill: none; stroke: #6B5E57; stroke-width: 1.2; opacity: .55; vector-effect: non-scaling-stroke; }
+.floor-svg .stair-pad { stroke: #6B5E57; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
