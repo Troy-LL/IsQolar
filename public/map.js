@@ -343,33 +343,52 @@ function shortLabel(r) {
   return t.length > 14 ? t.slice(0, 13) + "…" : t;
 }
 
-function drawIndoor(floorId) {
+const FLOOR_SVG = { "main-1f-lobby": "maps/main-1f-lobby.svg", "main-4f": "maps/main-4f.svg", "main-5f": "maps/main-5f.svg" };
+const floorSvgCache = new Map();
+async function floorPlan(floorId) {
+  if (floorSvgCache.has(floorId)) return floorSvgCache.get(floorId).cloneNode(true);
+  const url = FLOOR_SVG[floorId];
+  if (!url) return null;
+  try {
+    const text = await fetch(url).then((r) => r.text());
+    const doc = new DOMParser().parseFromString(text, "image/svg+xml");
+    const plan = doc.querySelector("g.plan");
+    if (!plan) return null;
+    // Bring <defs> (stair hatch) along so the pattern paints.
+    const wrap = svg("g", { class: "floor-svg", "data-floor": floorId });
+    const defs = doc.querySelector("defs");
+    if (defs) wrap.append(document.importNode(defs, true));
+    wrap.append(document.importNode(plan, true));
+    floorSvgCache.set(floorId, wrap);
+    return wrap.cloneNode(true);
+  } catch (e) {
+    console.warn("floor svg", e);
+    return null;
+  }
+}
+
+async function drawIndoor(floorId) {
   const root = $("indoor");
   root.replaceChildren();
   const f = S.paths.floors[floorId];
   const t = tf(floorId);
   const N = new Map(f.nodes.map((n) => [n.id, { ...n, ...t(n.x, n.y) }]));
-  // Building mass: corridors drawn wide enough to cover the rooms beside them.
-  const offs = f.rooms.map((r) => { const a = N.get(r.id); const b = N.get(r.node); return Math.hypot(a.x - b.x, a.y - b.y); }).sort((x, y) => x - y);
-  const reach = Math.min(70, offs.length ? offs[Math.floor(offs.length * 0.9)] : 30);
-  const width = 2 * reach + 34;
-  const mass = svg("g");
-  const halls = svg("g");
-  for (const [a, b] of f.edges) {
-    const A = N.get(a);
-    const B = N.get(b);
-    if (A.kind !== "corridor" || B.kind !== "corridor") continue;
-    const seg = { x1: A.x, y1: A.y, x2: B.x, y2: B.y, "stroke-linecap": "round" };
-    mass.append(svg("line", { ...seg, stroke: "#D9CFC8", "stroke-width": width + 2 }));
-    halls.append(svg("line", { ...seg, stroke: "#F3EDE8", "stroke-width": width }));
+  const plan = await floorPlan(floorId);
+  if (plan) {
+    root.append(plan);
+    // Click targets on traced room polygons.
+    plan.querySelectorAll("[data-room]").forEach((el) => {
+      const id = el.getAttribute("data-room");
+      const room = f.rooms.find((r) => r.id === id);
+      if (!room) return;
+      el.style.cursor = "pointer";
+      el.addEventListener("click", (e) => {
+        if (EDIT) return;
+        e.stopPropagation();
+        selectRoom({ ...room, floorId });
+      });
+    });
   }
-  const corr = svg("g");
-  for (const [a, b] of f.edges) {
-    const A = N.get(a);
-    const B = N.get(b);
-    if (A.kind === "corridor" && B.kind === "corridor") corr.append(svg("line", { x1: A.x, y1: A.y, x2: B.x, y2: B.y, stroke: "#efe6e1", "stroke-width": 18, "stroke-linecap": "round" }));
-  }
-  root.append(mass, halls, corr);
 
   const st = S.stairs.floors[floorId].stairs;
   const wings = [];
@@ -383,9 +402,13 @@ function drawIndoor(floorId) {
   const onLeg = new Set(leg ? leg.points.map((q) => `${q.x.toFixed(5)},${q.y.toFixed(5)}`) : []);
   const labels = [];
   const destId = S.sel && S.sel.room ? S.sel.room.id : null;
-  const rooms = svg("g");
   const seen = new Set();
   let dest = null;
+  if (plan) {
+    plan.querySelectorAll("[data-room]").forEach((el) => {
+      el.classList.toggle("dest", el.getAttribute("data-room") === destId);
+    });
+  }
   for (const r of f.rooms) {
     const key = `${r.x},${r.y}`;
     const isDest = r.id === destId;
@@ -393,22 +416,11 @@ function drawIndoor(floorId) {
     seen.add(key);
     const p = t(r.x, r.y);
     const lab = shortLabel(r);
-    const w = lab.length > 5 ? Math.max(44, lab.length * 4.6) : 34;
-    const g = svg("g", { class: "room" });
-    g.append(svg("rect", { x: p.x - w / 2, y: p.y - 9, width: w, height: 18, rx: 4, class: `r-tile${(r.flag || (roomCode(r) && roomCode(r).unsure)) ? " unsure" : ""}${isDest ? " dest" : ""}` }));
     const n = f.nodes.find((x) => x.id === r.node);
     const route = n && onLeg.has(`${n.x.toFixed(5)},${n.y.toFixed(5)}`);
     labels.push({ text: lab, p, prio: isDest ? 0 : route ? 2 : 3, unsure: !!(r.flag || (roomCode(r) && roomCode(r).unsure)) });
-    g.append(svg("title", {}, roomName(r)));
-    g.addEventListener("click", (e) => {
-      if (EDIT) return;
-      e.stopPropagation();
-      selectRoom({ ...r, floorId });
-    });
-    rooms.append(g);
     if (isDest) dest = p;
   }
-  root.append(rooms);
   const stairs = Object.entries(st).map(([id, q]) => ({ id, p: t(q.x, q.y), name: (S.stairs.stairs.find((s) => s.id === id) || {}).name || id }));
   if (leg) {
     const cur = S.step >= 0 && S.route.steps[S.step].floorId === floorId;
@@ -583,7 +595,7 @@ async function enterBuilding(floorId) {
         map.setPaintProperty("pup-roof-sel", "fill-extrusion-opacity", 0);
       }
       if (!RM) await chip.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 150 * SLOW, fill: "forwards" }).finished;
-      drawIndoor(floorId);
+      await drawIndoor(floorId);
       setCam("indoor", fitCam(floorBox(floorId)));
       S.inside = true;
       document.body.classList.add("inside");
@@ -604,7 +616,7 @@ async function enterBuilding(floorId) {
       await fade();
     }
   } else {
-    drawIndoor(floorId);
+    await drawIndoor(floorId);
     if (prev && prev !== floorId && !RM) {
       const order = S.floors.map((x) => x.id);
       const dir = order.indexOf(floorId) > order.indexOf(prev) ? 1 : -1;
@@ -702,14 +714,14 @@ function setupSheet() {
   sh.addEventListener("pointercancel", () => (y0 = null));
   $("handle").addEventListener("click", () => setSnap(SNAPS[(SNAPS.indexOf(sh.dataset.snap) + 1) % 3]));
 }
-function closeSheet() {
+async function closeSheet() {
   $("sheet").hidden = true;
   S.sel = null;
   S.route = null;
   S.step = -1;
   syncSheet();
   highlight(null);
-  if (S.inside) drawIndoor(S.floorId);
+  if (S.inside) await drawIndoor(S.floorId);
   else drawOutdoor();
   if (S.inside) drawFloorTabs();
 }
@@ -784,7 +796,7 @@ async function goStep(i) {
     return;
   }
   await enterBuilding(s.floorId);
-  drawIndoor(s.floorId);
+  await drawIndoor(s.floorId);
   await focusIndoor();
 }
 
