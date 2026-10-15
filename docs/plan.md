@@ -51,7 +51,7 @@ Rule: work starts from a fresh main, one task per PR, `npm run check` before eve
 | J2 | Justin | Printable ticket (print CSS), code and course. No CDN | none | a printed ticket shows code and course |
 | T4 | Troy | Render: connect the Blueprint, deploy main, open the public URL. Do not guess the hostname | T3 | public `GET /health` returns `{"ok":true}` |
 
-Room TBA tonight, in [plan-room-tba.md](plan-room-tba.md): RT1 Viv (clean the three floor images), RT2 Troy (floors file, after RT1), RT6 Ayen (empty station file).
+Room TBA tonight, in [plan-room-tba.md](plan-room-tba.md): RT1 Troy (clean the three floor images, taken from Viv), RT2 Troy (floors file, after RT1), RT6 Ayen (empty station file).
 
 ## Tomorrow morning, before 11:00
 

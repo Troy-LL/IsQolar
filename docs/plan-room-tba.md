@@ -14,13 +14,13 @@ Owners are the roles already listed in [plan.md](plan.md):
 
 Rule from the source plan: one task per branch, `npm run check` before the PR, CI `check` must pass. Do not edit [src/contract.ts](../src/contract.ts).
 
-Who runs each task tonight and tomorrow morning is in [delegation.md](delegation.md). Three owners differ from the role table above, so the queue files and the map files are not on the same person: RT1 is Viv, RT2 is Troy, RT6 is Ayen. The table below matches that list.
+Who runs each task tonight and tomorrow morning is in [delegation.md](delegation.md). Three owners differ from the role table above, so the queue files and the map files are not on the same person: RT1 is Troy (taken from Viv), RT2 is Troy, RT6 is Ayen. The table below matches that list.
 
 ## Tasks
 
 | ID | Owner | Task | Needs | Band | Done when |
 |---|---|---|---|---|---|
-| RT1 | Viv | Clean the tonight floor images | none | Tonight | `public/maps/` has a cleaned image for the Main ground lobby from `IBM_7739`, a straightened and cropped Main 4F image from `IBM_7741`, and a Main 5F image from `IBM_7742`. |
+| RT1 | Troy | Clean the tonight floor images | none | Tonight | `public/maps/` has a cleaned image for the Main ground lobby from `IBM_7739`, a straightened and cropped Main 4F image from `IBM_7741`, and a Main 5F image from `IBM_7742`. |
 | RT2 | Troy | Write the floors file | RT1 | Tonight | `data/floors.json` lists those three floors with `id`, `building`, `floor`, `label`, `image`, and `approximate`. The lobby row has `approximate: true`. Image fields point at the RT1 files. |
 | RT3 | Viv | Add the map page | RT1, RT2 | Tomorrow AM | `public/map.html` and `public/map.js` have a floor switcher, the floor image with an SVG pin overlay, a search box that finds a row by its label, a detail card, and deep links `map.html?loc=<id>` and `map.html?floor=<id>`. Usable at 360 px. |
 | RT4 | Viv | Log pin clicks | RT3 | Tomorrow AM | `map.html?edit=1` logs a clicked `x,y` on a 0 to 1 scale to the console. There is no editor UI. |
@@ -41,7 +41,7 @@ The two-day schedule in [plan.md](plan.md) still places submission tasks S1 to S
 
 ```mermaid
 flowchart TD
-  RT1["RT1 Viv: clean images"]
+  RT1["RT1 Troy: clean images"]
   RT2["RT2 Troy: floors file"]
   RT3["RT3 Viv: map page"]
   RT4["RT4 Viv: edit=1 clicks"]
@@ -87,11 +87,11 @@ RT6 and RT11 have no upstream task. RT11 waits on a confirmation, not on code.
 
 Paste one prompt per task. Fill nothing in. The paths below match this repo.
 
-### RT1 Viv
+### RT1 Troy
 
 ```
 Read docs/plan-room-tba.md task RT1, docs/floorplans/ROOM-TBA-PLAN.md, and docs/map-data-guide.md.
-Branch from fresh main: viv/rt1-clean-floors.
+Branch from fresh main: troy/rt1-clean-images.
 Copy and clean only these three sources from docs/floorplans/ into public/maps/: IBM_7739.JPG (Main ground lobby stand-in), IBM_7741.JPG (straighten and crop), IBM_7742.JPG (already a good straight-on plan).
 Do not add IBM_7721, IBM_7734, IBM_7740, IBM_7726, the glare skips, or library-3F.png.
 Do not edit src/contract.ts. Do not invent rooms or coordinates.
