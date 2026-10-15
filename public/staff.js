@@ -480,14 +480,16 @@
   // ---------------------------------------------------------------------------
   // H2: Save mode — Call next path
   // ---------------------------------------------------------------------------
-  function saveCallNext() {
+  function saveCallNext(predicted) {
     var list = loadSyncList();
-    var consumed = consumedIds(list);
-    var next = null;
-    for (var i = 0; i < lastQueue.length; i++) {
-      if (consumed.indexOf(lastQueue[i].id) === -1) {
-        next = lastQueue[i];
-        break;
+    var next = predicted || null;
+    if (!next) {
+      var consumed = consumedIds(list);
+      for (var i = 0; i < lastQueue.length; i++) {
+        if (consumed.indexOf(lastQueue[i].id) === -1) {
+          next = lastQueue[i];
+          break;
+        }
       }
     }
     if (!next) {
@@ -539,6 +541,15 @@
       return;
     }
 
+    var consumed = consumedIds(loadSyncList());
+    var predicted = null;
+    for (var i = 0; i < lastQueue.length; i++) {
+      if (consumed.indexOf(lastQueue[i].id) === -1) {
+        predicted = lastQueue[i];
+        break;
+      }
+    }
+
     inflight = true;
     msgFromPoll = false;
     elMsg.textContent = '';
@@ -570,7 +581,7 @@
         hubDown = true;
         inflight = false;
         syncButtons();
-        saveCallNext();
+        saveCallNext(predicted);
         return; // skip finally's syncButtons
       })
       .finally(function () {
@@ -819,41 +830,44 @@
                 return res2.json().then(function (body2) { return { ok: res2.ok, body: body2 }; });
               })
               .then(function (r2) {
-                if (r2.ok) {
+                if (r2.ok && r2.body.id === E) {
                   markSynced(item);
                   if (calledTicket && calledTicket.id === E) {
                     calledTicket = Object.assign({}, calledTicket, { sync: 'synced' });
                     lsSet(lsKey, calledTicket);
                   }
-                  // If the hub called a different ticket first, undo that.
-                  if (r2.body.id !== E) {
-                    var wrongCode = r2.body.code;
-                    fetchT('/api/tickets/' + encodeURIComponent(r2.body.id) + '/undo', { method: 'POST' }, 4000)
-                      .then(function (undoRes) {
-                        return undoRes.json().then(function (undoBody) {
-                          return { ok: undoRes.ok };
-                        });
-                      })
-                      .then(function (ur) {
-                        if (ur.ok) {
-                          notes.push('The hub had ' + wrongCode + ' first in line, so ' + wrongCode + ' went back in line.');
-                        } else {
-                          notes.push('Could not put ' + wrongCode + ' back in line.');
+                  step(rest);
+                } else if (r2.ok) {
+                  var wrongCode = r2.body.code;
+                  fetchT('/api/tickets/' + encodeURIComponent(r2.body.id) + '/undo', { method: 'POST' }, 4000)
+                    .then(function (undoRes) {
+                      return undoRes.json().then(function () {
+                        return { ok: undoRes.ok };
+                      });
+                    })
+                    .then(function (ur) {
+                      if (ur.ok) {
+                        if (calledTicket && calledTicket.id === E) {
+                          calledTicket = null;
+                          lsRemove(lsKey);
                         }
-                      })
-                      .catch(function () {
+                        dropItem(item, 'Saved Call next dropped: the line changed.');
+                        notes.push('The hub had ' + wrongCode + ' first in line, so ' + wrongCode + ' went back in line. ' + (t.code || E) + ' was not called.');
+                      } else {
                         notes.push('Could not put ' + wrongCode + ' back in line.');
                         hubDown = true;
                         finish(notes);
-                        return; // stop — finish already handles cleanup
-                      })
-                      .then(function () {
-                        // Only continues when catch did not set hubDown (no rethrow path).
-                        if (!hubDown) step(rest);
-                      });
-                  } else {
-                    step(rest);
-                  }
+                      }
+                    })
+                    .catch(function () {
+                      notes.push('Could not put ' + wrongCode + ' back in line.');
+                      hubDown = true;
+                      finish(notes);
+                      return;
+                    })
+                    .then(function () {
+                      if (!hubDown) step(rest);
+                    });
                 } else {
                   // Non-200 from next — drop.
                   if (calledTicket && calledTicket.id === E) {
