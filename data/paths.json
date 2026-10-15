@@ -13,8 +13,8 @@
         },
         {
           "id": "main-1f-lobby-office-for-scholarship-and-financial-assistance-w4",
-          "x": 0.174,
-          "y": 0.3334,
+          "x": 0.3056,
+          "y": 0.3165,
           "kind": "room"
         },
         {
@@ -97,8 +97,8 @@
         },
         {
           "id": "main-1f-lobby-security-office-n5",
-          "x": 0.174,
-          "y": 0.5523,
+          "x": 0.6559,
+          "y": 0.5248,
           "kind": "room"
         },
         {
@@ -115,8 +115,8 @@
         },
         {
           "id": "main-1f-lobby-department-of-military-science-and-tactics-office-e3",
-          "x": 0.174,
-          "y": 0.6969,
+          "x": 0.3353,
+          "y": 0.68,
           "kind": "room"
         },
         {
@@ -127,20 +127,20 @@
         },
         {
           "id": "main-1f-lobby-medical-clinic-services-e5",
-          "x": 0.174,
-          "y": 0.5144,
+          "x": 0.3387,
+          "y": 0.4975,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-dental-clinic-services-e6",
-          "x": 0.174,
-          "y": 0.5723,
+          "x": 0.3374,
+          "y": 0.5892,
           "kind": "room"
         },
         {
           "id": "main-1f-lobby-office-of-the-director-medical-health-services-e7",
-          "x": 0.174,
-          "y": 0.6302,
+          "x": 0.3085,
+          "y": 0.6471,
           "kind": "room"
         },
         {

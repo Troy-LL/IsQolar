@@ -109,6 +109,16 @@ describe("room codes", () => {
     assert.equal(searchRooms(paths, "north 412")[0].id, "main-4f-north-412");
     assert.equal(searchRooms(paths, "N 412")[0].id, "main-4f-north-412");
   });
+
+  it("keeps 1F east, west, and north doors off the south corridor", () => {
+    const southX = 0.165;
+    const wing = /-(?:e|w|n)\d+$/i;
+    const doors = paths.floors["main-1f-lobby"].nodes.filter((n) => wing.test(n.id));
+    assert.ok(doors.length >= 6);
+    for (const door of doors) {
+      assert.ok(Math.abs(door.x - southX) > 0.05, door.id);
+    }
+  });
 });
 
 
