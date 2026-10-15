@@ -292,23 +292,157 @@ export function planRoute(paths, stairs, floors, start, roomId) {
   };
 }
 
-// Full trip from the campus main gate: outdoor walk to the Main Building entrance, the lobby, then planRoute
-// from the lobby You Are Here point. The outdoor leg is [lng, lat] from data/campus-osm.json (x = lng, y = lat).
-export function planCampusRoute(paths, stairs, floors, campus, roomId) {
+const M_PER_DEG_LAT = 110540;
+
+function mPerDegLng(lat) {
+  return 111320 * Math.cos((lat * Math.PI) / 180);
+}
+
+function havMeters(a, b) {
+  const R = 6371000;
+  const rad = (d) => (d * Math.PI) / 180;
+  const dLat = rad(b[1] - a[1]);
+  const dLng = rad(b[0] - a[0]);
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(rad(a[1])) * Math.cos(rad(b[1])) * Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.asin(Math.min(1, Math.sqrt(h)));
+}
+
+function closestSegs(a, b, c, d) {
+  const lat = (a[1] + b[1] + c[1] + d[1]) / 4;
+  const mx = mPerDegLng(lat);
+  const xy = (p) => [p[0] * mx, p[1] * M_PER_DEG_LAT];
+  const A = xy(a);
+  const B = xy(b);
+  const C = xy(c);
+  const D = xy(d);
+  const d1x = B[0] - A[0];
+  const d1y = B[1] - A[1];
+  const d2x = D[0] - C[0];
+  const d2y = D[1] - C[1];
+  const rx = A[0] - C[0];
+  const ry = A[1] - C[1];
+  const ab2 = d1x * d1x + d1y * d1y;
+  const cd2 = d2x * d2x + d2y * d2y;
+  const f = d2x * rx + d2y * ry;
+  const eps = 1e-12;
+  let s = 0;
+  let t = 0;
+  const clamp = (v) => Math.max(0, Math.min(1, v));
+  if (ab2 <= eps && cd2 <= eps) {
+    s = 0;
+    t = 0;
+  } else if (ab2 <= eps) {
+    s = 0;
+    t = clamp(f / cd2);
+  } else {
+    const dot = d1x * rx + d1y * ry;
+    if (cd2 <= eps) {
+      t = 0;
+      s = clamp(-dot / ab2);
+    } else {
+      const along = d1x * d2x + d1y * d2y;
+      const denom = ab2 * cd2 - along * along;
+      s = denom > eps ? clamp((along * f - dot * cd2) / denom) : 0;
+      t = (along * s + f) / cd2;
+      if (t < 0) {
+        t = 0;
+        s = clamp(-dot / ab2);
+      } else if (t > 1) {
+        t = 1;
+        s = clamp((along - dot) / ab2);
+      }
+    }
+  }
+  const onBuilding = [A[0] + d1x * s, A[1] + d1y * s];
+  const onWalk = [C[0] + d2x * t, C[1] + d2y * t];
+  return {
+    building: [onBuilding[0] / mx, onBuilding[1] / M_PER_DEG_LAT],
+    walk: [onWalk[0] / mx, onWalk[1] / M_PER_DEG_LAT],
+    t,
+    d: Math.hypot(onBuilding[0] - onWalk[0], onBuilding[1] - onWalk[1]),
+  };
+}
+
+function buildingStartLabel(feature) {
+  const name = feature.properties.name;
+  const source = feature.properties.heightSource || "";
+  const base = name || "Unnamed building";
+  const flagged = !name || source.includes("?") || base.includes("?");
+  return flagged && !base.includes("?") ? `${base} ?` : base;
+}
+
+export const GATE_START = "gate";
+
+export function campusStarts(campus) {
+  const rows = campus.buildings.features.map((f) => ({ id: f.properties.osm, label: buildingStartLabel(f) }));
+  const counts = new Map();
+  for (const row of rows) counts.set(row.label, (counts.get(row.label) || 0) + 1);
+  for (const row of rows) {
+    if (counts.get(row.label) > 1) row.label = `${row.label} (${row.id})`;
+  }
+  rows.sort((a, b) => a.label.localeCompare(b.label, "en") || a.id.localeCompare(b.id));
+  return [{ id: GATE_START, label: "Main gate" }, ...rows];
+}
+
+function routeAlongWalk(campus, feature) {
+  const walk = campus.walk.coordinates;
+  const ring = feature.geometry.coordinates[0];
+  let best = null;
+  for (let edge = 0; edge < ring.length - 1; edge++) {
+    for (let i = 0; i < walk.length - 1; i++) {
+      const hit = closestSegs(ring[edge], ring[edge + 1], walk[i], walk[i + 1]);
+      if (!best || hit.d < best.d) best = { ...hit, i };
+    }
+  }
+  const coords = [];
+  const push = (p) => {
+    const last = coords[coords.length - 1];
+    if (!last || havMeters(last, p) >= 0.4) coords.push([p[0], p[1]]);
+  };
+  push(best.building);
+  if (best.t > 0 && best.t < 1) push(best.walk);
+  else if (best.t <= 0) push(walk[best.i]);
+  for (let k = best.i + 1; k < walk.length; k++) push(walk[k]);
+  let meters = 0;
+  for (let k = 1; k < coords.length; k++) meters += havMeters(coords[k - 1], coords[k]);
+  return { coordinates: coords, meters: Math.round(meters) };
+}
+
+function outdoorFrom(campus, fromId) {
+  if (!fromId || fromId === GATE_START) {
+    return {
+      ok: true,
+      coordinates: campus.walk.coordinates,
+      text: `Walk from the main gate to the Main Building entrance (${campus.walk.meters} m)`,
+    };
+  }
+  const feature = campus.buildings.features.find((f) => f.properties.osm === fromId);
+  if (!feature) return { ok: false, message: `${fromId} is not a campus building.` };
+  const walked = routeAlongWalk(campus, feature);
+  const label = campusStarts(campus).find((s) => s.id === fromId).label;
+  return {
+    ok: true,
+    coordinates: walked.coordinates,
+    text: `Walk from the ${label} to the ${campus.entrance.label} (${walked.meters} m)`,
+  };
+}
+
+// Outdoor points are [lng, lat] from data/campus-osm.json (x = lng, y = lat).
+export function planCampusRoute(paths, stairs, floors, campus, roomId, fromId) {
   const lobby = floors.find((f) => paths.floors[f.id] && paths.floors[f.id].start);
   if (!lobby) return { ok: false, message: "The lobby is not on the map yet." };
+  const outdoor = outdoorFrom(campus, fromId);
+  if (!outdoor.ok) return outdoor;
   const r = planRoute(paths, stairs, floors, { floorId: lobby.id, node: paths.floors[lobby.id].start }, roomId);
   if (!r.ok) return r;
-  const outdoor = {
-    floorId: "outdoor",
-    ids: [],
-    points: campus.walk.coordinates.map(([x, y]) => ({ x, y })),
-  };
   return {
     ...r,
-    legs: [outdoor, ...r.legs],
+    legs: [
+      { floorId: "outdoor", ids: [], points: outdoor.coordinates.map(([x, y]) => ({ x, y })) },
+      ...r.legs,
+    ],
     steps: [
-      { floorId: "outdoor", text: `Walk from the main gate to the Main Building entrance (${campus.walk.meters} m)` },
+      { floorId: "outdoor", text: outdoor.text },
       { floorId: lobby.id, text: `Enter the lobby (${floorShort(lobby)})` },
       ...r.steps,
     ],

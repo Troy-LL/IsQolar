@@ -27,5 +27,17 @@ export function shortestPath(paths: Paths, floorId: string, from: string, to: st
 export function allRooms(paths: Paths): (PathRoom & { floorId: string })[];
 export function searchRooms(paths: Paths, query: string): (PathRoom & { floorId: string })[];
 export function planRoute(paths: Paths, stairs: Stairs, floors: Floor[], start: { floorId: string; node: string }, roomId: string): RouteResult;
-export interface Campus { walk: { coordinates: [number, number][]; meters: number } }
-export function planCampusRoute(paths: Paths, stairs: Stairs, floors: Floor[], campus: Campus, roomId: string): RouteResult;
+export interface CampusBuilding {
+  properties: { osm: string; name: string | null; main?: boolean; height?: number; heightSource?: string };
+  geometry: { type: string; coordinates: [number, number][][] };
+}
+export interface Campus {
+  walk: { coordinates: [number, number][]; meters: number };
+  gate: { lngLat: [number, number]; label: string };
+  entrance: { lngLat: [number, number]; label: string; note?: string };
+  buildings: { features: CampusBuilding[] };
+}
+export const GATE_START: string;
+export interface CampusStart { id: string; label: string }
+export function campusStarts(campus: Campus): CampusStart[];
+export function planCampusRoute(paths: Paths, stairs: Stairs, floors: Floor[], campus: Campus, roomId: string, fromId?: string): RouteResult;
