@@ -36,6 +36,13 @@ Other devices on the venue LAN open `http://<laptop-ip>:3000`.
 The public URL is https://isqolar.onrender.com.
 Check the server is up: `GET /health` returns `{"ok":true}`.
 
+### Before a demo
+
+Open https://isqolar.onrender.com before a demo so the free Render instance is awake.
+Sleep and wake timing is in [ADR 005](docs/decisions/005-online-on-render.md).
+The [keep-awake workflow](.github/workflows/keep-awake.yml) already pings `GET /health` on that URL every 10 minutes.
+The Express app still makes no outbound call.
+
 ### Load the simulated morning
 
 ```bash
