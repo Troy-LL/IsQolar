@@ -4,23 +4,29 @@
     "building": "Main Academic Building",
     "floor": "1F (lobby level)",
     "label": "Main Building ground lobby",
-    "image": "public/maps/main-1f-lobby.jpg",
-    "approximate": true
+    "image": "public/maps/main-1f-lobby.png",
+    "approximate": true,
+    "imageWebp": "public/maps/main-1f-lobby.webp",
+    "poster": "public/maps/main-1f-lobby.jpg"
   },
   {
     "id": "main-4f",
     "building": "Main Academic Building",
     "floor": "4F",
     "label": "Main Building 4F",
-    "image": "public/maps/main-4f.jpg",
-    "approximate": false
+    "image": "public/maps/main-4f.png",
+    "approximate": false,
+    "imageWebp": "public/maps/main-4f.webp",
+    "poster": "public/maps/main-4f.jpg"
   },
   {
     "id": "main-5f",
     "building": "Main Academic Building",
     "floor": "5F",
     "label": "Main Building 5F",
-    "image": "public/maps/main-5f.jpg",
-    "approximate": false
+    "image": "public/maps/main-5f.png",
+    "approximate": false,
+    "imageWebp": "public/maps/main-5f.webp",
+    "poster": "public/maps/main-5f.jpg"
   }
 ]
