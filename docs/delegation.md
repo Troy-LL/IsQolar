@@ -17,7 +17,7 @@ Queue owners stay as in the 4:19 PM note and docs/plan.md. RT owners that differ
 - docs/plan.md uses these same clocks: tonight, 11:00 dry run, 12:30 freeze, 2:00 submit. R1 and K1 are not start-now tasks. K2 is not the freeze.
 - D3 is tonight after D1. POST /api/tickets/:id/undo already exists. Lookup matches the printed code on GET /api/stalls/:stall/queue.
 - J1 target is about 40 tickets. src/store.ts and docs/product.md still have 5.
-- RT1 owner is Viv, not Donita. RT2 owner is Troy, not Justin. RT6 owner is Ayen, not Justin. Reason: those files do not touch that person's queue files, and Justin and Donita already own the staff, seed, and ticket work.
+- RT1 owner is Troy, taken from Viv (it had been Viv, not Donita). RT2 owner is Troy, not Justin. RT6 owner is Ayen, not Justin. Reason: those files do not touch that person's queue files, and Justin and Donita already own the staff, seed, and ticket work.
 - RT3, RT4, RT5, RT7, and RT8 start tomorrow morning. plan-room-tba.md originally marked RT1 through RT8 as tonight. They wait on earlier PRs.
 - RT8 also waits on A4, because the enrolled screen is A4, which plan.md schedules tomorrow.
 - Only L2 may edit src/contract.ts. G1 and H2 wait for L2.
@@ -32,11 +32,11 @@ Queue owners stay as in the 4:19 PM note and docs/plan.md. RT owners that differ
 
 | Person | Tonight | Tomorrow AM |
 | --- | --- | --- |
-| Troy | T4, RT2 | L2, O1, O2, UP1, RT7, X2, RT12, S4, and R2 at 11:00 |
+| Troy | T4, RT1, RT2 | L2, O1, O2, UP1, RT7, X2, RT12, S4, and R2 at 11:00 |
 | Donita | H0, D1, D3 | D2, H1, H2, W1, X1, S5 |
 | Justin | J1, P0, J2 | RT5, G1, J3 |
 | Ayen | A1, RT6 | A4, A3, RT8, A2, A5, S1 |
-| Viv | RT1, V1 | RT3, RT4, V3, V2, S2 |
+| Viv | V1 | RT3, RT4, V3, V2, S2 |
 
 Viv's tomorrow order is RT3, RT4, V3, V2. Justin's long task tomorrow is RT5 (27 + 39 + 76 labels).
 
@@ -75,6 +75,25 @@ Local src/server.ts already has GET /health. If the live URL is not known, stop 
 Done when: The deployed URL's GET /health returns {"ok":true}.
 
 When the done-when line is true, run npm run check. Open a pull request into main. Append one line to docs/bob-log.md with this task id, the branch, and the PR link. Create docs/bob-log.md if it is missing. Then run: gh pr merge --auto --squash --delete-branch.
+```
+
+### RT1. Clean floor images
+- Goal: public/maps/ has the three tonight floors.
+- Files: docs/floorplans/IBM_7739.JPG, docs/floorplans/IBM_7741.JPG, docs/floorplans/IBM_7742.JPG, public/maps/, scripts/clean-floorplan.py, docs/floorplans/cleaning.md
+- Depends on: none
+- Done when: public/maps/ has a cleaned lobby image from IBM_7739, a straightened and cropped Main 4F image from IBM_7741, and a Main 5F image from IBM_7742.
+- Branch: `troy/rt1-clean-images`
+- Owner: Troy, taken from Viv. Do not append a bob-log line.
+
+```
+Branch from a fresh main using `troy/rt1-clean-images`.
+Read docs/delegation.md for RT1.
+public/maps/ does not exist yet. Copy from docs/floorplans/IBM_7739.JPG, IBM_7741.JPG, and IBM_7742.JPG into public/maps/. Deliver a cleaned lobby image from IBM_7739, a straightened and cropped Main 4F image from IBM_7741, and a Main 5F image from IBM_7742. Do not add IBM_7721, IBM_7734, IBM_7740, IBM_7726, or library-3F.png. Do not flip IBM_7741. Do not invent coordinates.
+Do not edit src/contract.ts.
+Run npm run check.
+Open a pull request into main.
+Do not append a bob-log line. Troy took this task from Viv.
+Then run gh pr merge --auto --squash --delete-branch.
 ```
 
 ### RT2. Write the floors file
@@ -375,7 +394,7 @@ Do not start R1, K1, or K2: R1 and K1 were the Oct 15 3:00 and 3:30 clocks, K2 i
 
 # Donita
 
-Staff tablet, the hub laptop, and tomorrow's offline queue. Floor images are Viv's RT1, so this night stays on `public/staff.html` and the hub.
+Staff tablet, the hub laptop, and tomorrow's offline queue. Floor images are Troy's RT1, taken from Viv, so this night stays on `public/staff.html` and the hub.
 
 ## Tonight
 
@@ -781,24 +800,6 @@ Held, no task prompt: RT10 alias text waits until the team supplies at least fiv
 
 ## Tonight
 
-### RT1. Clean floor images
-- Goal: public/maps/ has the three tonight floors.
-- Files: docs/floorplans/IBM_7739.JPG, docs/floorplans/IBM_7741.JPG, docs/floorplans/IBM_7742.JPG, public/maps/
-- Depends on: none
-- Done when: public/maps/ has a cleaned lobby image from IBM_7739, a straightened and cropped Main 4F image from IBM_7741, and a Main 5F image from IBM_7742.
-- Branch: `viv/rt1-clean-floors`
-
-```
-Branch from a fresh main using `viv/rt1-clean-floors`.
-Read docs/delegation.md for RT1.
-public/maps/ does not exist yet. Copy from docs/floorplans/IBM_7739.JPG, IBM_7741.JPG, and IBM_7742.JPG into public/maps/. Deliver a cleaned lobby image from IBM_7739, a straightened and cropped Main 4F image from IBM_7741, and a Main 5F image from IBM_7742. Do not add IBM_7721, IBM_7734, IBM_7740, IBM_7726, or library-3F.png. Do not flip IBM_7741. Do not invent coordinates.
-Do not edit src/contract.ts.
-Run npm run check.
-Open a pull request into main.
-Append one line to docs/bob-log.md with the task id, branch, and PR link. Create the file if it is missing.
-Then run gh pr merge --auto --squash --delete-branch.
-```
-
 ### V1. TV board
 - Goal: Board shows stalls, now serving, queue length, and estimated wait.
 - Files: public/board.html
@@ -932,6 +933,7 @@ flowchart TD
   subgraph tonight ["Tonight"]
     subgraph troyN ["Troy"]
       T4["T4 · Troy · connect Render"]
+      RT1["RT1 · Troy · clean floor images"]
       RT2["RT2 · Troy · floors file"]
     end
     subgraph donitaN ["Donita"]
@@ -950,7 +952,6 @@ flowchart TD
     end
     subgraph vivN ["Viv"]
       V1["V1 · Viv · TV board"]
-      RT1["RT1 · Viv · clean floor images"]
     end
   end
 
@@ -1092,10 +1093,10 @@ flowchart TD
 ✅ Done
 PR 12 is merged. T1b, F0, T3, and T2 are on main. Pages are shells. Seed is 5 tickets. Render /health is still 404.
 👉 Your task now
-- Troy: Connect the Render Blueprint so GET /health on the public URL returns ok (T4). Then the floors file (RT2) after Viv's images.
+- Troy: Connect the Render Blueprint so GET /health on the public URL returns ok (T4). Clean the three tonight floor images (RT1, taken from Viv). Then the floors file (RT2).
 - Donita: Hub laptop (H0), then staff Call next and Mark done (D1), then undo (D3).
 - Justin: About 40 simulated tickets (J1), poll last-updated text (P0), printable ticket (J2).
 - Ayen: Phone ticket and the Ikaw na, Iskolar! banner (A1). Empty station file (RT6) in parallel.
-- Viv: Clean the three tonight floor images (RT1) and the TV board (V1).
+- Viv: TV board (V1). RT1 moved to Troy.
 ⚠️ Render is not connected yet. Gym layout, five real aliases, a real lobby plan, library 2F confirmation, and the 4F ? names stay held.
 ⏰ 11:00 AM Oct 16, full dry run. Code freeze 12:30 PM. Submit 2:00 PM.
