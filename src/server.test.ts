@@ -1,9 +1,24 @@
 import { describe, it, beforeEach } from "node:test";
 import assert from "node:assert/strict";
+import { get as httpGet } from "node:http";
 import { app } from "./server.js";
 import { getStore } from "./store.js";
 import type { Stall } from "./contract.js";
 import type { AddressInfo } from "node:net";
+
+function redirectOf(target: string): Promise<{ status: number; location: string | undefined }> {
+  return new Promise((resolve, reject) => {
+    const req = httpGet(target, (incoming) => {
+      incoming.resume();
+      const location = incoming.headers.location;
+      resolve({
+        status: incoming.statusCode ?? 0,
+        location: Array.isArray(location) ? location[0] : location,
+      });
+    });
+    req.on("error", reject);
+  });
+}
 
 function startServer(): Promise<{ url: string; close: () => Promise<void> }> {
   return new Promise((resolve) => {
@@ -38,6 +53,16 @@ describe("IsQolar server", () => {
     const body = await json<{ ok: boolean }>(res);
     assert.equal(body.ok, true);
     await close();
+  });
+
+  it("GET / redirects to /map.html", async () => {
+    try {
+      const res = await redirectOf(`${url}/`);
+      assert.equal(res.status, 302);
+      assert.equal(res.location, "/map.html");
+    } finally {
+      await close();
+    }
   });
 
   it("full journey: join → done through every station → enrolled", async () => {
