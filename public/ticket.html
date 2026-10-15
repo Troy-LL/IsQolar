@@ -74,6 +74,18 @@
       color: #444;
     }
 
+    .ticket__qr {
+      margin: 1rem auto 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .ticket__qr-label {
+      font-size: 0.65rem;
+      color: #888;
+      margin-top: 0.35rem;
+    }
+
     .ticket__note {
       margin-top: 1.25rem;
       font-size: 0.7rem;
@@ -128,11 +140,18 @@
       .print-btn {
         display: none;
       }
+
+      /* QR must print clearly — keep it black on white */
+      .ticket__qr img,
+      .ticket__qr table {
+        image-rendering: pixelated;
+      }
     }
   </style>
 </head>
 <body>
   <div id="app"></div>
+  <script src="/qrcode.js"></script>
   <script src="/poll.js"></script>
   <script>
     (function () {
@@ -147,6 +166,10 @@
 
       function render(ticket) {
         document.title = "Ticket #" + ticket.code + " \u00b7 IsQolar";
+
+        // Relative URL — works on the hub LAN and on Render alike.
+        var phoneUrl = "/phone.html?id=" + ticket.id;
+
         app.innerHTML =
           '<div class="ticket">' +
             '<div class="ticket__brand">IsQolar</div>' +
@@ -157,9 +180,20 @@
             '<div class="ticket__course">' + ticket.course + '</div>' +
             (ticket.name ? '<div class="ticket__name">' + ticket.name + '</div>' : '') +
             '<hr class="ticket__divider">' +
+            '<div class="ticket__qr" id="qr-container"></div>' +
+            '<div class="ticket__qr-label">Scan to follow your queue on your phone</div>' +
             '<div class="ticket__note">Keep this ticket with you. Show this number at every station.</div>' +
           '</div>' +
           '<button class="print-btn" onclick="window.print()">Print ticket</button>';
+
+        // Generate QR after the DOM is updated.
+        var qr = qrcode(0, "M");
+        qr.addData(phoneUrl);
+        qr.make();
+        var container = document.getElementById("qr-container");
+        if (container) {
+          container.innerHTML = qr.createImgTag(4, 8);
+        }
       }
 
       function renderError(msg) {
