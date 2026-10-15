@@ -42,40 +42,40 @@
     "main-1f-lobby": {
       "stairs": {
         "stair-west-end": {
-          "x": 0.425,
-          "y": 0.2
+          "x": 0.2986,
+          "y": 0.2591
         },
         "stair-west-dome": {
-          "x": 0.3933,
-          "y": 0.457
+          "x": 0.3956,
+          "y": 0.4538
         },
         "stair-south-north": {
           "x": 0.165,
-          "y": 0.2118
+          "y": 0.2471
         },
         "stair-south-mid": {
           "x": 0.165,
-          "y": 0.5294
+          "y": 0.5137
         },
         "stair-south-south": {
           "x": 0.165,
-          "y": 0.8471
+          "y": 0.7804
         },
         "stair-north-end": {
-          "x": 0.7128,
-          "y": 0.5178
+          "x": 0.6933,
+          "y": 0.5002
         },
         "stair-north-dome": {
-          "x": 0.4384,
-          "y": 0.4877
+          "x": 0.4385,
+          "y": 0.4862
         },
         "stair-east-dome": {
-          "x": 0.3949,
-          "y": 0.5147
+          "x": 0.3956,
+          "y": 0.5156
         },
         "stair-east-end": {
-          "x": 0.2616,
-          "y": 0.7641
+          "x": 0.2833,
+          "y": 0.7412
         }
       },
       "notes": "all nine stairwells found on this plan"
@@ -124,40 +124,40 @@
     "main-5f": {
       "stairs": {
         "stair-west-end": {
-          "x": 0.2321,
-          "y": 0.1817
+          "x": 0.259,
+          "y": 0.1851
         },
         "stair-west-dome": {
-          "x": 0.4036,
-          "y": 0.4411
+          "x": 0.405,
+          "y": 0.4391
         },
         "stair-south-north": {
           "x": 0.17,
-          "y": 0.2042
+          "y": 0.2572
         },
         "stair-south-mid": {
           "x": 0.17,
-          "y": 0.5219
+          "y": 0.4917
         },
         "stair-south-south": {
           "x": 0.17,
-          "y": 0.8396
+          "y": 0.7262
         },
         "stair-north-end": {
-          "x": 0.7721,
-          "y": 0.5074
+          "x": 0.7728,
+          "y": 0.489
         },
         "stair-north-dome": {
-          "x": 0.4504,
-          "y": 0.4734
+          "x": 0.4505,
+          "y": 0.472
         },
         "stair-east-dome": {
-          "x": 0.4072,
-          "y": 0.5046
+          "x": 0.4065,
+          "y": 0.5037
         },
         "stair-east-end": {
-          "x": 0.2681,
-          "y": 0.8051
+          "x": 0.2725,
+          "y": 0.7726
         }
       },
       "notes": "all nine stairwells found on this plan"
