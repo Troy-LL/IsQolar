@@ -1,6 +1,6 @@
 # PUP Enrollment Queue design system
 
-**Owner:** TODO.
+**Owner:** Donita Salonga
 
 > **Spec alignment.** This file is the visual source of truth. Where it disagrees with the product spec ([PRD-PUP-Enrollment-Queue.md](PRD-PUP-Enrollment-Queue.md), Draft v0.1), the PRD wins on *behavior* and this file wins on *look*. Known gaps, to resolve before building the affected screen:
 >
