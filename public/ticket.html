@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Print Ticket — IsQolar</title>
+  <style>
+    /* ── Screen styles ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      color: #1a1a1a;
+    }
+
+    .ticket {
+      background: #fff;
+      border: 2px solid #7b1c2e; /* maroon */
+      border-radius: 8px;
+      width: 100%;
+      max-width: 360px;
+      padding: 2rem 1.5rem 1.5rem;
+      text-align: center;
+    }
+
+    .ticket__brand {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #7b1c2e;
+      margin-bottom: 0.5rem;
+    }
+
+    .ticket__divider {
+      border: none;
+      border-top: 1px solid #e0e0e0;
+      margin: 0.75rem 0;
+    }
+
+    .ticket__label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #666;
+      margin-bottom: 0.25rem;
+    }
+
+    .ticket__code {
+      font-size: 4rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #7b1c2e;
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+
+    .ticket__course {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 0.5rem;
+    }
+
+    .ticket__name {
+      font-size: 0.85rem;
+      color: #444;
+    }
+
+    .ticket__note {
+      margin-top: 1.25rem;
+      font-size: 0.7rem;
+      color: #888;
+      line-height: 1.5;
+    }
+
+    .print-btn {
+      margin-top: 1.5rem;
+      padding: 0.6rem 1.5rem;
+      background: #7b1c2e;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .error {
+      color: #444;
+      text-align: center;
+      max-width: 320px;
+    }
+
+    /* ── Print styles ──────────────────────────────────────────── */
+    @media print {
+      body {
+        background: #fff;
+        min-height: unset;
+        padding: 0;
+        justify-content: flex-start;
+      }
+
+      .ticket {
+        border: 2px solid #000;
+        border-radius: 0;
+        max-width: 100%;
+        width: 80mm;        /* standard receipt width */
+        margin: 0 auto;
+        padding: 8mm 6mm;
+      }
+
+      .ticket__code {
+        color: #000;
+      }
+
+      .ticket__brand {
+        color: #000;
+      }
+
+      .print-btn {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <script src="/poll.js"></script>
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var id = params.get("id");
+      var app = document.getElementById("app");
+
+      if (!id) {
+        app.innerHTML = '<p class="error">No ticket ID in the URL. Open this page from your ticket link.</p>';
+        return;
+      }
+
+      function render(ticket) {
+        document.title = "Ticket #" + ticket.code + " \u00b7 IsQolar";
+        app.innerHTML =
+          '<div class="ticket">' +
+            '<div class="ticket__brand">IsQolar</div>' +
+            '<hr class="ticket__divider">' +
+            '<div class="ticket__label">Ticket number</div>' +
+            '<div class="ticket__code">' + ticket.code + '</div>' +
+            '<div class="ticket__label">Course</div>' +
+            '<div class="ticket__course">' + ticket.course + '</div>' +
+            (ticket.name ? '<div class="ticket__name">' + ticket.name + '</div>' : '') +
+            '<hr class="ticket__divider">' +
+            '<div class="ticket__note">Keep this ticket with you. Show this number at every station.</div>' +
+          '</div>' +
+          '<button class="print-btn" onclick="window.print()">Print ticket</button>';
+      }
+
+      function renderError(msg) {
+        app.innerHTML = '<p class="error">' + msg + '</p>';
+      }
+
+      IsQolar.poll("/api/tickets/" + id, function (ticket) {
+        render(ticket);
+      }, 5000);
+
+      // Initial fetch — don't wait for the first poll interval.
+      fetch("/api/tickets/" + id)
+        .then(function (res) {
+          if (!res.ok) throw new Error(res.status);
+          return res.json();
+        })
+        .then(render)
+        .catch(function () {
+          renderError("Could not load ticket. Check your link, or ask at the check-in desk.");
+        });
+    })();
+  </script>
+</body>
+</html>
