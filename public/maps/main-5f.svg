@@ -5,165 +5,158 @@
       <rect width="8" height="8" fill="#E4DCD5"/>
       <line x1="0" y1="0" x2="0" y2="8" stroke="#6B5E57" stroke-width="1" stroke-opacity="0.08"/>
     </pattern>
-    <filter id="softShadow" x="-6%" y="-6%" width="112%" height="112%">
-      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#3D342F" flood-opacity="0.12"/>
-    </filter>
   </defs>
-  <g class="plan" filter="url(#softShadow)">
-    <polygon class="corridor" fill="#F3EDE8" stroke="none" points="846.98,594.02 1584.53,619.77 1582.57,675.74 845.02,649.98"/>
-    <polygon class="corridor" fill="#F3EDE8" stroke="none" points="868.36,638.85 548.20,1063.72 503.47,1030.02 823.64,605.15"/>
-    <polygon class="corridor" fill="#F3EDE8" stroke="none" points="824.87,640.37 475.84,238.86 518.11,202.12 867.13,603.63"/>
+  <g class="plan">
+    <polygon class="wing" fill="#FFFFFF" stroke="#6B5E57" stroke-width="2" stroke-linejoin="round" points="911.61,548.24 1580.21,571.59 1574.90,723.50 906.31,700.15"/>
+    <polygon class="wing" fill="#FFFFFF" stroke="#6B5E57" stroke-width="2" stroke-linejoin="round" points="702.84,573.16 439.62,270.35 554.33,170.63 817.56,473.44"/>
+    <polygon class="wing" fill="#FFFFFF" stroke="#6B5E57" stroke-width="2" stroke-linejoin="round" points="833.41,764.99 586.53,1092.61 465.14,1001.14 712.02,673.51"/>
+    <polygon class="wing" fill="#FFFFFF" stroke="#6B5E57" stroke-width="2" points="180.00,290.00 500.00,290.00 500.00,1010.00 180.00,1010.00"/>
+    <polygon class="corridor" fill="#F3EDE8" stroke="none" points="846.98,594.02 1576.53,619.49 1574.58,675.46 845.02,649.98"/>
+    <polygon class="corridor" fill="#F3EDE8" stroke="none" points="824.87,640.37 477.16,240.37 519.42,203.63 867.13,603.63"/>
+    <polygon class="corridor" fill="#F3EDE8" stroke="none" points="868.36,638.85 549.40,1062.13 504.68,1028.43 823.64,605.15"/>
     <polygon class="corridor" fill="#F3EDE8" stroke="none" points="316.00,298.00 364.00,298.00 364.00,1002.00 316.00,1002.00"/>
-    <polygon class="corridor" fill="#F3EDE8" stroke="none" points="498.00,592.00 790.00,592.00 790.00,652.00 498.00,652.00"/>
-    <circle class="dome" cx="846.0" cy="622.0" r="58" fill="#EDE4DC" stroke="#6B5E57" stroke-width="2.0"/>
-    <polygon fill="#FFFFFF" stroke="#6B5E57" stroke-width="2.0" points="180.00,290.00 500.00,290.00 500.00,1010.00 180.00,1010.00"/>
-    <polygon class="corridor" fill="#F3EDE8" stroke="none" points="316.00,298.00 364.00,298.00 364.00,1002.00 316.00,1002.00"/>
-    <polygon fill="url(#courtHatch)" stroke="#6B5E57" stroke-width="2.0" points="212.00,326.00 468.00,326.00 468.00,632.00 212.00,632.00"/>
-    <polygon fill="url(#courtHatch)" stroke="#6B5E57" stroke-width="2.0" points="212.00,668.00 468.00,668.00 468.00,974.00 212.00,974.00"/>
-    <polygon fill="none" stroke="#6B5E57" stroke-width="2.0" points="900.62,547.86 1588.20,571.87 1582.90,723.78 895.32,699.77"/>
-    <polygon fill="none" stroke="#6B5E57" stroke-width="2.0" points="875.40,709.27 585.33,1094.21 463.93,1002.73 754.01,617.79"/>
-    <polygon fill="none" stroke="#6B5E57" stroke-width="2.0" points="754.53,632.62 438.31,268.85 553.02,169.12 869.24,532.89"/>
-    <polygon fill="none" stroke="#6B5E57" stroke-width="2.0" points="180.00,290.00 500.00,290.00 500.00,1010.00 180.00,1010.00"/>
+    <polygon class="corridor" fill="#F3EDE8" stroke="none" points="340.00,592.00 846.00,592.00 846.00,652.00 340.00,652.00"/>
     <g class="rooms">
-      <polygon class="room" data-room="main-5f-n500" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="914.21,548.34 978.47,550.58 976.80,598.55 912.54,596.31"/>
-      <polygon class="room" data-room="main-5f-n502" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="979.67,550.62 1043.93,552.87 1042.26,600.84 978.00,598.59"/>
-      <polygon class="room" data-room="main-5f-n504" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="1045.13,552.91 1109.39,555.15 1107.72,603.12 1043.46,600.88"/>
-      <polygon class="room" data-room="main-5f-n506" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="1110.59,555.19 1174.85,557.44 1173.18,605.41 1108.92,603.16"/>
-      <polygon class="room" data-room="main-5f-n508" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="1176.05,557.48 1240.31,559.72 1238.64,607.69 1174.38,605.45"/>
-      <polygon class="room" data-room="main-5f-n510" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="1241.51,559.77 1305.77,562.01 1304.10,609.98 1239.84,607.74"/>
-      <polygon class="room" data-room="main-5f-n512" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="1306.97,562.05 1371.23,564.30 1369.56,612.27 1305.30,610.02"/>
-      <polygon class="room" data-room="main-5f-n514" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="1372.43,564.34 1436.69,566.58 1435.02,614.55 1370.76,612.31"/>
-      <polygon class="room" data-room="main-5f-n516" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="1437.89,566.62 1502.15,568.87 1500.48,616.84 1436.22,614.59"/>
-      <polygon class="room" data-room="main-5f-n518" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="1503.35,568.91 1567.61,571.15 1565.94,619.12 1501.68,616.88"/>
-      <polygon class="room" data-room="main-5f-n501" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="910.58,652.27 974.84,654.52 973.17,702.49 908.91,700.24"/>
-      <polygon class="room" data-room="main-5f-n503" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="976.04,654.56 1040.30,656.80 1038.63,704.77 974.37,702.53"/>
-      <polygon class="room" data-room="main-5f-n505" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="1041.50,656.84 1105.76,659.09 1104.09,707.06 1039.83,704.81"/>
-      <polygon class="room" data-room="main-5f-n507" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="1106.96,659.13 1171.22,661.37 1169.55,709.34 1105.29,707.10"/>
-      <polygon class="room" data-room="main-5f-n509" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="1172.42,661.42 1236.68,663.66 1235.01,711.63 1170.75,709.39"/>
-      <polygon class="room" data-room="main-5f-n511" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="1237.88,663.70 1302.14,665.95 1300.47,713.92 1236.21,711.67"/>
-      <polygon class="room" data-room="main-5f-n513" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="1303.34,665.99 1367.60,668.23 1365.93,716.20 1301.67,713.96"/>
-      <polygon class="room" data-room="main-5f-n515" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="1368.80,668.27 1433.06,670.52 1431.39,718.49 1367.13,716.24"/>
-      <polygon class="room" data-room="main-5f-n517" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="1434.26,670.56 1498.52,672.80 1496.85,720.77 1432.59,718.53"/>
-      <polygon class="room" data-room="main-5f-n519" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="1499.72,672.85 1563.98,675.09 1562.31,723.06 1498.05,720.82"/>
-      <polygon class="room" data-room="main-5f-e500" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="864.21,724.12 837.85,759.10 799.51,730.21 825.87,695.23"/>
-      <polygon class="room" data-room="main-5f-e502" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="837.13,760.06 810.77,795.04 772.43,766.15 798.79,731.17"/>
-      <polygon class="room" data-room="main-5f-e504" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="810.04,796.00 783.69,830.98 745.35,802.09 771.71,767.11"/>
-      <polygon class="room" data-room="main-5f-e506" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="782.96,831.94 756.60,866.92 718.27,838.03 744.63,803.05"/>
-      <polygon class="room" data-room="main-5f-e508" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="755.88,867.88 729.52,902.86 691.19,873.97 717.55,838.99"/>
-      <polygon class="room" data-room="main-5f-e510" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="728.80,903.81 702.44,938.79 664.11,909.91 690.47,874.93"/>
-      <polygon class="room" data-room="main-5f-e512" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="701.72,939.75 675.36,974.73 637.02,945.85 663.38,910.87"/>
-      <polygon class="room" data-room="main-5f-e514" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="674.64,975.69 648.28,1010.67 609.94,981.78 636.30,946.80"/>
-      <polygon class="room" data-room="main-5f-e516" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="647.55,1011.63 621.20,1046.61 582.86,1017.72 609.22,982.74"/>
-      <polygon class="room" data-room="main-5f-e518" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="620.47,1047.57 594.11,1082.55 555.78,1053.66 582.14,1018.68"/>
-      <polygon class="room" data-room="main-5f-e501" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="781.15,661.53 754.79,696.51 716.46,667.63 742.82,632.65"/>
-      <polygon class="room" data-room="main-5f-e503" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="754.07,697.47 727.71,732.45 689.37,703.56 715.73,668.58"/>
-      <polygon class="room" data-room="main-5f-e505" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="726.99,733.41 700.63,768.39 662.29,739.50 688.65,704.52"/>
-      <polygon class="room" data-room="main-5f-e507" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="699.91,769.35 673.55,804.33 635.21,775.44 661.57,740.46"/>
-      <polygon class="room" data-room="main-5f-e509" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="672.82,805.29 646.46,840.27 608.13,811.38 634.49,776.40"/>
-      <polygon class="room" data-room="main-5f-e511" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="645.74,841.23 619.38,876.21 581.05,847.32 607.41,812.34"/>
-      <polygon class="room" data-room="main-5f-e513" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="618.66,877.16 592.30,912.14 553.97,883.26 580.33,848.28"/>
-      <polygon class="room" data-room="main-5f-e515" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="591.58,913.10 565.22,948.08 526.88,919.20 553.24,884.22"/>
-      <polygon class="room" data-room="main-5f-e517" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="564.50,949.04 538.14,984.02 499.80,955.13 526.16,920.15"/>
-      <polygon class="room" data-room="main-5f-e519" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="537.41,984.98 511.06,1019.96 472.72,991.07 499.08,956.09"/>
-      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="742.32,618.58 713.59,585.52 749.81,554.03 778.55,587.09"/>
-      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="712.80,584.62 684.07,551.56 720.29,520.07 749.03,553.13"/>
-      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="683.28,550.65 654.54,517.60 690.77,486.11 719.51,519.16"/>
-      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="653.76,516.69 625.02,483.64 661.25,452.15 689.98,485.20"/>
-      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="624.23,482.73 595.50,449.67 631.72,418.18 660.46,451.24"/>
-      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="594.71,448.77 565.98,415.71 602.20,384.22 630.94,417.28"/>
-      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="565.19,414.81 536.45,381.75 572.68,350.26 601.41,383.32"/>
-      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="535.67,380.84 506.93,347.79 543.16,316.30 571.89,349.35"/>
-      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="506.14,346.88 477.41,313.83 513.63,282.34 542.37,315.39"/>
-      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="820.81,550.35 792.08,517.29 828.30,485.80 857.04,518.86"/>
-      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="791.29,516.39 762.56,483.33 798.78,451.84 827.52,484.90"/>
-      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="761.77,482.42 733.03,449.37 769.26,417.88 797.99,450.93"/>
-      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="732.25,448.46 703.51,415.41 739.74,383.91 768.47,416.97"/>
-      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="702.72,414.50 673.99,381.44 710.21,349.95 738.95,383.01"/>
-      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="673.20,380.54 644.47,347.48 680.69,315.99 709.43,349.05"/>
-      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="643.68,346.58 614.94,313.52 651.17,282.03 679.90,315.09"/>
-      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="614.16,312.61 585.42,279.56 621.65,248.07 650.38,281.12"/>
-      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="584.63,278.65 555.90,245.60 592.12,214.11 620.86,247.16"/>
-      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="555.11,244.69 526.37,211.63 562.60,180.14 591.34,213.20"/>
-      <polygon class="room" data-room="main-5f-s501" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="186.00,326.00 314.00,326.00 314.00,389.00 186.00,389.00"/>
-      <polygon class="room" data-room="main-5f-s502" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="186.00,391.00 314.00,391.00 314.00,454.00 186.00,454.00"/>
-      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="186.00,456.00 314.00,456.00 314.00,519.00 186.00,519.00"/>
-      <polygon class="room" data-room="main-5f-s504" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="186.00,521.00 314.00,521.00 314.00,584.00 186.00,584.00"/>
-      <polygon class="room" data-room="main-5f-s505" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="186.00,586.00 314.00,586.00 314.00,649.00 186.00,649.00"/>
-      <polygon class="room" data-room="main-5f-s506" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="186.00,651.00 314.00,651.00 314.00,714.00 186.00,714.00"/>
-      <polygon class="room" data-room="main-5f-s507" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="186.00,716.00 314.00,716.00 314.00,779.00 186.00,779.00"/>
-      <polygon class="room" data-room="main-5f-s508" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="186.00,781.00 314.00,781.00 314.00,844.00 186.00,844.00"/>
-      <polygon class="room" data-room="main-5f-s509" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="186.00,846.00 314.00,846.00 314.00,909.00 186.00,909.00"/>
-      <polygon class="room" data-room="main-5f-s510" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="186.00,911.00 314.00,911.00 314.00,974.00 186.00,974.00"/>
-      <polygon class="room" data-room="main-5f-s511" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="366.00,326.00 494.00,326.00 494.00,396.22 366.00,396.22"/>
-      <polygon class="room" data-room="main-5f-s512a" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="366.00,398.22 494.00,398.22 494.00,468.44 366.00,468.44"/>
-      <polygon class="room" data-room="main-5f-s512b" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="366.00,470.44 494.00,470.44 494.00,540.67 366.00,540.67"/>
-      <polygon class="room" data-room="main-5f-s513" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="366.00,542.67 494.00,542.67 494.00,612.89 366.00,612.89"/>
-      <polygon class="room" data-room="main-5f-s514" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="366.00,614.89 494.00,614.89 494.00,685.11 366.00,685.11"/>
-      <polygon class="room" data-room="main-5f-s515" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="366.00,687.11 494.00,687.11 494.00,757.33 366.00,757.33"/>
-      <polygon class="room" data-room="main-5f-s516" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="366.00,759.33 494.00,759.33 494.00,829.56 366.00,829.56"/>
-      <polygon class="room" data-room="main-5f-s517" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="366.00,831.56 494.00,831.56 494.00,901.78 366.00,901.78"/>
-      <polygon class="room" data-room="main-5f-s518" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1.0" stroke-linejoin="miter" points="366.00,903.78 494.00,903.78 494.00,974.00 366.00,974.00"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="701.01,571.05 676.65,543.03 712.88,511.54 737.23,539.56"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="675.60,541.82 651.25,513.81 687.47,482.32 711.83,510.33"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="650.20,512.60 625.84,484.58 662.07,453.09 686.42,481.11"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="624.79,483.38 600.44,455.36 636.67,423.87 661.02,451.88"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="599.39,454.15 575.04,426.13 611.26,394.64 635.62,422.66"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="573.99,424.93 549.63,396.91 585.86,365.42 610.21,393.44"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="548.58,395.70 524.23,367.69 560.45,336.20 584.81,364.21"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="523.18,366.48 498.82,338.46 535.05,306.97 559.40,334.99"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="497.77,337.26 473.42,309.24 509.65,277.75 534.00,305.76"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="472.37,308.03 448.02,280.02 484.24,248.52 508.60,276.54"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="779.50,502.82 755.14,474.80 791.37,443.31 815.72,471.33"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="754.09,473.59 729.74,445.58 765.96,414.09 790.32,442.10"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="728.69,444.37 704.33,416.35 740.56,384.86 764.91,412.88"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="703.28,415.14 678.93,387.13 715.16,355.64 739.51,383.65"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="677.88,385.92 653.53,357.90 689.75,326.41 714.11,354.43"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="652.48,356.70 628.12,328.68 664.35,297.19 688.70,325.21"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="627.07,327.47 602.72,299.46 638.94,267.97 663.30,295.98"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="601.67,298.25 577.31,270.23 613.54,238.74 637.89,266.76"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="576.26,269.03 551.91,241.01 588.14,209.52 612.49,237.53"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="550.86,239.80 526.51,211.79 562.73,180.29 587.09,208.31"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="186.00,447.00 314.00,447.00 314.00,513.00 186.00,513.00"/>
+      <polygon class="room" data-room="main-5f-n500" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="914.41,548.34 978.27,550.57 976.60,598.54 912.74,596.31"/>
+      <polygon class="room" data-room="main-5f-n502" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="979.87,550.63 1043.73,552.86 1042.06,600.83 978.20,598.60"/>
+      <polygon class="room" data-room="main-5f-n504" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1045.33,552.91 1109.19,555.14 1107.52,603.12 1043.66,600.89"/>
+      <polygon class="room" data-room="main-5f-n506" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1110.79,555.20 1174.65,557.43 1172.98,605.40 1109.12,603.17"/>
+      <polygon class="room" data-room="main-5f-n508" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1176.25,557.49 1240.11,559.72 1238.44,607.69 1174.58,605.46"/>
+      <polygon class="room" data-room="main-5f-n510" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1241.71,559.77 1305.57,562.00 1303.90,609.97 1240.04,607.74"/>
+      <polygon class="room" data-room="main-5f-n512" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1307.17,562.06 1371.03,564.29 1369.36,612.26 1305.50,610.03"/>
+      <polygon class="room" data-room="main-5f-n514" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1372.63,564.34 1436.49,566.57 1434.82,614.54 1370.96,612.31"/>
+      <polygon class="room" data-room="main-5f-n516" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1438.09,566.63 1501.95,568.86 1500.28,616.83 1436.42,614.60"/>
+      <polygon class="room" data-room="main-5f-n518" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1503.55,568.92 1567.41,571.15 1565.74,619.12 1501.88,616.89"/>
+      <polygon class="room" data-room="main-5f-n501" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="910.78,652.28 974.64,654.51 972.97,702.48 909.11,700.25"/>
+      <polygon class="room" data-room="main-5f-n503" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="976.24,654.57 1040.10,656.80 1038.43,704.77 974.57,702.54"/>
+      <polygon class="room" data-room="main-5f-n505" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1041.70,656.85 1105.56,659.08 1103.89,707.05 1040.03,704.82"/>
+      <polygon class="room" data-room="main-5f-n507" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1107.16,659.14 1171.02,661.37 1169.35,709.34 1105.49,707.11"/>
+      <polygon class="room" data-room="main-5f-n509" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1172.62,661.42 1236.48,663.65 1234.81,711.62 1170.95,709.39"/>
+      <polygon class="room" data-room="main-5f-n511" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1238.08,663.71 1301.94,665.94 1300.27,713.91 1236.41,711.68"/>
+      <polygon class="room" data-room="main-5f-n513" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1303.54,665.99 1367.40,668.22 1365.73,716.20 1301.87,713.97"/>
+      <polygon class="room" data-room="main-5f-n515" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1369.00,668.28 1432.86,670.51 1431.19,718.48 1367.33,716.25"/>
+      <polygon class="room" data-room="main-5f-n517" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1434.46,670.57 1498.32,672.80 1496.65,720.77 1432.79,718.54"/>
+      <polygon class="room" data-room="main-5f-n519" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1499.92,672.85 1563.78,675.08 1562.11,723.05 1498.25,720.82"/>
+      <polygon class="room" data-room="main-5f-e501" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="748.67,704.63 725.79,735.00 687.45,706.11 710.34,675.75"/>
+      <polygon class="room" data-room="main-5f-e503" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="724.82,736.28 701.94,766.65 663.61,737.76 686.49,707.39"/>
+      <polygon class="room" data-room="main-5f-e505" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="700.98,767.92 678.10,798.29 639.76,769.40 662.64,739.04"/>
+      <polygon class="room" data-room="main-5f-e507" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="677.13,799.57 654.25,829.93 615.92,801.05 638.80,770.68"/>
+      <polygon class="room" data-room="main-5f-e509" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="653.29,831.21 630.40,861.58 592.07,832.69 614.95,802.32"/>
+      <polygon class="room" data-room="main-5f-e511" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="629.44,862.86 606.56,893.22 568.22,864.34 591.11,833.97"/>
+      <polygon class="room" data-room="main-5f-e513" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="605.60,894.50 582.71,924.87 544.38,895.98 567.26,865.61"/>
+      <polygon class="room" data-room="main-5f-e515" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="581.75,926.15 558.87,956.51 520.53,927.62 543.42,897.26"/>
+      <polygon class="room" data-room="main-5f-e517" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="557.90,957.79 535.02,988.16 496.69,959.27 519.57,928.90"/>
+      <polygon class="room" data-room="main-5f-e519" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="534.06,989.43 511.18,1019.80 472.84,990.91 495.72,960.55"/>
+      <polygon class="room" data-room="main-5f-e500" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="831.73,767.22 808.85,797.59 770.51,768.70 793.39,738.34"/>
+      <polygon class="room" data-room="main-5f-e502" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="807.88,798.87 785.00,829.23 746.67,800.35 769.55,769.98"/>
+      <polygon class="room" data-room="main-5f-e504" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="784.04,830.51 761.15,860.88 722.82,831.99 745.70,801.62"/>
+      <polygon class="room" data-room="main-5f-e506" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="760.19,862.16 737.31,892.52 698.97,863.64 721.86,833.27"/>
+      <polygon class="room" data-room="main-5f-e508" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="736.35,893.80 713.46,924.17 675.13,895.28 698.01,864.91"/>
+      <polygon class="room" data-room="main-5f-e510" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="712.50,925.45 689.62,955.81 651.28,926.92 674.17,896.56"/>
+      <polygon class="room" data-room="main-5f-e512" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="688.65,957.09 665.77,987.46 627.44,958.57 650.32,928.20"/>
+      <polygon class="room" data-room="main-5f-e514" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="664.81,988.73 641.93,1019.10 603.59,990.21 626.47,959.85"/>
+      <polygon class="room" data-room="main-5f-e516" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="640.96,1020.38 618.08,1050.75 579.75,1021.86 602.63,991.49"/>
+      <polygon class="room" data-room="main-5f-e518" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="617.12,1052.02 594.23,1082.39 555.90,1053.50 578.78,1023.14"/>
+      <polygon class="room" data-room="main-5f-s501" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="186.00,311.00 314.00,311.00 314.00,377.00 186.00,377.00"/>
+      <polygon class="room" data-room="main-5f-s502" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="186.00,379.00 314.00,379.00 314.00,445.00 186.00,445.00"/>
+      <polygon class="room" data-room="main-5f-s504" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="186.00,515.00 314.00,515.00 314.00,581.00 186.00,581.00"/>
+      <polygon class="room" data-room="main-5f-s505" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="186.00,583.00 314.00,583.00 314.00,649.00 186.00,649.00"/>
+      <polygon class="room" data-room="main-5f-s506" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="186.00,651.00 314.00,651.00 314.00,717.00 186.00,717.00"/>
+      <polygon class="room" data-room="main-5f-s507" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="186.00,719.00 314.00,719.00 314.00,785.00 186.00,785.00"/>
+      <polygon class="room" data-room="main-5f-s508" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="186.00,787.00 314.00,787.00 314.00,853.00 186.00,853.00"/>
+      <polygon class="room" data-room="main-5f-s509" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="186.00,855.00 314.00,855.00 314.00,921.00 186.00,921.00"/>
+      <polygon class="room" data-room="main-5f-s510" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="186.00,923.00 314.00,923.00 314.00,989.00 186.00,989.00"/>
+      <polygon class="room" data-room="main-5f-s511" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="366.00,311.00 494.00,311.00 494.00,384.56 366.00,384.56"/>
+      <polygon class="room" data-room="main-5f-s512a" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="366.00,386.56 494.00,386.56 494.00,460.11 366.00,460.11"/>
+      <polygon class="room" data-room="main-5f-s512b" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="366.00,462.11 494.00,462.11 494.00,535.67 366.00,535.67"/>
+      <polygon class="room" data-room="main-5f-s513" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="366.00,537.67 494.00,537.67 494.00,590.00 366.00,590.00"/>
+      <polygon class="room" data-room="main-5f-s514" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="366.00,654.00 494.00,654.00 494.00,686.78 366.00,686.78"/>
+      <polygon class="room" data-room="main-5f-s515" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="366.00,688.78 494.00,688.78 494.00,762.33 366.00,762.33"/>
+      <polygon class="room" data-room="main-5f-s516" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="366.00,764.33 494.00,764.33 494.00,837.89 366.00,837.89"/>
+      <polygon class="room" data-room="main-5f-s517" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="366.00,839.89 494.00,839.89 494.00,913.44 366.00,913.44"/>
+      <polygon class="room" data-room="main-5f-s518" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="366.00,915.44 494.00,915.44 494.00,989.00 366.00,989.00"/>
     </g>
+    <circle class="dome" cx="846.0" cy="622.0" r="58" fill="#EDE4DC" stroke="#6B5E57" stroke-width="2"/>
     <g class="room-nums">
-      <text x="945.5" y="573.4" transform="rotate(0.0 945.5 573.4)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N500</text>
-      <text x="1011.0" y="575.7" transform="rotate(0.0 1011.0 575.7)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N502</text>
-      <text x="1076.4" y="578.0" transform="rotate(0.0 1076.4 578.0)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N504</text>
-      <text x="1141.9" y="580.3" transform="rotate(0.0 1141.9 580.3)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N506</text>
-      <text x="1207.3" y="582.6" transform="rotate(0.0 1207.3 582.6)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N508</text>
-      <text x="1272.8" y="584.9" transform="rotate(0.0 1272.8 584.9)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N510</text>
-      <text x="1338.3" y="587.2" transform="rotate(0.0 1338.3 587.2)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N512</text>
-      <text x="1403.7" y="589.4" transform="rotate(0.0 1403.7 589.4)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N514</text>
-      <text x="1469.2" y="591.7" transform="rotate(0.0 1469.2 591.7)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N516</text>
-      <text x="1534.6" y="594.0" transform="rotate(0.0 1534.6 594.0)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N518</text>
-      <text x="941.9" y="677.4" transform="rotate(0.0 941.9 677.4)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N501</text>
-      <text x="1007.3" y="679.7" transform="rotate(0.0 1007.3 679.7)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N503</text>
-      <text x="1072.8" y="682.0" transform="rotate(0.0 1072.8 682.0)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N505</text>
-      <text x="1138.3" y="684.2" transform="rotate(0.0 1138.3 684.2)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N507</text>
-      <text x="1203.7" y="686.5" transform="rotate(0.0 1203.7 686.5)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N509</text>
-      <text x="1269.2" y="688.8" transform="rotate(0.0 1269.2 688.8)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N511</text>
-      <text x="1334.6" y="691.1" transform="rotate(0.0 1334.6 691.1)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N513</text>
-      <text x="1400.1" y="693.4" transform="rotate(0.0 1400.1 693.4)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N515</text>
-      <text x="1465.6" y="695.7" transform="rotate(0.0 1465.6 695.7)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N517</text>
-      <text x="1531.0" y="698.0" transform="rotate(0.0 1531.0 698.0)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N519</text>
-      <text x="831.9" y="727.2" transform="rotate(37.0 831.9 727.2)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E500</text>
-      <text x="804.8" y="763.1" transform="rotate(37.0 804.8 763.1)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E502</text>
-      <text x="777.7" y="799.0" transform="rotate(37.0 777.7 799.0)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E504</text>
-      <text x="750.6" y="835.0" transform="rotate(37.0 750.6 835.0)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E506</text>
-      <text x="723.5" y="870.9" transform="rotate(37.0 723.5 870.9)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E508</text>
-      <text x="696.5" y="906.9" transform="rotate(37.0 696.5 906.9)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E510</text>
-      <text x="669.4" y="942.8" transform="rotate(37.0 669.4 942.8)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E512</text>
-      <text x="642.3" y="978.7" transform="rotate(37.0 642.3 978.7)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E514</text>
-      <text x="615.2" y="1014.7" transform="rotate(37.0 615.2 1014.7)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E516</text>
-      <text x="588.1" y="1050.6" transform="rotate(37.0 588.1 1050.6)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E518</text>
-      <text x="748.8" y="664.6" transform="rotate(37.0 748.8 664.6)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E501</text>
-      <text x="721.7" y="700.5" transform="rotate(37.0 721.7 700.5)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E503</text>
-      <text x="694.6" y="736.5" transform="rotate(37.0 694.6 736.5)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E505</text>
-      <text x="667.6" y="772.4" transform="rotate(37.0 667.6 772.4)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E507</text>
-      <text x="640.5" y="808.3" transform="rotate(37.0 640.5 808.3)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E509</text>
-      <text x="613.4" y="844.3" transform="rotate(37.0 613.4 844.3)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E511</text>
-      <text x="586.3" y="880.2" transform="rotate(37.0 586.3 880.2)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E513</text>
-      <text x="559.2" y="916.1" transform="rotate(37.0 559.2 916.1)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E515</text>
-      <text x="532.1" y="952.1" transform="rotate(37.0 532.1 952.1)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E517</text>
-      <text x="505.1" y="988.0" transform="rotate(37.0 505.1 988.0)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E519</text>
-      <text x="250.0" y="357.5" transform="rotate(0.0 250.0 357.5)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S501</text>
-      <text x="250.0" y="422.5" transform="rotate(0.0 250.0 422.5)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S502</text>
-      <text x="250.0" y="552.5" transform="rotate(0.0 250.0 552.5)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S504</text>
-      <text x="250.0" y="617.5" transform="rotate(0.0 250.0 617.5)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S505</text>
-      <text x="250.0" y="682.5" transform="rotate(0.0 250.0 682.5)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S506</text>
-      <text x="250.0" y="747.5" transform="rotate(0.0 250.0 747.5)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S507</text>
-      <text x="250.0" y="812.5" transform="rotate(0.0 250.0 812.5)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S508</text>
-      <text x="250.0" y="877.5" transform="rotate(0.0 250.0 877.5)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S509</text>
-      <text x="250.0" y="942.5" transform="rotate(0.0 250.0 942.5)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S510</text>
-      <text x="430.0" y="361.1" transform="rotate(0.0 430.0 361.1)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S511</text>
-      <text x="430.0" y="433.3" transform="rotate(0.0 430.0 433.3)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="central">S512A</text>
-      <text x="430.0" y="505.6" transform="rotate(0.0 430.0 505.6)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="central">S512B</text>
-      <text x="430.0" y="577.8" transform="rotate(0.0 430.0 577.8)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S513</text>
-      <text x="430.0" y="650.0" transform="rotate(0.0 430.0 650.0)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S514</text>
-      <text x="430.0" y="722.2" transform="rotate(0.0 430.0 722.2)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S515</text>
-      <text x="430.0" y="794.4" transform="rotate(0.0 430.0 794.4)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S516</text>
-      <text x="430.0" y="866.7" transform="rotate(0.0 430.0 866.7)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S517</text>
-      <text x="430.0" y="938.9" transform="rotate(0.0 430.0 938.9)" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S518</text>
+      <text x="945.5" y="573.4" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N500</text>
+      <text x="1011.0" y="575.7" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N502</text>
+      <text x="1076.4" y="578.0" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N504</text>
+      <text x="1141.9" y="580.3" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N506</text>
+      <text x="1207.3" y="582.6" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N508</text>
+      <text x="1272.8" y="584.9" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N510</text>
+      <text x="1338.3" y="587.2" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N512</text>
+      <text x="1403.7" y="589.4" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N514</text>
+      <text x="1469.2" y="591.7" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N516</text>
+      <text x="1534.6" y="594.0" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N518</text>
+      <text x="941.9" y="677.4" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N501</text>
+      <text x="1007.3" y="679.7" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N503</text>
+      <text x="1072.8" y="682.0" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N505</text>
+      <text x="1138.3" y="684.2" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N507</text>
+      <text x="1203.7" y="686.5" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N509</text>
+      <text x="1269.2" y="688.8" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N511</text>
+      <text x="1334.6" y="691.1" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N513</text>
+      <text x="1400.1" y="693.4" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N515</text>
+      <text x="1465.6" y="695.7" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N517</text>
+      <text x="1531.0" y="698.0" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">N519</text>
+      <text x="718.1" y="705.4" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E501</text>
+      <text x="694.2" y="737.0" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E503</text>
+      <text x="670.4" y="768.7" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E505</text>
+      <text x="646.5" y="800.3" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E507</text>
+      <text x="622.7" y="832.0" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E509</text>
+      <text x="598.8" y="863.6" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E511</text>
+      <text x="575.0" y="895.2" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E513</text>
+      <text x="551.1" y="926.9" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E515</text>
+      <text x="527.3" y="958.5" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E517</text>
+      <text x="503.5" y="990.2" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E519</text>
+      <text x="801.1" y="768.0" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E500</text>
+      <text x="777.3" y="799.6" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E502</text>
+      <text x="753.4" y="831.3" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E504</text>
+      <text x="729.6" y="862.9" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E506</text>
+      <text x="705.7" y="894.5" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E508</text>
+      <text x="681.9" y="926.2" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E510</text>
+      <text x="658.0" y="957.8" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E512</text>
+      <text x="634.2" y="989.5" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E514</text>
+      <text x="610.4" y="1021.1" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E516</text>
+      <text x="586.5" y="1052.8" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">E518</text>
+      <text x="250.0" y="344.0" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S501</text>
+      <text x="250.0" y="412.0" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S502</text>
+      <text x="250.0" y="548.0" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S504</text>
+      <text x="250.0" y="616.0" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S505</text>
+      <text x="250.0" y="684.0" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S506</text>
+      <text x="250.0" y="752.0" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S507</text>
+      <text x="250.0" y="820.0" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S508</text>
+      <text x="250.0" y="888.0" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S509</text>
+      <text x="250.0" y="956.0" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S510</text>
+      <text x="430.0" y="347.8" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S511</text>
+      <text x="430.0" y="423.3" fill="#4A403A" font-family="system-ui,sans-serif" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="central">S512A</text>
+      <text x="430.0" y="498.9" fill="#4A403A" font-family="system-ui,sans-serif" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="central">S512B</text>
+      <text x="430.0" y="563.8" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S513</text>
+      <text x="430.0" y="670.4" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S514</text>
+      <text x="430.0" y="725.6" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S515</text>
+      <text x="430.0" y="801.1" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S516</text>
+      <text x="430.0" y="876.7" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S517</text>
+      <text x="430.0" y="952.2" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S518</text>
     </g>
-    <circle cx="846.0" cy="622.0" r="60.0" fill="none" stroke="#FFC72C" stroke-width="2" opacity="0.75"/>
   </g>
 </svg>

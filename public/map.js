@@ -64,9 +64,10 @@ function insets() {
   const desk = W >= 900;
   const sheet = $("sheet");
   const open = !sheet.hidden;
-  const top = desk ? 32 : 88;
-  const left = desk && open ? 420 : S.inside ? 64 : 12;
-  const right = S.inside ? 88 : 16;
+  // Phone: the chip and floor tabs sit at the top, so the plan uses the full width below them.
+  const top = desk ? 72 : S.inside ? 200 : 88;
+  const left = desk && open ? 420 : 12;
+  const right = desk && S.inside ? 88 : 12;
   const bottom = !desk && open ? snapPx() + 20 : 16;
   return { W, H, top, left, right, bottom };
 }
@@ -107,7 +108,7 @@ function fitCamPad(box, pad, maxZoom = GOAL_ZOOM) {
   const aw = Math.max(80, W - pad.left - pad.right);
   const ah = Math.max(80, H - pad.top - pad.bottom);
   // never zoom past maxZoom: grow tiny boxes around their center
-  const fw = fitCam(floorBox(S.floorId)).w;
+  const fw = fitCam(floorBox(S.floorId), 0, 16).w;
   let minW = (fw / Math.pow(2, maxZoom - 18)) * (aw / W);
   // Short lobby/stair legs: keep at least ~140px of the shorter axis on screen (RT19 F4)
   const minScreen = 140;
@@ -437,13 +438,23 @@ async function drawIndoor(floorId) {
     const p = t(r.x, r.y);
     const lab = shortLabel(r);
     const n = f.nodes.find((x) => x.id === r.node);
+    const baked = plan && plan.querySelector(`[data-room="${r.id}"][data-baked]`);
     const route = n && onLeg.has(`${n.x.toFixed(5)},${n.y.toFixed(5)}`);
-    labels.push({ text: lab, p, prio: isDest ? 0 : route ? 2 : 3, unsure: !!(r.flag || (roomCode(r) && roomCode(r).unsure)) });
+    if (!baked) labels.push({ text: lab, p, prio: isDest ? 0 : route ? 2 : 3, unsure: !!(r.flag || (roomCode(r) && roomCode(r).unsure)) });
     if (isDest) {
       const door = f.nodes.find((x) => x.id === r.id) || n;
       dest = door ? t(door.x, door.y) : p;
     }
   }
+  // Walkable corridor network: a subtle dotted path layer under the route.
+  const net = svg("g", { class: "walk-net" });
+  for (const [a, b] of f.edges) {
+    const A = N.get(a);
+    const B = N.get(b);
+    if (!A || !B || A.kind !== "corridor" || B.kind !== "corridor") continue;
+    net.append(svg("line", { x1: A.x, y1: A.y, x2: B.x, y2: B.y }));
+  }
+  root.append(net);
   const stairs = Object.entries(st).map(([id, q]) => ({ id, p: t(q.x, q.y), name: (S.stairs.stairs.find((s) => s.id === id) || {}).name || id }));
   if (leg) {
     const cur = S.step >= 0 && S.route.steps[S.step].floorId === floorId;
@@ -523,7 +534,8 @@ function drawLabels() {
     arr.style.transform = `translate(${x}px, ${y}px)`;
     taken.push({ x, y, w: cw, h: ch });
   }
-  // Stairs: 24px maroon rounded icons. At fit zoom, on-route full opacity, others 40%.
+  // Stairs: 24px maroon icon + "Stairs" caption, always drawn on every floor.
+  // At fit zoom during a route, stairs off the route drop to 55%.
   const over = document.getElementById("over");
   if (over) over.replaceChildren();
   const leg = S.route ? S.route.legs.find((l) => l.floorId === ix.floorId) : null;
@@ -531,15 +543,15 @@ function drawLabels() {
   const onRouteIds = new Set([...(leg && leg.ids ? leg.ids : []), ...(routeStair ? [routeStair] : [])]);
   for (const s of ix.stairs) {
     const q = scr(s.p);
-    const b = { x: q.x - 12, y: q.y - 12, w: 24, h: 24 };
-    if (z >= 19 && !free(b)) continue;
-    taken.push(b);
+    taken.push({ x: q.x - 12, y: q.y - 12, w: 24, h: 24 });
     const k = u;
     const onRoute = onRouteIds.has(s.id);
-    const op = z < 19 ? (onRoute || !S.route ? 1 : 0.4) : 1;
-    const sg = svg("g", { class: "stair", opacity: String(op) });
-    sg.append(svg("rect", { x: s.p.x - 12 * k, y: s.p.y - 12 * k, width: 24 * k, height: 24 * k, rx: 6 * k, fill: "#8B0000" }));
+    const op = z < 19 && S.route && !onRoute ? 0.55 : 1;
+    const sg = svg("g", { class: "stair", opacity: String(op), "data-stair": s.id });
+    sg.append(svg("rect", { x: s.p.x - 12 * k, y: s.p.y - 12 * k, width: 24 * k, height: 24 * k, rx: 6 * k, fill: "#8B0000", stroke: "#fff", "stroke-width": 1.5 * k }));
     sg.append(svg("path", { d: `M${s.p.x - 7 * k} ${s.p.y + 7 * k} h${5 * k} v${-5 * k} h${5 * k} v${-5 * k} h${4 * k}`, fill: "none", stroke: "#fff", "stroke-width": 2 * k, "stroke-linecap": "round", "stroke-linejoin": "round" }));
+    const cap = { x: q.x - 16, y: q.y + 13, w: 32, h: 11 };
+    if (free(cap)) taken.push(cap) && sg.append(svg("text", { x: s.p.x, y: s.p.y + 22 * k, class: "stair-lab", style: `font-size:${9 * k}px;stroke-width:${2.5 * k}px` }, "Stairs"));
     sg.append(svg("title", {}, s.name));
     (over || g).append(sg);
   }
@@ -597,7 +609,7 @@ function drawFloorTabs() {
   const nav = $("floors");
   nav.replaceChildren();
   for (const f of [...S.floors].reverse()) {
-    if (!S.paths.floors[f.id]) continue;
+    if (!S.paths.floors[f.id] || !FLOOR_IMG[f.id]) continue;
     const b = el("button", { type: "button", "aria-pressed": String(f.id === S.floorId) }, floorShort(f));
     if (S.route) {
       const indoor = S.route.legs.filter((l) => l.floorId !== "outdoor");
