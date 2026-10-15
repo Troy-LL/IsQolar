@@ -34,7 +34,7 @@ Queue owners stay as in the 4:19 PM note and docs/plan.md. RT owners that differ
 | Person | Tonight | Tomorrow AM |
 | --- | --- | --- |
 | Troy | T4, RT1, RT2 | L2 (done), UJ1, UJ2, O1, O2, UP1, RT7, X2, RT12, S4, and R2 at 11:00 |
-| Donita | H0, D1, D3 | D2, UJ4, UJ3, H1, H2, W1, X1, S5 |
+| Donita | H0, D1, D3 | D2, UJ4, UJ3, H1, H2, W1, W2, X1, S5 |
 | Justin | J1, P0, J2 | RT5, G1, UJ5, J3 |
 | Ayen | A1, RT6 | A4, UJ6, UJ7, UJ8, A3, RT8, UJ9, A2, A5, S1 |
 | Viv | V1 | RT3, RT4, UJ10, V3, V2, S2 |
@@ -785,6 +785,24 @@ Read docs/delegation.md task W1.
 Branch from a fresh main: donita/w1-lan-check.
 On the hub LAN, open the board, the staff tablet, and a phone. Staff tap Call next. The phone banner and the board now-serving line must change within 2 seconds. If they do, do not change product code. If they do not, fix the one bug. Do not edit src/contract.ts.
 Run npm run check if you changed files. Open a pull request only if files changed. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
+```
+
+### W2. Staff Skip button
+
+- Goal: Staff can Skip the called ticket next to Mark done, with the same timeout and undo pattern as done.
+- Files: `public/staff.js`, `public/staff.html` only.
+- Depends on: D1, UJ2.
+- Done when: While a ticket is called, Skip is next to Mark done and POSTs `/api/tickets/:id/skip` with the same 4s `fetchT` timeout and undo pattern as Mark done. The page does not add Hold, Recall, Restore, Remove, Accept, or Change course.
+- Branch: `troy/w2-staff-skip`
+
+```
+Branch from a fresh main using `troy/w2-staff-skip`.
+Read AGENTS.md, .bob/rules/workflow.md, and docs/delegation.md for W2.
+Lane: public/staff.js and public/staff.html only. Do not edit src/contract.ts.
+Add a Skip button next to Mark done that POSTs /api/tickets/:id/skip (src/server.ts skip route) for the called ticket, using the same 4s fetchT timeout and undo pattern as done.
+No em dashes. No UPLB. No bob log. No AI trailers.
+Run tsc --noEmit, eslint ., and node --import tsx/esm --test src/*.test.ts.
+Open a pull request into main with screenshots at 1280x800 and 390x844 in the PR body. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### X1. Offline test

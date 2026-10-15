@@ -76,6 +76,7 @@
   var elUndoBtn = null;
   var elCallBtn = null;
   var elDoneBtn = null;
+  var elSkipBtn = null;
   var elSavedSection = null; // H2: saved-actions section
   var elSavedList = null;
 
@@ -203,8 +204,14 @@
     elDoneBtn.textContent = 'Mark done';
     elDoneBtn.addEventListener('click', onMarkDone);
 
+    elSkipBtn = document.createElement('button');
+    elSkipBtn.className = 'btn btn-skip';
+    elSkipBtn.textContent = 'Skip';
+    elSkipBtn.addEventListener('click', onSkip);
+
     btnRow.appendChild(elCallBtn);
     btnRow.appendChild(elDoneBtn);
+    btnRow.appendChild(elSkipBtn);
     app.appendChild(btnRow);
 
     // H2: saved-actions section (hidden when empty)
@@ -395,7 +402,9 @@
     }
     var label = lastAction.type === 'call'
       ? lastAction.code + ' called'
-      : lastAction.code + ' done';
+      : lastAction.type === 'skip'
+        ? lastAction.code + ' skipped'
+        : lastAction.code + ' done';
     elLastAction.textContent = label + '\u00a0';
     elUndoBtn.style.display = '';
   }
@@ -410,6 +419,7 @@
   function syncButtons() {
     elCallBtn.disabled = inflight || calledTicket !== null;
     elDoneBtn.disabled = inflight || calledTicket === null;
+    elSkipBtn.disabled = inflight || calledTicket === null;
     elUndoBtn.disabled = inflight;
     if (elLookupUndoBtn) elLookupUndoBtn.disabled = inflight;
   }
@@ -665,6 +675,68 @@
   }
 
   // ---------------------------------------------------------------------------
+  // Skip (same timeout and undo pattern as Mark done)
+  // ---------------------------------------------------------------------------
+  function onSkip() {
+    if (inflight || calledTicket === null) return;
+
+    if (inSaveMode()) {
+      msgFromPoll = false;
+      elMsg.textContent = 'Cannot reach the hub. Try again.';
+      return;
+    }
+
+    inflight = true;
+    msgFromPoll = false;
+    elMsg.textContent = '';
+    syncButtons();
+
+    var ticketId = calledTicket.id;
+    var ticketCode = calledTicket.code;
+    var ticketName = calledTicket.name;
+    var ticketCourse = calledTicket.course;
+
+    fetchT('/api/tickets/' + encodeURIComponent(ticketId) + '/skip', { method: 'POST' }, 4000)
+      .then(function (res) {
+        return res.json().then(function (body) {
+          return { ok: res.ok, status: res.status, body: body };
+        });
+      })
+      .then(function (r) {
+        if (r.ok) {
+          lastAction = { type: 'skip', id: ticketId, code: ticketCode, name: ticketName, course: ticketCourse };
+          calledTicket = null;
+          lsRemove(lsKey);
+          renderCalledPanel();
+          renderLastAction();
+        } else if (r.status === 404) {
+          msgFromPoll = false;
+          lastAction = null;
+          elMsg.textContent = 'Ticket no longer exists on the hub.';
+          calledTicket = null;
+          lsRemove(lsKey);
+          renderCalledPanel();
+          renderLastAction();
+        } else {
+          msgFromPoll = false;
+          elMsg.textContent = 'Error: ' + (r.body.error || r.status);
+        }
+      })
+      .catch(function () {
+        msgFromPoll = false;
+        elMsg.textContent = 'Cannot reach the hub. Try again.';
+        if (!hubDown) { hubDown = true; renderAll(); }
+      })
+      .finally(function () {
+        if (inflight) {
+          inflight = false;
+          renderCalledPanel();
+          syncButtons();
+        }
+      });
+  }
+
+  // ---------------------------------------------------------------------------
   // Undo last action (D3 Part A — online only)
   // ---------------------------------------------------------------------------
   function onUndoLastAction() {
@@ -672,7 +744,7 @@
 
     var action = lastAction;
     if (action.type === 'call' && (!calledTicket || calledTicket.id !== action.id)) return;
-    if (action.type === 'done' && calledTicket !== null) return;
+    if ((action.type === 'done' || action.type === 'skip') && calledTicket !== null) return;
 
     inflight = true;
     msgFromPoll = false;
