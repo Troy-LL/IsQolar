@@ -1,0 +1,1843 @@
+[
+ {
+  "building": "Main Academic Building",
+  "floor": "1F (lobby level)",
+  "label": "Accounting Office (S7)",
+  "kind": "office",
+  "source": "IBM_7739"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "1F (lobby level)",
+  "label": "Accounting Division - Students Services Section (S8)",
+  "kind": "office",
+  "source": "IBM_7739"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "1F (lobby level)",
+  "label": "Admission and Registration Office (W2)",
+  "kind": "office",
+  "source": "IBM_7739"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "1F (lobby level)",
+  "label": "Budget Services (S4)",
+  "kind": "office",
+  "source": "IBM_7739"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "1F (lobby level)",
+  "label": "Campus Ministry Office (N4)",
+  "kind": "office",
+  "source": "IBM_7739"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "1F (lobby level)",
+  "label": "Cashier (S6)",
+  "kind": "office",
+  "source": "IBM_7739"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "1F (lobby level)",
+  "label": "Central Records Office (N2)",
+  "kind": "office",
+  "source": "IBM_7739"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "1F (lobby level)",
+  "label": "Commission on Audit Office (N3)",
+  "kind": "office",
+  "source": "IBM_7739"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "1F (lobby level)",
+  "label": "Corps of Cadets Headquarters (E4)",
+  "kind": "office",
+  "source": "IBM_7739"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "1F (lobby level)",
+  "label": "Dental Clinic Services (E6)",
+  "kind": "office",
+  "source": "IBM_7739"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "1F (lobby level)",
+  "label": "Department of Military Science and Tactics Office (E3)",
+  "kind": "office",
+  "source": "IBM_7739"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "1F (lobby level)",
+  "label": "FREE - PUP Office (E1)",
+  "kind": "office",
+  "source": "IBM_7739"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "1F (lobby level)",
+  "label": "HRD Records Office (E2)",
+  "kind": "office",
+  "source": "IBM_7739"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "1F (lobby level)",
+  "label": "Human Resource Management Division (S3)",
+  "kind": "office",
+  "source": "IBM_7739"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "1F (lobby level)",
+  "label": "Medical Clinic Services (E5)",
+  "kind": "office",
+  "source": "IBM_7739"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "1F (lobby level)",
+  "label": "Office for Scholarship and Financial Assistance (W4)",
+  "kind": "office",
+  "source": "IBM_7739"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "1F (lobby level)",
+  "label": "Office of the Director - Medical Health Services (E7)",
+  "kind": "office",
+  "source": "IBM_7739"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "1F (lobby level)",
+  "label": "Office of the Director - Public Affairs Office (E8)",
+  "kind": "office",
+  "source": "IBM_7739"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "1F (lobby level)",
+  "label": "Office of the University Registrar (S1)",
+  "kind": "office",
+  "source": "IBM_7739"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "1F (lobby level)",
+  "label": "Office of the University Registrar - Records Retrieval Section (W5)",
+  "kind": "office",
+  "source": "IBM_7739"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "1F (lobby level)",
+  "label": "Payroll Section (S9)",
+  "kind": "office",
+  "source": "IBM_7739"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "1F (lobby level)",
+  "label": "Procurement Office (N1)",
+  "kind": "office",
+  "source": "IBM_7739"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "1F (lobby level)",
+  "label": "Property Extension Office (S5)",
+  "kind": "office",
+  "source": "IBM_7739"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "1F (lobby level)",
+  "label": "Security Office (N5)",
+  "kind": "office",
+  "source": "IBM_7739"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "1F (lobby level)",
+  "label": "Students Records Office (S2)",
+  "kind": "office",
+  "source": "IBM_7739"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "1F (lobby level)",
+  "label": "University Consumers Cooperative (Dome)",
+  "kind": "office",
+  "source": "IBM_7739"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "1F (lobby level)",
+  "label": "You Are Here (East Wing entrance)",
+  "kind": "other",
+  "source": "IBM_7739"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Classroom 401",
+  "kind": "room",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Classroom 402",
+  "kind": "room",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Classroom 403",
+  "kind": "room",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Classroom 404",
+  "kind": "room",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Classroom 405",
+  "kind": "room",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Classroom 406",
+  "kind": "room",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Classroom 407",
+  "kind": "room",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Classroom 408",
+  "kind": "room",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Classroom 409",
+  "kind": "room",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Classroom 410",
+  "kind": "room",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Classroom 411",
+  "kind": "room",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Classroom 412",
+  "kind": "room",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Classroom 413",
+  "kind": "room",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Classroom 414",
+  "kind": "room",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Classroom 415",
+  "kind": "room",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Classroom 416",
+  "kind": "room",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Classroom 417",
+  "kind": "room",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Classroom 418",
+  "kind": "room",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "4th Floor Dome",
+  "kind": "room",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "PUP PEM Center?",
+  "kind": "office",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Inst. of Social History?",
+  "kind": "office",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Faculty Office/Lounge?",
+  "kind": "office",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Dept. of Advertising and Public Relations?",
+  "kind": "office",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Accenture Ideas Exchange?",
+  "kind": "office",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Speech Laboratory?",
+  "kind": "office",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Training Center?",
+  "kind": "office",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Extension Center?",
+  "kind": "office",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Student Center?",
+  "kind": "office",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Student Lounge?",
+  "kind": "office",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Institutional Planning Office?",
+  "kind": "office",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "OU Audio Visual Room?",
+  "kind": "office",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "OU Library?",
+  "kind": "office",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Vacant Room?",
+  "kind": "office",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Canteen?",
+  "kind": "office",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Office (North wing)",
+  "kind": "office",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "EXIT (multiple, each wing end + dome)",
+  "kind": "exit",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Female toilet? (East)",
+  "kind": "cr",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "Male toilet? (West)",
+  "kind": "cr",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "4F",
+  "label": "You Are Here (East wing near dome)",
+  "kind": "other",
+  "source": "IBM_7741"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "Bayan Muna/NNARA/Gabriela Office (W51?)",
+  "kind": "office",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "CCMIT Server Room (S507)",
+  "kind": "office",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "College of Accountancy Faculty Room (N500)",
+  "kind": "office",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "College of Accountancy Student Council Office (E519)",
+  "kind": "office",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "College of Science Accreditation Center (S516)",
+  "kind": "office",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "College of Science Faculty Room (S514)",
+  "kind": "office",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "Curriculum Planning and Development Office (S506)",
+  "kind": "office",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "JPIA Office (E500)",
+  "kind": "office",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "SAMASA-COA (N519)",
+  "kind": "office",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "Sci-Tech Research and Development Center (S512A)",
+  "kind": "office",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "E500",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "E501",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "E502",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "E503",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "E504",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "E505",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "E506",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "E507",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "E508",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "E509",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "E510",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "E511",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "E512",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "E513",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "E514",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "E515",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "E516",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "E517",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "E518",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "E519",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "N500",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "N501",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "N502",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "N503",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "N504",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "N505",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "N506",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "N507",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "N508",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "N509",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "N510",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "N511",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "N512",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "N513",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "N514",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "N515",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "N516",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "N517",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "N518",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "N519",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "S501",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "S502",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "S503A",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "S504",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "S505?",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "S506",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "S507",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "S508",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "S509",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "S510",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "S511",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "S512A",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "S512B",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "S513",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "S514",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "S515",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "S516",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "S517",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "S518",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "5th floor Dome",
+  "kind": "room",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "Comfort Room (West)",
+  "kind": "cr",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "Comfort Room (North)",
+  "kind": "cr",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "Comfort Room (East)",
+  "kind": "cr",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "Elevator (South wing)",
+  "kind": "elevator",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "Fire Exit (South wing x2)",
+  "kind": "exit",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Main Academic Building",
+  "floor": "5F",
+  "label": "You Are Here (East Wing)",
+  "kind": "other",
+  "source": "IBM_7742"
+ },
+ {
+  "building": "Cultural Sports Center (Gymnasium)",
+  "floor": "GF",
+  "label": "Basketball Court",
+  "kind": "other",
+  "source": "IBM_7734"
+ },
+ {
+  "building": "Cultural Sports Center (Gymnasium)",
+  "floor": "GF",
+  "label": "Badminton Court (x2)",
+  "kind": "other",
+  "source": "IBM_7734"
+ },
+ {
+  "building": "Cultural Sports Center (Gymnasium)",
+  "floor": "GF",
+  "label": "Bleachers (E/W)",
+  "kind": "other",
+  "source": "IBM_7734"
+ },
+ {
+  "building": "Cultural Sports Center (Gymnasium)",
+  "floor": "GF",
+  "label": "Stage",
+  "kind": "other",
+  "source": "IBM_7734"
+ },
+ {
+  "building": "Cultural Sports Center (Gymnasium)",
+  "floor": "GF",
+  "label": "Lobby Porch",
+  "kind": "other",
+  "source": "IBM_7734"
+ },
+ {
+  "building": "Cultural Sports Center (Gymnasium)",
+  "floor": "GF",
+  "label": "Lobby",
+  "kind": "other",
+  "source": "IBM_7734"
+ },
+ {
+  "building": "Cultural Sports Center (Gymnasium)",
+  "floor": "GF",
+  "label": "Porch",
+  "kind": "other",
+  "source": "IBM_7734"
+ },
+ {
+  "building": "Cultural Sports Center (Gymnasium)",
+  "floor": "GF",
+  "label": "Drop-off Area",
+  "kind": "other",
+  "source": "IBM_7734"
+ },
+ {
+  "building": "Cultural Sports Center (Gymnasium)",
+  "floor": "GF",
+  "label": "Elec Room",
+  "kind": "other",
+  "source": "IBM_7734"
+ },
+ {
+  "building": "Cultural Sports Center (Gymnasium)",
+  "floor": "GF",
+  "label": "Stock Room/Equipment Storage",
+  "kind": "other",
+  "source": "IBM_7734"
+ },
+ {
+  "building": "Cultural Sports Center (Gymnasium)",
+  "floor": "GF",
+  "label": "Female Dressing Room",
+  "kind": "other",
+  "source": "IBM_7734"
+ },
+ {
+  "building": "Cultural Sports Center (Gymnasium)",
+  "floor": "GF",
+  "label": "Male Dressing Room",
+  "kind": "other",
+  "source": "IBM_7734"
+ },
+ {
+  "building": "Cultural Sports Center (Gymnasium)",
+  "floor": "GF",
+  "label": "Fire Pump Room?",
+  "kind": "other",
+  "source": "IBM_7734"
+ },
+ {
+  "building": "Cultural Sports Center (Gymnasium)",
+  "floor": "GF",
+  "label": "Maintenance Office?",
+  "kind": "other",
+  "source": "IBM_7734"
+ },
+ {
+  "building": "Cultural Sports Center (Gymnasium)",
+  "floor": "GF",
+  "label": "SHE (female CR) x2",
+  "kind": "cr",
+  "source": "IBM_7734"
+ },
+ {
+  "building": "Cultural Sports Center (Gymnasium)",
+  "floor": "GF",
+  "label": "HE (male CR) x2",
+  "kind": "cr",
+  "source": "IBM_7734"
+ },
+ {
+  "building": "Cultural Sports Center (Gymnasium)",
+  "floor": "GF",
+  "label": "EXIT (front x3)",
+  "kind": "exit",
+  "source": "IBM_7734"
+ },
+ {
+  "building": "Cultural Sports Center (Gymnasium)",
+  "floor": "GF",
+  "label": "Fire Exit (rear x2)",
+  "kind": "exit",
+  "source": "IBM_7734"
+ },
+ {
+  "building": "Ninoy Aquino Learning Resource Center? (ICT Office wing)",
+  "floor": "2F?",
+  "label": "Computer Lab 1",
+  "kind": "room",
+  "source": "IBM_7721"
+ },
+ {
+  "building": "Ninoy Aquino Learning Resource Center? (ICT Office wing)",
+  "floor": "2F?",
+  "label": "Computer Lab 2",
+  "kind": "room",
+  "source": "IBM_7721"
+ },
+ {
+  "building": "Ninoy Aquino Learning Resource Center? (ICT Office wing)",
+  "floor": "2F?",
+  "label": "Research Lab 1",
+  "kind": "room",
+  "source": "IBM_7721"
+ },
+ {
+  "building": "Ninoy Aquino Learning Resource Center? (ICT Office wing)",
+  "floor": "2F?",
+  "label": "Research Lab 2",
+  "kind": "room",
+  "source": "IBM_7721"
+ },
+ {
+  "building": "Ninoy Aquino Learning Resource Center? (ICT Office wing)",
+  "floor": "2F?",
+  "label": "Information Systems Development",
+  "kind": "room",
+  "source": "IBM_7721"
+ },
+ {
+  "building": "Ninoy Aquino Learning Resource Center? (ICT Office wing)",
+  "floor": "2F?",
+  "label": "Network and Systems Administration",
+  "kind": "room",
+  "source": "IBM_7721"
+ },
+ {
+  "building": "Ninoy Aquino Learning Resource Center? (ICT Office wing)",
+  "floor": "2F?",
+  "label": "PCARI Conference Room",
+  "kind": "room",
+  "source": "IBM_7721"
+ },
+ {
+  "building": "Ninoy Aquino Learning Resource Center? (ICT Office wing)",
+  "floor": "2F?",
+  "label": "Conference Room",
+  "kind": "room",
+  "source": "IBM_7721"
+ },
+ {
+  "building": "Ninoy Aquino Learning Resource Center? (ICT Office wing)",
+  "floor": "2F?",
+  "label": "ICTO Storage Room",
+  "kind": "room",
+  "source": "IBM_7721"
+ },
+ {
+  "building": "Ninoy Aquino Learning Resource Center? (ICT Office wing)",
+  "floor": "2F?",
+  "label": "Storage Room",
+  "kind": "room",
+  "source": "IBM_7721"
+ },
+ {
+  "building": "Ninoy Aquino Learning Resource Center? (ICT Office wing)",
+  "floor": "2F?",
+  "label": "Operations and Support Management",
+  "kind": "office",
+  "source": "IBM_7721"
+ },
+ {
+  "building": "Ninoy Aquino Learning Resource Center? (ICT Office wing)",
+  "floor": "2F?",
+  "label": "IT Project Management",
+  "kind": "office",
+  "source": "IBM_7721"
+ },
+ {
+  "building": "Ninoy Aquino Learning Resource Center? (ICT Office wing)",
+  "floor": "2F?",
+  "label": "Administration Room",
+  "kind": "office",
+  "source": "IBM_7721"
+ },
+ {
+  "building": "Ninoy Aquino Learning Resource Center? (ICT Office wing)",
+  "floor": "2F?",
+  "label": "Assistant Director (x2)",
+  "kind": "office",
+  "source": "IBM_7721"
+ },
+ {
+  "building": "Ninoy Aquino Learning Resource Center? (ICT Office wing)",
+  "floor": "2F?",
+  "label": "ICTO Director",
+  "kind": "office",
+  "source": "IBM_7721"
+ },
+ {
+  "building": "Ninoy Aquino Learning Resource Center? (ICT Office wing)",
+  "floor": "2F?",
+  "label": "ICTO Helpdesk",
+  "kind": "office",
+  "source": "IBM_7721"
+ },
+ {
+  "building": "Ninoy Aquino Learning Resource Center? (ICT Office wing)",
+  "floor": "2F?",
+  "label": "Quality Assurance Office",
+  "kind": "office",
+  "source": "IBM_7721"
+ },
+ {
+  "building": "Ninoy Aquino Learning Resource Center? (ICT Office wing)",
+  "floor": "2F?",
+  "label": "Fulltime Delivery Unit",
+  "kind": "office",
+  "source": "IBM_7721"
+ },
+ {
+  "building": "Ninoy Aquino Learning Resource Center? (ICT Office wing)",
+  "floor": "2F?",
+  "label": "Building Admin",
+  "kind": "office",
+  "source": "IBM_7721"
+ },
+ {
+  "building": "Ninoy Aquino Learning Resource Center? (ICT Office wing)",
+  "floor": "2F?",
+  "label": "ICTO Lobby",
+  "kind": "office",
+  "source": "IBM_7721"
+ },
+ {
+  "building": "Ninoy Aquino Learning Resource Center? (ICT Office wing)",
+  "floor": "2F?",
+  "label": "NALLRC Lobby",
+  "kind": "office",
+  "source": "IBM_7721"
+ },
+ {
+  "building": "Ninoy Aquino Learning Resource Center? (ICT Office wing)",
+  "floor": "2F?",
+  "label": "Phase 1 Pantry",
+  "kind": "office",
+  "source": "IBM_7721"
+ },
+ {
+  "building": "Ninoy Aquino Learning Resource Center? (ICT Office wing)",
+  "floor": "2F?",
+  "label": "Phase 2 Pantry",
+  "kind": "office",
+  "source": "IBM_7721"
+ },
+ {
+  "building": "Ninoy Aquino Learning Resource Center? (ICT Office wing)",
+  "floor": "2F?",
+  "label": "CR male/female",
+  "kind": "cr",
+  "source": "IBM_7721"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "1. Pylon",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "2. Mural Brass Sculpture",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "3. Guard House",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "4. Visitor Information Center",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "5. Covered Walk",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "6. Community Building (Gabriela Silang)",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "7. Tahanan ng Atleta",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "8. Track and Football Oval",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "9. Grandstand",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "10. Gazebo",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "11. Mabini Replica House",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "12. Mabini Shrine Museum & Information Center",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "13. Flag Pole",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "14. Freedom Park",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "15. Mabini Monument/PUP Obelisk",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "16. Tennis Court",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "17. Sports Facility",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "18. Engineering Science and Research Center",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "19. Cultural Sports Center (Gym)",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "20. Swimming Pool",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "21. PUP Tahanan ng Alumni",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "22. Physical Education Building",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "23. Ninoy Aquino Learning Resource Center",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "24. Lagoon",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "25. Amphi Theater",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "26. PUP Main Academic Building",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "27. (South Wing) Academic Building",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "28. Interfaith Chapel",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "29. College of Nutrition & Food Science Building",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "30. Facility Management Office Bldg.",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "31. PUP VIP Parking",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "32. Generator House",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "33. Linear Park",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "34. University Canteen/Sampaguita Building",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "35. Student Canteen",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "36. Charlie del Rosario Hall (Student Guidance)",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "37. Laboratory High School Building",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "38. Printing Press Building",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "39. Property Supply and Management Office",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "40. R.C. Overhead Water Tank",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "41. Cistern",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "42. Pump House",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "43. Food Technology Research and Development Center",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "44. Commercial Spaces",
+  "kind": "other",
+  "source": "IBM_7738"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "Area 1 (Oval) 6,385 pax",
+  "kind": "assembly",
+  "source": "IBM_7737"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "Area 2 (Obelisk-Parking) 603 pax?",
+  "kind": "assembly",
+  "source": "IBM_7737"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "Area 3 (Lagoon) 495 pax?",
+  "kind": "assembly",
+  "source": "IBM_7737"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "Area 4 (LHS)",
+  "kind": "assembly",
+  "source": "IBM_7737"
+ },
+ {
+  "building": "Campus (A. Mabini)",
+  "floor": "site",
+  "label": "Alternative Area 1 (294 pax?)",
+  "kind": "assembly",
+  "source": "IBM_7737"
+ },
+ {
+  "building": "Library (NALRC)",
+  "floor": "3F",
+  "label": "Chief Technical Section",
+  "kind": "office",
+  "source": "library-3F.png"
+ },
+ {
+  "building": "Library (NALRC)",
+  "floor": "3F",
+  "label": "Staff",
+  "kind": "office",
+  "source": "library-3F.png"
+ },
+ {
+  "building": "Library (NALRC)",
+  "floor": "3F",
+  "label": "Director's Office",
+  "kind": "office",
+  "source": "library-3F.png"
+ },
+ {
+  "building": "Library (NALRC)",
+  "floor": "3F",
+  "label": "Materials Processing Section",
+  "kind": "office",
+  "source": "library-3F.png"
+ },
+ {
+  "building": "Library (NALRC)",
+  "floor": "3F",
+  "label": "Silid Pulungan / Board Room",
+  "kind": "room",
+  "source": "library-3F.png"
+ },
+ {
+  "building": "Library (NALRC)",
+  "floor": "3F",
+  "label": "Technical Service Stock Rm.",
+  "kind": "room",
+  "source": "library-3F.png"
+ },
+ {
+  "building": "Library (NALRC)",
+  "floor": "3F",
+  "label": "Silid Lakandayang",
+  "kind": "room",
+  "source": "library-3F.png"
+ },
+ {
+  "building": "Library (NALRC)",
+  "floor": "3F",
+  "label": "NALRC Lounging Area",
+  "kind": "room",
+  "source": "library-3F.png"
+ },
+ {
+  "building": "Library (NALRC)",
+  "floor": "3F",
+  "label": "PUP Memorabilia",
+  "kind": "room",
+  "source": "library-3F.png"
+ },
+ {
+  "building": "Library (NALRC)",
+  "floor": "3F",
+  "label": "Archives / Special Services Office",
+  "kind": "office",
+  "source": "library-3F.png"
+ },
+ {
+  "building": "Library (NALRC)",
+  "floor": "3F",
+  "label": "Rare Books Collection",
+  "kind": "room",
+  "source": "library-3F.png"
+ },
+ {
+  "building": "Library (NALRC)",
+  "floor": "3F",
+  "label": "Third Floor Lobby",
+  "kind": "room",
+  "source": "library-3F.png"
+ },
+ {
+  "building": "Library (NALRC)",
+  "floor": "3F",
+  "label": "Chief Readers Services",
+  "kind": "office",
+  "source": "library-3F.png"
+ },
+ {
+  "building": "Library (NALRC)",
+  "floor": "3F",
+  "label": "Reference Section",
+  "kind": "office",
+  "source": "library-3F.png"
+ },
+ {
+  "building": "Library (NALRC)",
+  "floor": "3F",
+  "label": "Reading Area (west)",
+  "kind": "room",
+  "source": "library-3F.png"
+ },
+ {
+  "building": "Library (NALRC)",
+  "floor": "3F",
+  "label": "Circulation Section",
+  "kind": "office",
+  "source": "library-3F.png"
+ },
+ {
+  "building": "Library (NALRC)",
+  "floor": "3F",
+  "label": "Computer Laboratory",
+  "kind": "room",
+  "source": "library-3F.png"
+ },
+ {
+  "building": "Library (NALRC)",
+  "floor": "3F",
+  "label": "Male CR",
+  "kind": "cr",
+  "source": "library-3F.png"
+ },
+ {
+  "building": "Library (NALRC)",
+  "floor": "3F",
+  "label": "Female CR",
+  "kind": "cr",
+  "source": "library-3F.png"
+ },
+ {
+  "building": "Library (NALRC)",
+  "floor": "3F",
+  "label": "Open Below",
+  "kind": "room",
+  "source": "library-3F.png"
+ },
+ {
+  "building": "Library (NALRC)",
+  "floor": "3F",
+  "label": "Discussion Room",
+  "kind": "room",
+  "source": "library-3F.png"
+ },
+ {
+  "building": "Library (NALRC)",
+  "floor": "3F",
+  "label": "Disability Section",
+  "kind": "office",
+  "source": "library-3F.png"
+ },
+ {
+  "building": "Library (NALRC)",
+  "floor": "3F",
+  "label": "Filipiniana Section",
+  "kind": "office",
+  "source": "library-3F.png"
+ },
+ {
+  "building": "Library (NALRC)",
+  "floor": "3F",
+  "label": "Reading Area (east)",
+  "kind": "room",
+  "source": "library-3F.png"
+ },
+ {
+  "building": "Library (NALRC)",
+  "floor": "3F",
+  "label": "Serial Section",
+  "kind": "office",
+  "source": "library-3F.png"
+ },
+ {
+  "building": "Library (NALRC)",
+  "floor": "3F",
+  "label": "Stairs (up)",
+  "kind": "stairs",
+  "source": "library-3F.png"
+ },
+ {
+  "building": "Library (NALRC)",
+  "floor": "3F",
+  "label": "Fire Exit (west)",
+  "kind": "exit",
+  "source": "library-3F.png"
+ },
+ {
+  "building": "Library (NALRC)",
+  "floor": "3F",
+  "label": "Fire Exit (east)",
+  "kind": "exit",
+  "source": "library-3F.png"
+ },
+ {
+  "building": "Library (NALRC)",
+  "floor": "3F",
+  "label": "Exit (main stairs)",
+  "kind": "exit",
+  "source": "library-3F.png"
+ },
+ {
+  "building": "Library (NALRC)",
+  "floor": "3F",
+  "label": "Elevator",
+  "kind": "elevator",
+  "source": "library-3F.png"
+ }
+]

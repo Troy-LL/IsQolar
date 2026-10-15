@@ -6,6 +6,8 @@ Both days follow the same schedule: start about 10:45, 3:30 checkpoint, wrap-up 
 **Day 1 goal:** the three-screen loop works on the LAN by 3:30.
 **Day 2 goal:** the same loop works online too, plus the trust features, then a polished demo and submission.
 
+Room TBA tasks (find a room on the same phone) are in [plan-room-tba.md](plan-room-tba.md). The one-product story is in [product.md](product.md). If the map is not solid by 12:30 PM on Oct 16, remove the map link and the map files. The queue stays. Photos and labels are in [floorplans/](floorplans/).
+
 ---
 
 ## Owners
@@ -18,7 +20,7 @@ Both days follow the same schedule: start about 10:45, 3:30 checkpoint, wrap-up 
 | Viv | Front end | TV board, admin desktop |
 | Justin | Back end | Simulated morning, poll client, printable ticket + QR, guardian API |
 
-Rule: work starts from a fresh main, one task per PR, `npm run check` before every PR, auto-merge on, every Bob run logged.
+Rule: work starts from a fresh main, one task per PR, `npm run check` before every PR, auto-merge on.
 
 ---
 
@@ -50,8 +52,7 @@ Rule: work starts from a fresh main, one task per PR, `npm run check` before eve
 | W1 | Donita + Troy | Integration on three real devices on the hub LAN (hard start 2:30) | V1 D1 A1 P0 J1 H0 | 2:45 |
 | A2 | Ayen | Demo check against the script, including "staff tap Call next live" | W1 | 2:50 |
 | R1 | All | Dry run, with one reseed rehearsed | A2 | 3:00 |
-| L1 | All | Every Bob run logged | — | 3:25 |
-| K1 | — | **3:30 checkpoint (hard)** | R1 L1 | 3:30 |
+| K1 | — | **3:30 checkpoint (hard)** | R1 | 3:30 |
 
 > Fallback: if 2:50 isn't green, demo all three screens on one laptop.
 
@@ -106,7 +107,6 @@ Rule: work starts from a fresh main, one task per PR, `npm run check` before eve
 |---|---|---|
 | S1 | Ayen | Final pitch rehearsed twice |
 | S2 | Viv | README screenshots for each viewport |
-| S3 | Justin | Bob log complete + cleanup |
 | S4 | Troy | Final merge, tag v1.0, submission |
 | S5 | Donita | Backup demo: hub laptop + hotspot ready |
 
@@ -146,7 +146,6 @@ flowchart TD
       W1["W1 Donita+Troy: LAN integration"]
       A2["A2 Ayen: demo check"]
       R1["R1 All: dry run"]
-      L1["L1 All: log runs"]
       K1["K1: 3:30 checkpoint"]
     end
 
@@ -190,7 +189,6 @@ flowchart TD
     subgraph Band8["3:30 to 5:00"]
       S1["S1 Ayen: pitch rehearsal"]
       S2["S2 Viv: README screenshots"]
-      S3["S3 Justin: log + cleanup"]
       S4["S4 Troy: final merge + v1.0"]
       S5["S5 Donita: backup demo"]
     end
@@ -214,7 +212,6 @@ flowchart TD
   W1 --> A2
   A2 --> R1
   R1 --> K1
-  L1 --> K1
   W1 --> D2
   W1 --> D3
   W1 --> V2
@@ -242,7 +239,6 @@ flowchart TD
   R2 --> K2
   K2 --> S1
   K2 --> S2
-  K2 --> S3
   K2 --> S4
   K2 --> S5
 
