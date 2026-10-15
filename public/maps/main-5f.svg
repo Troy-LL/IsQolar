@@ -7,10 +7,7 @@
     </pattern>
   </defs>
   <g class="plan">
-    <polygon class="wing" fill="#FFFFFF" stroke="#6B5E57" stroke-width="2" stroke-linejoin="round" points="911.61,548.24 1580.21,571.59 1574.90,723.50 906.31,700.15"/>
-    <polygon class="wing" fill="#FFFFFF" stroke="#6B5E57" stroke-width="2" stroke-linejoin="round" points="702.84,573.16 439.62,270.35 554.33,170.63 817.56,473.44"/>
-    <polygon class="wing" fill="#FFFFFF" stroke="#6B5E57" stroke-width="2" stroke-linejoin="round" points="833.41,764.99 586.53,1092.61 465.14,1001.14 712.02,673.51"/>
-    <polygon class="wing" fill="#FFFFFF" stroke="#6B5E57" stroke-width="2" points="180.00,290.00 500.00,290.00 500.00,1010.00 180.00,1010.00"/>
+    <path class="wing" fill="#FFFFFF" stroke="#6B5E57" stroke-width="2" stroke-linejoin="round" fill-rule="evenodd" d="M454.05,290.00 L180.00,290.00 L180.00,1010.00 L473.58,1010.00 L586.92,1095.41 L883.86,701.37 L1576.83,725.57 L1582.28,569.66 L882.62,545.23 L554.53,167.81 L436.80,270.16 Z"/>
     <polygon class="corridor" fill="#F3EDE8" stroke="none" points="846.98,594.02 1576.53,619.49 1574.58,675.46 845.02,649.98"/>
     <polygon class="corridor" fill="#F3EDE8" stroke="none" points="824.87,640.37 477.16,240.37 519.42,203.63 867.13,603.63"/>
     <polygon class="corridor" fill="#F3EDE8" stroke="none" points="868.36,638.85 549.40,1062.13 504.68,1028.43 823.64,605.15"/>
@@ -37,7 +34,7 @@
       <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="601.67,298.25 577.31,270.23 613.54,238.74 637.89,266.76"/>
       <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="576.26,269.03 551.91,241.01 588.14,209.52 612.49,237.53"/>
       <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="550.86,239.80 526.51,211.79 562.73,180.29 587.09,208.31"/>
-      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="186.00,447.00 314.00,447.00 314.00,513.00 186.00,513.00"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="186.00,513.00 314.00,513.00 314.00,447.00 186.00,447.00"/>
       <polygon class="room" data-room="main-5f-n500" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="914.41,548.34 978.27,550.57 976.60,598.54 912.74,596.31"/>
       <polygon class="room" data-room="main-5f-n502" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="979.87,550.63 1043.73,552.86 1042.06,600.83 978.20,598.60"/>
       <polygon class="room" data-room="main-5f-n504" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1045.33,552.91 1109.19,555.14 1107.52,603.12 1043.66,600.89"/>
@@ -78,24 +75,24 @@
       <polygon class="room" data-room="main-5f-e514" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="664.81,988.73 641.93,1019.10 603.59,990.21 626.47,959.85"/>
       <polygon class="room" data-room="main-5f-e516" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="640.96,1020.38 618.08,1050.75 579.75,1021.86 602.63,991.49"/>
       <polygon class="room" data-room="main-5f-e518" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="617.12,1052.02 594.23,1082.39 555.90,1053.50 578.78,1023.14"/>
-      <polygon class="room" data-room="main-5f-s501" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="186.00,311.00 314.00,311.00 314.00,377.00 186.00,377.00"/>
-      <polygon class="room" data-room="main-5f-s502" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="186.00,379.00 314.00,379.00 314.00,445.00 186.00,445.00"/>
-      <polygon class="room" data-room="main-5f-s504" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="186.00,515.00 314.00,515.00 314.00,581.00 186.00,581.00"/>
-      <polygon class="room" data-room="main-5f-s505" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="186.00,583.00 314.00,583.00 314.00,649.00 186.00,649.00"/>
-      <polygon class="room" data-room="main-5f-s506" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="186.00,651.00 314.00,651.00 314.00,717.00 186.00,717.00"/>
-      <polygon class="room" data-room="main-5f-s507" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="186.00,719.00 314.00,719.00 314.00,785.00 186.00,785.00"/>
-      <polygon class="room" data-room="main-5f-s508" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="186.00,787.00 314.00,787.00 314.00,853.00 186.00,853.00"/>
-      <polygon class="room" data-room="main-5f-s509" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="186.00,855.00 314.00,855.00 314.00,921.00 186.00,921.00"/>
-      <polygon class="room" data-room="main-5f-s510" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="186.00,923.00 314.00,923.00 314.00,989.00 186.00,989.00"/>
-      <polygon class="room" data-room="main-5f-s511" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="366.00,311.00 494.00,311.00 494.00,384.56 366.00,384.56"/>
-      <polygon class="room" data-room="main-5f-s512a" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="366.00,386.56 494.00,386.56 494.00,460.11 366.00,460.11"/>
-      <polygon class="room" data-room="main-5f-s512b" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="366.00,462.11 494.00,462.11 494.00,535.67 366.00,535.67"/>
-      <polygon class="room" data-room="main-5f-s513" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="366.00,537.67 494.00,537.67 494.00,590.00 366.00,590.00"/>
-      <polygon class="room" data-room="main-5f-s514" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="366.00,654.00 494.00,654.00 494.00,686.78 366.00,686.78"/>
-      <polygon class="room" data-room="main-5f-s515" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="366.00,688.78 494.00,688.78 494.00,762.33 366.00,762.33"/>
-      <polygon class="room" data-room="main-5f-s516" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="366.00,764.33 494.00,764.33 494.00,837.89 366.00,837.89"/>
-      <polygon class="room" data-room="main-5f-s517" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="366.00,839.89 494.00,839.89 494.00,913.44 366.00,913.44"/>
-      <polygon class="room" data-room="main-5f-s518" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="366.00,915.44 494.00,915.44 494.00,989.00 366.00,989.00"/>
+      <polygon class="room" data-room="main-5f-s501" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="186.00,377.00 314.00,377.00 314.00,311.00 186.00,311.00"/>
+      <polygon class="room" data-room="main-5f-s502" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="186.00,445.00 314.00,445.00 314.00,379.00 186.00,379.00"/>
+      <polygon class="room" data-room="main-5f-s504" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="186.00,581.00 314.00,581.00 314.00,515.00 186.00,515.00"/>
+      <polygon class="room" data-room="main-5f-s505" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="186.00,649.00 314.00,649.00 314.00,583.00 186.00,583.00"/>
+      <polygon class="room" data-room="main-5f-s506" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="186.00,717.00 314.00,717.00 314.00,651.00 186.00,651.00"/>
+      <polygon class="room" data-room="main-5f-s507" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="186.00,785.00 314.00,785.00 314.00,719.00 186.00,719.00"/>
+      <polygon class="room" data-room="main-5f-s508" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="186.00,853.00 314.00,853.00 314.00,787.00 186.00,787.00"/>
+      <polygon class="room" data-room="main-5f-s509" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="186.00,921.00 314.00,921.00 314.00,855.00 186.00,855.00"/>
+      <polygon class="room" data-room="main-5f-s510" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="186.00,989.00 314.00,989.00 314.00,923.00 186.00,923.00"/>
+      <polygon class="room" data-room="main-5f-s511" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="366.00,311.00 366.00,384.56 494.00,384.56 494.00,340.53 468.33,311.00"/>
+      <polygon class="room" data-room="main-5f-s512a" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="366.00,460.11 494.00,460.11 494.00,386.56 366.00,386.56"/>
+      <polygon class="room" data-room="main-5f-s512b" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="366.00,535.67 494.00,535.67 494.00,462.11 366.00,462.11"/>
+      <polygon class="room" data-room="main-5f-s513" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="366.00,590.00 494.00,590.00 494.00,537.67 366.00,537.67"/>
+      <polygon class="room" data-room="main-5f-s514" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="366.00,686.78 494.00,686.78 494.00,654.00 366.00,654.00"/>
+      <polygon class="room" data-room="main-5f-s515" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="366.00,762.33 494.00,762.33 494.00,688.78 366.00,688.78"/>
+      <polygon class="room" data-room="main-5f-s516" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="366.00,837.89 494.00,837.89 494.00,764.33 366.00,764.33"/>
+      <polygon class="room" data-room="main-5f-s517" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="366.00,913.44 494.00,913.44 494.00,839.89 366.00,839.89"/>
+      <polygon class="room" data-room="main-5f-s518" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="494.00,915.44 366.00,915.44 366.00,989.00 468.02,989.00 494.00,954.53"/>
     </g>
     <circle class="dome" cx="846.0" cy="622.0" r="58" fill="#EDE4DC" stroke="#6B5E57" stroke-width="2"/>
     <g class="room-nums">
@@ -148,7 +145,7 @@
       <text x="250.0" y="820.0" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S508</text>
       <text x="250.0" y="888.0" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S509</text>
       <text x="250.0" y="956.0" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S510</text>
-      <text x="430.0" y="347.8" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S511</text>
+      <text x="437.7" y="346.3" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S511</text>
       <text x="430.0" y="423.3" fill="#4A403A" font-family="system-ui,sans-serif" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="central">S512A</text>
       <text x="430.0" y="498.9" fill="#4A403A" font-family="system-ui,sans-serif" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="central">S512B</text>
       <text x="430.0" y="563.8" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S513</text>
@@ -156,7 +153,7 @@
       <text x="430.0" y="725.6" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S515</text>
       <text x="430.0" y="801.1" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S516</text>
       <text x="430.0" y="876.7" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S517</text>
-      <text x="430.0" y="952.2" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S518</text>
+      <text x="437.6" y="952.7" fill="#4A403A" font-family="system-ui,sans-serif" font-size="10" font-weight="600" text-anchor="middle" dominant-baseline="central">S518</text>
     </g>
   </g>
 </svg>

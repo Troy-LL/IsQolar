@@ -7,10 +7,7 @@
     </pattern>
   </defs>
   <g class="plan">
-    <polygon class="wing" fill="#FFFFFF" stroke="#6B5E57" stroke-width="2" stroke-linejoin="round" points="855.35,964.00 855.35,1420.00 715.35,1420.00 715.35,964.00"/>
-    <polygon class="wing" fill="#FFFFFF" stroke="#6B5E57" stroke-width="2" stroke-linejoin="round" points="651.28,879.57 342.18,663.14 422.48,548.46 731.58,764.89"/>
-    <polygon class="wing" fill="#FFFFFF" stroke="#6B5E57" stroke-width="2" stroke-linejoin="round" points="839.13,764.89 1148.22,548.46 1228.53,663.14 919.43,879.57"/>
-    <polygon class="wing" fill="#FFFFFF" stroke="#6B5E57" stroke-width="2" points="441.38,210.00 1126.28,210.00 1126.28,550.00 441.38,550.00"/>
+    <path class="wing" fill="#FFFFFF" stroke="#6B5E57" stroke-width="2" stroke-linejoin="round" fill-rule="evenodd" d="M1126.28,210.00 L441.38,210.00 L441.38,550.00 L749.35,550.00 L749.35,774.90 L421.99,545.67 L339.39,663.63 L713.35,925.48 L713.35,1422.00 L857.35,1422.00 L857.35,925.48 L1231.31,663.63 L1148.72,545.67 L821.35,774.90 L821.35,550.00 L1126.28,550.00 Z"/>
     <polygon class="corridor" fill="#F3EDE8" stroke="none" points="813.35,888.00 813.35,1418.00 757.35,1418.00 757.35,888.00"/>
     <polygon class="corridor" fill="#F3EDE8" stroke="none" points="769.29,910.94 367.91,629.88 400.03,584.01 801.41,865.06"/>
     <polygon class="corridor" fill="#F3EDE8" stroke="none" points="769.29,865.06 1170.68,584.01 1202.80,629.88 801.41,910.94"/>
@@ -71,24 +68,24 @@
       <polygon class="room" data-room="main-4f-west-405" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1096.05,704.63 1127.81,682.39 1151.90,716.79 1120.14,739.03"/>
       <polygon class="room" data-room="main-4f-west-403" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1129.12,681.47 1160.88,659.23 1184.97,693.64 1153.21,715.88"/>
       <polygon class="room" data-room="main-4f-west-401" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1162.19,658.32 1193.95,636.08 1218.04,670.48 1186.28,692.72"/>
-      <polygon class="room" data-room="main-4f-pup-pem-center" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="472.38,214.00 539.81,214.00 539.81,356.00 472.38,356.00"/>
-      <polygon class="room" data-room="main-4f-inst-of-social-history" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="541.81,214.00 609.25,214.00 609.25,356.00 541.81,356.00"/>
-      <polygon class="room" data-room="main-4f-speech-laboratory" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="611.25,214.00 678.68,214.00 678.68,356.00 611.25,356.00"/>
-      <polygon class="room" data-room="main-4f-training-center" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="680.68,214.00 748.11,214.00 748.11,356.00 680.68,356.00"/>
-      <polygon class="room" data-room="main-4f-extension-center" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="750.11,214.00 817.55,214.00 817.55,356.00 750.11,356.00"/>
-      <polygon class="room" data-room="main-4f-student-center" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="819.55,214.00 886.98,214.00 886.98,356.00 819.55,356.00"/>
-      <polygon class="room" data-room="main-4f-student-lounge" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="888.98,214.00 956.41,214.00 956.41,356.00 888.98,356.00"/>
-      <polygon class="room" data-room="main-4f-institutional-planning-office" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="958.41,214.00 1025.85,214.00 1025.85,356.00 958.41,356.00"/>
-      <polygon class="room" data-room="main-4f-ou-audio-visual-room" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1027.85,214.00 1095.28,214.00 1095.28,356.00 1027.85,356.00"/>
-      <polygon class="room" data-room="main-4f-ou-library" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="472.38,404.00 539.81,404.00 539.81,546.00 472.38,546.00"/>
-      <polygon class="room" data-room="main-4f-vacant-room" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="541.81,404.00 609.25,404.00 609.25,546.00 541.81,546.00"/>
-      <polygon class="room" data-room="main-4f-faculty-office-lounge" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="611.25,404.00 678.68,404.00 678.68,546.00 611.25,546.00"/>
-      <polygon class="room" data-room="main-4f-dept-of-advertising-and-public-relations" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="680.68,404.00 748.11,404.00 748.11,546.00 680.68,546.00"/>
-      <polygon class="room" data-room="main-4f-accenture-ideas-exchange" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="750.11,404.00 747.35,404.00 747.35,546.00 750.11,546.00"/>
-      <polygon class="room" data-room="main-4f-canteen" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="823.35,404.00 886.98,404.00 886.98,546.00 823.35,546.00"/>
-      <polygon class="room" data-room="main-4f-office-north-wing" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="888.98,404.00 956.41,404.00 956.41,546.00 888.98,546.00"/>
-      <polygon class="room" data-room="main-4f-female-toilet-east" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="958.41,404.00 1025.85,404.00 1025.85,546.00 958.41,546.00"/>
-      <polygon class="room" data-room="main-4f-male-toilet-west" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1027.85,404.00 1095.28,404.00 1095.28,546.00 1027.85,546.00"/>
+      <polygon class="room" data-room="main-4f-pup-pem-center" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="472.38,356.00 539.81,356.00 539.81,214.00 472.38,214.00"/>
+      <polygon class="room" data-room="main-4f-inst-of-social-history" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="541.81,356.00 609.25,356.00 609.25,214.00 541.81,214.00"/>
+      <polygon class="room" data-room="main-4f-speech-laboratory" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="611.25,356.00 678.68,356.00 678.68,214.00 611.25,214.00"/>
+      <polygon class="room" data-room="main-4f-training-center" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="680.68,356.00 748.11,356.00 748.11,214.00 680.68,214.00"/>
+      <polygon class="room" data-room="main-4f-extension-center" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="750.11,356.00 817.55,356.00 817.55,214.00 750.11,214.00"/>
+      <polygon class="room" data-room="main-4f-student-center" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="819.55,356.00 886.98,356.00 886.98,214.00 819.55,214.00"/>
+      <polygon class="room" data-room="main-4f-student-lounge" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="888.98,356.00 956.41,356.00 956.41,214.00 888.98,214.00"/>
+      <polygon class="room" data-room="main-4f-institutional-planning-office" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="958.41,356.00 1025.85,356.00 1025.85,214.00 958.41,214.00"/>
+      <polygon class="room" data-room="main-4f-ou-audio-visual-room" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1027.85,356.00 1095.28,356.00 1095.28,214.00 1027.85,214.00"/>
+      <polygon class="room" data-room="main-4f-ou-library" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="472.38,546.00 539.81,546.00 539.81,404.00 472.38,404.00"/>
+      <polygon class="room" data-room="main-4f-vacant-room" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="541.81,546.00 609.25,546.00 609.25,404.00 541.81,404.00"/>
+      <polygon class="room" data-room="main-4f-faculty-office-lounge" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="611.25,546.00 678.68,546.00 678.68,404.00 611.25,404.00"/>
+      <polygon class="room" data-room="main-4f-dept-of-advertising-and-public-relations" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="680.68,546.00 748.11,546.00 748.11,404.00 680.68,404.00"/>
+      <polygon class="room" data-room="main-4f-accenture-ideas-exchange" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="747.35,404.00 747.35,546.00 750.11,546.00 750.11,404.00"/>
+      <polygon class="room" data-room="main-4f-canteen" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="823.35,546.00 886.98,546.00 886.98,404.00 823.35,404.00"/>
+      <polygon class="room" data-room="main-4f-office-north-wing" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="888.98,546.00 956.41,546.00 956.41,404.00 888.98,404.00"/>
+      <polygon class="room" data-room="main-4f-female-toilet-east" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="958.41,546.00 1025.85,546.00 1025.85,404.00 958.41,404.00"/>
+      <polygon class="room" data-room="main-4f-male-toilet-west" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1027.85,546.00 1095.28,546.00 1095.28,404.00 1027.85,404.00"/>
     </g>
     <circle class="dome" cx="785.4" cy="888.0" r="72" fill="#EDE4DC" stroke="#6B5E57" stroke-width="2"/>
     <g class="room-nums">

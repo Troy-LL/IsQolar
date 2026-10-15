@@ -5,7 +5,7 @@
 export const NOT_ON_MAP = "not on the map yet";
 
 export function floorShort(floor) {
-  const m = /^(\d+F)/.exec(floor && floor.floor ? floor.floor : String(floor || ""));
+  const m = /^(\d+F|GF|LG|B\d)/.exec(floor && floor.floor ? floor.floor : String(floor || ""));
   return m ? m[1] : String(floor && floor.id ? floor.id : floor);
 }
 
