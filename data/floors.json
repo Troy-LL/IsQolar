@@ -41,9 +41,9 @@
   },
   {
     "id": "library-2f",
-    "building": "Ninoy Aquino Learning Resource Center? (ICT Office wing)",
-    "floor": "2F?",
-    "label": "ICT Office 2F?",
+    "building": "Library (NALRC)",
+    "floor": "2F",
+    "label": "Library 2F",
     "image": "public/maps/library-2f.jpg",
     "approximate": false
   },
