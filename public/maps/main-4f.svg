@@ -152,15 +152,7 @@
       <g data-stair="stair-south-mid"><g class="stair" transform="translate(0,0)"><rect x="772.8" y="369.0" width="22" height="22" rx="2" fill="#F3EDE8" stroke="#6B5E57" stroke-width="1.5" /><line x1="772.8" y1="369.0" x2="794.8" y2="369.0" stroke="#6B5E57" stroke-width="1.2" /><line x1="772.8" y1="374.5" x2="794.8" y2="374.5" stroke="#6B5E57" stroke-width="1.2" /><line x1="772.8" y1="380.0" x2="794.8" y2="380.0" stroke="#6B5E57" stroke-width="1.2" /><line x1="772.8" y1="385.5" x2="794.8" y2="385.5" stroke="#6B5E57" stroke-width="1.2" /><line x1="772.8" y1="391.0" x2="794.8" y2="391.0" stroke="#6B5E57" stroke-width="1.2" /></g></g>
       <g data-stair="stair-south-south"><g class="stair" transform="translate(0,0)"><rect x="832.8" y="369.0" width="22" height="22" rx="2" fill="#F3EDE8" stroke="#6B5E57" stroke-width="1.5" /><line x1="832.8" y1="369.0" x2="854.8" y2="369.0" stroke="#6B5E57" stroke-width="1.2" /><line x1="832.8" y1="374.5" x2="854.8" y2="374.5" stroke="#6B5E57" stroke-width="1.2" /><line x1="832.8" y1="380.0" x2="854.8" y2="380.0" stroke="#6B5E57" stroke-width="1.2" /><line x1="832.8" y1="385.5" x2="854.8" y2="385.5" stroke="#6B5E57" stroke-width="1.2" /><line x1="832.8" y1="391.0" x2="854.8" y2="391.0" stroke="#6B5E57" stroke-width="1.2" /></g></g>
     </g>
-    
-    <g class="wings">
-      <text x="785.4" y="1168.0" fill="#6B5E57" font-family="system-ui,sans-serif" font-size="28" font-weight="600" letter-spacing="0.08em" text-anchor="middle" dominant-baseline="central">NORTH WING</text>
-      <text x="572.4" y="738.9" fill="#6B5E57" font-family="system-ui,sans-serif" font-size="28" font-weight="600" letter-spacing="0.08em" text-anchor="middle" dominant-baseline="central">EAST WING</text>
-      <text x="998.3" y="738.9" fill="#6B5E57" font-family="system-ui,sans-serif" font-size="28" font-weight="600" letter-spacing="0.08em" text-anchor="middle" dominant-baseline="central">WEST WING</text>
-      <text x="783.8" y="238.0" fill="#6B5E57" font-family="system-ui,sans-serif" font-size="28" font-weight="600" letter-spacing="0.08em" text-anchor="middle">SOUTH WING</text>
-    </g>
-  
-    <g class="room-nums">
+<g class="room-nums">
       <text class="rm-num" x="736.4" y="968.8" transform="rotate(0.0 736.4 968.8)" fill="#3D342F" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="600" text-anchor="middle" dominant-baseline="central">N401</text>
       <text class="rm-num" x="736.4" y="1020.5" transform="rotate(0.0 736.4 1020.5)" fill="#3D342F" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="600" text-anchor="middle" dominant-baseline="central">N403</text>
       <text class="rm-num" x="736.4" y="1072.2" transform="rotate(0.0 736.4 1072.2)" fill="#3D342F" font-family="system-ui,-apple-system,Segoe UI,sans-serif" font-size="11" font-weight="600" text-anchor="middle" dominant-baseline="central">N405</text>

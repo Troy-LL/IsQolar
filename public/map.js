@@ -478,15 +478,30 @@ function drawLabels() {
   const taken = [];
   const free = (b) => !taken.some((o) => b.x < o.x + o.w && o.x < b.x + b.w && b.y < o.y + o.h && o.y < b.y + b.h);
   const ix = S.ix;
-  const hasFloorImg = !!document.querySelector(".floor-svg image");
+  // Pin sits on the corridor-side edge of the dest room so the baked room code stays readable
+  // and the 13px dest label pill clears the pin.
+  let destPin = ix.dest;
+  if (ix.dest && S.sel && S.sel.room) {
+    const room = S.sel.room;
+    const f = S.paths.floors[ix.floorId];
+    const cn = f.nodes.find((n) => n.id === room.node);
+    if (cn) {
+      const tfn = tf(ix.floorId);
+      const cxy = tfn(cn.x, cn.y);
+      const dx = cxy.x - ix.dest.x;
+      const dy = cxy.y - ix.dest.y;
+      const len = Math.hypot(dx, dy) || 1;
+      // pull pin ~40% of the way from room centre toward the corridor node
+      destPin = { x: ix.dest.x + dx * 0.4, y: ix.dest.y + dy * 0.4 };
+    }
+  }
   if (ix.dest) {
-    const d = scr(ix.dest);
+    const d = scr(destPin);
     taken.push({ x: d.x - 14, y: d.y - 40, w: 28, h: 40 });
-    // Floor images already bake room codes; pin is enough when the directory art is present.
-    if (z >= 19 && ix.destText && !hasFloorImg) {
+    if (z >= 19 && ix.destText) {
       const w = ix.destText.length * 8 + 4;
       taken.push({ x: d.x + 16, y: d.y - 34, w, h: 18 });
-      g.append(svg("text", { x: ix.dest.x + 18 * u, y: ix.dest.y - 25 * u, class: "r-lab dest", style: `font-size:${13 * u}px;font-weight:800;text-anchor:start;stroke-width:${3 * u}px` }, ix.destText));
+      g.append(svg("text", { x: destPin.x + 18 * u, y: destPin.y - 25 * u, class: "r-lab dest", style: `font-size:${13 * u}px;font-weight:800;text-anchor:start;stroke-width:${3 * u}px` }, ix.destText));
     }
   }
   const arr = $("arrive");
@@ -512,7 +527,7 @@ function drawLabels() {
     let k = u;
     const sg = svg("g", { class: "stair" });
     k *= 20 / 18;
-    sg.append(svg("rect", { x: s.p.x - 9 * k, y: s.p.y - 9 * k, width: 18 * k, height: 18 * k, rx: 3 * k, fill: "#1f1a1a" }));
+    sg.append(svg("rect", { x: s.p.x - 9 * k, y: s.p.y - 9 * k, width: 18 * k, height: 18 * k, rx: 3 * k, fill: "#8B0000" }));
     sg.append(svg("path", { d: `M${s.p.x - 5 * k} ${s.p.y + 5 * k} h${4 * k} v${-4 * k} h${4 * k} v${-4 * k} h${3 * k}`, fill: "none", stroke: "#fff", "stroke-width": 1.8 * k }));
     sg.append(svg("title", {}, s.name));
     (over || g).append(sg);
@@ -524,9 +539,10 @@ function drawLabels() {
     taken.push({ x: q.x - 9, y: q.y - 9, w: 18, h: 18 });
   }
   if (ix.legStart) dot(ix.legStart, "#1b6e3f");
-  // Polished floor images already bake wing names and room codes; only overlay dest when zoomed.
+  // Wing names are app overlays at 13px; hide them past zoom 19.5 so they do not clip at goal zoom.
+  // Room codes stay baked on the directory image; only dest gets an overlay pill.
   const hasImg = !!document.querySelector(".floor-svg image");
-  if (z < 19 && !hasImg) {
+  if (z < 19.5) {
     for (const w of ix.wings) {
       const q = scr(w.p);
       const bw = w.text.length * 9;
@@ -536,7 +552,8 @@ function drawLabels() {
       const sx = Math.max(half, Math.min(innerWidth - half, q.x));
       g.append(svg("text", { x: c.x + sx * u, y, class: "w-name", style: `font-size:${13 * u}px;letter-spacing:${0.08 * 13 * u}px` }, w.text));
     }
-  } else if (z >= 19) {
+  }
+  if (z >= 19) {
     const order = [...ix.labels].sort((a, b) => a.prio - b.prio);
     for (const l of order) {
       if (l.prio === 0 && ix.destText) continue;
@@ -560,7 +577,7 @@ function drawLabels() {
   }
   pin.hidden = !(S.inside && ix.dest);
   if (ix.dest) {
-    const d = scr(ix.dest);
+    const d = scr(destPin || ix.dest);
     pin.style.transform = `translate(${d.x}px, ${d.y}px)`;
   }
 }
