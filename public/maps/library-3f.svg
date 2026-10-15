@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1232 710" width="1232" height="710" data-floor="library-3f">
+  <rect width="1232" height="710" fill="#FFFFFF"/>
+  <g class="plan">
+    <path class="wing" fill="#FFFFFF" stroke="#6B5E57" stroke-width="2" stroke-linejoin="round" d="M499,18 L681,18 L681,402 L1075,402 L1075,583 L107,583 L107,402 L499,402 Z"/>
+    <polygon class="corridor" fill="#F3EDE8" stroke="none" points="560,40 592,40 592,342 560,342"/>
+    <polygon class="corridor" fill="#F3EDE8" stroke="none" points="532,342 560,342 560,402 532,402"/>
+    <g class="rooms">
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="499,18 530,18 530,40 499,40"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="640,18 681,18 681,40 640,40"/>
+      <polygon class="room" data-room="library-3f-chief-technical-section" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="499,40 560,40 560,100 499,100"/>
+      <polygon class="room" data-room="library-3f-staff" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="592,40 628,40 628,100 592,100"/>
+      <polygon class="room" data-room="library-3f-director-s-office" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="628,40 681,40 681,100 628,100"/>
+      <polygon class="room" data-room="library-3f-materials-processing-section" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="499,100 560,100 560,221 499,221"/>
+      <polygon class="room" data-room="library-3f-silid-pulungan-board-room" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="592,100 681,100 681,221 592,221"/>
+      <polygon class="room" data-room="library-3f-technical-service-stock-rm" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="499,221 560,221 560,252 499,252"/>
+      <polygon class="room" data-room="library-3f-nalrc-lounging-area" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="499,252 560,252 560,281 499,281"/>
+      <polygon class="room" data-room="library-3f-silid-lakandayang" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="592,221 681,221 681,281 592,281"/>
+      <polygon class="room" data-room="library-3f-pup-memorabilia" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="499,281 560,281 560,342 499,342"/>
+      <polygon class="room" data-room="library-3f-archives-special-services-office" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="592,281 681,281 681,342 592,342"/>
+      <polygon class="room" data-room="library-3f-elevator" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="506,344 532,344 532,364 506,364"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="499,382 532,382 532,402 499,402"/>
+      <polygon class="room" data-room="library-3f-rare-books-collection" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="560,342 681,342 681,372 560,372"/>
+      <polygon fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="560,372 681,372 681,402 560,402"/>
+      <polygon class="room" data-room="library-3f-chief-readers-services" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="409,402 469,402 469,443 409,443"/>
+      <polygon class="room" data-room="library-3f-computer-laboratory" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="409,463 469,463 469,583 409,583"/>
+      <polygon class="room" data-room="library-3f-male-cr" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="469,524 499,524 499,583 469,583"/>
+      <polygon class="room" data-room="library-3f-female-cr" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="499,524 530,524 530,583 499,583"/>
+      <polygon class="room" data-room="library-3f-open-below" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="530,463 651,463 651,578 530,578"/>
+      <polygon class="room" data-room="library-3f-discussion-room" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="712,402 772,402 772,443 712,443"/>
+      <polygon class="room" data-room="library-3f-circulation-section" data-baked="1" fill="none" stroke="none" points="107,402 152,402 152,548 107,548"/>
+      <polygon class="room" data-room="library-3f-reference-section" data-baked="1" fill="none" stroke="none" points="152,402 409,402 409,492 152,492"/>
+      <polygon class="room" data-room="library-3f-reading-area-west" data-baked="1" fill="none" stroke="none" points="152,492 409,492 409,583 152,583"/>
+      <polygon class="room" data-room="library-3f-fire-exit-west" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="107,548 152,548 152,583 107,583"/>
+      <polygon class="room" data-room="library-3f-third-floor-lobby" data-baked="1" fill="none" stroke="none" points="469,402 712,402 712,463 530,463 530,524 469,524"/>
+      <polygon class="room" data-room="library-3f-disability-section" data-baked="1" fill="none" stroke="none" points="772,402 868,402 868,463 772,463"/>
+      <polygon class="room" data-room="library-3f-filipiniana-section" data-baked="1" fill="none" stroke="none" points="868,402 1075,402 1075,463 868,463"/>
+      <polygon class="room" data-room="library-3f-serial-section" data-baked="1" fill="none" stroke="none" points="712,463 768,463 768,583 712,583"/>
+      <polygon class="room" data-room="library-3f-reading-area-east" data-baked="1" fill="none" stroke="none" points="768,463 1048,463 1048,583 768,583"/>
+      <polygon class="room" data-room="library-3f-fire-exit-east" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="1048,548 1075,548 1075,583 1048,583"/>
+      <polygon class="room" data-room="library-3f-stairs-up" data-baked="1" fill="#FFFFFF" stroke="#B8ACA3" stroke-width="1" points="651,520 712,520 712,598 651,598"/>
+      <polygon class="room" data-room="library-3f-exit-main-stairs" data-baked="1" fill="#8B0000" stroke="#8B0000" stroke-width="1" points="682,491 706,491 706,506 682,506"/>
+    </g>
+    <g class="stairs" fill="none" stroke="#6B5E57" stroke-width="1">
+      <line x1="546" y1="22" x2="590" y2="22"/>
+      <line x1="546" y1="26" x2="590" y2="26"/>
+      <line x1="546" y1="30" x2="590" y2="30"/>
+      <line x1="546" y1="34" x2="590" y2="34"/>
+      <line x1="656" y1="528" x2="706" y2="528"/>
+      <line x1="656" y1="536" x2="706" y2="536"/>
+      <line x1="656" y1="544" x2="706" y2="544"/>
+      <line x1="656" y1="552" x2="706" y2="552"/>
+      <line x1="656" y1="560" x2="706" y2="560"/>
+      <line x1="656" y1="568" x2="706" y2="568"/>
+      <line x1="656" y1="576" x2="706" y2="576"/>
+      <line x1="656" y1="584" x2="706" y2="584"/>
+      <line x1="136" y1="566" x2="150" y2="566"/>
+      <line x1="136" y1="572" x2="150" y2="572"/>
+      <line x1="136" y1="578" x2="150" y2="578"/>
+      <line x1="1072" y1="558" x2="1090" y2="558"/>
+      <line x1="1072" y1="566" x2="1090" y2="566"/>
+      <line x1="1072" y1="574" x2="1090" y2="574"/>
+      <path d="M1075,552 L1092,552 L1092,600 L1075,600"/>
+    </g>
+    <g class="void" fill="none" stroke="#6B5E57" stroke-width="1">
+      <line x1="530" y1="463" x2="651" y2="578"/>
+      <line x1="651" y1="463" x2="530" y2="578"/>
+      <line x1="506" y1="344" x2="532" y2="364"/>
+      <line x1="532" y1="344" x2="506" y2="364"/>
+    </g>
+    <g class="columns" fill="none" stroke="#6B5E57" stroke-width="1">
+      <rect x="164" y="460" width="5" height="5"/>
+      <rect x="224" y="460" width="5" height="5"/>
+      <rect x="286" y="460" width="5" height="5"/>
+      <rect x="346" y="460" width="5" height="5"/>
+      <rect x="164" y="521" width="5" height="5"/>
+      <rect x="224" y="521" width="5" height="5"/>
+      <rect x="286" y="521" width="5" height="5"/>
+      <rect x="346" y="521" width="5" height="5"/>
+      <rect x="830" y="460" width="5" height="5"/>
+      <rect x="891" y="460" width="5" height="5"/>
+      <rect x="951" y="460" width="5" height="5"/>
+      <rect x="1012" y="460" width="5" height="5"/>
+      <rect x="830" y="521" width="5" height="5"/>
+      <rect x="891" y="521" width="5" height="5"/>
+      <rect x="951" y="521" width="5" height="5"/>
+      <rect x="1012" y="521" width="5" height="5"/>
+    </g>
+    <g class="marks">
+      <rect x="563" y="41" width="25" height="12" fill="#14803C"/>
+      <text x="575" y="47" fill="#FFFFFF" font-family="system-ui,sans-serif" font-size="4" font-weight="700" text-anchor="middle" dominant-baseline="central">EXIT</text>
+      <rect x="111" y="565" width="23" height="12" fill="#14803C"/>
+      <text x="122" y="571" fill="#FFFFFF" font-family="system-ui,sans-serif" font-size="3" font-weight="700" text-anchor="middle" dominant-baseline="central">FIRE EXIT</text>
+      <rect x="1042" y="564" width="25" height="11" fill="#14803C"/>
+      <text x="1054" y="570" fill="#FFFFFF" font-family="system-ui,sans-serif" font-size="3" font-weight="700" text-anchor="middle" dominant-baseline="central">FIRE EXIT</text>
+      <text x="694" y="498" fill="#FFFFFF" font-family="system-ui,sans-serif" font-size="7" font-weight="700" text-anchor="middle" dominant-baseline="central">EXIT</text>
+      <line x1="694" y1="522" x2="694" y2="510" stroke="#8B0000" stroke-width="1"/>
+      <polyline points="691,513 694,509 697,513" fill="none" stroke="#8B0000" stroke-width="1"/>
+      <text x="702" y="516" fill="#8B0000" font-family="system-ui,sans-serif" font-size="6" font-weight="700" text-anchor="start" dominant-baseline="central">UP</text>
+    </g>
+    <path class="wing" fill="none" stroke="#6B5E57" stroke-width="2" stroke-linejoin="round" d="M499,18 L681,18 L681,402 L1075,402 L1075,583 L107,583 L107,402 L499,402 Z"/>
+    <g class="room-nums" fill="#4A403A" font-family="system-ui,sans-serif" font-weight="600" text-anchor="middle">
+      <text x="514" y="29" font-size="5" dominant-baseline="central">STORAGE</text>
+      <text x="660" y="29" font-size="5" dominant-baseline="central">STORAGE</text>
+      <text x="529" y="70" font-size="6.5" dominant-baseline="central">
+        <tspan x="529" dy="-8">CHIEF</tspan>
+        <tspan x="529" dy="8">TECHNICAL</tspan>
+        <tspan x="529" dy="8">SECTION</tspan>
+      </text>
+      <text x="610" y="70" font-size="6.5" dominant-baseline="central">STAFF</text>
+      <text x="654" y="70" font-size="5.5" dominant-baseline="central">
+        <tspan x="654" dy="-4">DIRECTOR'S</tspan>
+        <tspan x="654" dy="7">OFFICE</tspan>
+      </text>
+      <text x="529" y="160" font-size="6" dominant-baseline="central">
+        <tspan x="529" dy="-10">MATERIALS</tspan>
+        <tspan x="529" dy="8">PROCESSING</tspan>
+        <tspan x="529" dy="8">SECTION</tspan>
+      </text>
+      <text x="636" y="160" font-size="7" dominant-baseline="central">
+        <tspan x="636" dy="-10">SILID PULUNGAN</tspan>
+        <tspan x="636" dy="10">BOARD ROOM</tspan>
+      </text>
+      <text x="529" y="236" font-size="5" dominant-baseline="central">
+        <tspan x="529" dy="-4">TECHNICAL</tspan>
+        <tspan x="529" dy="6">STOCK RM.</tspan>
+      </text>
+      <text x="529" y="266" font-size="4.5" dominant-baseline="central">
+        <tspan x="529" dy="-6">NALRC</tspan>
+        <tspan x="529" dy="5.5">LOUNGING</tspan>
+        <tspan x="529" dy="5.5">AREA</tspan>
+      </text>
+      <text x="636" y="251" font-size="7" dominant-baseline="central">
+        <tspan x="636" dy="-5">SILID</tspan>
+        <tspan x="636" dy="9">LAKANDAYANG</tspan>
+      </text>
+      <text x="529" y="311" font-size="5.5" dominant-baseline="central">
+        <tspan x="529" dy="-4">PUP</tspan>
+        <tspan x="529" dy="7">MEMORABILIA</tspan>
+      </text>
+      <text x="636" y="311" font-size="6" dominant-baseline="central">
+        <tspan x="636" dy="-8">ARCHIVES /</tspan>
+        <tspan x="636" dy="8">SPECIAL SERVICES</tspan>
+        <tspan x="636" dy="8">OFFICE</tspan>
+      </text>
+      <text x="620" y="357" font-size="6.5" dominant-baseline="central">
+        <tspan x="620" dy="-4">RARE BOOKS</tspan>
+        <tspan x="620" dy="8">COLLECTION</tspan>
+      </text>
+      <text x="620" y="387" font-size="6" dominant-baseline="central">
+        <tspan x="620" dy="-4">PUP</tspan>
+        <tspan x="620" dy="7">MEMORABILIA</tspan>
+      </text>
+      <text x="439" y="422" font-size="5.5" dominant-baseline="central">
+        <tspan x="439" dy="-7">CHIEF</tspan>
+        <tspan x="439" dy="7">READERS</tspan>
+        <tspan x="439" dy="7">SERVICES</tspan>
+      </text>
+      <text x="439" y="523" font-size="6.5" dominant-baseline="central">
+        <tspan x="439" dy="-5">COMPUTER</tspan>
+        <tspan x="439" dy="9">LABORATORY</tspan>
+      </text>
+      <text x="484" y="554" font-size="6" dominant-baseline="central">MALE</text>
+      <text x="514" y="554" font-size="5" dominant-baseline="central">FEMALE</text>
+      <text x="590" y="520" font-size="8" letter-spacing="1" dominant-baseline="central">OPEN BELOW</text>
+      <text x="742" y="422" font-size="5.5" dominant-baseline="central">
+        <tspan x="742" dy="-4">DISCUSSION</tspan>
+        <tspan x="742" dy="7">ROOM</tspan>
+      </text>
+      <text x="820" y="432" font-size="6" dominant-baseline="central">
+        <tspan x="820" dy="-4">DISABILITY</tspan>
+        <tspan x="820" dy="8">SECTION</tspan>
+      </text>
+      <text x="970" y="432" font-size="8" letter-spacing="1.4" dominant-baseline="central">FILIPINIANA SECTION</text>
+      <text x="908" y="530" font-size="9" letter-spacing="2" dominant-baseline="central">READING AREA</text>
+      <text x="280" y="440" font-size="8" letter-spacing="1.6" dominant-baseline="central">REFERENCE SECTION</text>
+      <text x="280" y="540" font-size="9" letter-spacing="2" dominant-baseline="central">READING AREA</text>
+      <text x="590" y="432" font-size="8" letter-spacing="1" dominant-baseline="central">THIRD FLOOR LOBBY</text>
+      <text transform="rotate(-90 128 475)" x="128" y="475" font-size="6" letter-spacing="0.6" dominant-baseline="central">CIRCULATION SECTION</text>
+      <text transform="rotate(-90 740 530)" x="740" y="530" font-size="6" letter-spacing="0.6" dominant-baseline="central">SERIAL SECTION</text>
+    </g>
+    <g class="sheet" fill="#4A403A" font-family="system-ui,sans-serif">
+      <circle cx="138" cy="192" r="26" fill="#FFFFFF" stroke="#6B5E57" stroke-width="1.5"/>
+      <line x1="112" y1="192" x2="164" y2="192" stroke="#6B5E57" stroke-width="1"/>
+      <text x="138" y="180" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">1</text>
+      <text x="138" y="204" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="central">A-3</text>
+      <line x1="164" y1="192" x2="470" y2="192" stroke="#6B5E57" stroke-width="1.25"/>
+      <text x="176" y="178" font-size="13" font-weight="700" text-anchor="start">THIRD FLOOR PLAN</text>
+      <text x="176" y="206" font-size="8" text-anchor="start">SCALE</text>
+      <text x="460" y="206" font-size="8" text-anchor="end">1:400MTS</text>
+    </g>
+  </g>
+</svg>
