@@ -50,7 +50,7 @@ Extras later: IBM_7740 (Main 2F), IBM_7726 (unnamed ground floor). Not plans: IB
 Fails on: duplicate ids, unknown floorId, x/y outside 0..1, unknown kind, image file missing. Prints count of `verified: false` and `?` labels.
 
 ## Rules
-No em dashes. Never invent rooms, names or aliases. Bob writes most feature code; non-Bob help logged under Troy, never faked in docs/bob-log.md. One task per branch, PR, CI `check` must pass. Ask PUP before publishing floor plans publicly.
+No em dashes. Never invent rooms, names or aliases. One task per branch, PR, CI `check` must pass. Ask PUP before publishing floor plans publicly.
 
 ## Cut line
 If not solid by the 12:30 PM freeze on Oct 16: remove the map link and files; the queue is untouched.

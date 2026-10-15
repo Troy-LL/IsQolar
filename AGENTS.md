@@ -22,7 +22,6 @@ Read this first. Then read the doc that owns the topic you are working on.
   - [006-store-interface.md](docs/decisions/006-store-interface.md)
   - [007-room-tba-2d.md](docs/decisions/007-room-tba-2d.md)
 - **Team, two-day tasks, and dependency graph (temporary):** [docs/plan.md](docs/plan.md)
-- **Bob run log:** [docs/bob-log.md](docs/bob-log.md)
 
 ## Commands
 
@@ -39,7 +38,6 @@ Before a PR: `npm run check`.
 
 - Never make live AI calls or outbound internet requests of any kind.
 - Never change [src/contract.ts](src/contract.ts) after 11:15 unless you are the project manager. See [docs/decisions/003-contract-freeze-at-11-15.md](docs/decisions/003-contract-freeze-at-11-15.md).
-- Log every Bob run in [docs/bob-log.md](docs/bob-log.md): date, time, who, mode, and one line describing what was done.
 - Do not create docs/api.md. The contract lives in src/contract.ts.
 - Do not edit [docs/DESIGN-PUP-Enrollment-Queue.md](docs/DESIGN-PUP-Enrollment-Queue.md). UI design is owned by Donita.
 - One owner per fact. If a fact fits two files, put it in the more specific one and link from the other.

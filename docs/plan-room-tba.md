@@ -12,7 +12,7 @@ Owners are the roles already listed in [plan.md](plan.md):
 | Viv | The map page, a new public screen. |
 | Justin | The JSON files the map reads. |
 
-Rule from the source plan: one task per branch, `npm run check` before the PR, CI `check` must pass. Bob writes most of the feature code. Log that run in [bob-log.md](bob-log.md). Do not edit [src/contract.ts](../src/contract.ts).
+Rule from the source plan: one task per branch, `npm run check` before the PR, CI `check` must pass. Do not edit [src/contract.ts](../src/contract.ts).
 
 ## Tasks
 
@@ -81,7 +81,7 @@ RT6 and RT11 have no upstream task. RT11 waits on a confirmation, not on code.
 
 **Cut (RT12).** 12:30 PM on Oct 16. If the tonight tasks are not in and a search does not land on a pin, remove the map link and the map files. The queue is untouched. Ask PUP before a merge that would publish floor plan images on the public Render URL. See [decisions/007-room-tba-2d.md](decisions/007-room-tba-2d.md).
 
-## Bob prompts
+## Prompts
 
 Paste one prompt per task. Fill nothing in. The paths below match this repo.
 
@@ -93,7 +93,7 @@ Branch from fresh main: donita/rt1-clean-floors.
 Copy and clean only these three sources from docs/floorplans/ into public/maps/: IBM_7739.JPG (Main ground lobby stand-in), IBM_7741.JPG (straighten and crop), IBM_7742.JPG (already a good straight-on plan).
 Do not add IBM_7721, IBM_7734, IBM_7740, IBM_7726, the glare skips, or library-3F.png.
 Do not edit src/contract.ts. Do not invent rooms or coordinates.
-When the images are in public/maps/, run npm run check, open a PR, and append one line to docs/bob-log.md.
+When the images are in public/maps/, run npm run check, open a PR.
 ```
 
 ### RT2 Justin
@@ -105,7 +105,7 @@ Add data/floors.json with the three tonight floors only. Fields: id, building, f
 The IBM_7739 lobby row has approximate true. Image fields point at the RT1 files in public/maps/.
 Copy building and floor text from docs/floorplans/rooms.json. Do not invent a floor.
 Do not edit src/contract.ts.
-When done, run npm run check, open a PR, and append one line to docs/bob-log.md.
+When done, run npm run check, open a PR.
 ```
 
 ### RT3 Viv
@@ -116,7 +116,7 @@ Branch from fresh main: viv/rt3-map-page.
 Add public/map.html and public/map.js: floor switcher, floor image, SVG pin overlay, search by label, detail card, deep links map.html?loc=<id> and map.html?floor=<id>.
 Read floors and locations from data/floors.json and data/locations.json. Insert text without unsanitized innerHTML. The page must be usable at 360 px and must work on the LAN with no CDN.
 Do not edit src/contract.ts. Do not add a room that is not in the JSON.
-When done, run npm run check, open the page on a phone-width window, open a PR, and append one line to docs/bob-log.md.
+When done, run npm run check, open the page on a phone-width window, open a PR.
 ```
 
 ### RT4 Viv
@@ -127,7 +127,7 @@ Branch from fresh main: viv/rt4-edit-pins.
 On public/map.html?edit=1, a click on the floor image logs x and y to the console, each between 0 and 1, relative to the image.
 Do not build an editor UI. Do not write the click to disk.
 Do not edit src/contract.ts.
-When done, run npm run check, click once and confirm the console line, open a PR, and append one line to docs/bob-log.md.
+When done, run npm run check, click once and confirm the console line, open a PR.
 ```
 
 ### RT5 Justin
@@ -140,7 +140,7 @@ Fields: id, floorId, label, kind, x, y, aliases (empty array), source, verified.
 Copy label, kind, and source from docs/floorplans/rooms.json. Keep every "?".
 Set x and y only from map.html?edit=1 console logs, each inside 0..1. Leave verified false when the label contains "?".
 Do not add aliases. Do not edit src/contract.ts. Do not add a label that is not in rooms.json.
-When done, run npm run check, open a PR, and append one line to docs/bob-log.md.
+When done, run npm run check, open a PR.
 ```
 
 ### RT6 Justin
@@ -150,7 +150,7 @@ Read docs/plan-room-tba.md task RT6 and docs/floorplans/ROOM-TBA-PLAN.md.
 Branch from fresh main: justin/rt6-station-locations.
 Add data/station-locations.json as an empty mapping from station or stall id to location id. No gym rows.
 Do not edit src/contract.ts. Do not invent a table layout.
-When done, run npm run check, open a PR, and append one line to docs/bob-log.md.
+When done, run npm run check, open a PR.
 ```
 
 ### RT7 Troy
@@ -162,7 +162,7 @@ Include a map-data check in npm run check. Fail on a duplicate id, an unknown fl
 Print the count of verified false rows and the count of labels that contain "?".
 Known kinds are room, office, cr, stairs, exit, elevator, assembly, other.
 Do not edit src/contract.ts. Do not change queue logic.
-When done, run npm run check, open a PR, and append one line to docs/bob-log.md.
+When done, run npm run check, open a PR.
 ```
 
 ### RT8 Ayen
@@ -174,7 +174,7 @@ On the phone's fully enrolled screen, add a link whose text is "Find your classe
 The enrolled sentence stays the contract string: "You're fully enrolled. Welcome, Iskolar ng Bayan."
 The queue pages must still load if that link and the map files are removed.
 Do not edit src/contract.ts.
-When done, run npm run check, open the enrolled screen and follow the link, open a PR, and append one line to docs/bob-log.md.
+When done, run npm run check, open the enrolled screen and follow the link, open a PR.
 ```
 
 ### RT9 Donita
@@ -185,7 +185,7 @@ Do not start this branch until the team has supplied the gym table layout. IBM_7
 When the layout exists: branch donita/rt9-gym-pins. Add pins for the IBM_7734 labels in docs/floorplans/rooms.json, and fill data/station-locations.json with the station and stall ids the layout names.
 Add "Show on map" on the phone only for a station that has a link.
 Keep "?" labels unverified. Do not edit src/contract.ts. Do not invent tables or coordinates.
-When done, run npm run check, open a PR, and append one line to docs/bob-log.md.
+When done, run npm run check, open a PR.
 ```
 
 ### RT10 Ayen
@@ -194,7 +194,7 @@ When done, run npm run check, open a PR, and append one line to docs/bob-log.md.
 Read docs/plan-room-tba.md task RT10 and docs/map-data-guide.md.
 Do not start until the team has written down at least five real other names for rooms that are already in data/locations.json.
 Branch ayen/rt10-aliases. Append only those supplied strings to the aliases arrays. Do not invent a name. Do not edit src/contract.ts.
-When done, run npm run check, search for one supplied alias, open a PR, and append one line to docs/bob-log.md.
+When done, run npm run check, search for one supplied alias, open a PR.
 ```
 
 ### RT11 Troy
@@ -205,7 +205,7 @@ Do not add IBM_7721 to data/floors.json or public/maps/ unless the team confirms
 The building and floor on those rows are marked "?". Keep them.
 If confirmed, branch troy/rt11-library-2f and add only the rooms.json labels for source IBM_7721.
 Do not edit src/contract.ts.
-When done, run npm run check, open a PR, and append one line to docs/bob-log.md.
+When done, run npm run check, open a PR.
 ```
 
 ### RT12 Troy
@@ -215,5 +215,5 @@ Read docs/plan-room-tba.md task RT12.
 At 12:30 PM on Oct 16, check whether RT1 through RT8 are merged and a search on a tonight floor lands on a pin.
 If yes, leave the Find your classes link.
 If no, remove the map link and the map files. Do not change queue logic. Do not edit src/contract.ts.
-Branch troy/rt12-map-cut only when removing the map. Run npm run check, open a PR, and append one line to docs/bob-log.md.
+Branch troy/rt12-map-cut only when removing the map. Run npm run check, open a PR.
 ```
