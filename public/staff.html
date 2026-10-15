@@ -4,9 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Staff — IsQolar</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #fff; color: #111; padding: 16px; }
+    #app { max-width: 600px; margin: 0 auto; }
+    .header h1 { font-size: 22px; font-weight: 700; margin-bottom: 16px; }
+    .waiting { font-size: 18px; margin-bottom: 20px; color: #444; }
+    .called-panel { background: #f4f4f4; border-radius: 8px; padding: 20px; margin-bottom: 16px; min-height: 162px; }
+    .ticket-code { font-size: 64px; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: 0.04em; line-height: 1; margin-bottom: 8px; }
+    .ticket-name { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+    .ticket-course { font-size: 18px; color: #444; }
+    .btn-row { display: flex; gap: 12px; margin-top: 8px; }
+    .btn { flex: 1; min-height: 64px; font-size: 20px; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .btn-call { background: #111; color: #fff; }
+    .btn-done { background: #e0e0e0; color: #111; }
+    .msg { margin-top: 12px; font-size: 16px; font-weight: 600; color: #111; min-height: 1.4em; }
+    .last-action { margin-top: 6px; font-size: 16px; color: #444; min-height: 1.4em; }
+    .error-page { font-size: 18px; color: #111; padding: 24px 0; }
+  </style>
 </head>
 <body>
   <main id="app"></main>
   <script src="/poll.js"></script>
+  <script src="/staff.js"></script>
 </body>
 </html>
