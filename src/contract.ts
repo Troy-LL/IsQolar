@@ -32,8 +32,8 @@ export type Station =
   | "stall"
   | "enrolled";
 
-/** The lifecycle state of a ticket within its current station. */
-export type TicketStatus = "waiting" | "called" | "done";
+/** The lifecycle state of a ticket within its current station. "cancelled" is a second Skip. */
+export type TicketStatus = "waiting" | "called" | "done" | "cancelled";
 
 /** Where a ticket was created. `hub` is the venue laptop. `online` is the public instance. */
 export type TicketSource = "hub" | "online";
@@ -61,6 +61,12 @@ export interface Ticket {
   calledAt: string | null; // ISO 8601
   /** Absent on tickets written before this field. */
   source?: TicketSource;
+  /**
+   * ISO 8601. Absent until the first Skip.
+   * A waiting ticket at a stall is ordered by this time when it is set, and by createdAt when it is not.
+   * Ticket.code does not change when this is set.
+   */
+  skippedAt?: string;
 }
 
 export interface Stall {
@@ -138,7 +144,8 @@ export interface TicketDetail extends Ticket {
 // Returns: Stall[]
 
 // GET /api/stalls/:stall/queue
-// Returns: Ticket[]
+// Returns: Ticket[] waiting at this stall.
+// Order is skippedAt when set, otherwise createdAt, ascending.
 
 // POST /api/stalls/:stall/next
 // Returns: the Ticket whose status was moved from "waiting" to "called"
@@ -149,6 +156,13 @@ export interface TicketDetail extends Ticket {
 
 // POST /api/tickets/:id/undo
 // Reverts the last move. Staff only.
+// Returns: Ticket
+
+// POST /api/tickets/:id/skip
+// Staff only. Ticket.code does not change. station does not change, so finished steps stay finished.
+// First Skip, when skippedAt is absent: status returns to "waiting" and skippedAt is set to now,
+// which places the ticket after the other waiting tickets at its stall.
+// Second Skip, when skippedAt is already set: status becomes "cancelled" and the ticket leaves that stall line.
 // Returns: Ticket
 
 // GET /api/admin/summary
