@@ -20,8 +20,24 @@
     .btn-call { background: #111; color: #fff; }
     .btn-done { background: #e0e0e0; color: #111; }
     .msg { margin-top: 12px; font-size: 16px; font-weight: 600; color: #111; min-height: 1.4em; }
-    .last-action { margin-top: 6px; font-size: 16px; color: #444; min-height: 1.4em; }
+    .last-action-row { display: flex; align-items: center; gap: 10px; margin-top: 6px; min-height: 1.4em; }
+    .last-action-text { font-size: 16px; color: #444; }
+    .btn-undo { flex: none; min-height: 48px; padding: 0 16px; font-size: 16px; font-weight: 600; background: #e0e0e0; color: #111; border: none; border-radius: 8px; cursor: pointer; }
+    .btn-undo:disabled { opacity: 0.4; cursor: not-allowed; }
     .error-page { font-size: 18px; color: #111; padding: 24px 0; }
+    .lookup-section { margin-top: 32px; border-top: 1px solid #e0e0e0; padding-top: 20px; }
+    .lookup-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+    .lookup-form { display: flex; gap: 10px; margin-bottom: 12px; }
+    .lookup-input { flex: 1; min-height: 48px; font-size: 18px; padding: 0 12px; border: 1px solid #ccc; border-radius: 8px; }
+    .btn-find { flex: none; min-height: 48px; padding: 0 20px; font-size: 18px; font-weight: 700; background: #111; color: #fff; border: none; border-radius: 8px; cursor: pointer; }
+    .btn-find:disabled { opacity: 0.4; cursor: not-allowed; }
+    .lookup-msg { font-size: 16px; font-weight: 600; color: #111; min-height: 1.4em; margin-bottom: 8px; }
+    .lookup-result { background: #f4f4f4; border-radius: 8px; padding: 16px; }
+    .lookup-result:empty { display: none; }
+    .lookup-code { font-size: 40px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1; margin-bottom: 6px; }
+    .lookup-name { font-size: 18px; font-weight: 600; margin-bottom: 2px; }
+    .lookup-course { font-size: 16px; color: #444; margin-bottom: 6px; }
+    .lookup-pos { font-size: 16px; color: #444; margin-bottom: 12px; }
   </style>
 </head>
 <body>
