@@ -7,22 +7,116 @@
 </head>
 <body>
   <main>
-    <p id="station"></p>
-    <p id="label"></p>
+    <p id="step"></p>
+    <ol id="rail"></ol>
+    <p id="sentence"></p>
+    <p id="place" hidden></p>
+    <p id="estimate" hidden></p>
+    <p id="updated"></p>
   </main>
   <script src="/poll.js"></script>
   <script>
+    var STEPS = {
+      checkin: { n: 1, name: "Admission" },
+      docs: { n: 1, name: "Admission" },
+      stall: { n: 2, name: "College / Department" },
+      validation: { n: 3, name: "Medical" },
+      main: { n: 4, name: "Registration Card" },
+      enrolled: { n: 5, name: "ID" }
+    };
+    var RAIL = [
+      { n: 1, name: "Admission" },
+      { n: 2, name: "College / Department" },
+      { n: 3, name: "Medical" },
+      { n: 4, name: "Registration Card" },
+      { n: 5, name: "ID" }
+    ];
+
+    var stepEl = document.getElementById("step");
+    var railEl = document.getElementById("rail");
+    var sentenceEl = document.getElementById("sentence");
+    var placeEl = document.getElementById("place");
+    var estimateEl = document.getElementById("estimate");
+    var updatedEl = document.getElementById("updated");
+    var lastShown = "";
+
+    function shownTime(date) {
+      var m = date.getMinutes();
+      var mm = m < 10 ? "0" + m : String(m);
+      return date.getHours() + ":" + mm;
+    }
+
+    function kindOf(status) {
+      var label = typeof status.label === "string" ? status.label : "";
+      if (status.station === "enrolled") return "enrolled";
+      if (label.indexOf("Cancelled") === 0 || status.status === "cancelled") return "cancelled";
+      if (typeof status.skippedAt === "string" && status.skippedAt) return "skipped";
+      if (label.indexOf("Called") === 0 || status.status === "called") return "called";
+      if (label.indexOf("Done") === 0 || status.status === "done") return "done";
+      return "waiting";
+    }
+
+    function sentenceFor(n, kind) {
+      if (kind === "enrolled") return "Fully enrolled";
+      if (kind === "cancelled") return "Your student's ticket was cancelled. They should go to the help desk.";
+      if (kind === "skipped") return "Your student was called but was not there. They are now at the back of the line for Step " + n + ".";
+      if (kind === "called") return "At Step " + n + " now";
+      if (kind === "done" && n < 5) return "Done with Step " + n + ". Next: Step " + (n + 1);
+      if (kind === "done") return "Fully enrolled";
+      return "Waiting at Step " + n;
+    }
+
+    function render(status) {
+      var step = STEPS[status.station];
+      if (!step) return;
+      var kind = kindOf(status);
+      var enrolled = kind === "enrolled";
+      stepEl.textContent = "Step " + step.n + " of 5 · " + step.name;
+      sentenceEl.textContent = sentenceFor(step.n, kind);
+      railEl.textContent = "";
+      if (enrolled) {
+        for (var i = 0; i < RAIL.length; i++) {
+          var item = RAIL[i];
+          var li = document.createElement("li");
+          li.textContent = "Done · Step " + item.n + " " + item.name;
+          railEl.appendChild(li);
+        }
+      }
+      placeEl.hidden = true;
+      estimateEl.hidden = true;
+      placeEl.textContent = "";
+      estimateEl.textContent = "";
+      if (status.station === "stall" && (kind === "waiting" || kind === "done")) {
+        if (kind === "waiting" && typeof status.position === "number" && isFinite(status.position)) {
+          var ahead = status.position - 1;
+          if (ahead < 0) ahead = 0;
+          placeEl.hidden = false;
+          placeEl.textContent = ahead + " people ahead";
+        }
+        if (typeof status.estWaitMin === "number" && isFinite(status.estWaitMin)) {
+          estimateEl.hidden = false;
+          estimateEl.textContent = "About " + status.estWaitMin + " minutes";
+        }
+      }
+      lastShown = shownTime(new Date());
+      updatedEl.textContent = lastShown;
+    }
+
+    setInterval(function () {
+      if (!lastShown) return;
+      if (document.body.dataset.online === "false") {
+        updatedEl.textContent = "Not updating since " + lastShown;
+      }
+    }, 1000);
+
     var params = new URLSearchParams(window.location.search);
     var code = params.get("code");
-    var stationEl = document.getElementById("station");
-    var labelEl = document.getElementById("label");
     if (!code) {
-      labelEl.textContent = "Missing code.";
+      sentenceEl.textContent = "Missing code.";
     } else {
       window.IsQolar.poll("/api/guardian/" + encodeURIComponent(code), function (status) {
         if (!status || typeof status.station !== "string") return;
-        stationEl.textContent = status.station;
-        labelEl.textContent = status.label;
+        render(status);
       });
     }
   </script>
