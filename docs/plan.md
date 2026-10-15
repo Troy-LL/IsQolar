@@ -6,6 +6,8 @@ Both days follow the same schedule: start about 10:45, 3:30 checkpoint, wrap-up 
 **Day 1 goal:** the three-screen loop works on the LAN by 3:30.
 **Day 2 goal:** the same loop works online too, plus the trust features, then a polished demo and submission.
 
+Room TBA tasks (find a room on the same phone) are in [plan-room-tba.md](plan-room-tba.md). The one-product story is in [product.md](product.md). If the map is not solid by 12:30 PM on Oct 16, remove the map link and the map files. The queue stays. Photos and labels are in [floorplans/](floorplans/).
+
 ---
 
 ## Owners

@@ -10,6 +10,11 @@ Staff tap "Call next" at their stall and the board updates for everyone.
 It does not add interviewers or make the office faster.
 It takes away the guessing and the wasted waiting.
 
+Enrollment day and campus wayfinding are the same app.
+The enrolled screen is planned to link to "Find your classes", which opens Room TBA on the same phone.
+That map page is not in the repo yet.
+The product story, the 3-minute demo, and what is out of scope are in [docs/product.md](docs/product.md).
+
 ## Who it is for
 
 - **Freshmen** — see your position at your stall, an estimated wait, and a checklist that ends with "You're fully enrolled."
@@ -68,6 +73,14 @@ The shared data types and endpoint shapes live in [src/contract.ts](src/contract
 The contract was frozen at 11:15 on October 15, 2026.
 Only the project manager may change it after that time.
 See [docs/decisions/003-contract-freeze-at-11-15.md](docs/decisions/003-contract-freeze-at-11-15.md).
+
+## Room TBA
+
+Room TBA is the planned campus floor-plan search inside this app. The map page is not built yet.
+Tasks are in [docs/plan-room-tba.md](docs/plan-room-tba.md).
+How to clean a plan and place pins is in [docs/map-data-guide.md](docs/map-data-guide.md).
+Why the map is 2D, and why locations stay out of the contract, is in [docs/decisions/007-room-tba-2d.md](docs/decisions/007-room-tba-2d.md).
+Photos and transcribed labels are in [docs/floorplans/](docs/floorplans/).
 
 ## Checks
 
