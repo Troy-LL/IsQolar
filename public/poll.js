@@ -43,6 +43,7 @@
           state.online = true;
           state.lastUpdated = new Date();
           document.body.dataset.online = "true";
+          document.body.dataset.lastUpdated = state.lastUpdated.toISOString();
           onData(json);
         })
         .catch(function () {
