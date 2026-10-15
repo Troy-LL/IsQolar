@@ -2723,8 +2723,8 @@
    121.0109702,
    14.597125
   ],
-  "label": "Main Building entrance ?",
-  "note": "? OSM has no door on the Main Building. Placed where the OSM walk from the main gate meets the building outline. The 1F directory calls its You Are Here the East Wing entrance."
+  "label": "East Wing entrance",
+  "note": "OSM has no door on the Main Building. Placed where the OSM walk from the main gate meets the building outline. The 1F directory (IBM_7739) marks You Are Here on the East Wing."
  },
  "walk": {
   "coordinates": [
@@ -2794,6 +2794,6 @@
    ]
   ],
   "meters": 265,
-  "note": "Shortest path on OSM footways and service roads from the main gate, then a straight last step to the entrance (?)."
+  "note": "Shortest path on OSM footways and service roads from the main gate, then a straight last step to the East Wing entrance."
  }
 }

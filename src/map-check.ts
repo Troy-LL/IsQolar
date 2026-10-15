@@ -1,5 +1,6 @@
 import { existsSync, readFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
+import { campusStarts, roomDisplay, roomListed, type Campus } from "../public/route.js";
 
 export const ROOM_KINDS = ["room", "office", "cr", "stairs", "exit", "elevator", "assembly", "other"] as const;
 
@@ -39,6 +40,10 @@ export interface MapInput {
     floors: Record<string, { stairs: Record<string, { x: number; y: number }> }>;
   };
   fileExists: (path: string) => boolean;
+  campus?: {
+    buildings: { features: { properties: { osm: string; name: string | null } }[] };
+    entrance?: { label?: string };
+  };
 }
 
 export interface MapReport {
@@ -119,7 +124,33 @@ export function checkMap(input: MapInput): MapReport {
     }
   }
 
+  for (const label of visibleLabels(input)) {
+    if (shownMark(label)) errors.push(`visible label: ${label}`);
+  }
+
   return { ok: errors.length === 0, errors, verifiedFalse, questionLabels };
+}
+
+function shownMark(label: string): boolean {
+  return label.includes("?") || /(?:way|relation)\/\d+/.test(label);
+}
+
+function visibleLabels(input: MapInput): string[] {
+  const labels: string[] = [];
+  for (const floor of Object.values(input.paths.floors)) {
+    for (const room of floor.rooms) {
+      if (!roomListed(room)) continue;
+      labels.push(room.label, roomDisplay(room));
+    }
+  }
+  if (input.campus) {
+    for (const start of campusStarts(input.campus as Campus)) labels.push(start.label);
+    for (const feature of input.campus.buildings.features) {
+      if (feature.properties.name) labels.push(feature.properties.name);
+    }
+    if (input.campus.entrance?.label) labels.push(input.campus.entrance.label);
+  }
+  return labels;
 }
 
 export function formatMapReport(report: MapReport): string {
@@ -135,7 +166,8 @@ function runCli(): number {
   const floors = JSON.parse(readFileSync("data/floors.json", "utf8")) as FloorRow[];
   const paths = JSON.parse(readFileSync("data/paths.json", "utf8")) as MapInput["paths"];
   const stairs = JSON.parse(readFileSync("data/stairs.json", "utf8")) as MapInput["stairs"];
-  const report = checkMap({ floors, paths, stairs, fileExists: existsSync });
+  const campus = JSON.parse(readFileSync("data/campus-osm.json", "utf8")) as MapInput["campus"];
+  const report = checkMap({ floors, paths, stairs, campus, fileExists: existsSync });
   console.log(formatMapReport(report));
   return report.ok ? 0 : 1;
 }

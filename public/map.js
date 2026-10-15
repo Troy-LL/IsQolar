@@ -1,4 +1,4 @@
-import { planCampusRoute, campusStarts, GATE_START, allRooms, roomName, roomCode, roomDisplay, parseRoomQuery, searchRooms, wingName, floorShort, SEARCH_LIMIT } from "./route.js";
+import { planCampusRoute, campusStarts, GATE_START, allRooms, roomName, roomCode, roomDisplay, roomListed, parseRoomQuery, searchRooms, wingName, floorShort, SEARCH_LIMIT } from "./route.js";
 
 const $ = (id) => document.getElementById(id);
 const NS = "http://www.w3.org/2000/svg";
@@ -192,7 +192,8 @@ function featCenter(f) {
 function mainFeatures() { return S.campus.buildings.features.filter((f) => f.properties.main); }
 function mainCoords() { return mainFeatures().flatMap(featCoords); }
 function buildingName(f) {
-  const n = f.properties.name || "Unnamed building";
+  const n = f.properties.name;
+  if (!n || n.includes("?")) return "";
   return f.properties.part_of && f.properties.part_of !== n && !n.includes(f.properties.part_of) ? `${n} (${f.properties.part_of})` : n;
 }
 function marker(lngLat, color, text) {
@@ -282,7 +283,7 @@ function initMap() {
       syncCompass();
       marker(campus.gate.lngLat, "#1b6e3f", "Main gate").addTo(map);
       // Entrance: dot plus a label below it that gives way to the building names (6px collision margin).
-      map.addSource("pup-entrance", { type: "geojson", data: { type: "Feature", properties: { label: "Main entrance ?" }, geometry: { type: "Point", coordinates: campus.entrance.lngLat } } });
+      map.addSource("pup-entrance", { type: "geojson", data: { type: "Feature", properties: { label: campus.entrance.label }, geometry: { type: "Point", coordinates: campus.entrance.lngLat } } });
       map.addLayer({ id: "pup-entrance-dot", type: "circle", source: "pup-entrance", paint: { "circle-radius": 6, "circle-color": "#FFC72C", "circle-stroke-color": "#ffffff", "circle-stroke-width": 2.5 } }, "pup-names");
       map.addLayer({ id: "pup-entrance-label", type: "symbol", source: "pup-entrance", layout: { "text-field": ["get", "label"], "text-font": ["Noto Sans Bold"], "text-size": 11, "text-variable-anchor": ["top", "bottom", "right", "left"], "text-radial-offset": 0.9, "text-padding": 6, "text-allow-overlap": false, "text-optional": true }, paint: { "text-color": "#1f1a1a", "text-halo-color": "#ffffff", "text-halo-width": 2 } }, "pup-names");
       map.once("idle", () => {
@@ -352,6 +353,7 @@ function floorBox(floorId) {
   return bbox(pts, ext ? 12 : 50);
 }
 function shortLabel(r) {
+  if (!roomListed(r)) return "";
   const c = roomCode(r);
   if (c) return c.code;
   const m = /\(([A-Z]+\d+[A-Z]?\??)\)$/.exec(r.label);
@@ -636,6 +638,7 @@ function drawLabels() {
   if (z >= 19) {
     const order = [...ix.labels].sort((a, b) => a.prio - b.prio);
     for (const l of order) {
+      if (!l.text) continue;
       if (l.prio === 0) continue; // baked code visible under dest highlight
       if (hasImg && l.prio > 0) continue; // baked on the directory image
       const q = scr(l.p);
@@ -849,9 +852,9 @@ async function selectRoom(room) {
   const f = S.floors.find((x) => x.id === room.floorId);
   openSheet({
     crumb: "PUP Main Building",
-    title: roomDisplay(room),
+    title: roomListed(room) ? roomDisplay(room) : "Room",
     sub: `${floorShort(f)}${room.wing ? " · " + room.wing : (roomCode(room) && roomCode(room).letter ? " · " + wingName(roomCode(room).letter) : "")} · PUP Main Building`,
-    flag: room.flag ? "This label has a ? on the directory poster. Not confirmed." : "",
+    flag: roomListed(room) && room.flag ? "This label is not confirmed on the directory poster." : "",
   });
   await enterBuilding(room.floorId);
   await focusIndoor();
@@ -861,8 +864,8 @@ async function selectBuilding(f) {
   S.route = null;
   drawOutdoor();
   const p = f.properties;
-  if (p.main) openSheet({ crumb: "PUP Main · Sta. Mesa", title: "PUP Main Building", sub: "Floors 1F, 4F, 5F mapped inside", inside: true, flag: `Main entrance ? ${S.campus.entrance.note.replace(/^\?\s*/, "")}` });
-  else openSheet({ crumb: "PUP Main · Sta. Mesa", title: p.name || "Unnamed building ?", sub: "No floor plan yet" });
+  if (p.main) openSheet({ crumb: "PUP Main · Sta. Mesa", title: "PUP Main Building", sub: "Floors 1F, 4F, 5F mapped inside", inside: true, flag: S.campus.entrance.note || "" });
+  else openSheet({ crumb: "PUP Main · Sta. Mesa", title: buildingName(f) || "Building", sub: "No floor plan yet" });
   $("dir").hidden = true;
   if (S.inside) await exitBuilding();
   highlight(f);
@@ -943,7 +946,7 @@ function searchAll(q) {
   const parsed = parseRoomQuery(q);
   const rooms = searchRooms(S.paths, q).map((r) => ({ type: "room", r, parsed }));
   if (parsed) return rooms;
-  const bs = S.campus.buildings.features.filter((f) => f.properties.name && buildingName(f).toLowerCase().includes(s)).map((b) => ({ type: "building", b }));
+  const bs = S.campus.buildings.features.filter((f) => buildingName(f) && buildingName(f).toLowerCase().includes(s)).map((b) => ({ type: "building", b }));
   if (!bs.some((x) => x.b.properties.main) && S.campus.wingLabels.features.some((w) => w.properties.name.toLowerCase().includes(s))) bs.unshift({ type: "building", b: mainFeatures()[0] });
   return [...rooms, ...bs];
 }

@@ -331,7 +331,7 @@
  {
   "building": "Main Academic Building",
   "floor": "4F",
-  "label": "Inst. of Social History?",
+  "label": "Inst. of Social History",
   "kind": "office",
   "source": "IBM_7741"
  },
@@ -359,42 +359,42 @@
  {
   "building": "Main Academic Building",
   "floor": "4F",
-  "label": "Speech Laboratory?",
+  "label": "Speech Laboratory",
   "kind": "office",
   "source": "IBM_7741"
  },
  {
   "building": "Main Academic Building",
   "floor": "4F",
-  "label": "Training Center?",
+  "label": "Training Center",
   "kind": "office",
   "source": "IBM_7741"
  },
  {
   "building": "Main Academic Building",
   "floor": "4F",
-  "label": "Extension Center?",
+  "label": "Extension Center",
   "kind": "office",
   "source": "IBM_7741"
  },
  {
   "building": "Main Academic Building",
   "floor": "4F",
-  "label": "Student Center?",
+  "label": "Student Center",
   "kind": "office",
   "source": "IBM_7741"
  },
  {
   "building": "Main Academic Building",
   "floor": "4F",
-  "label": "Student Lounge?",
+  "label": "Student Lounge",
   "kind": "office",
   "source": "IBM_7741"
  },
  {
   "building": "Main Academic Building",
   "floor": "4F",
-  "label": "Institutional Planning Office?",
+  "label": "Institutional Planning Office",
   "kind": "office",
   "source": "IBM_7741"
  },
@@ -415,7 +415,7 @@
  {
   "building": "Main Academic Building",
   "floor": "4F",
-  "label": "Vacant Room?",
+  "label": "Vacant Room",
   "kind": "office",
   "source": "IBM_7741"
  },
@@ -1080,7 +1080,7 @@
  {
   "building": "Cultural Sports Center (Gymnasium)",
   "floor": "GF",
-  "label": "Fire Pump Room?",
+  "label": "EE Pump Room",
   "kind": "other",
   "source": "IBM_7734"
  },
@@ -1605,14 +1605,14 @@
  {
   "building": "Campus (A. Mabini)",
   "floor": "site",
-  "label": "Area 2 (Obelisk-Parking) 603 pax?",
+  "label": "Area 2 (Obelisk-Parking) 603 pax",
   "kind": "assembly",
   "source": "IBM_7737"
  },
  {
   "building": "Campus (A. Mabini)",
   "floor": "site",
-  "label": "Area 3 (Lagoon) 495 pax?",
+  "label": "Area 3 (Lagoon) 495 pax",
   "kind": "assembly",
   "source": "IBM_7737"
  },
@@ -1626,7 +1626,7 @@
  {
   "building": "Campus (A. Mabini)",
   "floor": "site",
-  "label": "Alternative Area 1 (294 pax?)",
+  "label": "Alternative Area 1 (294 pax)",
   "kind": "assembly",
   "source": "IBM_7737"
  },

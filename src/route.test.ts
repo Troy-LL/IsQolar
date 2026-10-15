@@ -48,7 +48,7 @@ describe("route", () => {
     if (!r.ok) return;
     assert.deepEqual(r.legs.map((l) => l.floorId), ["outdoor", "main-1f-lobby", "main-4f"]);
     assert.deepEqual(r.steps.map((s) => s.text), [
-      `Walk from the main gate to the Main Building entrance (${campus.walk.meters} m)`,
+      `Walk from the main gate to the ${campus.entrance.label} (${campus.walk.meters} m)`,
       "Enter the lobby (1F)",
       "Walk to the East wing stairs by the dome",
       "Go up to 4F",

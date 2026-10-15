@@ -1,7 +1,7 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { planCampusRoute, campusStarts, GATE_START, type Paths, type Stairs, type Floor, type Campus } from "../public/route.js";
+import { planCampusRoute, campusStarts, GATE_START, searchRooms, type Paths, type Stairs, type Floor, type Campus } from "../public/route.js";
 
 const paths = JSON.parse(readFileSync("data/paths.json", "utf8")) as Paths;
 const stairs = JSON.parse(readFileSync("data/stairs.json", "utf8")) as Stairs;
@@ -71,27 +71,29 @@ describe("campus start", () => {
     assert.equal(plain.ok, true);
     assert.equal(gated.ok, true);
     if (!plain.ok || !gated.ok) return;
-    assert.equal(plain.steps[0].text, `Walk from the main gate to the Main Building entrance (${campus.walk.meters} m)`);
+    assert.equal(plain.steps[0].text, `Walk from the main gate to the ${campus.entrance.label} (${campus.walk.meters} m)`);
+    assert.doesNotMatch(plain.steps[0].text, /\?/);
     assert.deepEqual(plain.legs[0].points, gated.legs[0].points);
     assert.deepEqual(plain.legs[0].points.map((p) => [p.x, p.y]), campus.walk.coordinates);
     assert.deepEqual(plain.steps.slice(1).map((s) => s.text), gated.steps.slice(1).map((s) => s.text));
   });
 
-  it("lists the main gate and only buildings from campus-osm", () => {
+  it("lists the main gate and named buildings, with no question marks or OSM ids", () => {
     const starts = campusStarts(campus);
-    const ids = campus.buildings.features.map((f) => f.properties.osm);
+    const named = campus.buildings.features.filter((f) => f.properties.name && !f.properties.name.includes("?"));
     assert.equal(starts[0].id, GATE_START);
     assert.equal(starts[0].label, "Main gate");
-    assert.equal(starts.length, ids.length + 1);
-    for (const s of starts.slice(1)) assert.ok(ids.includes(s.id), s.id);
+    assert.equal(starts.length, named.length + 1);
     const labels = starts.slice(1).map((s) => s.label);
     assert.deepEqual(labels, labels.slice().sort((a, b) => a.localeCompare(b, "en") || 0));
+    for (const s of starts) {
+      assert.doesNotMatch(s.label, /\?/);
+      assert.doesNotMatch(s.label, /way\/|relation\//);
+    }
     for (const f of campus.buildings.features) {
       const row = starts.find((s) => s.id === f.properties.osm);
-      assert.ok(row);
-      const flagged = !f.properties.name || /\?/.test(f.properties.heightSource || "") || /\?/.test(f.properties.name || "");
-      if (flagged) assert.match(row.label, /\?/);
-      else assert.doesNotMatch(row.label, /\?/);
+      if (!f.properties.name || f.properties.name.includes("?")) assert.equal(row, undefined);
+      else assert.equal(row?.label, f.properties.name);
     }
   });
 
@@ -115,24 +117,31 @@ describe("campus start", () => {
       prev = at;
     }
     assert.equal(pts.some((p) => p[0] === walk[0][0] && p[1] === walk[0][1]), false);
-    assert.match(r.steps[0].text, /Ninoy Aquino Library and Learning Resource Center to the Main Building entrance \? \(\d+ m\)/);
+    assert.match(r.steps[0].text, /Ninoy Aquino Library and Learning Resource Center to the East Wing entrance \(\d+ m\)/);
     assert.doesNotMatch(r.steps[0].text, /Resource Center \?/);
     assert.deepEqual(r.steps.slice(1).map((s) => s.text), gate.steps.slice(1).map((s) => s.text));
     assert.deepEqual(r.legs.slice(1).map((l) => l.floorId), gate.legs.slice(1).map((l) => l.floorId));
   });
 
-  it("keeps ? on an estimated or unnamed start", () => {
-    const estimated = campus.buildings.features.find((f) => f.properties.name && /\?/.test(f.properties.heightSource || ""));
+  it("routes a named building without a question mark and leaves unnamed buildings off the From list", () => {
+    const estimated = campus.buildings.features.find((f) => f.properties.name === "Community Building");
     const unnamed = campus.buildings.features.find((f) => !f.properties.name);
     assert.ok(estimated && unnamed);
+    assert.match(estimated.properties.heightSource || "", /\?/);
+    const row = campusStarts(campus).find((s) => s.id === estimated.properties.osm);
+    assert.equal(row && row.label, "Community Building");
     const estimatedRoute = planCampusRoute(paths, stairs, floors, campus, roomId, estimated.properties.osm);
     const unnamedRoute = planCampusRoute(paths, stairs, floors, campus, roomId, unnamed.properties.osm);
     assert.equal(estimatedRoute.ok, true);
-    assert.equal(unnamedRoute.ok, true);
-    if (!estimatedRoute.ok || !unnamedRoute.ok) return;
-    assert.match(estimatedRoute.steps[0].text, new RegExp(`${estimated.properties.name} \\?`));
-    assert.match(estimatedRoute.steps[0].text, /Main Building entrance \?/);
-    assert.match(unnamedRoute.steps[0].text, /Unnamed building \?/);
+    assert.equal(unnamedRoute.ok, false);
+    if (!estimatedRoute.ok || unnamedRoute.ok) return;
+    assert.match(estimatedRoute.steps[0].text, /Walk from the Community Building to the East Wing entrance/);
+    assert.doesNotMatch(estimatedRoute.steps[0].text, /\?/);
+    assert.equal(unnamedRoute.message, "That building is not in the From list.");
+    assert.doesNotMatch(unnamedRoute.message, /way\/|relation\//);
+    assert.equal(searchRooms(paths, "Speech Laboratory").some((r) => r.label === "Speech Laboratory"), true);
+    assert.equal(searchRooms(paths, "Maintenance").length, 0);
+    assert.equal(searchRooms(paths, "PEM").length, 0);
   });
 
   it("rejects a start that is not a campus building", () => {

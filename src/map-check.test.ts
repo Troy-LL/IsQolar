@@ -154,11 +154,32 @@ describe("map check", () => {
     assert.equal(report.questionLabels, 1);
   });
 
+  it("fails when a visible list contains ? or an OSM id", () => {
+    const input = map();
+    input.campus = {
+      buildings: {
+        features: [
+          { properties: { osm: "way/1", name: "Hall?" } },
+          { properties: { osm: "way/2", name: "Block (way/2)" } },
+          { properties: { osm: "way/3", name: null } },
+        ],
+      },
+      entrance: { label: "Door ?" },
+    };
+    const report = checkMap(input);
+    assert.equal(report.ok, false);
+    assert.ok(report.errors.some((e) => e.includes("Hall?")));
+    assert.ok(report.errors.some((e) => e.includes("way/2")));
+    assert.ok(report.errors.some((e) => e.includes("Door ?")));
+    assert.equal(report.errors.some((e) => e.includes("way/3")), false);
+  });
+
   it("accepts the floors, paths, and images on main", () => {
     const floors = JSON.parse(readFileSync("data/floors.json", "utf8")) as MapInput["floors"];
     const paths = JSON.parse(readFileSync("data/paths.json", "utf8")) as MapInput["paths"];
     const stairs = JSON.parse(readFileSync("data/stairs.json", "utf8")) as MapInput["stairs"];
-    const report = checkMap({ floors, paths, stairs, fileExists: existsSync });
+    const campus = JSON.parse(readFileSync("data/campus-osm.json", "utf8")) as MapInput["campus"];
+    const report = checkMap({ floors, paths, stairs, campus, fileExists: existsSync });
     assert.equal(report.ok, true, report.errors.join("\n"));
     let verified = 0;
     let questions = 0;
