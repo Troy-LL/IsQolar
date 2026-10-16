@@ -215,10 +215,23 @@ button:focus-visible, a:focus-visible, .maplibregl-canvas:focus-visible { outlin
   .from-layer.open .from-panel { transform: none; opacity: 1; }
 }
 
-.opin { width: 44px; height: 44px; margin: 0; padding: 0; border: 0; background: transparent; appearance: none; cursor: pointer; display: block; line-height: 0; }
+.map-pins { position: fixed; inset: 0; z-index: 3; pointer-events: none; --lab: 12px; }
+.map-pins[data-step="0"] { --lab: 11px; }
+.map-pins[data-step="1"] { --lab: 12px; }
+.map-pins[data-step="2"] { --lab: 13px; }
+.map-pins[data-step="3"] { --lab: 15px; }
+.map-pins[data-step="0"] .opin svg { transform: scale(.86); transform-origin: 22px 40px; }
+.map-pins[data-step="2"] .opin svg { transform: scale(1.08); transform-origin: 22px 40px; }
+.map-pins[data-step="3"] .opin svg { transform: scale(1.16); transform-origin: 22px 40px; }
+.opin { position: absolute; width: 44px; height: 44px; min-width: 44px; min-height: 44px; margin: 0; padding: 0; border: 0; background: transparent; appearance: none; cursor: pointer; display: block; line-height: 0; pointer-events: auto; overflow: visible; }
 .opin svg { display: block; width: 44px; height: 44px; overflow: visible; filter: drop-shadow(0 1px 1.5px rgba(31, 26, 26, .35)); }
 .opin-fill { fill: #8B0000; stroke: #fff; stroke-width: 2; stroke-linejoin: round; }
 .opin[data-state="selected"] .opin-fill,
 .opin[data-state="destination"] .opin-fill { fill: #FFC72C; }
 .opin-ring { fill: #fff; }
 .opin:focus-visible { outline: 3px solid var(--maroon-deep); outline-offset: 2px; }
+.opin-label { position: absolute; pointer-events: none; max-width: calc(100vw - 80px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 800; font-size: var(--lab); line-height: 1.2; color: #1f1a1a; text-shadow: 0 0 1px #fff, 0 0 2px #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff, 1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff; }
+.bldg-chip { position: absolute; pointer-events: none; max-width: calc(100vw - 80px); padding: 8px 12px; background: #fff; color: #8B0000; font-size: 13px; font-weight: 800; line-height: 1.2; border-radius: 16px; border-bottom: 3px solid #FFC72C; box-shadow: 0 1px 4px rgba(31,26,26,.2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dpin.pin-replaced .drop, .dpin.pin-replaced .ring { visibility: hidden; }
+.pin-mk.pin-replaced { pointer-events: none; }
+.pin-mk.pin-replaced > * { visibility: hidden; }

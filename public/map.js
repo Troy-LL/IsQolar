@@ -1,5 +1,6 @@
 import { planCampusRoute, campusStarts, GATE_START, allRooms, roomName, roomCode, roomDisplay, roomListed, parseRoomQuery, searchRooms, wingName, floorShort, SEARCH_LIMIT } from "./route.js";
 import { projectFloor, unprojectFloor } from "./floor-geo.js";
+import { drawMapPins, namesLayer, wingsLayer } from "./map-pins.js";
 
 const $ = (id) => document.getElementById(id);
 const NS = "http://www.w3.org/2000/svg";
@@ -302,15 +303,17 @@ function initMap() {
       map.addLayer({ id: "pup-walk-case", type: "line", source: "pup-walk", layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": "#ffffff", "line-width": 12 } });
       map.addLayer({ id: "pup-walk", type: "line", source: "pup-walk", layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": "#8B0000", "line-width": 6 } });
       map.addSource("pup-wings", { type: "geojson", data: campus.wingLabels });
-      map.addLayer({ id: "pup-wings", type: "symbol", source: "pup-wings", minzoom: 17.6, layout: { "text-field": ["upcase", ["get", "name"]], "text-font": ["Noto Sans Bold"], "text-size": 11, "text-letter-spacing": 0.08, "text-padding": 16 }, paint: { "text-color": "#6B5E57", "text-halo-color": "#ffffff", "text-halo-width": 1.5 } });
+      map.addLayer({ id: "pup-wings", type: "symbol", source: "pup-wings", minzoom: 17.6, filter: wingsLayer.filter, layout: wingsLayer.layout, paint: wingsLayer.paint });
       map.addLayer({
         id: "pup-names",
         type: "symbol",
         source: "pup-buildings",
-        filter: ["!=", ["get", "name"], null],
-        layout: { "text-field": ["get", "name"], "text-font": ["Noto Sans Bold"], "text-size": ["case", ["get", "main"], 14, 11], "text-max-width": 8, "text-allow-overlap": false, "symbol-z-order": "source" },
-        paint: { "text-color": ["case", ["get", "main"], "#5c0000", "#1f1a1a"], "text-halo-color": "#ffffff", "text-halo-width": 2 },
+        filter: namesLayer.filter,
+        layout: namesLayer.layout,
+        paint: namesLayer.paint,
       });
+      map.on("move", syncOutdoorPins);
+      map.once("idle", syncOutdoorPins);
       map.on("click", "pup-3d", (e) => {
         const f = e.features && e.features[0];
         if (!f) return;
@@ -565,6 +568,8 @@ function drawLabels() {
   const pin = $("pin");
   if (!g || !S.ix || !S.cam.indoor) {
     pin.hidden = true;
+    pin.classList.remove("pin-replaced");
+    syncOutdoorPins();
     return;
   }
   g.replaceChildren();
@@ -710,6 +715,36 @@ function drawLabels() {
     const d = scr(destPin || ix.dest);
     pin.style.transform = `translate(${d.x}px, ${d.y}px)`;
   }
+  pin.classList.toggle("pin-replaced", !!(S.inside && ix.dest));
+  const pins = ix.labels.map((l) => ({ ...scr(l.prio === 0 && ix.dest ? ix.dest : l.p), kind: "room", label: l.text, selected: l.prio === 0, dest: l.prio === 0 }));
+  const shown = pins.filter((p) => p.selected || p.dest || (z >= 19 && !hasImg));
+  if (ix.dest && !shown.some((p) => p.dest)) {
+    const room = S.sel && S.sel.room;
+    shown.push({ ...scr(ix.dest), kind: "room", label: room ? roomDisplay(room) : "", selected: true, dest: true });
+  }
+  drawMapPins($("indoor"), { zoom: z, building: $("where").textContent, pins: shown });
+}
+
+function syncOutdoorPins() {
+  if (S.inside || !map || !S.campus || !S.campus.gate) return;
+  const zoom = map.getZoom();
+  const pins = [];
+  const gate = map.project(S.campus.gate.lngLat);
+  if (gate.x >= 4 && gate.y >= 4 && gate.x <= innerWidth - 4 && gate.y <= innerHeight - 4) {
+    pins.push({ id: "gate", x: gate.x, y: gate.y, kind: "gate", label: "Main gate" });
+  }
+  const destEl = document.querySelector(".maplibregl-marker.dpin");
+  if (destEl && S.sel && S.sel.room) {
+    const r = destEl.getBoundingClientRect();
+    if (r.x >= 4 && r.y >= 4 && r.x <= innerWidth - 4 && r.y <= innerHeight - 4) {
+      pins.push({ id: S.sel.room.id, x: r.x + r.width / 2, y: r.y + r.height / 2, kind: "room", label: roomDisplay(S.sel.room), selected: true, dest: true });
+      destEl.classList.add("pin-replaced");
+    } else {
+      destEl.classList.remove("pin-replaced");
+    }
+  }
+  document.querySelectorAll(".pin-mk").forEach((el) => el.classList.toggle("pin-replaced", pins.some((p) => p.kind === "gate")));
+  drawMapPins($("outdoor"), { zoom, pins });
 }
 
 function buildingLabel(f) {
@@ -893,6 +928,7 @@ function syncOverlayGraphics(floorId) {
   }
   if (!destMarker) destMarker = new maplibregl.Marker({ element: destPinEl(), anchor: "center" });
   destMarker.setLngLat(dest).addTo(map);
+  syncOutdoorPins();
 }
 async function flyFootprint(floorId, duration) {
   const feat = floorFeature(floorId);
@@ -1007,6 +1043,7 @@ async function exitBuilding() {
   $("where").textContent = "PUP Main · Sta. Mesa";
   if (map) await fitTo(featCoords(S.campus.campus), { pitch: 55, maxZoom: 17.2, duration: 900 });
   syncCompass();
+  syncOutdoorPins();
   stage("outdoor");
 }
 async function showFloor(floorId) {
