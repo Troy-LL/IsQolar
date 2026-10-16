@@ -2,18 +2,58 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Check-in - IsQolar</title>
+  <link rel="icon" href="/brand/logo-light.png" type="image/png">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --maroon: #8B0000; --gold: #FFC72C; --ink: #1F1A1A; --paper: #fff; --shell: #F3EDE8; }
+    :root {
+      --maroon: #880000;
+      --maroon-deep: #5c0000;
+      --gold: #ffcc00;
+      --ink: #1f1a1a;
+      --ink-soft: #5e5656;
+      --line: #e2dcd8;
+      --paper: #ffffff;
+      --shell: #f7f4f2;
+    }
+    html { -webkit-tap-highlight-color: transparent; }
     body {
-      font-family: system-ui, sans-serif;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
       background: var(--shell);
       color: var(--ink);
-      padding: 16px;
+      padding:
+        calc(16px + env(safe-area-inset-top))
+        calc(16px + env(safe-area-inset-right))
+        calc(16px + env(safe-area-inset-bottom))
+        calc(16px + env(safe-area-inset-left));
     }
-    #app { max-width: 420px; margin: 0 auto; }
+    .logo { height: 36px; width: auto; display: block; }
+    .brand { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .map-back {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 0 4px;
+      margin-bottom: 4px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      text-decoration: none;
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-user-select: none;
+      transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .map-back:active { transform: scale(0.97); }
+    .map-back:focus-visible {
+      outline: 3px solid var(--maroon-deep);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .map-back:hover { color: var(--maroon); }
+    }
     h1 {
       font-size: 22px;
       font-weight: 700;
@@ -30,17 +70,18 @@
       color: var(--maroon);
     }
     .field { margin-bottom: 16px; }
+    input, select, textarea { font-size: 16px; }
     input, select {
       width: 100%;
       min-height: 48px;
       font-size: 18px;
       padding: 0 12px;
-      border: 2px solid #B8ACA3;
+      border: 2px solid var(--line);
       border-radius: 8px;
       background: var(--paper);
       color: var(--ink);
     }
-    input:focus, select:focus {
+    input:focus-visible, select:focus-visible {
       outline: 3px solid var(--gold);
       outline-offset: 2px;
       border-color: var(--maroon);
@@ -56,8 +97,19 @@
       color: var(--paper);
       cursor: pointer;
       border-bottom: 3px solid var(--gold);
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-user-select: none;
+      transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1);
     }
-    button:hover { background: #5c0000; }
+    button:active:not(:disabled) { transform: scale(0.97); }
+    button:focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 2px;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      button:hover:not(:disabled) { background: var(--maroon-deep); }
+    }
     button:disabled {
       opacity: 0.4;
       cursor: not-allowed;
@@ -69,10 +121,14 @@
       color: var(--maroon);
       min-height: 1.4em;
     }
+    @media (prefers-reduced-motion: reduce) {
+      .map-back, button { transition: none; }
+    }
   </style>
 </head>
 <body>
   <main id="app">
+    <div class="brand"><img class="logo" src="/brand/logo-light.png" alt="IsQolar"><a class="map-back" href="/prototype/">Home</a><a class="map-back" href="/map.html">Map</a></div>
     <h1>Check-in</h1>
     <form id="checkin-form">
       <div class="field">

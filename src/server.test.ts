@@ -55,11 +55,11 @@ describe("IsQolar server", () => {
     await close();
   });
 
-  it("GET / redirects to /map.html", async () => {
+  it("GET / redirects to /prototype/", async () => {
     try {
       const res = await redirectOf(`${url}/`);
       assert.equal(res.status, 302);
-      assert.equal(res.location, "/map.html");
+      assert.equal(res.location, "/prototype/");
     } finally {
       await close();
     }

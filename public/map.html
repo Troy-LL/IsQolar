@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Room TBA · IsQolar</title>
+<link rel="icon" href="/brand/logo-light.png" type="image/png">
 <link rel="stylesheet" href="vendor/maplibre/maplibre-gl.css">
 <link rel="stylesheet" href="map.css">
 </head>
@@ -14,6 +15,9 @@
 </div>
 
 <header class="top">
+  <button type="button" id="menu" class="round" aria-label="Menu" aria-expanded="false" aria-controls="menu-panel">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
   <button type="button" id="back" class="round" aria-label="Back to campus" hidden>
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </button>
@@ -25,6 +29,16 @@
   </label>
   <ul id="results" class="results" hidden></ul>
 </header>
+
+<div id="menu-layer" class="menu-layer" hidden>
+  <button type="button" id="menu-scrim" class="menu-scrim" aria-label="Close menu"></button>
+  <nav id="menu-panel" class="menu-panel" aria-label="IsQolar">
+    <img class="logo" src="/brand/logo-light.png" alt="IsQolar">
+    <a href="/prototype/">Home</a>
+    <a href="/checkin.html">Queue</a>
+    <a href="/chat.html">Chat</a>
+  </nav>
+</div>
 
 <div id="where" class="where">PUP Main · Sta. Mesa</div>
 <nav id="floors" class="floors" aria-label="Floors" hidden></nav>

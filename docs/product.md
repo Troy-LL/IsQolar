@@ -1,6 +1,6 @@
 # IsQolar
 
-IsQolar is one product for PUP Manila. It gets freshmen through enrollment day in the gym queue, and it is planned to help students get around campus. Campus wayfinding is Room TBA, the reference product, on the same phone as the ticket. The map page is not in the repo yet.
+IsQolar is one product for PUP Manila. It gets freshmen through enrollment day in the gym queue, and it is planned to help students get around campus. Campus wayfinding is Room TBA, the reference product, on the same phone as the ticket. The prototype is the front door (`/` opens it). It links to the live map and the chatbot, and those pages link back.
 
 The queue and the map are planned to share one server, one look, and one deploy. Room TBA, once the map page exists, searches a room or office and lands on a pin on a 2D floor plan. See [decisions/007-room-tba-2d.md](decisions/007-room-tba-2d.md).
 
@@ -23,7 +23,7 @@ How to run the app is in [README.md](../README.md). Stations, polling, and wait 
 
 ## The 3-minute demo
 
-The phone, staff, and board pages are shells today (`public/phone.html`, `public/staff.html`, `public/board.html`). `public/map.html` is not in the repo yet. This is the demo to run once those screens are filled in. If the map is not solid by the 12:30 PM cut on Oct 16, stop after the enrolled line. The queue still stands. See [plan-room-tba.md](plan-room-tba.md).
+The phone, staff, and board pages are shells today (`public/phone.html`, `public/staff.html`, `public/board.html`). The prototype is the front door (`/` opens it). It links to the live map and the chatbot, and those pages link back. This is the demo to run once those screens are filled in. If the map is not solid by the 12:30 PM cut on Oct 16, stop after the enrolled line. The queue still stands. See [plan-room-tba.md](plan-room-tba.md).
 
 `npm run seed` loads the morning that is in `src/store.ts`: stalls `BSCS-1`, `BSIT-1`, and `BSEE-1`, and 41 simulated tickets on those stalls. The tickets repeat Ana Reyes, Ben Santos, Cara Lim, Dan Cruz, and Eva Tan. Seeded tickets are labeled simulated.
 
