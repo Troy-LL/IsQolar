@@ -154,6 +154,14 @@ button:focus-visible, a:focus-visible, .maplibregl-canvas:focus-visible { outlin
 .pill.search { flex: 0 0 44px; width: 44px; min-width: 44px; max-width: 44px; padding: 0; justify-content: center; overflow: hidden; box-sizing: border-box; transition: flex-basis .2s var(--ease), max-width .2s var(--ease), padding .2s var(--ease); }
 .top .pill.from { flex: 1 1 0%; min-width: 0; max-width: calc(100% - 56px); }
 .pill.search:focus-within, .pill.search.open { flex: 1 1 160px; width: auto; min-width: 0; max-width: none; padding: 0 14px; justify-content: flex-start; }
+/* On phone, collapse the From pill to its label only when search is open so it does not clip */
+@media (max-width: 899px) {
+  .pill.search:focus-within ~ .pill.from,
+  .pill.search.open ~ .pill.from { display: none; }
+  /* From pill stays visible if search is after it in DOM; handle either order */
+  .top:has(.pill.search:focus-within) .pill.from,
+  .top:has(.pill.search.open) .pill.from { display: none; }
+}
 .pill.search input { width: 0; opacity: 0; pointer-events: none; }
 .pill.search:focus-within input, .pill.search.open input { width: auto; flex: 1; min-width: 0; opacity: 1; pointer-events: auto; }
 .pill.search .clear { display: none; }
@@ -168,8 +176,8 @@ button:focus-visible, a:focus-visible, .maplibregl-canvas:focus-visible { outlin
 .stair-lab { fill: #8B0000; font-weight: 700; text-anchor: middle; dominant-baseline: hanging; paint-order: stroke; stroke: #fff; stroke-linejoin: round; }
 @media (max-width: 899px) {
   .floors { gap: 2px; padding: 4px; }
-  .floors button { width: 44px; height: 36px; font-size: 14px; }
-  .floors button small { font-size: 9px; }
+  .floors button { width: 44px; height: 36px; min-height: 36px; max-height: 36px; font-size: 14px; overflow: hidden; }
+  .floors button small { font-size: 9px; white-space: nowrap; max-width: 40px; line-height: 1.1; }
 }
 
 .from-trigger { flex: 1; min-width: 0; min-height: 44px; height: 100%; display: flex; align-items: center; gap: 8px; padding: 0 12px 0 14px; border: 0; border-radius: 26px; background: transparent; color: var(--ink); font: inherit; text-align: left; cursor: pointer; }

@@ -5,134 +5,413 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Ticket — IsQolar</title>
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --maroon: #880000; --maroon-deep: #5C0000; --gold: #FFCC00;
+      --ink: #1F1A1A; --ink-soft: #5E5656; --line: #E2DCD8;
+      --paper: #FFFFFF; --shell: #F7F4F2; --green: #1B6E3F;
+    }
     body {
-      font-family: system-ui, sans-serif;
-      margin: 0;
-      padding: 16px;
-      color: #1F1A1A;
-      background: #fff;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--shell);
+      color: var(--ink);
     }
+    #app { max-width: 480px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; }
 
-    .ticket__code,
-    .ticket__course {
-      margin: 0;
-    }
-
-    .ticket__code:empty,
-    .ticket__course:empty {
+    /* ── call banner ─── sticky, gold, full-width ───────────────────────────── */
+    #call-banner {
       display: none;
+      position: sticky; top: 0; z-index: 10;
+      padding: 18px 20px;
+      background: var(--gold);
+      color: var(--maroon-deep);
+      font-size: 22px;
+      font-weight: 800;
+      text-align: center;
+      border-bottom: 4px solid var(--maroon);
+      animation: pulse-banner 1.2s ease-in-out infinite;
     }
-
-    .ticket__code {
-      font-size: 48px;
-      font-weight: 700;
-      line-height: 1;
+    #call-banner.visible { display: block; }
+    @keyframes pulse-banner {
+      0%, 100% { background: var(--gold); }
+      50% { background: #ffe740; }
     }
+    #call-banner .banner-sub { font-size: 14px; font-weight: 600; margin-top: 4px; opacity: .75; }
 
-    .ticket__course {
-      margin-top: 8px;
-      font-size: 18px;
-      font-weight: 600;
+    /* ── header ─────────────────────────────────────────────────────────── */
+    .ph-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px 12px;
+      background: var(--paper);
+      border-bottom: 3px solid var(--gold);
     }
+    .ph-brand { font-size: 18px; font-weight: 800; color: var(--maroon); }
+    #offline-pill {
+      display: none;
+      font-size: 11px; font-weight: 700;
+      background: #4a3000; color: var(--gold);
+      padding: 4px 10px; border-radius: 12px;
+    }
+    body[data-online="false"] #offline-pill { display: block; }
 
-    .ticket__qr {
+    /* ── ticket card ─────────────────────────────────────────────────────── */
+    .ph-body { padding: 16px 20px; flex: 1; }
+    .ticket-card {
+      background: var(--paper);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 2px 12px rgba(31,26,26,.1);
+      border-top: 6px solid var(--maroon);
+    }
+    .ticket-card .tc-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-soft); margin-bottom: 4px; }
+    .ticket-code { font-size: 56px; font-weight: 800; line-height: 1; color: var(--maroon); font-variant-numeric: tabular-nums; }
+    .ticket-course { font-size: 17px; font-weight: 700; margin-top: 4px; color: var(--ink); }
+
+    /* ── step rail ───────────────────────────────────────────────────────── */
+    .step-rail { margin-top: 20px; display: flex; flex-direction: column; gap: 0; }
+    .step-item { display: flex; align-items: flex-start; gap: 12px; padding: 8px 0; position: relative; }
+    .step-item + .step-item::before {
+      content: ""; position: absolute; left: 14px; top: -8px; height: 12px;
+      border-left: 2px dashed var(--line);
+    }
+    .step-dot {
+      width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 800;
+      border: 2px solid var(--line); background: var(--paper); color: var(--ink-soft);
+    }
+    .step-item.done .step-dot { background: var(--green); border-color: var(--green); color: #fff; }
+    .step-item.current .step-dot { background: var(--maroon); border-color: var(--maroon); color: #fff; }
+    .step-label { font-size: 15px; font-weight: 600; padding-top: 4px; }
+    .step-item.done .step-label { color: var(--ink-soft); }
+    .step-item.current .step-label { color: var(--ink); font-weight: 700; }
+    .step-sub { font-size: 13px; color: var(--ink-soft); margin-top: 2px; }
+
+    /* ── position/wait block ─────────────────────────────────────────────── */
+    .pos-block {
       margin-top: 16px;
+      background: var(--shell);
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
     }
+    .pos-block.hidden { display: none; }
+    .pb-item { text-align: center; }
+    .pb-num { font-size: 32px; font-weight: 800; color: var(--maroon); font-variant-numeric: tabular-nums; line-height: 1; }
+    .pb-lbl { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-soft); margin-top: 4px; }
+    .step-away { margin-top: 10px; font-size: 13px; color: var(--ink-soft); background: var(--paper); border-radius: 10px; padding: 10px 14px; border-left: 3px solid var(--gold); }
 
-    .ticket__qr:empty {
+    /* ── enrolled card ───────────────────────────────────────────────────── */
+    .enrolled-card {
       display: none;
+      margin-top: 16px;
+      background: var(--green);
+      color: #fff;
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+    }
+    .enrolled-card.visible { display: block; }
+    .enrolled-card .ec-icon { font-size: 40px; margin-bottom: 10px; }
+    .enrolled-card .ec-title { font-size: 18px; font-weight: 800; }
+
+    /* ── no id: show redirect ────────────────────────────────────────────── */
+    .no-ticket {
+      margin: 40px 20px;
+      text-align: center;
+    }
+    .no-ticket p { font-size: 16px; color: var(--ink-soft); margin-bottom: 16px; }
+    .no-ticket a {
+      display: inline-block;
+      padding: 14px 28px;
+      background: var(--maroon);
+      color: #fff;
+      font-size: 17px;
+      font-weight: 700;
+      border-radius: 10px;
+      text-decoration: none;
+      border-bottom: 3px solid var(--gold);
     }
 
-    .ticket__qr img {
-      width: 30mm;
-      height: 30mm;
-      image-rendering: pixelated;
-    }
+    /* ── QR / printable section ─────────────────────────────────────────── */
+    .ticket-qr { margin-top: 16px; }
+    .ticket-qr img { width: 80px; height: 80px; image-rendering: pixelated; border-radius: 8px; }
+    .ticket-qr .tc-label { margin-bottom: 6px; }
 
     @media print {
-      body {
-        background: #fff;
-        margin: 0;
-        padding: 0;
-      }
-
-      body * {
-        visibility: hidden;
-      }
-
-      .ticket__code,
-      .ticket__course,
-      .ticket__qr {
-        visibility: visible;
-        position: fixed;
-        left: 0;
-        width: 72mm;
-        margin: 0;
-        color: #000;
-        background: transparent;
-      }
-
-      .ticket__qr,
-      .ticket__qr * {
-        visibility: visible;
-      }
-
-      .ticket__code {
-        top: 0;
-        font-size: 48pt;
-        font-weight: 700;
-        line-height: 1;
-      }
-
-      .ticket__course {
-        top: 56pt;
-        font-size: 14pt;
-        font-weight: 600;
-      }
-
-      .ticket__qr {
-        top: 78pt;
-      }
+      body { background: #fff; }
+      .ph-header, .call-banner, #call-banner, .step-rail, .pos-block, .step-away, .enrolled-card, .no-ticket, #offline-pill { display: none !important; }
+      .ticket-card { box-shadow: none; border: none; padding: 0; }
+      .ticket-code { font-size: 48pt; font-weight: 700; color: #000; }
+      .ticket-course { font-size: 14pt; color: #000; }
+      .ticket-qr img { width: 30mm; height: 30mm; }
     }
   </style>
 </head>
 <body>
-  <main id="app">
-    <p class="ticket__code" id="ticket-code"></p>
-    <p class="ticket__course" id="ticket-course"></p>
-    <div class="ticket__qr" id="ticket-qr"></div>
-  </main>
+  <div id="app">
+    <div id="call-banner" role="alert" aria-live="assertive">
+      <div>Ikaw na, Iskolar!</div>
+      <div class="banner-sub">Go to your stall now · Pumunta na sa inyong stall</div>
+    </div>
+
+    <header class="ph-header">
+      <div class="ph-brand">IsQolar</div>
+      <div id="offline-pill">Not updating</div>
+    </header>
+
+    <div class="ph-body" id="ph-body">
+      <!-- filled by JS -->
+    </div>
+  </div>
+
   <script src="/qrcode.js"></script>
   <script src="/poll.js"></script>
   <script>
     (function () {
       var params = new URLSearchParams(window.location.search);
-      var id = params.get("id");
-      if (!id) return;
+      var ticketId = params.get("id");
+      var body = document.getElementById("ph-body");
+      var banner = document.getElementById("call-banner");
 
-      var codeEl = document.getElementById("ticket-code");
-      var courseEl = document.getElementById("ticket-course");
-      var qrEl = document.getElementById("ticket-qr");
+      if (!ticketId) {
+        body.innerHTML = '<div class="no-ticket">' +
+          '<p>No ticket found. Check in first.</p>' +
+          '<a href="/checkin.html">Check in</a>' +
+          '</div>';
+        return;
+      }
 
-      IsQolar.poll("/api/tickets/" + encodeURIComponent(id), function (ticket) {
+      // Steps definition (user-journey.md)
+      var STEPS = [
+        { key: "checkin",    label: "Admission",          sub: "Step 1 of 5" },
+        { key: "docs",       label: "Admission",          sub: "Step 1 of 5" },
+        { key: "stall",      label: "College / Dept",     sub: "Step 2 of 5" },
+        { key: "validation", label: "Medical",            sub: "Step 3 of 5" },
+        { key: "main",       label: "Registration Card",  sub: "Step 4 of 5" },
+        { key: "enrolled",   label: "ID",                 sub: "Step 5 of 5" },
+      ];
+      // Displayed rail: deduplicated
+      var RAIL = [
+        { key: "checkin",    label: "Admission",         num: "1" },
+        { key: "stall",      label: "College / Dept",    num: "2" },
+        { key: "validation", label: "Medical",           num: "3" },
+        { key: "main",       label: "Registration Card", num: "4" },
+        { key: "enrolled",   label: "ID",                num: "5" },
+      ];
+      var STATION_ORDER = ["checkin","docs","validation","main","stall","enrolled"];
+      function stationIndex(s) { return STATION_ORDER.indexOf(s); }
+      function railIndex(station) {
+        if (station === "checkin" || station === "docs") return 0;
+        if (station === "stall") return 1;
+        if (station === "validation") return 2;
+        if (station === "main") return 3;
+        if (station === "enrolled") return 4;
+        return 0;
+      }
+
+      var rendered = {};
+
+      function buildTicketCard(ticket) {
+        var card = document.createElement("div");
+        card.className = "ticket-card";
+
+        var lbl = document.createElement("div");
+        lbl.className = "tc-label";
+        lbl.textContent = ticket.simulated ? "Simulated ticket" : "Your ticket";
+        card.appendChild(lbl);
+
+        var code = document.createElement("div");
+        code.className = "ticket-code";
+        code.id = "ticket-code";
+        code.textContent = ticket.code;
+        card.appendChild(code);
+
+        var course = document.createElement("div");
+        course.className = "ticket-course";
+        course.id = "ticket-course";
+        course.textContent = ticket.course;
+        card.appendChild(course);
+
+        return card;
+      }
+
+      function buildRail(ticket) {
+        var ri = railIndex(ticket.station);
+        var rail = document.createElement("div");
+        rail.className = "step-rail";
+        for (var i = 0; i < RAIL.length; i++) {
+          var item = document.createElement("div");
+          var cls = "step-item";
+          if (i < ri) cls += " done";
+          else if (i === ri) cls += " current";
+          item.className = cls;
+
+          var dot = document.createElement("div");
+          dot.className = "step-dot";
+          dot.textContent = i < ri ? "✓" : RAIL[i].num;
+          item.appendChild(dot);
+
+          var txt = document.createElement("div");
+          var name = document.createElement("div");
+          name.className = "step-label";
+          name.textContent = RAIL[i].label;
+          txt.appendChild(name);
+          item.appendChild(txt);
+          rail.appendChild(item);
+        }
+        return rail;
+      }
+
+      function buildPosBlock(ticket) {
+        var block = document.createElement("div");
+        block.className = "pos-block" + (ticket.station !== "stall" ? " hidden" : "");
+        block.id = "pos-block";
+
+        var posItem = document.createElement("div");
+        posItem.className = "pb-item";
+        var posNum = document.createElement("div");
+        posNum.className = "pb-num";
+        posNum.id = "pos-num";
+        posNum.textContent = ticket.position != null ? ticket.position : "—";
+        var posLbl = document.createElement("div");
+        posLbl.className = "pb-lbl";
+        posLbl.textContent = "In line";
+        posItem.appendChild(posNum);
+        posItem.appendChild(posLbl);
+        block.appendChild(posItem);
+
+        var waitItem = document.createElement("div");
+        waitItem.className = "pb-item";
+        var waitNum = document.createElement("div");
+        waitNum.className = "pb-num";
+        waitNum.id = "wait-num";
+        waitNum.textContent = ticket.estWaitMin != null ? ticket.estWaitMin + " min" : "—";
+        var waitLbl = document.createElement("div");
+        waitLbl.className = "pb-lbl";
+        waitLbl.textContent = "Est. wait";
+        waitItem.appendChild(waitNum);
+        waitItem.appendChild(waitLbl);
+        block.appendChild(waitItem);
+
+        return block;
+      }
+
+      function buildStepAway(ticket) {
+        var el = document.createElement("div");
+        el.className = "step-away";
+        el.id = "step-away";
+        el.hidden = true;
+        el.textContent = "You can step away for now. Come back when you have about 20 minutes left.";
+        return el;
+      }
+
+      function buildEnrolled() {
+        var card = document.createElement("div");
+        card.className = "enrolled-card";
+        card.id = "enrolled-card";
+        var icon = document.createElement("div");
+        icon.className = "ec-icon";
+        icon.textContent = "🎓";
+        card.appendChild(icon);
+        var title = document.createElement("div");
+        title.className = "ec-title";
+        title.textContent = "You're fully enrolled. Welcome, Iskolar ng Bayan.";
+        card.appendChild(title);
+        return card;
+      }
+
+      function buildQR(ticket) {
+        var qrWrap = document.createElement("div");
+        qrWrap.className = "ticket-qr";
+        var lbl = document.createElement("div");
+        lbl.className = "tc-label";
+        lbl.textContent = "Show to staff";
+        qrWrap.appendChild(lbl);
+        if (typeof qrcode === "function" && ticket.id) {
+          var url = "/phone.html?id=" + encodeURIComponent(ticket.id);
+          var qr = qrcode(0, "M");
+          qr.addData(url);
+          qr.make();
+          var img = document.createElement("img");
+          img.src = qr.createDataURL(4, 8);
+          img.alt = "QR for ticket " + ticket.code;
+          qrWrap.appendChild(img);
+        }
+        return qrWrap;
+      }
+
+      var built = false;
+      var wasCalled = false;
+
+      function firstRender(ticket) {
+        built = true;
+        body.replaceChildren();
+
+        var card = buildTicketCard(ticket);
+        card.appendChild(buildQR(ticket));
+        body.appendChild(card);
+        body.appendChild(buildRail(ticket));
+        body.appendChild(buildPosBlock(ticket));
+        body.appendChild(buildStepAway(ticket));
+        body.appendChild(buildEnrolled(ticket));
+      }
+
+      function updateRender(ticket) {
+        // update code/course
+        var codeEl = document.getElementById("ticket-code");
+        if (codeEl) codeEl.textContent = ticket.code;
+        var courseEl = document.getElementById("ticket-course");
+        if (courseEl) courseEl.textContent = ticket.course;
+
+        // rebuild rail
+        var oldRail = body.querySelector(".step-rail");
+        if (oldRail) oldRail.replaceWith(buildRail(ticket));
+
+        // update pos block
+        var pb = document.getElementById("pos-block");
+        if (pb) {
+          pb.classList.toggle("hidden", ticket.station !== "stall");
+          var posNum = document.getElementById("pos-num");
+          if (posNum) posNum.textContent = ticket.position != null ? ticket.position : "—";
+          var waitNum = document.getElementById("wait-num");
+          if (waitNum) waitNum.textContent = ticket.estWaitMin != null ? ticket.estWaitMin + " min" : "—";
+        }
+
+        // step-away hint
+        var sa = document.getElementById("step-away");
+        if (sa) sa.hidden = !(ticket.station === "stall" && ticket.status === "waiting" && ticket.estWaitMin > 20);
+
+        // call banner
+        var called = ticket.status === "called";
+        if (called) {
+          banner.classList.add("visible");
+          if (!wasCalled && navigator.vibrate) navigator.vibrate([400, 100, 400]);
+          document.title = "Ikaw na! — IsQolar";
+        } else {
+          banner.classList.remove("visible");
+          document.title = "My Ticket — IsQolar";
+        }
+        wasCalled = called;
+
+        // enrolled card
+        var ec = document.getElementById("enrolled-card");
+        if (ec) ec.classList.toggle("visible", ticket.station === "enrolled");
+      }
+
+      IsQolar.poll("/api/tickets/" + encodeURIComponent(ticketId), function (ticket) {
         if (!ticket || typeof ticket.code !== "string") {
-          codeEl.textContent = "";
-          courseEl.textContent = "";
-          qrEl.replaceChildren();
+          if (!built) {
+            body.innerHTML = '<div class="no-ticket"><p>Ticket not found.</p><a href="/checkin.html">Check in again</a></div>';
+          }
           return;
         }
-        codeEl.textContent = ticket.code;
-        courseEl.textContent = typeof ticket.course === "string" ? ticket.course : "";
-        qrEl.replaceChildren();
-        if (typeof ticket.id !== "string" || typeof qrcode !== "function") return;
-        var phoneUrl = "/phone.html?id=" + encodeURIComponent(ticket.id);
-        var qr = qrcode(0, "M");
-        qr.addData(phoneUrl);
-        qr.make();
-        var img = document.createElement("img");
-        img.src = qr.createDataURL(4, 8);
-        img.alt = "Phone page for ticket " + ticket.code;
-        qrEl.replaceChildren(img);
+        if (!built) {
+          firstRender(ticket);
+        }
+        updateRender(ticket);
       });
     })();
   </script>
