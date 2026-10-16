@@ -344,6 +344,7 @@
       }
 
       var built = false;
+      var wasCalled = false;
 
       function firstRender(ticket) {
         built = true;
@@ -384,14 +385,16 @@
         if (sa) sa.hidden = !(ticket.station === "stall" && ticket.status === "waiting" && ticket.estWaitMin > 20);
 
         // call banner
-        if (ticket.status === "called") {
+        var called = ticket.status === "called";
+        if (called) {
           banner.classList.add("visible");
-          if (navigator.vibrate) navigator.vibrate([400, 100, 400]);
+          if (!wasCalled && navigator.vibrate) navigator.vibrate([400, 100, 400]);
           document.title = "Ikaw na! — IsQolar";
         } else {
           banner.classList.remove("visible");
           document.title = "My Ticket — IsQolar";
         }
+        wasCalled = called;
 
         // enrolled card
         var ec = document.getElementById("enrolled-card");

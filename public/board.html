@@ -183,7 +183,7 @@
 
       // ── stall rendering ────────────────────────────────────────────────────
       var stallsContainer = document.getElementById("brd-stalls");
-      var lastStallIds = null;
+      var renderGen = 0;
 
       function renderStall(stall, queue) {
         var card = document.createElement("div");
@@ -249,7 +249,10 @@
       }
 
       function renderStalls(stalls) {
+        if (!Array.isArray(stalls)) return;
+        var gen = ++renderGen;
         fetchQueues(stalls, function (queues) {
+          if (gen !== renderGen) return;
           stallsContainer.replaceChildren();
           if (!stalls.length) {
             var empty = document.createElement("div");
@@ -266,6 +269,7 @@
 
       // ── poll ───────────────────────────────────────────────────────────────
       IsQolar.poll("/api/stalls", function (stalls) {
+        if (!Array.isArray(stalls)) return;
         renderStalls(stalls);
       }, 2000);
     })();
