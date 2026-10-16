@@ -15,7 +15,7 @@ function makeTempDir(): string {
 
 const stall = {
   id: "BSCS-1",
-  name: "BS Computer Science — Stall 1",
+  name: "BS Computer Science - Stall 1",
   department: "IT & CS",
   activeInterviewers: 1,
   queueLength: 0,

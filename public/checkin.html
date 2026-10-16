@@ -6,19 +6,28 @@
   <title>Check-in - IsQolar</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --maroon: #8B0000; --gold: #FFC72C; --ink: #1F1A1A; --paper: #fff; --shell: #F3EDE8; }
     body {
       font-family: system-ui, sans-serif;
-      background: #fff;
-      color: #111;
+      background: var(--shell);
+      color: var(--ink);
       padding: 16px;
     }
     #app { max-width: 420px; margin: 0 auto; }
-    h1 { font-size: 22px; font-weight: 700; margin-bottom: 16px; }
+    h1 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--maroon);
+      border-bottom: 3px solid var(--gold);
+      padding-bottom: 8px;
+    }
     label {
       display: block;
       font-size: 16px;
       font-weight: 600;
       margin-bottom: 6px;
+      color: var(--maroon);
     }
     .field { margin-bottom: 16px; }
     input, select {
@@ -26,10 +35,15 @@
       min-height: 48px;
       font-size: 18px;
       padding: 0 12px;
-      border: 1px solid #ccc;
+      border: 2px solid #B8ACA3;
       border-radius: 8px;
-      background: #fff;
-      color: #111;
+      background: var(--paper);
+      color: var(--ink);
+    }
+    input:focus, select:focus {
+      outline: 3px solid var(--gold);
+      outline-offset: 2px;
+      border-color: var(--maroon);
     }
     button {
       width: 100%;
@@ -38,10 +52,12 @@
       font-weight: 700;
       border: none;
       border-radius: 8px;
-      background: #111;
-      color: #fff;
+      background: var(--maroon);
+      color: var(--paper);
       cursor: pointer;
+      border-bottom: 3px solid var(--gold);
     }
+    button:hover { background: #5c0000; }
     button:disabled {
       opacity: 0.4;
       cursor: not-allowed;
@@ -50,7 +66,7 @@
       margin-top: 12px;
       font-size: 16px;
       font-weight: 600;
-      color: #111;
+      color: var(--maroon);
       min-height: 1.4em;
     }
   </style>

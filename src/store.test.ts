@@ -14,7 +14,7 @@ describe("MemoryStore", () => {
     // Seed one BSCS stall so the stall station can be reached.
     await store.setStall({
       id: "BSCS-1",
-      name: "BS Computer Science — Stall 1",
+      name: "BS Computer Science - Stall 1",
       department: "IT & CS",
       activeInterviewers: 1,
       queueLength: 0,

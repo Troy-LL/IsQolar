@@ -68,9 +68,9 @@ export class MemoryStore implements Store {
   async seed(): Promise<void> {
     await this.reset();
 
-    await this.setStall({ id: "BSCS-1", name: "BS Computer Science — Stall 1", department: "IT & CS", activeInterviewers: 1, queueLength: 0, nowServing: null });
-    await this.setStall({ id: "BSIT-1", name: "BS Information Technology — Stall 1", department: "IT & CS", activeInterviewers: 1, queueLength: 0, nowServing: null });
-    await this.setStall({ id: "BSEE-1", name: "BS Electrical Engineering — Stall 1", department: "Engineering", activeInterviewers: 1, queueLength: 0, nowServing: null });
+    await this.setStall({ id: "BSCS-1", name: "BS Computer Science - Stall 1", department: "IT & CS", activeInterviewers: 1, queueLength: 0, nowServing: null });
+    await this.setStall({ id: "BSIT-1", name: "BS Information Technology - Stall 1", department: "IT & CS", activeInterviewers: 1, queueLength: 0, nowServing: null });
+    await this.setStall({ id: "BSEE-1", name: "BS Electrical Engineering - Stall 1", department: "Engineering", activeInterviewers: 1, queueLength: 0, nowServing: null });
 
     const pattern: { name: string; course: string; stall: string; count: number }[] = [
       { name: "Ana Reyes", course: "BSCS", stall: "BSCS-1", count: 9 },
