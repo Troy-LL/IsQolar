@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Check-in - IsQolar</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, sans-serif;
+      background: #fff;
+      color: #111;
+      padding: 16px;
+    }
+    #app { max-width: 420px; margin: 0 auto; }
+    h1 { font-size: 22px; font-weight: 700; margin-bottom: 16px; }
+    label {
+      display: block;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .field { margin-bottom: 16px; }
+    input, select {
+      width: 100%;
+      min-height: 48px;
+      font-size: 18px;
+      padding: 0 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #fff;
+      color: #111;
+    }
+    button {
+      width: 100%;
+      min-height: 56px;
+      font-size: 18px;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      background: #111;
+      color: #fff;
+      cursor: pointer;
+    }
+    button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    #error {
+      margin-top: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #111;
+      min-height: 1.4em;
+    }
+  </style>
+</head>
+<body>
+  <main id="app">
+    <h1>Check-in</h1>
+    <form id="checkin-form">
+      <div class="field">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" autocomplete="name" required>
+      </div>
+      <div class="field">
+        <label for="course">Course</label>
+        <select id="course" name="course" required>
+          <option value="">Loading courses...</option>
+        </select>
+      </div>
+      <button type="submit" id="submit">Get ticket</button>
+    </form>
+    <p id="error" role="alert"></p>
+  </main>
+  <script>
+    (function () {
+      var form = document.getElementById("checkin-form");
+      var nameInput = document.getElementById("name");
+      var courseSelect = document.getElementById("course");
+      var submitBtn = document.getElementById("submit");
+      var errorEl = document.getElementById("error");
+
+      function courseFromStallId(id) {
+        var dash = id.lastIndexOf("-");
+        return dash > 0 ? id.slice(0, dash) : id;
+      }
+
+      function fillCourses(stalls) {
+        var seen = {};
+        var courses = [];
+        for (var i = 0; i < stalls.length; i++) {
+          var course = courseFromStallId(stalls[i].id);
+          if (!seen[course]) {
+            seen[course] = true;
+            courses.push(course);
+          }
+        }
+        courseSelect.textContent = "";
+        var blank = document.createElement("option");
+        blank.value = "";
+        blank.textContent = courses.length ? "Select a course" : "No courses available";
+        courseSelect.appendChild(blank);
+        for (var c = 0; c < courses.length; c++) {
+          var opt = document.createElement("option");
+          opt.value = courses[c];
+          opt.textContent = courses[c];
+          courseSelect.appendChild(opt);
+        }
+      }
+
+      fetch("/api/stalls")
+        .then(function (res) {
+          if (!res.ok) throw new Error("Could not load courses");
+          return res.json();
+        })
+        .then(fillCourses)
+        .catch(function () {
+          courseSelect.textContent = "";
+          var opt = document.createElement("option");
+          opt.value = "";
+          opt.textContent = "Could not load courses";
+          courseSelect.appendChild(opt);
+          errorEl.textContent = "Could not load courses from the hub.";
+        });
+
+      form.addEventListener("submit", function (ev) {
+        ev.preventDefault();
+        errorEl.textContent = "";
+        submitBtn.disabled = true;
+        var body = {
+          name: nameInput.value.trim(),
+          course: courseSelect.value
+        };
+        fetch("/api/tickets", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body)
+        })
+          .then(function (res) {
+            return res.text().then(function (text) {
+              var parsed = null;
+              try { parsed = text ? JSON.parse(text) : null; } catch (_e) { parsed = null; }
+              return { status: res.status, text: text, json: parsed };
+            });
+          })
+          .then(function (result) {
+            if (result.status === 201 && result.json && result.json.id) {
+              window.location.href = "/phone.html?id=" + encodeURIComponent(result.json.id);
+              return;
+            }
+            if (result.status === 400) {
+              var msg = (result.json && result.json.error) || result.text || "Request failed";
+              errorEl.textContent = msg;
+              return;
+            }
+            errorEl.textContent = (result.json && result.json.error) || result.text || "Request failed";
+          })
+          .catch(function () {
+            errorEl.textContent = "Could not create ticket.";
+          })
+          .then(function () {
+            submitBtn.disabled = false;
+          });
+      });
+    })();
+  </script>
+</body>
+</html>

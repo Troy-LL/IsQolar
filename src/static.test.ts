@@ -73,4 +73,9 @@ describe("static pages", () => {
     const res = await fetch(`${url}/board.html`);
     assert.equal(res.status, 200);
   });
+
+  it("GET /checkin.html returns 200", async () => {
+    const res = await fetch(`${url}/checkin.html`);
+    assert.equal(res.status, 200);
+  });
 });
