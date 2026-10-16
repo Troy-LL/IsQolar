@@ -273,14 +273,23 @@ export async function chat(body: unknown, fetchImpl: typeof fetch = fetch): Prom
         await new Promise((r) => setTimeout(r, RETRY_DELAY_MS));
         continue;
       }
-      if (!res.ok) return { status: 502, body: { error: "upstream error" } };
+      if (!res.ok) {
+        const errBody = await res.text().catch(() => "");
+        console.error(`[chat] Groq ${res.status}: ${errBody.slice(0, 400)}`);
+        if (retryable && attempt === 0) continue;
+        return { status: 502, body: { error: "upstream error" } };
+      }
       const data = (await res.json()) as { choices?: { message?: { content?: string } }[] };
       const reply = data.choices?.[0]?.message?.content?.trim();
-      if (!reply) return { status: 502, body: { error: "upstream error" } };
+      if (!reply) {
+        console.error("[chat] Groq returned no reply:", JSON.stringify(data).slice(0, 200));
+        return { status: 502, body: { error: "upstream error" } };
+      }
       return { status: 200, body: { reply: sanitizeLinks(reply) } };
     }
     return { status: 502, body: { error: "upstream error" } };
-  } catch {
+  } catch (err) {
+    console.error("[chat] fetch threw:", err);
     return { status: 502, body: { error: "upstream error" } };
   }
 }
