@@ -719,6 +719,14 @@ When the done-when line is true, run npm run check. Open a pull request into mai
 - Branch: `troy/rt35-main-corners`
 - Owner: Troy
 
+### RT36. Gym, Library and Psych floors on the map
+- Goal: gym-gf, library-3f and library-2f use their traced SVGs, gym-gf and library-3f sit on their OSM footprints, and psych-gf is listed but hidden.
+- Files: data/floors.json, data/paths.json (gym-gf only), public/maps/gym-gf.svg, public/maps/gym-gf.webp, public/maps/library-3f.svg, public/maps/library-3f.webp, src/route.test.ts.
+- Depends on: RT35 and RT26 merged.
+- Done when: gym corners fit way/583440438 and library 3F corners fit way/126342422, the gym route graph is in the traced SVG's pixel space (no stray lines across the court), gym labels are larger, the library 3F title block is gone, psych-gf is hidden, library-2f keeps the RT11 hold, and npm run check passes.
+- Branch: `troy/rt36-other-floors`
+- Owner: Troy
+
 ### RT32. Route regression and debug page
 - Goal: A test locks the routes already covered in src/route.test.ts, and a debug page shows the same route.
 - Files: src/route.test.ts, public/route-debug.html (new)
