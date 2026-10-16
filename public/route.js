@@ -168,7 +168,9 @@ export function shortestPath(paths, floorId, from, to) {
   }
   const ids = [to];
   while (ids[0] !== from) ids.unshift(prev.get(ids[0]));
-  return { distance: dist.get(to), ids, points: snapLeg(g, ids, paths.floors[floorId].aspect || 1) };
+  // Some stair nodes sit exactly on a corridor node, so drop repeated points (ids keep every node).
+  const points = snapLeg(g, ids, paths.floors[floorId].aspect || 1).filter((p, i, all) => i === 0 || p.x !== all[i - 1].x || p.y !== all[i - 1].y);
+  return { distance: dist.get(to), ids, points };
 }
 
 // Draw a leg on the corridors: leaves (start, stairs, rooms) join the corridor at their foot point, not at the
@@ -267,6 +269,12 @@ export function planRoute(paths, stairs, floors, start, roomId) {
     };
   }
 
+  const fromRow = floors.find((f) => f.id === start.floorId);
+  const toRow = floors.find((f) => f.id === room.floorId);
+  if (fromRow && toRow && fromRow.building !== toRow.building) {
+    // No poster shows a stair or bridge between buildings, so never route through one.
+    return { ok: false, message: `${target} is in ${toRow.building}. Indoor steps from ${fromRow.building} are not mapped yet.` };
+  }
   const fromStairs = (stairs.floors[start.floorId] || { stairs: {} }).stairs;
   const toStairs = (stairs.floors[room.floorId] || { stairs: {} }).stairs;
   let best = null;
