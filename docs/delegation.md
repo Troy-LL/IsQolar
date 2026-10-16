@@ -644,6 +644,14 @@ Done when: The walk is a sequence of OSM footway positions from the main gate to
 When the done-when line is true, run npm run check. Open a pull request into main. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
+### RT35. Main floor corners from the footprint
+- Goal: Main 1F, 4F and 5F sit on the Main footprint (OSM relation/6752508) with the same hub and North Wing.
+- Files: data/floors.json only.
+- Depends on: none.
+- Done when: each Main floor's corners come from a similarity fit (hub where the North and East Wing axes cross, North Wing tip) of its own image, 4F and 5F line up on the footprint, and npm run check passes.
+- Branch: `troy/rt35-main-corners`
+- Owner: Troy
+
 ### RT32. Route regression and debug page
 - Goal: A test locks the routes already covered in src/route.test.ts, and a debug page shows the same route.
 - Files: src/route.test.ts, public/route-debug.html (new)
