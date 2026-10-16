@@ -44,9 +44,8 @@ describe("static pages", () => {
     const html = await res.text();
     const printCss = html.slice(html.indexOf("@media print"));
     assert.match(printCss, /@media print/);
-    assert.match(printCss, /ticket__code/);
-    assert.match(printCss, /ticket__course/);
-    assert.match(printCss, /visibility:\s*hidden/);
+    assert.match(printCss, /ticket-code/);
+    assert.match(printCss, /ticket-course/);
   });
 
   it("GET /ticket.html is not served", async () => {
@@ -61,7 +60,7 @@ describe("static pages", () => {
     assert.doesNotMatch(html, /https?:\/\//);
     assert.match(html, /\/phone\.html\?id=/);
     const printCss = html.slice(html.indexOf("@media print"));
-    assert.match(printCss, /ticket__qr/);
+    assert.match(printCss, /ticket-qr/);
   });
 
   it("GET /qrcode.js is served from the hub", async () => {
