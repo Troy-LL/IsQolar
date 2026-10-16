@@ -138,6 +138,12 @@ export function mount(el, { go }) {
 
   const live = (k) => el.querySelector(`[data-live="${k}"]`);
   function update() {
+    const netBtn = el.querySelector('[data-tool="net"]');
+    if (netBtn) {
+      const on = store.isOffline();
+      netBtn.textContent = `Simulate network loss: ${on ? 'on' : 'off'}`;
+      netBtn.setAttribute('aria-pressed', String(on));
+    }
     const b = store.boardView(['BSIT', 'BSCS', 'BSA']);
     live('hero').innerHTML = b.stalls.map((s, i) => `<span class="lp-tk lp-tk--${'abc'[i]}"><span class="lp-tk__ok">${ic('check', 14)}</span><span><b class="num">${s.serving != null ? lab(s.serving) : '—'}</b><small>Now serving · ${esc(s.code)}</small></span></span>`).join('');
     live('rows').innerHTML = ['BSIT', 'BSCS', 'BSA'].map((c) => { const p = prog(c); return `<div class="lp-row"><span class="lp-row__b">${esc(c.slice(0, 2))}</span><span class="lp-row__t"><b>Stall ${esc(c)}</b><small><span class="num">${p.inLine}</span> in line</small></span><span class="lp-row__r">${waitTxt(p.wait)}</span></div>`; }).join('');
@@ -154,7 +160,7 @@ export function mount(el, { go }) {
     const tl = e.target.closest('[data-tool]');
     if (tl) {
       if (tl.dataset.tool === 'reset') { store.resetAll(); tl.textContent = 'Reset done'; setTimeout(() => { tl.textContent = 'Reset the simulated morning'; }, 1600); }
-      else { const on = store.toggleOffline(); tl.textContent = `Simulate network loss: ${on ? 'on' : 'off'}`; tl.setAttribute('aria-pressed', String(on)); }
+      else { store.toggleOffline(); }
       return;
     }
     const g = e.target.closest('[data-go]'); if (g) return go(g.dataset.go);

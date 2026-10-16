@@ -12,6 +12,8 @@ button, input, select { font: inherit; color: inherit; }
 .pq-header { background: var(--maroon); color: var(--paper); height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 var(--space-4); border-bottom: var(--rule-gold) solid var(--gold); }
 .pq-header :focus-visible { outline-color: var(--gold); }
 .pq-brand { display: flex; align-items: center; gap: var(--space-2); }
+.pq-brand__link { display: flex; align-items: center; gap: var(--space-2); color: inherit; text-decoration: none; min-height: 44px; border-radius: 4px; }
+.pq-brand__link:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 .pq-lang { display: flex; gap: var(--space-1); }
 .pq-lang button { background: none; border: 0; color: var(--paper); min-width: 44px; min-height: 44px; cursor: pointer; font-family: var(--font-text); font-weight: 700; font-size: 16px; }
 .pq-lang button[aria-pressed="true"] { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px; }

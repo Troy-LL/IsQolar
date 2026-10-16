@@ -82,6 +82,12 @@ export async function init() {
   const reload = () => { state = load() || state; lastOk = Date.now(); notify(); };
   channel?.addEventListener('message', reload);
   window.addEventListener('storage', (e) => { if (e.key === KEY) reload(); });
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register(new URL('../sw.js', import.meta.url)).catch(() => {});
+  }
+  window.addEventListener('offline', () => setOffline(true));
+  window.addEventListener('online', () => setOffline(false));
+  if (!navigator.onLine) setOffline(true);
 }
 export function start() {                      // one shared clock for every mounted view
   if (started) return; started = true;
@@ -349,7 +355,8 @@ export function callMe(no) {
 }
 export function markDone(no) { const t = state.tickets[no]; if (t && state.stalls[t.stall].serving === no) staffMarkDone(t.stall); }
 export function resetAll() { localStorage.removeItem(KEY); localStorage.removeItem(ME); state = seed(); save(); notify(); }
-export function toggleOffline() { offline = !offline; if (!offline) lastOk = Date.now(); notify(); return offline; }
+export function setOffline(on) { offline = on; if (!offline) lastOk = Date.now(); notify(); }
+export function toggleOffline() { setOffline(!offline); return offline; }
 export const isOffline = () => offline;
 
 // ---- student: courses + explore ----

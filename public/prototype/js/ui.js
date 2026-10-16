@@ -10,7 +10,7 @@ export const placeLabel = (row) => t('stall.place', { row });
 export function header({ lang = true, label = '' } = {}) {
   const l = getLang();
   return `<header class="pq-header">
-    <div class="pq-brand"><img class="logo" src="/brand/logo-dark.png" alt=""><span class="heading-s">${t('app.name')}</span>${label ? `<span class="caption pq-header__label">${esc(label)}</span>` : ''}</div>
+    <div class="pq-brand"><a class="pq-brand__link" href="/prototype/" aria-label="${t('app.name')} home"><img class="logo" src="/brand/logo-dark.png" alt=""><span class="heading-s">${t('app.name')}</span></a>${label ? `<span class="caption pq-header__label">${esc(label)}</span>` : ''}</div>
     ${lang ? `<div class="pq-lang" role="group" aria-label="Language">
       <button type="button" data-lang="en" aria-pressed="${l === 'en'}" lang="en" aria-label="${t('lang.en')}">EN</button>
       <button type="button" data-lang="fil" aria-pressed="${l === 'fil'}" lang="fil" aria-label="${t('lang.fil')}">FIL</button>
