@@ -213,24 +213,33 @@ function buildingCoords(floorId) {
   return feat ? featCoords(feat) : mainCoords();
 }
 function floorSvgUrl(floorId) { return `maps/${floorId}.svg`; }
-function floorWebpUrl(floorId) { return `maps/${floorId}.webp`; }
+function declaredAssetUrl(path) {
+  return String(path || "").replace(/^public\//, "");
+}
+function assetExt(path) {
+  const m = /\.([a-z0-9]+)$/i.exec(path || "");
+  return m ? m[1].toLowerCase() : "";
+}
+async function headOk(url) {
+  if (!url) return false;
+  return fetch(url, { method: "HEAD" }).then((r) => r.ok).catch(() => false);
+}
 async function probeFloorAssets() {
   await Promise.all(S.floors.map(async (f) => {
-    const [svg, webp] = await Promise.all([
-      fetch(floorSvgUrl(f.id), { method: "HEAD" }).then((r) => r.ok).catch(() => false),
-      fetch(floorWebpUrl(f.id), { method: "HEAD" }).then((r) => r.ok).catch(() => false),
-    ]);
-    floorAssetOk.set(f.id, { svg, webp });
+    const url = declaredAssetUrl(f.image);
+    const ext = assetExt(f.image);
+    const ok = await headOk(url);
+    floorAssetOk.set(f.id, { svg: ok && ext === "svg", webp: ok && ext === "webp", image: ok, url });
   }));
 }
 function floorOnSwitcher(floorId) {
   if (HELD_FLOORS.has(floorId)) return false;
   const a = floorAssetOk.get(floorId);
-  return !!(a && a.svg && S.paths.floors[floorId]);
+  return !!(a && a.image && S.paths.floors[floorId]);
 }
 function floorDrawable(floorId) {
   const a = floorAssetOk.get(floorId);
-  return !!(a && (a.webp || a.svg));
+  return !!(a && a.image);
 }
 function buildingName(f) {
   const n = f.properties.name;
@@ -415,8 +424,15 @@ const FLOOR_EXT = new Map();
 async function floorPlan(floorId) {
   if (floorSvgCache.has(floorId)) return floorSvgCache.get(floorId).cloneNode(true);
   const assets = floorAssetOk.get(floorId);
-  if (!assets || !assets.svg) return null;
-  const imgUrl = assets.webp ? floorWebpUrl(floorId) : floorSvgUrl(floorId);
+  if (!assets || !assets.image) return null;
+  if (!assets.svg) {
+    const [W, H] = floorSize(floorId);
+    const wrap = svg("g", { class: "floor-svg", "data-floor": floorId });
+    wrap.append(svg("image", { href: assets.url, width: W, height: H, preserveAspectRatio: "none" }));
+    floorSvgCache.set(floorId, wrap);
+    return wrap.cloneNode(true);
+  }
+  const imgUrl = assets.url;
   const svgUrl = floorSvgUrl(floorId);
   try {
     const [W, H] = floorSize(floorId);
@@ -832,10 +848,10 @@ async function rasterSvg(url) {
 }
 async function floorImageUrl(floorId) {
   const assets = floorAssetOk.get(floorId);
-  if (!assets) return null;
-  if (assets.webp) return floorWebpUrl(floorId);
-  if (assets.svg) return rasterSvg(floorSvgUrl(floorId));
-  return null;
+  if (!assets || !assets.image) return null;
+  if (assets.webp) return assets.url;
+  if (assets.svg) return rasterSvg(assets.url);
+  return assets.url;
 }
 function destPinEl() {
   const e = el("div", { class: "dpin" });
