@@ -1,6 +1,6 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { stat } from "node:fs/promises";
 import { projectFloor, unprojectFloor } from "../public/floor-geo.js";
 
@@ -65,6 +65,21 @@ describe("floor overlay corners", () => {
         assert.ok(Math.abs(backV - v) < 1e-6, `${floor.id} v`);
       }
     }
+  });
+});
+
+describe("floor asset probe", () => {
+  it("checks the image floors.json declares, not a guessed svg and webp", () => {
+    const js = readFileSync("public/map.js", "utf8");
+    const start = js.indexOf("async function probeFloorAssets");
+    const end = js.indexOf("function floorOnSwitcher");
+    const fn = js.slice(start, end);
+    assert.ok(start >= 0 && end > start);
+    assert.equal(fn.includes("floorSvgUrl"), false);
+    assert.equal(fn.includes("floorWebpUrl"), false);
+    assert.match(fn, /f\.image/);
+    const floors = JSON.parse(readFileSync("data/floors.json", "utf8")) as { id: string; image: string }[];
+    for (const floor of floors) assert.equal(existsSync(floor.image), true, floor.id);
   });
 });
 
