@@ -35,7 +35,6 @@ export function mount(el, { go }) {
 
   el.innerHTML = `<div class="lp">
     <section class="lp-hero" id="top">
-      <span class="lp-badge"><span class="lp-dot"></span>Prototype · built for PUP Manila freshman enrollment</span>
       <h1 class="lp-h1">Turn your ${chip('ticket')} enrollment day<br>into a line you can see</h1>
       <p class="lp-lead">One ticket from check-in to “You’re fully enrolled”. See your place in line, about how long it will take, and when you can step away.</p>
       <div class="lp-cta"><button type="button" class="lp-btn" data-go="student">Get my ticket ${ic('arrow', 18)}</button><a class="lp-btn lp-btn--ghost" href="/chat.html">Chat</a><a class="lp-btn lp-btn--ghost" href="/map.html">Map</a><button type="button" class="lp-btn lp-btn--ghost" data-go="board">See the board</button></div>
@@ -98,7 +97,7 @@ export function mount(el, { go }) {
     </section>
 
     <section class="lp-sec lp-sec--tight">
-      <div class="lp-banner"><div class="lp-banner__txt"><span class="lp-pill lp-pill--inv">No surprises</span><h2 class="lp-h2 lp-h2--inv">No install. ${chip('wifi')} No login. No guessing.</h2>
+      <div class="lp-banner"><div class="lp-banner__txt"><span class="lp-pill lp-pill--inv">No surprises</span><h2 class="lp-h2 lp-h2--inv">No install. ${chip('wifi')} Login with your permit. No guessing.</h2>
         <p class="lp-p lp-p--inv">Built for the day: a phone browser, a ticket the check-in desk can create, and a board everyone can read.</p></div>
         <div class="lp-banner__card"><p class="lp-h3">Made for the venue</p><ul class="lp-checks"><li>${ic('check', 18)} Opens in any phone browser</li><li>${ic('check', 18)} Runs on the venue’s local network</li><li>${ic('check', 18)} Staff-assisted check-in for students without phones</li><li>${ic('check', 18)} English and Filipino</li><li>${ic('check', 18)} Accessibility settings built in</li></ul></div></div>
     </section>
