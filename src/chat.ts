@@ -37,6 +37,7 @@ interface FloorEntry {
   building: string;
   floor: string;
   label: string;
+  hidden?: boolean;
 }
 
 function collectCodes(node: unknown, out: Set<string>): void {
@@ -72,18 +73,43 @@ const demoQa = (loadJson("../public/chat/demo-qa.json") as DemoQa[] | null) ?? [
 const roomsData = (loadJson("../docs/floorplans/rooms.json") as RoomEntry[] | null) ?? [];
 const floorsData = (loadJson("../data/floors.json") as FloorEntry[] | null) ?? [];
 
-/** Parse courses.csv into college -> courses mapping. */
+function csvFields(line: string): string[] {
+  const fields: string[] = [];
+  let field = "";
+  let quoted = false;
+  const text = line.replace(/\r$/, "");
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (ch === '"') {
+      if (quoted && text[i + 1] === '"') {
+        field += '"';
+        i++;
+      } else {
+        quoted = !quoted;
+      }
+    } else if (ch === "," && !quoted) {
+      fields.push(field);
+      field = "";
+    } else {
+      field += ch;
+    }
+  }
+  fields.push(field);
+  return fields;
+}
+
 function parseCourses(csv: string): string {
   const lines = csv.split("\n").slice(1).filter((l) => l.trim());
   const colleges = new Map<string, { name: string; courses: string[] }>();
   for (const line of lines) {
-    const cols = line.split(",");
-    const acronym = cols[1]?.replace(/"/g, "").trim();
-    const unitName = cols[2]?.replace(/"/g, "").trim();
-    const courseName = cols[5]?.replace(/"/g, "").trim();
+    const cols = csvFields(line);
+    const acronym = cols[1]?.trim();
+    const unitName = cols[2]?.trim();
+    const courseName = cols[5]?.trim();
     if (!acronym || !unitName || !courseName) continue;
-    if (!colleges.has(acronym)) colleges.set(acronym, { name: unitName, courses: [] });
-    colleges.get(acronym)!.courses.push(courseName);
+    const college = colleges.get(acronym);
+    if (college) college.courses.push(courseName);
+    else colleges.set(acronym, { name: unitName, courses: [courseName] });
   }
   return [...colleges.entries()]
     .map(([acr, c]) => `${c.name} (${acr}): ${c.courses.join(", ")}`)
@@ -143,6 +169,7 @@ function buildOfficeDirectory(): string {
 /** Build buildings reference from floors.json. */
 function buildBuildingsReference(): string {
   return floorsData
+    .filter((f) => !f.hidden)
     .map((f) => `${f.building} — ${f.floor} (floor plan id: ${f.id})`)
     .join("\n");
 }

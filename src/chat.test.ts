@@ -1,7 +1,7 @@
 import { describe, it, before, after, afterEach } from "node:test";
 import assert from "node:assert/strict";
 import type { AddressInfo } from "node:net";
-import { chat, sanitizeLinks, GROQ_URL } from "./chat.js";
+import { buildSystemPrompt, chat, sanitizeLinks, GROQ_URL } from "./chat.js";
 import { app } from "./server.js";
 
 const KEY = "gsk_test_secret_value_123";
@@ -108,5 +108,13 @@ describe("chat page", () => {
     const res = await fetch(`${url}/api/chat`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(ok) });
     if (saved !== undefined) process.env.GROQ_API_KEY = saved;
     assert.equal(res.status, 503);
+  });
+
+  it("names courses from quoted college names and skips hidden floors", () => {
+    const prompt = buildSystemPrompt();
+    assert.match(prompt, /Interior Design/);
+    assert.match(prompt, /Tourism Management/);
+    assert.match(prompt, /Transportation Management/);
+    assert.doesNotMatch(prompt, /Psychology Building/);
   });
 });
