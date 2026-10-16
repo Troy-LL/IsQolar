@@ -3,6 +3,7 @@ import { randomUUID } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { join, dirname } from "node:path";
 import type { Ticket, TicketDetail, Stall, AdminSummary, HealthResponse, Station, GuardianStatus, TicketStatus } from "./contract.js";
+import { chat } from "./chat.js";
 import { getStore, hubFileLoaded, type StoredTicket } from "./store.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -15,6 +16,12 @@ app.get("/", (_req, res) => {
 app.use(express.static(join(__dirname, "../public")));
 app.use("/data", express.static(join(__dirname, "../data")));
 app.use("/vendor/maplibre", express.static(join(__dirname, "../node_modules/maplibre-gl/dist")));
+
+// POST /api/chat
+app.post("/api/chat", async (req, res) => {
+  const out = await chat(req.body);
+  res.status(out.status).json(out.body);
+});
 
 // GET /health
 app.get("/health", (_req, res) => {

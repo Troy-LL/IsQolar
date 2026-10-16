@@ -674,6 +674,15 @@ Done when: the test fails when a locked route's steps or point list change, and 
 When the done-when line is true, run npm run check. Open a pull request into main. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
+### W4. Hidden chatbot
+
+- Goal: A ChatGPT-style page at /chat.html answers PUP Manila questions about the three IsQolar features (FAQ, Room TBA map, queue), with a Play demo button for the prerecorded Q&A.
+- Files: src/chat.ts (new), src/chat.test.ts (new), src/server.ts (POST /api/chat only), public/chat.html (new), public/chat/demo-qa.json and public/chat/audio/*.mp3 (new), render.yaml
+- Depends on: none. Render needs GROQ_API_KEY set in its dashboard.
+- Done when: POST /api/chat proxies to Groq with the key from process.env.GROQ_API_KEY only (503 without it, 502 upstream failure, 400 bad input), room links only use codes in data/paths.json, chat.html is not linked from any page, and Play demo plays and types all six Q&A pairs with no API calls.
+- Branch: `troy/w4-chat`
+- Owner: Troy
+
 # Donita
 
 Staff tablet, the hub laptop, and tomorrow's offline queue. Floor images are Troy's RT1, taken from Viv, so this night stays on `public/staff.html` and the hub.
