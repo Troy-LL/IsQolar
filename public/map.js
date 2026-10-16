@@ -169,12 +169,37 @@ async function flyTo(opts) {
   else map.flyTo({ curve: 1.3, easing: EASE_IO, ...opts, padding, duration: flyDur(opts.duration || 1400), essential: true });
   await done;
 }
-// Fit the outdoor camera to one leg: 48px padding, peek height at the bottom, 600ms easeInOutCubic.
-async function fitLeg(coords) {
+// Outdoor fit: MapLibre cameraForBounds returns null for object padding after an overlay room
+// focus, so use a uniform pad then pan up by a fraction of the sheet height.
+async function fitLeg(coords, kind = "indoor") {
+  const box = lngLatBox(coords);
+  if (kind === "outdoor") {
+    map.stop();
+    const done = moveDone(700);
+    const opts = { padding: 56, bearing: -25, pitch: 0, maxZoom: 17.6, essential: true };
+    if (RM) map.fitBounds(box, { ...opts, duration: 0 });
+    else map.fitBounds(box, { ...opts, duration: flyDur(500), easing: EASE_IO });
+    await done;
+    if (!$("sheet").hidden && innerWidth < 900) {
+      const dy = Math.round(snapPx() * 0.3);
+      const done2 = moveDone(280);
+      map.panBy([0, dy], { duration: RM ? 0 : flyDur(220) });
+      await done2;
+    }
+    return;
+  }
   const padding = legPad();
   const bearing = map.getBearing();
-  const cam = map.cameraForBounds(lngLatBox(coords), { padding, bearing, maxZoom: 18.4 });
-  if (!cam) return;
+  let cam = map.cameraForBounds(box, { padding, bearing, maxZoom: 18.4 });
+  // Fallback: object padding can fail after overlay focus; uniform pad still works.
+  if (!cam) cam = map.cameraForBounds(box, { padding: 48, bearing, maxZoom: 18.4 });
+  if (!cam) {
+    const done = moveDone(600);
+    if (RM) map.fitBounds(box, { padding: 48, bearing, pitch: 30, maxZoom: 18.4, duration: 0 });
+    else map.fitBounds(box, { padding: 48, bearing, pitch: 30, maxZoom: 18.4, duration: flyDur(600), easing: EASE_IO });
+    await done;
+    return;
+  }
   const done = moveDone(600);
   const opts = { center: cam.center, zoom: cam.zoom - 0.2, pitch: 30, bearing, padding: { top: 0, left: 0, right: 0, bottom: 0 } };
   if (RM) map.jumpTo(opts);
@@ -234,12 +259,21 @@ async function probeFloorAssets() {
 }
 function floorOnSwitcher(floorId) {
   if (HELD_FLOORS.has(floorId)) return false;
+  const row = floorRow(floorId);
+  if (row && row.hidden) return false;
   const a = floorAssetOk.get(floorId);
   return !!(a && a.image && S.paths.floors[floorId]);
 }
 function floorDrawable(floorId) {
+  const row = floorRow(floorId);
+  if (row && row.hidden) return false;
+  if (HELD_FLOORS.has(floorId)) return false;
   const a = floorAssetOk.get(floorId);
   return !!(a && a.image);
+}
+function floorsForOsm(osm) {
+  if (!osm) return [];
+  return S.floors.filter((f) => f.osm === osm && floorDrawable(f.id) && floorCorners(f.id));
 }
 function buildingName(f) {
   const n = f.properties.name;
@@ -969,21 +1003,45 @@ async function enterOverlay(floorId) {
   if (feat) highlight(feat);
   if (map.getLayer("pup-roof-sel")) map.setPaintProperty("pup-roof-sel", "fill-extrusion-opacity", 0);
   dimBuilding(feat && feat.properties.osm);
+  const finishChrome = () => {
+    S.overlay = true;
+    syncOverlayGraphics(floorId);
+    $("back").hidden = false;
+    $("floors").hidden = false;
+    syncCompass();
+    drawFloorTabs();
+    const f = floorRow(floorId);
+    $("where").textContent = `${buildingLabel(f)} · ${floorShort(f)}`;
+    stage("indoor");
+  };
+  // First entry: fly the outdoor camera, then drape the floor mid-flight (same beat as the SVG enter path).
+  // Showing the raster before the fly made mobile look like a hard cut after RT29/RT35.
+  if (first && map && !RM) {
+    const corners = floorCorners(floorId);
+    const coords = corners || buildingCoords(floorId);
+    const [[w, so], [e, n]] = lngLatBox(coords);
+    const bearing = feat && feat.properties.main ? axisBearing() : map.getBearing();
+    const pitch = params.has("pitch") ? Number(params.get("pitch")) : 0;
+    const flight = flyTo({ center: [(w + e) / 2, (so + n) / 2], zoom: 18.6, pitch, bearing, duration: FLY_IN, curve: 1.4 });
+    await wait(FLY_IN * 0.55);
+    const shown = await showFloorImage(floorId);
+    if (!shown) {
+      restoreBuildings();
+      S.overlay = false;
+      await flight;
+      return false;
+    }
+    finishChrome();
+    await flight;
+    return true;
+  }
   const shown = await showFloorImage(floorId);
   if (!shown) {
     restoreBuildings();
     S.overlay = false;
     return false;
   }
-  S.overlay = true;
-  syncOverlayGraphics(floorId);
-  $("back").hidden = false;
-  $("floors").hidden = false;
-  syncCompass();
-  drawFloorTabs();
-  const f = floorRow(floorId);
-  $("where").textContent = `${buildingLabel(f)} · ${floorShort(f)}`;
-  stage("indoor");
+  finishChrome();
   if (first) await flyFootprint(floorId, FLY_IN);
   return true;
 }
@@ -1043,7 +1101,7 @@ async function enterBuilding(floorId) {
   $("where").textContent = `${buildingLabel(f)} · ${floorShort(f)}`;
   stage("indoor");
 }
-async function exitBuilding() {
+async function exitBuilding(opts = {}) {
   if (map && map.getLayer("pup-roof-sel")) map.setPaintProperty("pup-roof-sel", "fill-extrusion-opacity", 0.8);
   const was = S.inside || S.overlay;
   clearOverlay();
@@ -1057,7 +1115,8 @@ async function exitBuilding() {
   $("pin").hidden = true;
   $("arrive").hidden = true;
   $("where").textContent = "PUP Main · Sta. Mesa";
-  if (map) await fitTo(featCoords(S.campus.campus), { pitch: 55, maxZoom: 17.2, duration: 900 });
+  // Route step 1 fits the outdoor leg itself; skip the campus overview so the line is not left off-screen.
+  if (map && !opts.skipFit) await fitTo(featCoords(S.campus.campus), { pitch: 55, maxZoom: 17.2, duration: 900 });
   syncCompass();
   syncOutdoorPins();
   stage("outdoor");
@@ -1181,7 +1240,14 @@ async function selectBuilding(f) {
   S.route = null;
   drawOutdoor();
   const p = f.properties;
+  const mapped = floorsForOsm(p.osm);
   if (p.main) openSheet({ crumb: "PUP Main · Sta. Mesa", title: "PUP Main Building", sub: "Floors 1F, 4F, 5F mapped inside", inside: true, flag: S.campus.entrance.note || "" });
+  else if (mapped.length) openSheet({
+    crumb: "PUP Main · Sta. Mesa",
+    title: buildingName(f) || "Building",
+    sub: mapped.map((x) => floorShort(x)).join(", ") + " mapped inside",
+    inside: true,
+  });
   else openSheet({ crumb: "PUP Main · Sta. Mesa", title: buildingName(f) || "Building", sub: "No floor plan yet" });
   $("dir").hidden = true;
   if (S.inside || S.overlay) await exitBuilding();
@@ -1373,6 +1439,7 @@ function mountFrom() {
 }
 function directions() {
   if (!S.sel || !S.sel.room) return;
+  if (map) map.stop();
   const r = planCampusRoute(S.paths, S.stairs, S.floors, S.campus, S.sel.room.id, selectedFrom());
   const list = $("steps");
   list.replaceChildren();
@@ -1409,12 +1476,18 @@ async function goStep(i) {
   if (cur) cur.scrollIntoView({ block: "nearest" });
   const s = S.route.steps[S.step];
   if (s.floorId === "outdoor") {
-    if (S.inside || S.overlay) await exitBuilding();
+    if (S.inside || S.overlay) await exitBuilding({ skipFit: true });
+    highlight(null);
+    setSnap("half");
     drawOutdoor();
-    const leg = S.route.legs[0];
-    if (map) await fitLeg(leg.points.map((q) => [q.x, q.y]));
+    const leg = S.route.legs.find((l) => l.floorId === "outdoor") || S.route.legs[0];
+    if (map) {
+      map.stop();
+      await fitLeg(leg.points.map((q) => [q.x, q.y]), "outdoor");
+    }
     return;
   }
+  setSnap("half");
   await enterBuilding(s.floorId);
   await drawIndoor(s.floorId);
   await focusIndoor();
@@ -1624,7 +1697,11 @@ async function load() {
   setupSheet();
   $("compass").addEventListener("click", () => map && (RM ? map.jumpTo({ bearing: 0 }) : map.easeTo({ bearing: 0, duration: 300 * SLOW })));
   $("dir").addEventListener("click", directions);
-  $("inside").addEventListener("click", () => showFloor(floors[0].id));
+  $("inside").addEventListener("click", () => {
+    const osm = S.sel && S.sel.building && S.sel.building.properties.osm;
+    const mapped = floorsForOsm(osm);
+    showFloor((mapped[0] && mapped[0].id) || floors.find((f) => floorOnSwitcher(f.id))?.id || floors[0].id);
+  });
   $("prev").addEventListener("click", () => goStep(S.step - 1));
   $("next").addEventListener("click", () => (S.step === S.route.steps.length - 1 ? closeSheet() : goStep(S.step + 1)));
   $("zoomIn").addEventListener("click", () => zoomBy(1.4));

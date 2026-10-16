@@ -673,6 +673,14 @@ Done when: public/maps/psych-gf.svg traces that photo and public/maps/psych-gf.w
 When the done-when line is true, run npm run check. Open a pull request into main. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
+### RT38. Mobile fly-in and first-step route
+- Goal: searching a Main room on a phone plays the fly-in into the building again, and step 1 of a gate route shows the outdoor walk line in view.
+- Files: public/map.js, src/map-route-cam.test.ts (new), docs/delegation.md.
+- Depends on: RT29 and RT35 on main (overlay path with Main corners).
+- Done when: enterOverlay flies the outdoor camera before draping the floor mid-flight; outdoor goStep skips the campus overview, fits the gate walk with uniform padding and pitch 0 (object padding returns null after overlay focus on MapLibre 5), then pans up for the sheet; buildings with draped floors (gym, library) get Go inside; npm run check passes.
+- Branch: `troy/rt38-route-fly`
+- Owner: Troy
+
 ### RT37. Stairs, repeated points and other buildings
 - Goal: every Main room routes from the 1F lobby with no zero-length step, and a room in another building gets an honest message instead of a stair route.
 - Files: public/route.js, src/route-allpairs.test.ts (new), src/route-regression.test.ts (lock refresh).
