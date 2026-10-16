@@ -82,7 +82,7 @@ describe("static pages", () => {
     const res = await fetch(`${url}/map.html`);
     assert.equal(res.status, 200);
     const html = await res.text();
-    assert.match(html, /href="\/checkin\.html"/);
+    assert.match(html, /href="\/prototype\/#student"/);
     assert.match(html, /href="\/chat\.html"/);
     assert.match(html, /href="\/prototype\/"/);
     assert.match(html, /Home/);
