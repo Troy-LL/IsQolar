@@ -795,7 +795,7 @@ function drawLabels() {
     const room = S.sel && S.sel.room;
     shown.push({ ...scr(ix.dest), kind: "room", label: room ? roomDisplay(room) : "", selected: true, dest: true });
   }
-  drawMapPins($("indoor"), { zoom: z, building: $("where").textContent, pins: shown });
+  drawMapPins($("indoor"), { zoom: z, building: "", pins: shown });
 }
 
 function syncOutdoorPins() {
@@ -858,10 +858,10 @@ const FLY_IN = 1400;
 function dimBuilding(osmId) {
   const id = osmId || "";
   map.setPaintProperty("pup-3d", "fill-extrusion-height", ["case", ["==", ["get", "osm"], id], 0.15, ["-", ["get", "height"], 0.3]]);
-  map.setPaintProperty("pup-3d", "fill-extrusion-opacity", ["case", ["==", ["get", "osm"], id], 0.28, 0.95]);
+  map.setPaintProperty("pup-3d", "fill-extrusion-opacity", ["case", ["==", ["get", "osm"], id], 0, 0.95]);
   map.setPaintProperty("pup-roof", "fill-extrusion-base", ["case", ["==", ["get", "osm"], id], 0.15, ["-", ["get", "height"], 0.3]]);
   map.setPaintProperty("pup-roof", "fill-extrusion-height", ["case", ["==", ["get", "osm"], id], 0.35, ["get", "height"]]);
-  map.setPaintProperty("pup-roof", "fill-extrusion-opacity", ["case", ["==", ["get", "osm"], id], 0.35, 1]);
+  map.setPaintProperty("pup-roof", "fill-extrusion-opacity", ["case", ["==", ["get", "osm"], id], 0, 1]);
 }
 function restoreBuildings() {
   if (!map || !map.getLayer("pup-3d")) return;
@@ -875,7 +875,6 @@ function clearOverlay() {
   S.overlay = false;
   if (destMarker) destMarker.remove();
   if (!map || !map.getSource("floor-plan")) return;
-  if (map.getLayer("floor-mat")) map.setLayoutProperty("floor-mat", "visibility", "none");
   map.setLayoutProperty("floor-raster", "visibility", "none");
   map.getSource("floor-route").setData(EMPTY_FC);
   map.getSource("floor-stairs").setData(EMPTY_FC);
@@ -934,15 +933,8 @@ function onFloorPlanClick(e) {
   }
   if (best) selectRoom({ ...best, floorId: S.floorId });
 }
-function floorQuad(coordinates) {
-  const ring = coordinates.map((c) => [c[0], c[1]]);
-  const first = ring[0];
-  const last = ring[ring.length - 1];
-  if (!last || first[0] !== last[0] || first[1] !== last[1]) ring.push([first[0], first[1]]);
-  return { type: "FeatureCollection", features: [{ type: "Feature", properties: {}, geometry: { type: "Polygon", coordinates: [ring] } }] };
-}
 function raiseFloorDraw() {
-  for (const id of ["floor-mat", "floor-raster", "floor-route-case", "floor-route", "floor-stairs"]) {
+  for (const id of ["floor-raster", "floor-route-case", "floor-route", "floor-stairs"]) {
     if (map.getLayer(id)) map.moveLayer(id);
   }
 }
@@ -951,8 +943,6 @@ async function showFloorImage(floorId) {
   const coordinates = floorCorners(floorId);
   if (!url || !coordinates || !map) return false;
   if (!map.getSource("floor-plan")) {
-    map.addSource("floor-mat", { type: "geojson", data: floorQuad(coordinates) });
-    map.addLayer({ id: "floor-mat", type: "fill", source: "floor-mat", paint: { "fill-color": "#E7E1DB", "fill-opacity": 1 } });
     map.addSource("floor-plan", { type: "image", url, coordinates });
     map.addLayer({ id: "floor-raster", type: "raster", source: "floor-plan", paint: { "raster-opacity": 1, "raster-fade-duration": 0 } });
     map.addSource("floor-route", { type: "geojson", data: EMPTY_FC });
@@ -974,8 +964,6 @@ async function showFloorImage(floorId) {
     map.on("mouseenter", "floor-raster", () => (map.getCanvas().style.cursor = "pointer"));
     map.on("mouseleave", "floor-raster", () => (map.getCanvas().style.cursor = ""));
   } else {
-    map.setLayoutProperty("floor-mat", "visibility", "visible");
-    map.getSource("floor-mat").setData(floorQuad(coordinates));
     map.setLayoutProperty("floor-raster", "visibility", "visible");
     map.getSource("floor-plan").updateImage({ url, coordinates });
   }
@@ -1057,7 +1045,6 @@ async function enterOverlay(floorId) {
     syncCompass();
     drawFloorTabs();
     const f = floorRow(floorId);
-    $("where").textContent = `${buildingLabel(f)} · ${floorShort(f)}`;
     stage("indoor");
     drawOutdoor();
   };
@@ -1106,13 +1093,11 @@ async function enterBuilding(floorId) {
     highlight(feat);
     const fade = async () => {
       stage("crossfade");
-      const chip = $("where");
       // selected roof red fades out over the first 200ms of the crossfade
       if (map && map.getLayer("pup-roof-sel")) {
         map.setPaintProperty("pup-roof-sel", "fill-extrusion-opacity-transition", { duration: RM ? 0 : 200 * SLOW, delay: 0 });
         map.setPaintProperty("pup-roof-sel", "fill-extrusion-opacity", 0);
       }
-      if (!RM) await chip.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 150 * SLOW, fill: "forwards" }).finished;
       await drawIndoor(floorId);
       setCam("indoor", fitCam(floorBox(floorId)));
       S.inside = true;
@@ -1121,9 +1106,6 @@ async function enterBuilding(floorId) {
       $("floors").hidden = false;
       syncCompass();
       await wait(350);
-      const f0 = S.floors.find((x) => x.id === floorId);
-      chip.textContent = `${buildingLabel(f0)} · ${floorShort(f0)}`;
-      if (!RM) await chip.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200 * SLOW, fill: "forwards" }).finished;
     };
     if (map && !RM) {
       const feat = floorFeature(floorId);
@@ -1145,7 +1127,6 @@ async function enterBuilding(floorId) {
   }
   drawFloorTabs();
   const f = S.floors.find((x) => x.id === floorId);
-  $("where").textContent = `${buildingLabel(f)} · ${floorShort(f)}`;
   stage("indoor");
 }
 async function exitBuilding(opts = {}) {
@@ -1161,7 +1142,6 @@ async function exitBuilding(opts = {}) {
   $("floors").hidden = true;
   $("pin").hidden = true;
   $("arrive").hidden = true;
-  $("where").textContent = "PUP Main · Sta. Mesa";
   // Route step 1 fits the outdoor leg itself; skip the campus overview so the line is not left off-screen.
   if (map && !opts.skipFit) await fitTo(featCoords(S.campus.campus), { pitch: 55, maxZoom: 17.2, duration: 900 });
   syncCompass();
@@ -1392,7 +1372,6 @@ function renderFromCards() {
 }
 let fromGen = 0;
 function openFrom() {
-  closeMenu();
   const layer = $("from-layer");
   if (!layer || !layer.hidden) return;
   const gen = ++fromGen;
@@ -1425,49 +1404,6 @@ function closeFrom() {
   }
   layer.classList.remove("open");
   const panel = $("from-panel");
-  let done = false;
-  const end = (e) => {
-    if (e && e.target !== panel) return;
-    if (done) return;
-    done = true;
-    panel.removeEventListener("transitionend", end);
-    finish();
-  };
-  panel.addEventListener("transitionend", end);
-  setTimeout(end, 400);
-}
-let menuGen = 0;
-function openMenu() {
-  closeFrom();
-  $("results").hidden = true;
-  const gen = ++menuGen;
-  $("menu").setAttribute("aria-expanded", "true");
-  const layer = $("menu-layer");
-  layer.hidden = false;
-  requestAnimationFrame(() => {
-    if (gen !== menuGen) return;
-    layer.classList.add("open");
-  });
-  $("menu-panel").querySelector("a").focus();
-}
-function closeMenu() {
-  const layer = $("menu-layer");
-  if (!layer || layer.hidden) return;
-  const gen = ++menuGen;
-  $("menu").setAttribute("aria-expanded", "false");
-  const finish = () => {
-    if (gen !== menuGen) return;
-    const back = layer.contains(document.activeElement);
-    layer.hidden = true;
-    layer.classList.remove("open");
-    if (back) $("menu").focus();
-  };
-  if (RM) {
-    finish();
-    return;
-  }
-  layer.classList.remove("open");
-  const panel = $("menu-panel");
   let done = false;
   const end = (e) => {
     if (e && e.target !== panel) return;
@@ -1773,20 +1709,12 @@ async function load() {
   Object.assign(S, { floors, paths, stairs, campus, rooms: allRooms(paths) });
   await probeFloorAssets();
   mountFrom();
-  $("menu").addEventListener("click", () => ($("menu").getAttribute("aria-expanded") === "true" ? closeMenu() : openMenu()));
-  $("menu-scrim").addEventListener("click", closeMenu);
-  $("menu-layer").addEventListener("keydown", (e) => {
-    if (e.key !== "Escape") return;
-    e.preventDefault();
-    closeMenu();
-  });
   setCam("indoor", { x: 0, y: 0, w: 1000, h: 1000 });
   if (window.maplibregl) await initMap();
   if (SLOW > 1) document.body.classList.add("slow");
 
   $("q").addEventListener("input", renderResults);
   $("q").addEventListener("focus", () => {
-    closeMenu();
     closeFrom();
     renderResults();
   });
