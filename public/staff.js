@@ -508,6 +508,7 @@
       return;
     }
     calledTicket = { id: next.id, code: next.code, name: next.name, course: next.course, sync: 'waiting' };
+    if (next.skippedAt) calledTicket.skippedAt = next.skippedAt;
     lsSet(lsKey, calledTicket);
     var item = { id: makeSyncId(), action: 'next', stall: stallId, ticketId: null, savedAt: new Date().toISOString(), syncedLater: false };
     list.push(item);
@@ -899,6 +900,7 @@
             markSynced(item);
             if (calledTicket && calledTicket.id === E) {
               calledTicket = Object.assign({}, calledTicket, { sync: 'synced' });
+              if (t.skippedAt) calledTicket.skippedAt = t.skippedAt; else delete calledTicket.skippedAt;
               lsSet(lsKey, calledTicket);
             }
             step(rest);
@@ -915,6 +917,7 @@
                   markSynced(item);
                   if (calledTicket && calledTicket.id === E) {
                     calledTicket = Object.assign({}, calledTicket, { sync: 'synced' });
+                    if (r2.body.skippedAt) calledTicket.skippedAt = r2.body.skippedAt; else delete calledTicket.skippedAt;
                     lsSet(lsKey, calledTicket);
                   }
                   step(rest);
