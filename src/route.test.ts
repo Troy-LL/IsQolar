@@ -264,7 +264,8 @@ describe("map routing data", () => {
   });
 
   it("every floor has stairs and a connected path graph", () => {
-    for (const floor of floors) {
+    // A hidden floor (psych-gf) is traced but has no footprint or route data yet.
+    for (const floor of floors.filter((row) => !(row as { hidden?: boolean }).hidden)) {
       const graph = paths.floors[floor.id];
       assert.ok(graph, `${floor.id} has no path graph`);
       const entry = stairs.floors[floor.id];
