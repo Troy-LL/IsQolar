@@ -6502,7 +6502,7 @@
         },
         {
           "id": "main-2f-network-operations-center-server-room-s8",
-          "label": "Network Operations Center \u2013 Server Room (S8)",
+          "label": "Network Operations Center – Server Room (S8)",
           "kind": "office",
           "x": 0.276,
           "y": 0.6696,
@@ -6639,327 +6639,274 @@
       ]
     },
     "gym-gf": {
-      "aspect": 1.3333,
+      "aspect": 0.7529,
+      "svgSize": [
+        1280,
+        1700
+      ],
       "start": "start",
       "nodes": [
         {
-          "id": "l0",
-          "x": 0.222,
-          "y": 0.2464,
+          "id": "start",
+          "x": 0.4844,
+          "y": 0.1941,
+          "kind": "start"
+        },
+        {
+          "id": "c0",
+          "x": 0.4766,
+          "y": 0.2647,
           "kind": "corridor"
         },
         {
-          "id": "l1",
-          "x": 0.2251,
-          "y": 0.3304,
+          "id": "c1",
+          "x": 0.4766,
+          "y": 0.3382,
           "kind": "corridor"
         },
         {
-          "id": "l2",
-          "x": 0.2282,
-          "y": 0.4144,
+          "id": "c2",
+          "x": 0.2656,
+          "y": 0.3382,
           "kind": "corridor"
         },
         {
-          "id": "l3",
-          "x": 0.2313,
-          "y": 0.4984,
+          "id": "c8",
+          "x": 0.2656,
+          "y": 0.5471,
           "kind": "corridor"
         },
         {
-          "id": "l4",
-          "x": 0.2344,
-          "y": 0.5824,
+          "id": "c3",
+          "x": 0.2656,
+          "y": 0.7441,
           "kind": "corridor"
         },
         {
-          "id": "m0",
-          "x": 0.284,
-          "y": 0.3904,
+          "id": "c4",
+          "x": 0.4766,
+          "y": 0.7441,
           "kind": "corridor"
         },
         {
-          "id": "m1",
-          "x": 0.3584,
-          "y": 0.3885,
+          "id": "c5",
+          "x": 0.7031,
+          "y": 0.7441,
           "kind": "corridor"
         },
         {
-          "id": "m2",
-          "x": 0.4328,
-          "y": 0.3866,
+          "id": "c7",
+          "x": 0.7031,
+          "y": 0.5588,
           "kind": "corridor"
         },
         {
-          "id": "m3",
-          "x": 0.5072,
-          "y": 0.3846,
-          "kind": "corridor"
-        },
-        {
-          "id": "m4",
-          "x": 0.5816,
-          "y": 0.3827,
-          "kind": "corridor"
-        },
-        {
-          "id": "m5",
-          "x": 0.656,
-          "y": 0.3808,
-          "kind": "corridor"
-        },
-        {
-          "id": "r0",
-          "x": 0.6808,
-          "y": 0.2464,
-          "kind": "corridor"
-        },
-        {
-          "id": "r1",
-          "x": 0.6849,
-          "y": 0.352,
-          "kind": "corridor"
-        },
-        {
-          "id": "r2",
-          "x": 0.6891,
-          "y": 0.4576,
-          "kind": "corridor"
-        },
-        {
-          "id": "r3",
-          "x": 0.6932,
-          "y": 0.5632,
+          "id": "c6",
+          "x": 0.7031,
+          "y": 0.3382,
           "kind": "corridor"
         },
         {
           "id": "gym-gf-drop-off-area",
-          "x": 0.1724,
-          "y": 0.3904,
+          "x": 0.5,
+          "y": 0.0494,
           "kind": "room"
         },
         {
           "id": "gym-gf-stock-room-equipment-storage",
-          "x": 0.2096,
-          "y": 0.2656,
+          "x": 0.7402,
+          "y": 0.1494,
           "kind": "room"
         },
         {
           "id": "gym-gf-he-male-cr-x2",
-          "x": 0.1972,
-          "y": 0.232,
+          "x": 0.8438,
+          "y": 0.1494,
           "kind": "room"
         },
         {
           "id": "gym-gf-lobby-porch",
-          "x": 0.2096,
-          "y": 0.3424,
+          "x": 0.5488,
+          "y": 0.1494,
           "kind": "room"
         },
         {
           "id": "gym-gf-elec-room",
-          "x": 0.2096,
-          "y": 0.496,
+          "x": 0.252,
+          "y": 0.1494,
           "kind": "room"
         },
         {
           "id": "gym-gf-she-female-cr-x2",
-          "x": 0.1972,
-          "y": 0.5536,
+          "x": 0.0996,
+          "y": 0.1494,
           "kind": "room"
         },
         {
           "id": "gym-gf-porch",
-          "x": 0.222,
-          "y": 0.592,
+          "x": 0.0422,
+          "y": 0.2824,
           "kind": "room"
         },
         {
           "id": "gym-gf-badminton-court-x2",
-          "x": 0.2964,
-          "y": 0.4,
+          "x": 0.2422,
+          "y": 0.2721,
           "kind": "room"
         },
         {
           "id": "gym-gf-basketball-court",
-          "x": 0.4576,
-          "y": 0.3904,
+          "x": 0.4844,
+          "y": 0.5441,
           "kind": "room"
         },
         {
           "id": "gym-gf-bleachers-e-w",
-          "x": 0.4204,
-          "y": 0.2464,
+          "x": 0.1484,
+          "y": 0.5471,
           "kind": "room"
         },
         {
           "id": "gym-gf-lobby",
-          "x": 0.4576,
-          "y": 0.2176,
+          "x": 0.7871,
+          "y": 0.5588,
           "kind": "room"
         },
         {
           "id": "gym-gf-stage",
-          "x": 0.6684,
-          "y": 0.3616,
+          "x": 0.5117,
+          "y": 0.8235,
           "kind": "room"
         },
         {
           "id": "gym-gf-male-dressing-room",
-          "x": 0.7056,
-          "y": 0.28,
+          "x": 0.7383,
+          "y": 0.8176,
           "kind": "room"
         },
         {
           "id": "gym-gf-female-dressing-room",
-          "x": 0.7056,
-          "y": 0.5056,
+          "x": 0.2578,
+          "y": 0.8176,
           "kind": "room"
         },
         {
           "id": "gym-gf-fire-pump-room",
-          "x": 0.718,
-          "y": 0.5536,
+          "x": 0.1406,
+          "y": 0.9,
           "kind": "room"
         },
         {
           "id": "gym-gf-maintenance-office",
-          "x": 0.7304,
-          "y": 0.232,
+          "x": 0.3691,
+          "y": 0.1494,
           "kind": "room"
-        },
-        {
-          "id": "start",
-          "x": 0.2096,
-          "y": 0.352,
-          "kind": "start",
-          "label": "You Are Here"
         }
       ],
       "edges": [
         [
-          "l0",
-          "l1"
+          "start",
+          "c0"
         ],
         [
-          "l1",
-          "l2"
+          "c0",
+          "c1"
         ],
         [
-          "l2",
-          "l3"
+          "c1",
+          "c2"
         ],
         [
-          "l3",
-          "l4"
+          "c2",
+          "c8"
         ],
         [
-          "m0",
-          "m1"
+          "c8",
+          "c3"
         ],
         [
-          "m1",
-          "m2"
+          "c3",
+          "c4"
         ],
         [
-          "m2",
-          "m3"
+          "c4",
+          "c5"
         ],
         [
-          "m3",
-          "m4"
+          "c5",
+          "c7"
         ],
         [
-          "m4",
-          "m5"
+          "c7",
+          "c6"
         ],
         [
-          "r0",
-          "r1"
+          "c6",
+          "c1"
         ],
         [
-          "r1",
-          "r2"
-        ],
-        [
-          "r2",
-          "r3"
-        ],
-        [
-          "l2",
-          "m0"
-        ],
-        [
-          "m5",
-          "r2"
-        ],
-        [
-          "l2",
+          "start",
           "gym-gf-drop-off-area"
         ],
         [
-          "l0",
-          "gym-gf-stock-room-equipment-storage"
-        ],
-        [
-          "l0",
-          "gym-gf-he-male-cr-x2"
-        ],
-        [
-          "l1",
+          "start",
           "gym-gf-lobby-porch"
         ],
         [
-          "l3",
+          "start",
           "gym-gf-elec-room"
         ],
         [
-          "l4",
-          "gym-gf-she-female-cr-x2"
-        ],
-        [
-          "l4",
-          "gym-gf-porch"
-        ],
-        [
-          "m0",
-          "gym-gf-badminton-court-x2"
-        ],
-        [
-          "m2",
-          "gym-gf-basketball-court"
-        ],
-        [
-          "m2",
-          "gym-gf-bleachers-e-w"
-        ],
-        [
-          "m2",
-          "gym-gf-lobby"
-        ],
-        [
-          "r1",
-          "gym-gf-stage"
-        ],
-        [
-          "r0",
-          "gym-gf-male-dressing-room"
-        ],
-        [
-          "r2",
-          "gym-gf-female-dressing-room"
-        ],
-        [
-          "r3",
-          "gym-gf-fire-pump-room"
-        ],
-        [
-          "r0",
+          "start",
           "gym-gf-maintenance-office"
         ],
         [
-          "l1",
-          "start"
+          "start",
+          "gym-gf-stock-room-equipment-storage"
+        ],
+        [
+          "start",
+          "gym-gf-he-male-cr-x2"
+        ],
+        [
+          "start",
+          "gym-gf-she-female-cr-x2"
+        ],
+        [
+          "c2",
+          "gym-gf-porch"
+        ],
+        [
+          "c2",
+          "gym-gf-badminton-court-x2"
+        ],
+        [
+          "c1",
+          "gym-gf-basketball-court"
+        ],
+        [
+          "c8",
+          "gym-gf-bleachers-e-w"
+        ],
+        [
+          "c7",
+          "gym-gf-lobby"
+        ],
+        [
+          "c4",
+          "gym-gf-stage"
+        ],
+        [
+          "c3",
+          "gym-gf-female-dressing-room"
+        ],
+        [
+          "c5",
+          "gym-gf-male-dressing-room"
+        ],
+        [
+          "c3",
+          "gym-gf-fire-pump-room"
         ]
       ],
       "rooms": [
@@ -6967,129 +6914,129 @@
           "id": "gym-gf-drop-off-area",
           "label": "Drop-off Area",
           "kind": "other",
-          "x": 0.1724,
-          "y": 0.3904,
-          "node": "l2"
+          "x": 0.5,
+          "y": 0.0494,
+          "node": "start"
         },
         {
           "id": "gym-gf-stock-room-equipment-storage",
           "label": "Stock Room/Equipment Storage",
           "kind": "other",
-          "x": 0.2096,
-          "y": 0.2656,
-          "node": "l0"
+          "x": 0.7402,
+          "y": 0.1494,
+          "node": "start"
         },
         {
           "id": "gym-gf-he-male-cr-x2",
           "label": "HE (male CR) x2",
           "kind": "cr",
-          "x": 0.1972,
-          "y": 0.232,
-          "node": "l0"
+          "x": 0.8438,
+          "y": 0.1494,
+          "node": "start"
         },
         {
           "id": "gym-gf-lobby-porch",
           "label": "Lobby Porch",
           "kind": "other",
-          "x": 0.2096,
-          "y": 0.3424,
-          "node": "l1"
+          "x": 0.5488,
+          "y": 0.1494,
+          "node": "start"
         },
         {
           "id": "gym-gf-elec-room",
           "label": "Elec Room",
           "kind": "other",
-          "x": 0.2096,
-          "y": 0.496,
-          "node": "l3"
+          "x": 0.252,
+          "y": 0.1494,
+          "node": "start"
         },
         {
           "id": "gym-gf-she-female-cr-x2",
           "label": "SHE (female CR) x2",
           "kind": "cr",
-          "x": 0.1972,
-          "y": 0.5536,
-          "node": "l4"
+          "x": 0.0996,
+          "y": 0.1494,
+          "node": "start"
         },
         {
           "id": "gym-gf-porch",
           "label": "Porch",
           "kind": "other",
-          "x": 0.222,
-          "y": 0.592,
-          "node": "l4"
+          "x": 0.0422,
+          "y": 0.2824,
+          "node": "c2"
         },
         {
           "id": "gym-gf-badminton-court-x2",
           "label": "Badminton Court (x2)",
           "kind": "other",
-          "x": 0.2964,
-          "y": 0.4,
-          "node": "m0"
+          "x": 0.2422,
+          "y": 0.2721,
+          "node": "c2"
         },
         {
           "id": "gym-gf-basketball-court",
           "label": "Basketball Court",
           "kind": "other",
-          "x": 0.4576,
-          "y": 0.3904,
-          "node": "m2"
+          "x": 0.4844,
+          "y": 0.5441,
+          "node": "c1"
         },
         {
           "id": "gym-gf-bleachers-e-w",
           "label": "Bleachers (E/W)",
           "kind": "other",
-          "x": 0.4204,
-          "y": 0.2464,
-          "node": "m2"
+          "x": 0.1484,
+          "y": 0.5471,
+          "node": "c8"
         },
         {
           "id": "gym-gf-lobby",
           "label": "Lobby",
           "kind": "other",
-          "x": 0.4576,
-          "y": 0.2176,
-          "node": "m2"
+          "x": 0.7871,
+          "y": 0.5588,
+          "node": "c7"
         },
         {
           "id": "gym-gf-stage",
           "label": "Stage",
           "kind": "other",
-          "x": 0.6684,
-          "y": 0.3616,
-          "node": "r1"
+          "x": 0.5117,
+          "y": 0.8235,
+          "node": "c4"
         },
         {
           "id": "gym-gf-male-dressing-room",
           "label": "Male Dressing Room",
           "kind": "other",
-          "x": 0.7056,
-          "y": 0.28,
-          "node": "r0"
+          "x": 0.7383,
+          "y": 0.8176,
+          "node": "c5"
         },
         {
           "id": "gym-gf-female-dressing-room",
           "label": "Female Dressing Room",
           "kind": "other",
-          "x": 0.7056,
-          "y": 0.5056,
-          "node": "r2"
+          "x": 0.2578,
+          "y": 0.8176,
+          "node": "c3"
         },
         {
           "id": "gym-gf-fire-pump-room",
           "label": "EE Pump Room",
           "kind": "other",
-          "x": 0.718,
-          "y": 0.5536,
-          "node": "r3"
+          "x": 0.1406,
+          "y": 0.9,
+          "node": "c3"
         },
         {
           "id": "gym-gf-maintenance-office",
           "label": "Maintenance Office?",
           "kind": "other",
-          "x": 0.7304,
-          "y": 0.232,
-          "node": "r0",
+          "x": 0.3691,
+          "y": 0.1494,
+          "node": "start",
           "flag": "?"
         }
       ]
