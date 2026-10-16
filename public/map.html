@@ -15,32 +15,34 @@
 </div>
 
 <header class="top">
-  <button type="button" id="menu" class="round" aria-label="Menu" aria-expanded="false" aria-controls="menu-panel">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </button>
-  <button type="button" id="back" class="round" aria-label="Back to campus" hidden>
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </button>
-  <label class="pill">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
-    <span class="sr">Search rooms and buildings</span>
-    <input id="q" type="search" aria-label="Search rooms and buildings" placeholder="Search a room, e.g. S513" autocomplete="off" enterkeyhint="search">
-    <button type="button" id="clear" class="clear" aria-label="Clear search" hidden>×</button>
-  </label>
+  <div class="topnav-wrap">
+  <nav class="topnav" aria-label="IsQolar">
+    <a href="/prototype/" class="topnav-brand">
+      <img class="topnav-logo" src="/brand/logo-light.png" alt="">
+      <span class="topnav-wordmark">IsQolar</span>
+    </a>
+    <div class="topnav-links">
+      <a href="/prototype/">Home</a>
+      <a href="/prototype/#student">Queue</a>
+      <a href="/chat.html">Chat</a>
+    </div>
+    <div class="topnav-spacer" aria-hidden="true"></div>
+  </nav>
+  </div>
+  <div class="top-row">
+    <button type="button" id="back" class="round" aria-label="Back to campus" hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <label class="pill">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <span class="sr">Search rooms and buildings</span>
+      <input id="q" type="search" aria-label="Search rooms and buildings" placeholder="Search a room, e.g. S513" autocomplete="off" enterkeyhint="search">
+      <button type="button" id="clear" class="clear" aria-label="Clear search" hidden>×</button>
+    </label>
+  </div>
   <ul id="results" class="results" hidden></ul>
 </header>
 
-<div id="menu-layer" class="menu-layer" hidden>
-  <button type="button" id="menu-scrim" class="menu-scrim" aria-label="Close menu"></button>
-  <nav id="menu-panel" class="menu-panel" aria-label="IsQolar">
-    <img class="logo" src="/brand/logo-light.png" alt="IsQolar">
-    <a href="/prototype/">Home</a>
-    <a href="/prototype/#student">Queue</a>
-    <a href="/chat.html">Chat</a>
-  </nav>
-</div>
-
-<div id="where" class="where">PUP Main · Sta. Mesa</div>
 <nav id="floors" class="floors" aria-label="Floors" hidden></nav>
 <button type="button" id="compass" class="compass" aria-label="Reset map to north" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l4 9h-8z" fill="#8B0000"/><path d="M12 21l-4-9h8z" fill="#b9aca5"/></svg></button>
 <div id="arrive" class="arrive" hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13h3.5V9.5H10V6h3" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span></span></div>
