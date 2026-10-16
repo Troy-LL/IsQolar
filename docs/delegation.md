@@ -33,7 +33,7 @@ Queue owners stay as in the 4:19 PM note and docs/plan.md. RT owners that differ
 
 | Person | Tonight | Tomorrow AM |
 | --- | --- | --- |
-| Troy | T4, RT1, RT2 | L2 (done), UJ1, UJ2, W3, O1, O2, UP1, RT7, X2, RT12, S4, and R2 at 11:00 |
+| Troy | T4, RT1, RT2 | L2 (done), UJ1, UJ2, W3, W5, O1, O2, UP1, RT7, X2, RT12, S4, and R2 at 11:00 |
 | Donita | H0, D1, D3 | D2, UJ4, UJ3, H1, H2, W1, W2, X1, S5 |
 | Justin | J1, P0, J2 | RT5, G1, UJ5, J3 |
 | Ayen | A1, RT6 | A4, UJ6, UJ7, UJ8, A3, RT8, UJ9, A2, A5, S1 |
@@ -182,6 +182,36 @@ Do not edit src/contract.ts. Do not invent rooms, aliases, student names, or a R
 Done when: the form posts CreateTicketBody, redirects on 201, shows the 400 error text, loads courses from GET /api/stalls, and the static test covers the page.
 
 When the done-when line is true, run npm run check. Open a pull request into main. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
+```
+
+
+### W5. Queue polish
+- Goal: Warn before a second Skip cancels, fix the Find button at 390px, theme check-in, and drop em dashes from seed stall names.
+- Files: public/staff.js, public/staff.html, public/checkin.html, src/store.ts, matching stall-name strings in tests, docs/delegation.md
+- Depends on: W2, W3.
+- Done when: Skip confirms before cancelling a ticket that already has skippedAt. Find does not overflow at 390px width. checkin.html uses maroon #8B0000 and gold #FFC72C. Seed stall names use a plain hyphen separator. This task is listed here.
+- Branch: `troy/w5-queue-polish`
+
+```
+Task W5. Queue polish.
+
+Goal: Warn before a second Skip cancels, fix the Find button at 390px, theme check-in, and drop em dashes from seed stall names.
+
+Files: public/staff.js, public/staff.html, public/checkin.html, src/store.ts, matching stall-name strings in tests, docs/delegation.md.
+
+Depends on: W2, W3.
+
+Branch from troy/w2-staff-skip (or main after W2 and W3 merge): troy/w5-queue-polish.
+
+Read docs/delegation.md for this task id.
+
+In public/staff.js, warn before a second Skip cancels a ticket (server cancels when skippedAt is already set). Fix the Find button overflowing about 1px at 390px width. Theme public/checkin.html in maroon #8B0000 and gold #FFC72C. Replace em dashes in seed stall names with a plain hyphen. Add W5 to docs/delegation.md.
+
+Do not edit src/contract.ts. Do not touch map files. No em dashes. No UPLB. No bob log. No AI trailers.
+
+Done when: the confirm runs on a second Skip, Find fits at 390px, check-in is themed, seed names use hyphens, and this task is listed.
+
+When the done-when line is true, run npm run check. Open a pull request into main with screenshots at 1280x800 and 390x844 in the PR body. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
 ### O1. Wake before demos

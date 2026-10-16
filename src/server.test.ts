@@ -43,7 +43,7 @@ describe("IsQolar server", () => {
   beforeEach(async () => {
     const store = getStore();
     await store.reset();
-    await store.setStall({ id: "BSCS-1", name: "BS Computer Science — Stall 1", department: "IT & CS", activeInterviewers: 1, queueLength: 0, nowServing: null });
+    await store.setStall({ id: "BSCS-1", name: "BS Computer Science - Stall 1", department: "IT & CS", activeInterviewers: 1, queueLength: 0, nowServing: null });
     ({ url, close } = await startServer());
   });
 

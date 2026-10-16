@@ -288,7 +288,7 @@
   function renderHeader() {
     elHeader.textContent = '';
     var h1 = document.createElement('h1');
-    h1.textContent = stallName ? stallId + ' \u2014 ' + stallName : stallId;
+    h1.textContent = stallName ? stallId + ' - ' + stallName : stallId;
     elHeader.appendChild(h1);
   }
 
@@ -574,6 +574,7 @@
       .then(function (r) {
         if (r.ok) {
           calledTicket = { id: r.body.id, code: r.body.code, name: r.body.name, course: r.body.course };
+          if (r.body.skippedAt) calledTicket.skippedAt = r.body.skippedAt;
           lsSet(lsKey, calledTicket);
           lastAction = { type: 'call', id: r.body.id, code: r.body.code, name: r.body.name, course: r.body.course };
           renderCalledPanel();
@@ -686,6 +687,13 @@
       return;
     }
 
+    if (calledTicket.skippedAt) {
+      var ok = window.confirm(
+        'This ticket was already skipped once. Skip again to cancel ' + calledTicket.code + '?'
+      );
+      if (!ok) return;
+    }
+
     inflight = true;
     msgFromPoll = false;
     elMsg.textContent = '';
@@ -771,6 +779,7 @@
             renderLastAction();
             if (r.body.station === 'stall' && r.body.status === 'called') {
               calledTicket = { id: r.body.id, code: r.body.code, name: r.body.name, course: r.body.course };
+              if (r.body.skippedAt) calledTicket.skippedAt = r.body.skippedAt;
               lsSet(lsKey, calledTicket);
               renderCalledPanel();
               msgFromPoll = false;
