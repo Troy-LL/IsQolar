@@ -12,7 +12,8 @@ async function assertFloorImage(path: string): Promise<void> {
   assert.ok(info.size < MAX_BYTES, `${path} is ${info.size} bytes`);
 }
 
-const CORNER_TOL_DEG = 0.00025;
+// Poster images keep a transparent margin around the drawn building, so a fitted image box reaches past the footprint.
+const CORNER_TOL_DEG = 0.001;
 
 function footprintBbox(osm: string): { west: number; south: number; east: number; north: number } {
   const campus = JSON.parse(readFileSync("data/campus-osm.json", "utf8")) as {
@@ -50,6 +51,8 @@ describe("floor overlay corners", () => {
         assert.ok(lng >= box.west - CORNER_TOL_DEG && lng <= box.east + CORNER_TOL_DEG, `${floor.id} lng`);
         assert.ok(lat >= box.south - CORNER_TOL_DEG && lat <= box.north + CORNER_TOL_DEG, `${floor.id} lat`);
       }
+      const [midLng, midLat] = projectFloor(corners, 0.5, 0.5);
+      assert.ok(midLng >= box.west && midLng <= box.east && midLat >= box.south && midLat <= box.north, `${floor.id} center`);
       const units: [number, number][] = [
         [0, 0],
         [1, 0],
