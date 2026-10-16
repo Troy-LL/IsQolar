@@ -128,20 +128,12 @@ const locked: { oneFloor: LockedRoute; floorChange: LockedRoute; outdoors: Locke
           {
             "x": 0.38791,
             "y": 0.53106
-          },
-          {
-            "x": 0.38791,
-            "y": 0.53106
           }
         ]
       },
       {
         "floorId": "main-4f",
         "points": [
-          {
-            "x": 0.4864,
-            "y": 0.42823
-          },
           {
             "x": 0.4864,
             "y": 0.42823
@@ -278,20 +270,12 @@ const locked: { oneFloor: LockedRoute; floorChange: LockedRoute; outdoors: Locke
           {
             "x": 0.38791,
             "y": 0.53106
-          },
-          {
-            "x": 0.38791,
-            "y": 0.53106
           }
         ]
       },
       {
         "floorId": "main-4f",
         "points": [
-          {
-            "x": 0.4864,
-            "y": 0.42823
-          },
           {
             "x": 0.4864,
             "y": 0.42823

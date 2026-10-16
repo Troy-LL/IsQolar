@@ -614,6 +614,14 @@ Done when: public/maps/psych-gf.svg traces that photo and public/maps/psych-gf.w
 When the done-when line is true, run npm run check. Open a pull request into main. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
 ```
 
+### RT37. Stairs, repeated points and other buildings
+- Goal: every Main room routes from the 1F lobby with no zero-length step, and a room in another building gets an honest message instead of a stair route.
+- Files: public/route.js, src/route-allpairs.test.ts (new), src/route-regression.test.ts (lock refresh).
+- Depends on: RT32 merged.
+- Done when: no poster shows a stair or bridge from Main to the gym or the library, so none is added. Repeated points are dropped from each leg (ids keep every node). The all-pairs test routes every Main room and checks that gym and library rooms name their building. npm run check passes.
+- Branch: `troy/rt37-stairs`
+- Owner: Troy
+
 ### RT31. Real walking paths
 - Goal: The outdoor walk from the main gate to the East Wing entrance follows OSM footways stored in the repo.
 - Files: data/campus-osm.json, public/route.js, src/route.test.ts, src/route-start.test.ts
