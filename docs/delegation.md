@@ -758,6 +758,36 @@ When the done-when line is true, run npm run check. Open a pull request into mai
 - Branch: `troy/w4-chat`
 - Owner: Troy
 
+### RT34. Room link
+- Goal: `/map.html?room=<code>` opens that room after the map data loads.
+- Files: public/map.js only. Do not edit public/route.js. Do not add a link from a ticket or a stall.
+- Depends on: none
+- Done when: After the data loads, the page resolves the code with parseRoomQuery and searchRooms and selects that room the same way a result click does. An unknown code leaves the campus map up and shows "Room not found". No ticket page and no stall page links to a room. Tickets have no room field, and there is no verified mapping.
+- Branch: `troy/rt34-room-link`
+- Owner: Troy
+
+```
+Task RT34. Room link.
+
+Goal: /map.html?room=<code> opens that room after the map data loads.
+
+Files: public/map.js only. Do not edit public/route.js. Do not add a link from a ticket or a stall.
+
+Depends on: none.
+
+Branch from a fresh main: troy/rt34-room-link.
+
+Read docs/delegation.md for this task id.
+
+After the data loads, resolve the code with parseRoomQuery and searchRooms from route.js. Select that room the same way a result click does. For an unknown code, open the map normally and show "Room not found". Do not add a link from a ticket or a stall to a room. Tickets have no room field, and there is no verified mapping. Do not invent a room.
+
+Do not edit src/contract.ts. Do not edit docs/DESIGN-PUP-Enrollment-Queue.md.
+
+Done when: a known room code selects that room, an unknown code shows "Room not found" on the normal map, and no ticket or stall page gained a room link.
+
+When the done-when line is true, run npm run check. Open a pull request into main. Stop after opening the PR and report the PR link. Do not merge. Troy reviews and merges.
+```
+
 # Donita
 
 Staff tablet, the hub laptop, and tomorrow's offline queue. Floor images are Troy's RT1, taken from Viv, so this night stays on `public/staff.html` and the hub.
