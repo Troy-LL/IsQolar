@@ -400,12 +400,35 @@ function syncCompass() {
   const fl = $("floors");
   c.style.top = fl.hidden ? "" : `${fl.getBoundingClientRect().bottom + 10}px`;
 }
+let hiddenOutdoorLabels = null;
+function setOutdoorLabels(on) {
+  if (!map.getStyle()) return;
+  if (on) {
+    if (!hiddenOutdoorLabels) return;
+    for (const id of hiddenOutdoorLabels) {
+      if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", "visible");
+    }
+    hiddenOutdoorLabels = null;
+    return;
+  }
+  if (hiddenOutdoorLabels) return;
+  hiddenOutdoorLabels = [];
+  for (const layer of map.getStyle().layers) {
+    if (layer.type !== "symbol") continue;
+    if ((map.getLayoutProperty(layer.id, "visibility") || "visible") === "none") continue;
+    map.setLayoutProperty(layer.id, "visibility", "none");
+    hiddenOutdoorLabels.push(layer.id);
+  }
+}
 function drawOutdoor() {
   if (!map || !map.getSource("pup-walk")) return;
+  const covered = !!S.overlay;
+  setOutdoorLabels(!covered);
   const leg = S.route && S.route.legs.find((l) => l.floorId === "outdoor");
-  const cur = S.route && S.step >= 0 && S.route.steps[S.step].floorId === "outdoor";
-  map.setPaintProperty("pup-walk", "line-opacity", cur ? 1 : 0.35);
-  map.setPaintProperty("pup-walk-case", "line-opacity", cur ? 1 : 0.35);
+  const cur = !covered && S.route && S.step >= 0 && S.route.steps[S.step].floorId === "outdoor";
+  const opacity = covered ? 0 : cur ? 1 : 0.35;
+  map.setPaintProperty("pup-walk", "line-opacity", opacity);
+  map.setPaintProperty("pup-walk-case", "line-opacity", opacity);
   map.getSource("pup-walk").setData({
     type: "FeatureCollection",
     features: leg ? [{ type: "Feature", properties: {}, geometry: { type: "LineString", coordinates: leg.points.map((p) => [p.x, p.y]) } }] : [],
@@ -583,7 +606,9 @@ async function drawIndoor(floorId) {
   const stairs = Object.entries(st).map(([id, q]) => ({ id, p: t(q.x, q.y), name: (S.stairs.stairs.find((s) => s.id === id) || {}).name || id }));
   if (leg) {
     const cur = S.step >= 0 && S.route.steps[S.step].floorId === floorId;
-    drawLine(root, leg.points.map((q) => t(q.x, q.y)), cur);
+    const pts = leg.points.map((q) => t(q.x, q.y));
+    if (dest && (!pts.length || pts[pts.length - 1].x !== dest.x || pts[pts.length - 1].y !== dest.y)) pts.push(dest);
+    drawLine(root, pts, cur);
   }
   const indoorLegs = S.route ? S.route.legs.filter((l) => l.floorId !== "outdoor") : [];
   const startFloor = indoorLegs.length ? indoorLegs[0].floorId : S.floors[0].id;
@@ -631,8 +656,6 @@ function drawLabels() {
   const taken = [];
   const free = (b) => !taken.some((o) => b.x < o.x + o.w && o.x < b.x + b.w && b.y < o.y + o.h && o.y < b.y + b.h);
   const ix = S.ix;
-  // Pin sits on the corridor-side edge of the dest room so the baked room code stays readable
-  // Dest pin at door. No floating code text — baked code stays under dest highlight.
   const destPin = ix.dest;
   if (ix.dest) {
     const d = scr(destPin);
@@ -852,6 +875,7 @@ function clearOverlay() {
   S.overlay = false;
   if (destMarker) destMarker.remove();
   if (!map || !map.getSource("floor-plan")) return;
+  if (map.getLayer("floor-mat")) map.setLayoutProperty("floor-mat", "visibility", "none");
   map.setLayoutProperty("floor-raster", "visibility", "none");
   map.getSource("floor-route").setData(EMPTY_FC);
   map.getSource("floor-stairs").setData(EMPTY_FC);
@@ -910,11 +934,25 @@ function onFloorPlanClick(e) {
   }
   if (best) selectRoom({ ...best, floorId: S.floorId });
 }
+function floorQuad(coordinates) {
+  const ring = coordinates.map((c) => [c[0], c[1]]);
+  const first = ring[0];
+  const last = ring[ring.length - 1];
+  if (!last || first[0] !== last[0] || first[1] !== last[1]) ring.push([first[0], first[1]]);
+  return { type: "FeatureCollection", features: [{ type: "Feature", properties: {}, geometry: { type: "Polygon", coordinates: [ring] } }] };
+}
+function raiseFloorDraw() {
+  for (const id of ["floor-mat", "floor-raster", "floor-route-case", "floor-route", "floor-stairs"]) {
+    if (map.getLayer(id)) map.moveLayer(id);
+  }
+}
 async function showFloorImage(floorId) {
   const url = await floorImageUrl(floorId);
   const coordinates = floorCorners(floorId);
   if (!url || !coordinates || !map) return false;
   if (!map.getSource("floor-plan")) {
+    map.addSource("floor-mat", { type: "geojson", data: floorQuad(coordinates) });
+    map.addLayer({ id: "floor-mat", type: "fill", source: "floor-mat", paint: { "fill-color": "#E7E1DB", "fill-opacity": 1 } });
     map.addSource("floor-plan", { type: "image", url, coordinates });
     map.addLayer({ id: "floor-raster", type: "raster", source: "floor-plan", paint: { "raster-opacity": 1, "raster-fade-duration": 0 } });
     map.addSource("floor-route", { type: "geojson", data: EMPTY_FC });
@@ -936,9 +974,12 @@ async function showFloorImage(floorId) {
     map.on("mouseenter", "floor-raster", () => (map.getCanvas().style.cursor = "pointer"));
     map.on("mouseleave", "floor-raster", () => (map.getCanvas().style.cursor = ""));
   } else {
+    map.setLayoutProperty("floor-mat", "visibility", "visible");
+    map.getSource("floor-mat").setData(floorQuad(coordinates));
     map.setLayoutProperty("floor-raster", "visibility", "visible");
     map.getSource("floor-plan").updateImage({ url, coordinates });
   }
+  raiseFloorDraw();
   return true;
 }
 function syncOverlayGraphics(floorId) {
@@ -948,7 +989,19 @@ function syncOverlayGraphics(floorId) {
   const xy = (x, y) => projectFloor(corners, x, y);
   const leg = S.route ? S.route.legs.find((l) => l.floorId === floorId) : null;
   const cur = !!(S.route && S.step >= 0 && S.route.steps[S.step].floorId === floorId);
+  const room = S.sel && S.sel.room && S.sel.room.floorId === floorId ? S.sel.room : null;
+  const floor = S.paths.floors[floorId];
+  let dest = null;
+  if (room && floor) {
+    const door = floor.nodes.find((x) => x.id === room.id) || floor.nodes.find((x) => x.id === room.node);
+    const p = door || room;
+    dest = xy(p.x, p.y);
+  }
   const line = leg && leg.points.length ? leg.points.map((q) => xy(q.x, q.y)) : [];
+  if (dest) {
+    const last = line[line.length - 1];
+    if (!last || Math.abs(last[0] - dest[0]) > 1e-9 || Math.abs(last[1] - dest[1]) > 1e-9) line.push(dest);
+  }
   map.getSource("floor-route").setData(line.length ? { type: "FeatureCollection", features: [{ type: "Feature", properties: {}, geometry: { type: "LineString", coordinates: line } }] } : EMPTY_FC);
   const opacity = line.length ? (cur ? 1 : 0.35) : 0;
   map.setPaintProperty("floor-route", "line-opacity", opacity);
@@ -964,14 +1017,7 @@ function syncOverlayGraphics(floorId) {
       geometry: { type: "Point", coordinates: xy(q.x, q.y) },
     })),
   });
-  const room = S.sel && S.sel.room && S.sel.room.floorId === floorId ? S.sel.room : null;
-  const floor = S.paths.floors[floorId];
-  let dest = null;
-  if (room && floor) {
-    const door = floor.nodes.find((x) => x.id === room.id) || floor.nodes.find((x) => x.id === room.node);
-    const p = door || room;
-    dest = xy(p.x, p.y);
-  }
+  raiseFloorDraw();
   if (!dest) {
     if (destMarker) destMarker.remove();
     return;
@@ -1013,6 +1059,7 @@ async function enterOverlay(floorId) {
     const f = floorRow(floorId);
     $("where").textContent = `${buildingLabel(f)} · ${floorShort(f)}`;
     stage("indoor");
+    drawOutdoor();
   };
   // First entry: fly the outdoor camera, then drape the floor mid-flight (same beat as the SVG enter path).
   // Showing the raster before the fly made mobile look like a hard cut after RT29/RT35.
@@ -1187,8 +1234,9 @@ function setSnap(name) {
   syncSheet();
 }
 function syncSheet() {
-  const h = $("sheet").hidden ? 0 : snapPx();
-  document.documentElement.style.setProperty("--sheet-h", innerWidth >= 900 ? "0px" : `${h}px`);
+  const sh = $("sheet");
+  const h = sh.hidden || innerWidth >= 900 ? 0 : Math.round(sh.getBoundingClientRect().height);
+  document.documentElement.style.setProperty("--sheet-h", `${h}px`);
 }
 function setupSheet() {
   const sh = $("sheet");
@@ -1344,6 +1392,7 @@ function renderFromCards() {
 }
 let fromGen = 0;
 function openFrom() {
+  closeMenu();
   const layer = $("from-layer");
   if (!layer || !layer.hidden) return;
   const gen = ++fromGen;
@@ -1358,7 +1407,6 @@ function openFrom() {
   else requestAnimationFrame(() => requestAnimationFrame(() => {
     if (gen === fromGen) layer.classList.add("open");
   }));
-  $("from-q").focus();
 }
 function closeFrom() {
   const layer = $("from-layer");
@@ -1377,6 +1425,49 @@ function closeFrom() {
   }
   layer.classList.remove("open");
   const panel = $("from-panel");
+  let done = false;
+  const end = (e) => {
+    if (e && e.target !== panel) return;
+    if (done) return;
+    done = true;
+    panel.removeEventListener("transitionend", end);
+    finish();
+  };
+  panel.addEventListener("transitionend", end);
+  setTimeout(end, 400);
+}
+let menuGen = 0;
+function openMenu() {
+  closeFrom();
+  $("results").hidden = true;
+  const gen = ++menuGen;
+  $("menu").setAttribute("aria-expanded", "true");
+  const layer = $("menu-layer");
+  layer.hidden = false;
+  requestAnimationFrame(() => {
+    if (gen !== menuGen) return;
+    layer.classList.add("open");
+  });
+  $("menu-panel").querySelector("a").focus();
+}
+function closeMenu() {
+  const layer = $("menu-layer");
+  if (!layer || layer.hidden) return;
+  const gen = ++menuGen;
+  $("menu").setAttribute("aria-expanded", "false");
+  const finish = () => {
+    if (gen !== menuGen) return;
+    const back = layer.contains(document.activeElement);
+    layer.hidden = true;
+    layer.classList.remove("open");
+    if (back) $("menu").focus();
+  };
+  if (RM) {
+    finish();
+    return;
+  }
+  layer.classList.remove("open");
+  const panel = $("menu-panel");
   let done = false;
   const end = (e) => {
     if (e && e.target !== panel) return;
@@ -1418,7 +1509,11 @@ function mountFrom() {
   layer.append(scrim, panel);
   document.body.append(layer);
 
-  trigger.addEventListener("click", openFrom);
+  trigger.addEventListener("click", () => {
+    const layer = $("from-layer");
+    if (layer && !layer.hidden) closeFrom();
+    else openFrom();
+  });
   scrim.addEventListener("click", closeFrom);
   x.addEventListener("click", closeFrom);
   input.addEventListener("input", () => {
@@ -1678,12 +1773,23 @@ async function load() {
   Object.assign(S, { floors, paths, stairs, campus, rooms: allRooms(paths) });
   await probeFloorAssets();
   mountFrom();
+  $("menu").addEventListener("click", () => ($("menu").getAttribute("aria-expanded") === "true" ? closeMenu() : openMenu()));
+  $("menu-scrim").addEventListener("click", closeMenu);
+  $("menu-layer").addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    e.preventDefault();
+    closeMenu();
+  });
   setCam("indoor", { x: 0, y: 0, w: 1000, h: 1000 });
   if (window.maplibregl) await initMap();
   if (SLOW > 1) document.body.classList.add("slow");
 
   $("q").addEventListener("input", renderResults);
-  $("q").addEventListener("focus", renderResults);
+  $("q").addEventListener("focus", () => {
+    closeMenu();
+    closeFrom();
+    renderResults();
+  });
   $("clear").addEventListener("click", () => {
     $("q").value = "";
     renderResults();
