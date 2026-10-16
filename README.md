@@ -19,7 +19,7 @@ The product story, the 3-minute demo, and what is out of scope are in [docs/prod
 
 - **Freshmen** — see your position at your stall, an estimated wait, and a checklist that ends with "You're fully enrolled."
 - **Stall staff and interviewers** — call the next student, mark them done, look up by permit number, and undo a wrong move.
-- **Coordinators** — see which stalls are clogged and average wait per stall.
+- **Guardian** — to track their student.
 
 ## How to run it
 
