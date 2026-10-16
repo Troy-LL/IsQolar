@@ -36,7 +36,9 @@
   .user { align-self: flex-end; background: var(--maroon); color: #fff; border-bottom-right-radius: 4px; }
   .bot { align-self: flex-start; background: #fff; border: 1px solid var(--line); border-bottom-left-radius: 4px; }
   .bot a { color: var(--maroon); font-weight: 600; }
-  .err { align-self: center; color: var(--maroon); font-size: 14px; }
+  .err { align-self: center; color: var(--maroon); font-size: 14px; display: flex; align-items: center; gap: 8px; }
+  .retry { background: var(--gold); color: var(--maroon); padding: 6px 12px; }
+  .saved { font-size: 11px; color: var(--muted); padding-left: 4px; font-style: italic; }
     .hello { text-align: center; color: var(--muted); margin: 24px 0 8px; }
   .hello b { color: var(--maroon); font-size: 22px; display: block; margin-bottom: 4px; }
   #chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
@@ -140,30 +142,78 @@
     }
   });
 
-  async function ask(text) {
-    if (demo.running) return;
-    text = text.trim(); if (!text) return;
-    hideHello();
-    asked.add(text);
-    thread.querySelectorAll(".follow").forEach((el) => el.remove());
-    bubble("user", text);
-    history.push({ role: "user", content: text });
-    while (history.length > 20) history.shift();
-    const wait = bubble("bot", "");
-    sendBtn.disabled = true;
+  let inFlight = false;
+  const norm = (t) => t.toLowerCase().replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter((w) => w.length > 2);
+  function savedAnswer(text) {
+    const words = new Set(norm(text));
+    let best = null, bestScore = 0;
+    for (const q of qa) {
+      const qw = new Set(norm(q.question));
+      const inter = [...words].filter((w) => qw.has(w)).length;
+      const score = inter / Math.max(1, new Set([...words, ...qw]).size);
+      if (score > bestScore) { bestScore = score; best = q; }
+    }
+    return bestScore >= 0.5 ? best : null;
+  }
+  async function post() {
     try {
       const r = await fetch("/api/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: history }) });
       const data = await r.json().catch(() => ({}));
-      if (!r.ok) { drop(wait); history.pop(); bubble("err", data.error || "Something went wrong."); return; }
-      wait.innerHTML = linkify(data.reply);
-      history.push({ role: "assistant", content: data.reply });
-      showFollowUps();
+      return { ok: r.ok, status: r.status, data };
     } catch {
-      drop(wait); history.pop(); bubble("err", "Network error. Try again.");
-    } finally { sendBtn.disabled = false; scroll(); }
+      return { ok: false, status: 0, data: {} };
+    }
+  }
+  async function attempt(text) {
+    inFlight = true; sendBtn.disabled = true;
+    const wait = bubble("bot", "");
+    try {
+      let res = await post();
+      if (!res.ok && (res.status === 502 || res.status === 0)) {
+        await new Promise((r) => setTimeout(r, 1500));
+        res = await post();
+      }
+      if (res.ok) {
+        wait.innerHTML = linkify(res.data.reply);
+        history.push({ role: "assistant", content: res.data.reply });
+        showFollowUps();
+        return;
+      }
+      const saved = savedAnswer(text);
+      if (saved) {
+        const answer = saved.answer + (saved.link ? "\n" + saved.link : "");
+        wait.innerHTML = linkify(answer);
+        const tag = document.createElement("div");
+        tag.className = "saved"; tag.textContent = "Saved answer (offline)";
+        wait.parentElement.insertBefore(tag, wait.nextSibling);
+        history.push({ role: "assistant", content: answer });
+        showFollowUps();
+        return;
+      }
+      drop(wait);
+      const e = bubble("err", "");
+      e.textContent = "Hindi ako maka-connect ngayon. Sorry! ";
+      const retry = document.createElement("button");
+      retry.type = "button"; retry.className = "btn retry"; retry.textContent = "Retry";
+      retry.onclick = () => { if (inFlight) return; e.remove(); attempt(text); };
+      e.appendChild(retry);
+    } finally {
+      inFlight = false; sendBtn.disabled = demo.running; scroll();
+    }
+  }
+  async function ask(text) {
+    if (demo.running || inFlight) return;
+    text = text.trim(); if (!text) return;
+    hideHello();
+    asked.add(text);
+    thread.querySelectorAll(".follow, .msg.err").forEach((el) => el.remove());
+    bubble("user", text);
+    history.push({ role: "user", content: text });
+    while (history.length > 20) history.shift();
+    await attempt(text);
   }
 
-  document.getElementById("form").onsubmit = (e) => { e.preventDefault(); const t = input.value; input.value = ""; ask(t); };
+  document.getElementById("form").onsubmit = (e) => { e.preventDefault(); if (inFlight) return; const t = input.value; input.value = ""; ask(t); };
   input.addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); document.getElementById("form").requestSubmit(); } });
 
   // Demo mode: plays prerecorded audio and types it out. No API calls.

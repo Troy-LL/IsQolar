@@ -9,6 +9,7 @@ export const DEFAULT_MODEL = "openai/gpt-oss-20b";
 export const MAX_MESSAGES = 20;
 export const MAX_CHARS = 2000;
 export const TIMEOUT_MS = 15000;
+export const RETRY_DELAY_MS = 500;
 
 export interface ChatMessage {
   role: "user" | "assistant";
@@ -99,24 +100,36 @@ export async function chat(body: unknown, fetchImpl: typeof fetch = fetch): Prom
   const key = process.env.GROQ_API_KEY;
   if (!key) return { status: 503, body: { error: "chat is not configured" } };
   const model = process.env.GROQ_MODEL || DEFAULT_MODEL;
+  const deadline = Date.now() + TIMEOUT_MS;
+  const payload = JSON.stringify({
+    model,
+    messages: [{ role: "system", content: buildSystemPrompt() }, ...msgs],
+    temperature: 0.3,
+    max_tokens: 1024,
+    ...(model.startsWith("openai/gpt-oss") ? { reasoning_effort: "low" } : {}),
+  });
   try {
-    const res = await fetchImpl(GROQ_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
-      body: JSON.stringify({
-        model,
-        messages: [{ role: "system", content: buildSystemPrompt() }, ...msgs],
-        temperature: 0.3,
-        max_tokens: 1024,
-        ...(model.startsWith("openai/gpt-oss") ? { reasoning_effort: "low" } : {}),
-      }),
-      signal: AbortSignal.timeout(TIMEOUT_MS),
-    });
-    if (!res.ok) return { status: 502, body: { error: "upstream error" } };
-    const data = (await res.json()) as { choices?: { message?: { content?: string } }[] };
-    const reply = data.choices?.[0]?.message?.content?.trim();
-    if (!reply) return { status: 502, body: { error: "upstream error" } };
-    return { status: 200, body: { reply: sanitizeLinks(reply) } };
+    for (let attempt = 0; attempt < 2; attempt++) {
+      const left = deadline - Date.now();
+      if (left <= 0) break;
+      const res = await fetchImpl(GROQ_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
+        body: payload,
+        signal: AbortSignal.timeout(left),
+      });
+      const retryable = res.status === 429 || res.status >= 500;
+      if (retryable && attempt === 0 && deadline - Date.now() > RETRY_DELAY_MS + 1000) {
+        await new Promise((r) => setTimeout(r, RETRY_DELAY_MS));
+        continue;
+      }
+      if (!res.ok) return { status: 502, body: { error: "upstream error" } };
+      const data = (await res.json()) as { choices?: { message?: { content?: string } }[] };
+      const reply = data.choices?.[0]?.message?.content?.trim();
+      if (!reply) return { status: 502, body: { error: "upstream error" } };
+      return { status: 200, body: { reply: sanitizeLinks(reply) } };
+    }
+    return { status: 502, body: { error: "upstream error" } };
   } catch {
     return { status: 502, body: { error: "upstream error" } };
   }

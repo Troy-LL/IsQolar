@@ -61,6 +61,27 @@ describe("chat", () => {
     assert.ok(!JSON.stringify(thrown).includes(KEY));
   });
 
+  it("retries once on 429 or 5xx, then gives up", async () => {
+    process.env.GROQ_API_KEY = KEY;
+    const seq = (statuses: number[]) => {
+      let i = 0;
+      const f = (async () => {
+        const st = statuses[Math.min(i++, statuses.length - 1)];
+        return new Response(JSON.stringify(st === 200 ? { choices: [{ message: { content: "ok" } }] } : {}), { status: st });
+      }) as typeof fetch;
+      return { f, calls: () => i };
+    };
+    const a = seq([429, 200]);
+    assert.equal((await chat(ok, a.f)).status, 200);
+    assert.equal(a.calls(), 2);
+    const b = seq([503, 500, 200]);
+    assert.equal((await chat(ok, b.f)).status, 502);
+    assert.equal(b.calls(), 2);
+    const c = seq([401, 200]);
+    assert.equal((await chat(ok, c.f)).status, 502);
+    assert.equal(c.calls(), 1);
+  });
+
   it("drops room links for unknown codes", () => {
     assert.equal(sanitizeLinks("/map.html?room=Z999"), "/map.html");
     assert.equal(sanitizeLinks("/map.html?room=S508"), "/map.html?room=S508");
