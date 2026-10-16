@@ -158,11 +158,12 @@ function viewBounds() {
   const desk = innerWidth >= 900;
   const sheet = document.getElementById("sheet");
   const open = !!(sheet && !sheet.hidden);
-  const sheetTop = open ? sheet.getBoundingClientRect().top : innerHeight;
   const top = desk ? 80 : 112;
   const left = desk && open ? 424 : 8;
   const right = innerWidth - (desk ? 68 : 60);
-  const bottom = Math.min(innerHeight - 8, sheetTop - 8);
+  const bottom = desk || !open
+    ? innerHeight - 8
+    : Math.min(innerHeight - 8, sheet.getBoundingClientRect().top - 8);
   return { left, top, right: Math.max(left + 44, right), bottom: Math.max(top + 44, bottom) };
 }
 
@@ -327,20 +328,21 @@ function readTranslate(el) {
 }
 
 function markerPoint(el) {
-  const dot = el.querySelector("i") || el;
+  const dot = el.querySelector("i") || el.querySelector(".drop") || el;
   const r = dot.getBoundingClientRect();
   if (r.width < 1 && r.height < 1) return null;
-  return { x: r.left + r.width / 2, y: r.top + r.height / 2, text: (el.querySelector("span")?.textContent || "").trim() };
+  const labelSpan = [...el.querySelectorAll("span")].find((s) => s.textContent && !s.classList.contains("ring") && !s.classList.contains("drop"));
+  return { x: r.left + r.width / 2, y: r.top + r.height / 2, text: (labelSpan?.textContent || "").trim() };
 }
 
 function fromDom() {
   const zoom = Number(document.body.dataset.izoom);
   const pins = [];
+  const title = document.getElementById("title")?.textContent?.trim() || "";
   const pin = document.getElementById("pin");
   if (pin && !pin.hidden) {
     const at = readTranslate(pin);
     if (at) {
-      const title = document.getElementById("title")?.textContent?.trim() || "";
       pins.push({ id: "selected", x: at.x, y: at.y, kind: "room", label: title, selected: true, dest: true });
     }
     pin.classList.add("pin-replaced");
@@ -356,20 +358,38 @@ function fromDom() {
       pins.push({ id: kind, x: at.x, y: at.y, kind, label: at.text });
       el.classList.add("pin-replaced");
     });
+    document.querySelectorAll(".dpin").forEach((el) => {
+      if (el.id === "pin" || el.hidden) return;
+      const at = markerPoint(el);
+      if (!at || !inView(at.x, at.y)) return;
+      pins.push({
+        id: "dest",
+        x: at.x,
+        y: at.y,
+        kind: "room",
+        label: title || at.text || "Destination",
+        selected: true,
+        dest: true,
+      });
+      el.classList.add("pin-replaced");
+    });
   }
   const sheet = document.getElementById("sheet");
-  const title = document.getElementById("title")?.textContent?.trim() || "";
   const outdoor = !indoor;
   const open = !!(sheet && !sheet.hidden);
-  const buildingSheet = outdoor && open && title && document.getElementById("inside") && !document.getElementById("inside").hidden;
+  const where = document.getElementById("where")?.textContent || "";
+  const buildingName = where.split("·")[0].trim();
+  const back = document.getElementById("back");
+  const overlayOpen = outdoor && !!(back && !back.hidden);
+  const insideBtn = document.getElementById("inside");
+  const buildingSheet = outdoor && open && title && insideBtn && !insideBtn.hidden;
   let building = "";
   let chip = null;
   if (buildingSheet) {
     building = title;
     chip = { x: innerWidth / 2, y: Math.min(innerHeight * 0.42, innerHeight * 0.55) };
-  } else if (!outdoor) {
-    const where = document.getElementById("where")?.textContent || "";
-    building = where.split("·")[0].trim();
+  } else if (!outdoor || (overlayOpen && buildingName)) {
+    building = buildingName;
     const b = viewBounds();
     chip = { x: b.left + 90, y: b.top + 28 };
   }
@@ -395,11 +415,13 @@ function watch() {
   const sheet = document.getElementById("sheet");
   const title = document.getElementById("title");
   const where = document.getElementById("where");
+  const back = document.getElementById("back");
   if (pin) new MutationObserver(schedule).observe(pin, opts);
-  if (outdoor) new MutationObserver(schedule).observe(outdoor, { attributes: true, childList: true, subtree: true, attributeFilter: ["style", "class"] });
+  if (outdoor) new MutationObserver(schedule).observe(outdoor, { attributes: true, childList: true, subtree: true, attributeFilter: ["style", "class", "hidden"] });
   if (sheet) new MutationObserver(schedule).observe(sheet, opts);
   if (title) new MutationObserver(schedule).observe(title, { childList: true, characterData: true, subtree: true });
   if (where) new MutationObserver(schedule).observe(where, { childList: true, characterData: true, subtree: true });
+  if (back) new MutationObserver(schedule).observe(back, opts);
   new MutationObserver(schedule).observe(document.body, { attributes: true, attributeFilter: ["class", "data-izoom"] });
   window.addEventListener("resize", schedule);
   schedule();
