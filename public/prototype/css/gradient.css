@@ -1,0 +1,78 @@
+/* Gradient skin: simple white cards, hairline borders, gradient accents.
+   Deviation from DESIGN-PUP-Enrollment-Queue.md (which bans gradients and tints): gradients are built only from
+   maroon, maroon-deep, gold and green, plus one lighter and one deeper stop of each. Text, marks and words are unchanged.
+   Delete the link to this file to go back to the flat design-file look. */
+:root {
+  --grad-maroon: linear-gradient(135deg, #a30000 0%, #880000 48%, #5c0000 100%);
+  --grad-maroon-soft: linear-gradient(135deg, rgba(136, 0, 0, 0.07) 0%, rgba(255, 204, 0, 0.16) 100%);
+  --grad-gold: linear-gradient(135deg, #ffdb4d 0%, #ffcc00 55%, #ffb800 100%);
+  --grad-green: linear-gradient(135deg, #25904f 0%, #1b6e3f 55%, #14552f 100%);
+  --r-card: 20px;
+  --shadow-card: 0 1px 2px rgba(31, 26, 26, 0.05), 0 12px 32px -12px rgba(31, 26, 26, 0.16);
+  --shadow-card-s: 0 1px 2px rgba(31, 26, 26, 0.06), 0 6px 16px -6px rgba(31, 26, 26, 0.18);
+  --shadow-lift: 0 16px 28px -10px rgba(92, 0, 0, 0.5);
+}
+html { background: var(--shell); }
+body {
+  background:
+    radial-gradient(900px 380px at 50% -140px, rgba(136, 0, 0, 0.13), transparent 70%),
+    radial-gradient(520px 320px at 100% 18%, rgba(255, 204, 0, 0.16), transparent 70%),
+    linear-gradient(180deg, #fff7f2 0, var(--shell) 420px);
+  background-color: var(--shell);
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+.pq-page { padding: var(--space-6) var(--space-4) 56px; gap: var(--space-6); }
+.pq-header { background: var(--grad-maroon); }
+.pq-banner { background: var(--grad-gold); border-radius: 0 0 var(--r-card) var(--r-card); }
+
+/* Surfaces */
+.pq-card { background: var(--paper); border: var(--hairline) solid var(--line); border-radius: var(--r-card); box-shadow: var(--shadow-card); padding: var(--space-6) var(--space-4); }
+.pq-ticket { background: var(--paper); border: var(--hairline) solid var(--line); border-radius: 26px; box-shadow: var(--shadow-card); }
+.pq-ticket__band { background: var(--grad-maroon); height: 52px; }
+.pq-ticket__main { padding: var(--space-6); }
+.pq-live { padding: var(--space-4); border-radius: 16px; background: var(--grad-maroon-soft); gap: var(--space-1); }
+.pq-tag { background: var(--paper); border: var(--hairline) solid var(--ink-soft); }
+.pq-ticket__tear { border-top: var(--outline) dashed var(--line); }
+.pq-ticket__tear::before, .pq-ticket__tear::after { background: var(--shell); border: var(--hairline) solid var(--line); }
+.pq-qr { border-radius: 12px; border: var(--hairline) solid var(--line); }
+.pq-enrolled { background: var(--grad-green); border-radius: 26px; box-shadow: var(--shadow-card); padding: var(--space-8) var(--space-6); }
+
+/* Checklist */
+.pq-check li { border-radius: 0; padding: var(--space-3); margin: 0; }
+.pq-check li.is-current { background: var(--grad-maroon-soft); border-radius: 14px; border-top-color: transparent; }
+.pq-check li.is-current + li { border-top-color: transparent; }
+.pq-check__head { padding: 0 var(--space-3); margin-bottom: var(--space-2); }
+.pq-livestatus { padding: 0 var(--space-1); }
+
+/* Controls */
+.pq-btn { background: var(--grad-maroon); border-radius: 14px; min-height: 52px; box-shadow: var(--shadow-card-s); transition: box-shadow var(--move), transform var(--move), filter var(--move); }
+.pq-btn:hover { background: var(--grad-maroon); filter: brightness(1.08); }
+.pq-btn--quiet { background: var(--paper); color: var(--ink); border: var(--outline) solid var(--ink-soft); box-shadow: none; }
+.pq-btn--quiet:hover { background: var(--paper); filter: none; }
+.pq-input { background: var(--paper); border: var(--outline) solid var(--ink-soft); border-radius: 14px; min-height: 52px; padding: 0 var(--space-4); box-shadow: none; }
+.pq-field { gap: var(--space-2); }
+
+/* Interaction: hover lifts with a bigger drop shadow, press settles back. */
+.pq-lang button { transition: transform var(--move), filter var(--move); }
+.pq-link { transition: text-decoration-thickness var(--move), transform var(--move); }
+@media (hover: hover) {
+  .pq-btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
+  .pq-btn--quiet:hover { box-shadow: var(--shadow-card-s); border-color: var(--ink); }
+  .pq-lang button:hover { transform: translateY(-2px); filter: drop-shadow(0 4px 5px rgba(0, 0, 0, 0.45)); opacity: 1; }
+  .pq-link:hover { text-decoration-thickness: 3px; transform: translateY(-1px); }
+  select.pq-input { cursor: pointer; transition: box-shadow var(--move), transform var(--move), border-color var(--move); }
+  select.pq-input:hover { transform: translateY(-2px); box-shadow: var(--shadow-card-s); border-color: var(--ink); }
+}
+.pq-btn:active { transform: translateY(0) scale(0.985); box-shadow: var(--shadow-card-s); }
+.pq-lang button:active { transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .pq-btn:hover, .pq-btn:active, .pq-lang button:hover, .pq-link:hover, select.pq-input:hover { transform: none; }
+}
+
+/* Prototype controls bar */
+.pq-demo { background: var(--paper); border-top: var(--hairline) solid var(--line); box-shadow: 0 -10px 24px -12px rgba(31, 26, 26, 0.2); padding: var(--space-3) var(--space-4); }
+.pq-demo button { background: var(--paper); border: var(--outline) solid var(--ink-soft); border-radius: 12px; box-shadow: none; transition: box-shadow var(--move), transform var(--move), border-color var(--move); }
+@media (hover: hover) { .pq-demo button:hover { transform: translateY(-2px); box-shadow: var(--shadow-card-s); border-color: var(--ink); } }
+.pq-demo button:active { transform: scale(0.97); }

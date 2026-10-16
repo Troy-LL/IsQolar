@@ -1,0 +1,28 @@
+[
+  {"code":"CAF","name":"College of Accountancy and Finance","programs":[
+    {"code":"BSA","name":"BS Accountancy"},{"code":"BSMA","name":"BS Management Accounting"}]},
+  {"code":"CADBE","name":"College of Architecture, Design and the Built Environment","programs":[
+    {"code":"BS-ARCH","name":"BS Architecture"},{"code":"BSID","name":"BS Interior Design"},{"code":"BSEP","name":"BS Environmental Planning"}]},
+  {"code":"CAL","name":"College of Arts and Letters","programs":[
+    {"code":"ABELS","name":"BA English Language Studies"},{"code":"ABF","name":"BA Filipinology"},{"code":"ABLCS","name":"BA Literary and Cultural Studies"},{"code":"AB-PHILO","name":"BA Philosophy"},{"code":"BPEA","name":"Bachelor of Performing Arts, Theater Arts"}]},
+  {"code":"CBA","name":"College of Business Administration","programs":[
+    {"code":"BSBAFM","name":"BSBA Financial Management"},{"code":"BSBAHRM","name":"BSBA Human Resource Management"},{"code":"BSBA-MM","name":"BSBA Marketing Management"},{"code":"BSENTREP","name":"BS Entrepreneurship"},{"code":"BSOA","name":"BS Office Administration"}]},
+  {"code":"COC","name":"College of Communication","programs":[
+    {"code":"BADPR","name":"Bachelor in Advertising and Public Relations"},{"code":"BA Broadcasting","name":"BA Broadcasting"},{"code":"BACR","name":"BA Communication Research"},{"code":"BAJ","name":"BA Journalism"}]},
+  {"code":"CCIS","name":"College of Computer and Information Sciences","programs":[
+    {"code":"BSCS","name":"BS Computer Science"},{"code":"BSIT","name":"BS Information Technology"}]},
+  {"code":"COED","name":"College of Education","programs":[
+    {"code":"BTLEd","name":"Bachelor of Technology and Livelihood Education"},{"code":"BLIS","name":"Bachelor of Library and Information Science"},{"code":"BSEd","name":"Bachelor of Secondary Education"},{"code":"BEEd","name":"Bachelor of Elementary Education"},{"code":"BECEd","name":"Bachelor of Early Childhood Education"}]},
+  {"code":"CE","name":"College of Engineering","programs":[
+    {"code":"BSCE","name":"BS Civil Engineering"},{"code":"BSCpE","name":"BS Computer Engineering"},{"code":"BSEE","name":"BS Electrical Engineering"},{"code":"BSECE","name":"BS Electronics Engineering"},{"code":"BSIE","name":"BS Industrial Engineering"},{"code":"BSME","name":"BS Mechanical Engineering"},{"code":"BSRE","name":"BS Railway Engineering"}]},
+  {"code":"CHK","name":"College of Human Kinetics","programs":[
+    {"code":"BPE","name":"Bachelor of Physical Education"},{"code":"BSESS","name":"BS Exercise and Sports Sciences"}]},
+  {"code":"CPSPA","name":"College of Political Science and Public Administration","programs":[
+    {"code":"BPA","name":"Bachelor of Public Administration"},{"code":"BAIS","name":"BA International Studies"},{"code":"BAPE","name":"BA Political Economy"},{"code":"BAPS","name":"BA Political Science"}]},
+  {"code":"CSSD","name":"College of Social Sciences and Development","programs":[
+    {"code":"ABS","name":"BA Sociology"},{"code":"BSE","name":"BS Economics"},{"code":"BAH","name":"BA History"},{"code":"BAPHS","name":"BA Philippine Studies"},{"code":"BSPSY","name":"BS Psychology"},{"code":"BHS","name":"Bachelor in Human Services"},{"code":"BSSW","name":"BS Social Work"}]},
+  {"code":"CS","name":"College of Science","programs":[
+    {"code":"BSFT","name":"BS Food Technology"},{"code":"BSAPMATH","name":"BS Applied Mathematics"},{"code":"BSBIO","name":"BS Biology"},{"code":"BSCHEM","name":"BS Chemistry"},{"code":"BSMATH","name":"BS Mathematics"},{"code":"BSND","name":"BS Nutrition and Dietetics"},{"code":"BSPHY","name":"BS Physics"},{"code":"BSSTAT","name":"BS Statistics"}]},
+  {"code":"CTHTM","name":"College of Tourism, Hospitality and Transportation Management","programs":[
+    {"code":"BSHM","name":"BS Hospitality Management"},{"code":"BSTM","name":"BS Tourism Management"},{"code":"BSTRM","name":"BS Transportation Management"}]}
+]

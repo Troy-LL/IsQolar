@@ -1,0 +1,7 @@
+[
+  { "id": "check-in",       "who": "Staff desk" },
+  { "id": "document-check", "who": "Staff" },
+  { "id": "validation",     "who": "Staff" },
+  { "id": "main-line",      "who": "Board only" },
+  { "id": "course-stall",   "who": "Interviewer" }
+]
