@@ -1574,6 +1574,29 @@ function pick(fn) {
   $("q").blur();
   fn();
 }
+function roomFromLink(raw) {
+  const parsed = parseRoomQuery(raw);
+  if (!parsed || !parsed.letter || !parsed.number || parsed.letterOnly) return null;
+  const want = `${parsed.letter}${parsed.number}`.toUpperCase();
+  const hits = searchRooms(S.paths, raw).filter((r) => {
+    const c = roomCode(r);
+    return c && String(c.code || "").replace(/\?$/, "").toUpperCase() === want;
+  });
+  return hits.length === 1 ? hits[0] : null;
+}
+async function openLinkedRoom(raw) {
+  const room = roomFromLink(raw);
+  if (room) {
+    $("results").hidden = true;
+    $("q").blur();
+    await selectRoom(room);
+    return;
+  }
+  const list = $("results");
+  list.replaceChildren();
+  list.hidden = false;
+  list.append(el("li", { class: "empty" }, "Room not found"));
+}
 
 // ---------- pan and zoom ----------
 function zoomBy(k, cx, cy) {
@@ -1694,25 +1717,29 @@ async function load() {
   });
   setupGestures();
 
-  if (params.get("q")) {
-    $("q").value = params.get("q");
-    renderResults();
-  }
-  const to = params.get("to");
-  if (to) {
-    const r = S.rooms.find((x) => x.id === to);
-    if (r) {
-      await selectRoom(r);
-      if (params.get("dir") === "1") {
-        await directions();
-        if (params.get("step")) await goStep(Number(params.get("step")) - 1);
-      }
+  if (params.has("room")) {
+    await openLinkedRoom(params.get("room"));
+  } else {
+    if (params.get("q")) {
+      $("q").value = params.get("q");
+      renderResults();
     }
-  } else if (params.get("floor")) {
-    await showFloor(params.get("floor"));
-  } else if (params.get("b")) {
-    const f = S.campus.buildings.features.find((x) => x.properties.osm === params.get("b"));
-    if (f) await selectBuilding(f);
+    const to = params.get("to");
+    if (to) {
+      const r = S.rooms.find((x) => x.id === to);
+      if (r) {
+        await selectRoom(r);
+        if (params.get("dir") === "1") {
+          await directions();
+          if (params.get("step")) await goStep(Number(params.get("step")) - 1);
+        }
+      }
+    } else if (params.get("floor")) {
+      await showFloor(params.get("floor"));
+    } else if (params.get("b")) {
+      const f = S.campus.buildings.features.find((x) => x.properties.osm === params.get("b"));
+      if (f) await selectBuilding(f);
+    }
   }
   document.body.dataset.ready = "1";
 }

@@ -27,5 +27,7 @@ describe("RT38 outdoor step camera", () => {
     assert.match(src, /cameraForBounds returns null for object padding/);
     assert.match(src, /FLY_IN \* 0\.55/);
     assert.match(src, /skipFit: true/);
+    assert.match(src, /params\.has\("room"\)/);
+    assert.match(src, /function roomFromLink/);
   });
 });
