@@ -5,7 +5,7 @@ import { join, dirname } from "node:path";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
-export const DEFAULT_MODEL = "llama-3.3-70b-versatile";
+export const DEFAULT_MODEL = "llama3-8b-8192";
 export const MAX_MESSAGES = 20;
 export const MAX_CHARS = 2000;
 export const TIMEOUT_MS = 15000;
