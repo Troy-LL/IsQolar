@@ -50,16 +50,18 @@
     "building": "Cultural Sports Center (Gymnasium)",
     "floor": "GF",
     "label": "Gymnasium ground floor",
-    "image": "public/maps/gym-gf.jpg",
-    "approximate": false,
-    "osm": "way/583440438"
+    "image": "public/maps/gym-gf.svg",
+    "approximate": true,
+    "osm": "way/583440438",
+    "corners": [[121.0108331, 14.5996528], [121.011177, 14.5992882], [121.0106767, 14.5988462], [121.0103328, 14.5992107]],
+    "note": "Corners fit the plan outline to OSM way/583440438. Which short end faces the drop-off is not confirmed ?"
   },
   {
     "id": "library-2f",
     "building": "Library (NALRC)",
     "floor": "2F",
     "label": "Library 2F",
-    "image": "public/maps/library-2f.jpg",
+    "image": "public/maps/library-2f.svg",
     "approximate": false,
     "osm": "way/126342422"
   },
@@ -68,8 +70,20 @@
     "building": "Library (NALRC)",
     "floor": "3F",
     "label": "Library 3F",
-    "image": "public/maps/library-3f.png",
+    "image": "public/maps/library-3f.svg",
     "approximate": false,
-    "osm": "way/126342422"
+    "osm": "way/126342422",
+    "corners": [[121.0094529, 14.5985224], [121.0105188, 14.5980441], [121.010234, 14.5974497], [121.0091681, 14.5979279]],
+    "note": "Corners fit the T outline (bar ends, stem tip) to OSM way/126342422."
+  },
+  {
+    "id": "psych-gf",
+    "building": "Psychology Building ?",
+    "floor": "GF",
+    "label": "Psych building ground floor",
+    "image": "public/maps/psych-gf.svg",
+    "approximate": true,
+    "hidden": true,
+    "note": "Traced from IBM_7726. OSM footprint unknown, so no corners and no route data yet. Hidden until Troy confirms ?"
   }
 ]

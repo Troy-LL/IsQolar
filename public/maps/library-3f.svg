@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1232 710" width="1232" height="710" data-floor="library-3f">
-  <rect width="1232" height="710" fill="#FFFFFF"/>
+  
   <g class="plan">
     <path class="wing" fill="#FFFFFF" stroke="#6B5E57" stroke-width="2" stroke-linejoin="round" d="M499,18 L681,18 L681,402 L1075,402 L1075,583 L107,583 L107,402 L499,402 Z"/>
     <polygon class="corridor" fill="#F3EDE8" stroke="none" points="560,40 592,40 592,342 560,342"/>
@@ -179,16 +179,6 @@
       <text x="590" y="432" font-size="8" letter-spacing="1" dominant-baseline="central">THIRD FLOOR LOBBY</text>
       <text transform="rotate(-90 128 475)" x="128" y="475" font-size="6" letter-spacing="0.6" dominant-baseline="central">CIRCULATION SECTION</text>
       <text transform="rotate(-90 740 530)" x="740" y="530" font-size="6" letter-spacing="0.6" dominant-baseline="central">SERIAL SECTION</text>
-    </g>
-    <g class="sheet" fill="#4A403A" font-family="system-ui,sans-serif">
-      <circle cx="138" cy="192" r="26" fill="#FFFFFF" stroke="#6B5E57" stroke-width="1.5"/>
-      <line x1="112" y1="192" x2="164" y2="192" stroke="#6B5E57" stroke-width="1"/>
-      <text x="138" y="180" font-size="12" font-weight="600" text-anchor="middle" dominant-baseline="central">1</text>
-      <text x="138" y="204" font-size="9" font-weight="600" text-anchor="middle" dominant-baseline="central">A-3</text>
-      <line x1="164" y1="192" x2="470" y2="192" stroke="#6B5E57" stroke-width="1.25"/>
-      <text x="176" y="178" font-size="13" font-weight="700" text-anchor="start">THIRD FLOOR PLAN</text>
-      <text x="176" y="206" font-size="8" text-anchor="start">SCALE</text>
-      <text x="460" y="206" font-size="8" text-anchor="end">1:400MTS</text>
     </g>
   </g>
 </svg>
