@@ -1,59 +1,98 @@
-# IsQolar
+<p align="center">
+  <img src="public/brand/logo-light.png" alt="IsQolar" width="220">
+</p>
 
-**Every Iskolar, in the right line.**
+<h1 align="center">IsQolar</h1>
 
-IsQolar shows every freshman where they are in line, when they can step away, and when they're truly done.
+<p align="center"><b>Every Iskolar, in the right line.</b><br>
+A live queue, campus map and help desk for PUP freshman enrollment day, all in one phone browser tab.</p>
 
-A local web app for first-year enrollment at PUP Manila.
-It gives each freshman a ticket for their course stall and a live board of every stall.
-Staff tap "Call next" at their stall and the board updates for everyone.
-It does not add interviewers or make the office faster.
-It takes away the guessing and the wasted waiting.
+<p align="center">
+  <a href="https://isqolar.onrender.com"><b>Live demo: isqolar.onrender.com</b></a>
+</p>
 
-Enrollment day and campus wayfinding are the same app.
-The enrolled screen is planned to link to "Find your classes", which opens Room TBA on the same phone.
-That map page is not in the repo yet.
-The product story, the 3-minute demo, and what is out of scope are in [docs/product.md](docs/product.md).
+<p align="center">
+  <img alt="1st Place, ICS x IBM Bobathon 2026" src="https://img.shields.io/badge/ICS%20x%20IBM%20Bobathon%202026-1st%20Place-8B0000">
+  <img alt="Node 20" src="https://img.shields.io/badge/Node-20-339933?logo=node.js&logoColor=white">
+  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white">
+  <img alt="Express 5" src="https://img.shields.io/badge/Express-5-000000?logo=express&logoColor=white">
+  <img alt="CI" src="https://github.com/Troy-LL/IsQolar/actions/workflows/ci.yml/badge.svg">
+</p>
+
+> **1st Place, ICS x IBM Bobathon 2026.** Built by a team of five PUP students in a two-day hackathon.
+
+## The problem
+
+Every enrollment day, 200 to 300 PUP Manila freshmen line up at course stalls with no idea where they stand. Nobody knows how long the wait is, whether it is safe to step away for food, or which building their first class is in. So everyone stands in line, guesses, and waits.
+
+IsQolar does not add interviewers or make the office faster. It removes the guessing and the wasted waiting.
+
+## What it does
+
+| Feature | What it gives you |
+|---|---|
+| **Per-course stall tickets** | Each freshman checks in and gets a ticket for their course stall, on their phone or printed with a QR code. |
+| **Live board** | A TV-ready board shows every stall's queue so the whole room knows who is up next. |
+| **Staff "Call next"** | Stall staff call the next student, mark them done, skip, look up by permit number, and undo a wrong tap. The board and phones update within seconds. |
+| **Campus map** | A 3D MapLibre map of PUP Sta. Mesa with step-by-step walking directions from campus landmarks to the exact room and floor (for example, Gym to S508 on the 5th floor). |
+| **FAQ chatbot** | Ask in English or Taglish ("saan po yung S508?") and get an answer with a button that opens the room on the map. |
+| **LAN or online** | Runs on one laptop over the venue Wi-Fi with no internet, or online on Render for anyone with a link. Same code either way. |
+
+<p align="center">
+  <img src="docs/qa/demo-readiness/render-s508-directions.png" alt="Walking directions from the PUP Gymnasium to room S508" width="420">
+  &nbsp;
+  <img src="docs/shots/w4/desktop-live.png" alt="IsQolar Chat answering a Taglish question about room S508" width="420">
+</p>
 
 ## Who it is for
 
-- **Freshmen** — see your position at your stall, an estimated wait, and a checklist that ends with "You're fully enrolled."
-- **Stall staff and interviewers** — call the next student, mark them done, look up by permit number, and undo a wrong move.
-- **Coordinators** — see which stalls are clogged and average wait per stall.
+- **Freshmen:** see your place at your stall, an estimated wait, and a checklist that ends with "You're fully enrolled."
+- **Stall staff and interviewers:** call the next student, mark them done, look up by permit number, and undo mistakes.
+- **Coordinators:** see which stalls are clogged and the average wait per stall.
 
-## How to run it
+## Tech stack
 
-**Requirements:** Node 20, npm.
+- **Runtime:** Node 20, Express 5, TypeScript (strict), run with tsx
+- **Front end:** plain HTML, CSS and JavaScript pages that poll the server every 2 seconds
+- **Map:** MapLibre GL with hand-traced floor plans and a room routing graph
+- **Chat:** Groq chat completions, grounded on a curated FAQ and the room list (optional, off unless a key is set)
+- **Quality:** Node test runner, ESLint, `tsc --noEmit`, and a map data checker, all run by GitHub Actions CI on every PR
+- **Deploy:** Render (free web service) with a health check and a keep-awake workflow
+
+Design decisions are written up as short ADRs in [docs/decisions/](docs/decisions/), and the data flow is in [docs/architecture.md](docs/architecture.md).
+
+## Quick start
+
+**Requirements:** Node 20 and npm.
 
 ```bash
 npm install
-npm start
+npm start          # http://localhost:3000
 ```
 
-The server starts on port 3000.
-Open `http://localhost:3000` on the host laptop.
-Other devices on the venue LAN open `http://<laptop-ip>:3000`.
-The public URL is https://isqolar.onrender.com.
-Check the server is up: `GET /health` returns `{"ok":true}`.
+Other devices on the same Wi-Fi can open `http://<laptop-ip>:3000`. `GET /health` returns `{"ok":true}`.
 
-### Before a demo
-
-Open https://isqolar.onrender.com before a demo so the free Render instance is awake.
-Sleep and wake timing is in [ADR 005](docs/decisions/005-online-on-render.md).
-The [keep-awake workflow](.github/workflows/keep-awake.yml) already pings `GET /health` on that URL every 10 minutes.
-A backup external pinger (cron-job.org hitting https://isqolar.onrender.com/health every 10 min) is used.
-The Express app still makes no outbound call.
-
-### Load the simulated morning
+Load a simulated enrollment morning (every seeded ticket is labeled **simulated**):
 
 ```bash
 npm run seed
 ```
 
-This resets all state and loads a simulated enrollment morning.
-Every ticket created by the seed is labeled **simulated**.
+Run the venue hub with state saved to disk:
 
-## Stations (in order)
+```bash
+npm run hub
+```
+
+Turn on the chatbot by setting `GROQ_API_KEY` in your environment (and optionally `GROQ_MODEL`). Without a key, the chat endpoint answers "not configured" and everything else works.
+
+Run every check before opening a PR:
+
+```bash
+npm run check      # typecheck, lint, tests, map data check
+```
+
+## Enrollment stations (in order)
 
 1. Check-in
 2. Document check
@@ -62,46 +101,24 @@ Every ticket created by the seed is labeled **simulated**.
 5. Course stall (grouped by department, 1 or 2 interviewers, second document check)
 6. You're fully enrolled
 
-See [docs/architecture.md](docs/architecture.md) for data flow between stations.
+## Scope and limits
 
-## Limits
+- Built for one enrollment day of 200 to 300 freshmen.
+- No native app. Students use their phone browser or a printed ticket.
+- First-year students only. Continuing students, transferees and graduate students are out of scope.
+- Does not connect to PUP's enrollment system (SIS) and does not handle payments.
+- The free Render instance sleeps when idle. Open the live demo a minute before showing it.
 
-- Designed for 200 to 300 freshmen on one enrollment day.
-- Runs on localhost or the venue LAN by default. No internet is needed or used for day-1 operation.
-- An optional Render deploy (day 2) can extend reach beyond the venue; the app itself still makes no outbound calls.
-- Pages poll the server every 2 seconds. There is no push or live connection.
-- No native mobile app. Students use a browser on their phone or a printed ticket.
-- No live AI at runtime. Bob (AI coding assistant) is development-only.
-- First-year students only. Continuing students, transferees, and graduate students are out of scope.
-- Does not connect to PUP's enrollment system (SIS) or handle payments.
-- Guardian outbound sync (viewing status from outside the venue) is not in the MVP.
+## Team
 
-## Contract
+Built for the ICS x IBM Bobathon 2026 by:
 
-The shared data types and endpoint shapes live in [src/contract.ts](src/contract.ts).
-The contract was frozen at 11:15 on October 15, 2026.
-Only the project manager may change it after that time.
-See [docs/decisions/003-contract-freeze-at-11-15.md](docs/decisions/003-contract-freeze-at-11-15.md).
+| Name | Role |
+|---|---|
+| Troy | Project manager, full stack: API contract, merges, Render deploy |
+| Donita | Full stack: venue hub, offline persistence, design system |
+| Ayen | Product manager, front end: student phone flow, demo script |
+| Viv | Front end: TV board, admin desktop |
+| Justin | Back end: simulated morning, poll client, printable QR ticket, guardian API |
 
-## Room TBA
-
-Room TBA is the planned campus floor-plan search inside this app. The map page is not built yet.
-Tasks are in [docs/plan-room-tba.md](docs/plan-room-tba.md).
-How to clean a plan and place pins is in [docs/map-data-guide.md](docs/map-data-guide.md).
-Why the map is 2D, and why locations stay out of the contract, is in [docs/decisions/007-room-tba-2d.md](docs/decisions/007-room-tba-2d.md).
-Photos and transcribed labels are in [docs/floorplans/](docs/floorplans/).
-
-## Checks
-
-```bash
-npm run check
-```
-
-Runs three steps in order and stops at the first failure:
-
-1. `typecheck` — `tsc --noEmit` with strict mode
-2. `lint` — ESLint with the recommended TypeScript rules
-3. `test` — Node's built-in test runner over every `*.test.ts` under `src/`
-
-Run this before opening any PR.
-
+IBM Bob was our AI coding assistant during development. See [AGENTS.md](AGENTS.md) and [.bob/rules/](.bob/rules/).
