@@ -122,3 +122,7 @@ Built for the ICS x IBM Bobathon 2026 by:
 | Justin | Back end: simulated morning, poll client, printable QR ticket, guardian API |
 
 IBM Bob was our AI coding assistant during development. See [AGENTS.md](AGENTS.md) and [.bob/rules/](.bob/rules/).
+
+## License
+
+[MIT](LICENSE). Copyright (c) 2026 IsQolar team.
