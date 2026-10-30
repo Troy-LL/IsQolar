@@ -148,7 +148,7 @@ button:focus-visible, a:focus-visible, .maplibregl-canvas:focus-visible { outlin
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
-.arrive { position: fixed; left: 0; top: 0; z-index: 3; display: flex; align-items: center; gap: 5px; max-width: min(280px, calc(100vw - 110px)); background: #fff; color: var(--ink); font-size: 12px; font-weight: 600; padding: 4px 9px 4px 6px; border-radius: 13px; box-shadow: 0 1px 4px rgba(0,0,0,.2); white-space: nowrap; pointer-events: none; }
+.arrive { position: fixed; left: 0; top: 0; z-index: 3; display: flex; align-items: center; gap: 5px; max-width: min(280px, calc(100vw - 110px)); background: #fff; color: var(--ink); font-size: 12px; font-weight: 600; padding: 4px 9px 4px 6px; border-radius: 13px; box-shadow: 0 1px 4px rgba(0,0,0,.2); white-space: normal; pointer-events: none; }
 .arrive svg { width: 16px; height: 16px; background: #1f1a1a; color: #fff; border-radius: 3px; padding: 1px; box-sizing: border-box; }
 
 .r-lab.unsure { fill: #9a8f88; }
@@ -179,11 +179,13 @@ button:focus-visible, a:focus-visible, .maplibregl-canvas:focus-visible { outlin
 .walk-net line { stroke: #C9BCB1; stroke-width: 2; stroke-dasharray: 1 6; stroke-linecap: round; vector-effect: non-scaling-stroke; }
 .stair-lab { fill: #8B0000; font-weight: 700; text-anchor: middle; dominant-baseline: hanging; paint-order: stroke; stroke: #fff; stroke-linejoin: round; }
 @media (max-width: 899px) {
+  .zoomctl { left: 12px; right: auto; }
+  .floors { top: 128px; left: auto; right: 12px; flex-direction: column; width: auto; gap: 4px; padding: 4px; }
+  .maplibregl-ctrl-bottom-left { left: 64px; max-width: calc(100% - 136px); }
   .topnav { gap: 4px; padding: 4px 4px 4px 10px; }
   .topnav-wordmark, .topnav-spacer { display: none; }
   .topnav-links a { padding: 0 8px; }
-  .floors { top: 120px; gap: 2px; padding: 4px; }
-  .compass { top: 184px; }
+  .compass { left: 12px; right: auto; top: 128px; }
   .floors button { width: 44px; height: 36px; min-height: 36px; max-height: 36px; font-size: 14px; overflow: hidden; }
   .floors button small { font-size: 9px; white-space: nowrap; max-width: 40px; line-height: 1.1; }
 }

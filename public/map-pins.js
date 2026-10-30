@@ -1,3 +1,5 @@
+import { framePad, freeRect } from "./map-frame.js";
+
 const SVG_NS = "http://www.w3.org/2000/svg";
 const PAD = 8;
 const TIP = 40;
@@ -157,14 +159,19 @@ export const wingsLayer = {
 function viewBounds() {
   const desk = innerWidth >= 900;
   const sheet = document.getElementById("sheet");
+  const floors = document.getElementById("floors");
   const open = !!(sheet && !sheet.hidden);
-  const top = desk ? 80 : 112;
-  const left = desk && open ? 424 : 8;
-  const right = innerWidth - (desk ? 68 : 60);
-  const bottom = desk || !open
-    ? innerHeight - 8
-    : Math.min(innerHeight - 8, sheet.getBoundingClientRect().top - 8);
-  return { left, top, right: Math.max(left + 44, right), bottom: Math.max(top + 44, bottom) };
+  const rect = open ? sheet.getBoundingClientRect() : null;
+  const stacked = document.body.classList.contains("inside") || !!(floors && !floors.hidden);
+  const pad = framePad({
+    width: innerWidth,
+    height: innerHeight,
+    desk,
+    stacked,
+    panelRight: desk && rect ? rect.right : 0,
+    sheetCover: !desk && rect ? Math.max(0, innerHeight - rect.top) : 0,
+  });
+  return freeRect(pad, innerWidth, innerHeight);
 }
 
 function overlaps(a, b, pad) {
