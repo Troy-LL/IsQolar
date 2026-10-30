@@ -59,6 +59,20 @@ export function overlaps(a, b) {
   return a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
 }
 
+// Pins, room labels, and the map controls the arrive chip must stay off.
+export const ARRIVE_OBSTACLES = "#map-pins .opin, #map-pins .opin-label, #compass, .zoomctl button, #floors button, .dpin .drop, .dpin .ring";
+
+// Boxes from elements that are already on screen.
+export function elementBoxes(nodes) {
+  const boxes = [];
+  for (const el of nodes) {
+    if (!el || typeof el.getBoundingClientRect !== "function") continue;
+    const b = el.getBoundingClientRect();
+    if (b.width > 1 && b.height > 1) boxes.push({ x: b.x, y: b.y, w: b.width, h: b.height });
+  }
+  return boxes;
+}
+
 // Small boxes along a screen polyline so a chip can sit beside the line.
 export function strokeBoxes(points, thickness = 14, step = 12) {
   const boxes = [];

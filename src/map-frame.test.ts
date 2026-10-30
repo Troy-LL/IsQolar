@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { controlRects, firstClearChip, framePad, freeRect, isStacked, legCamera, overlaps, placeChip, routeFrame, strokeBoxes } from "../public/map-frame.js";
+import { ARRIVE_OBSTACLES, controlRects, elementBoxes, firstClearChip, framePad, freeRect, isStacked, legCamera, overlaps, placeChip, routeFrame, strokeBoxes } from "../public/map-frame.js";
 
 function rectOf(bounds: { left: number; top: number; right: number; bottom: number }) {
   return { x: bounds.left, y: bounds.top, w: bounds.right - bounds.left, h: bounds.bottom - bounds.top };
@@ -142,6 +142,20 @@ describe("map frame", () => {
     assert.equal(isStacked(root(false, false)), true);
     assert.equal(isStacked(root(false, true)), false);
     assert.equal(isStacked(null), false);
+  });
+
+  it("keeps the arrive chip off a rendered room label", () => {
+    assert.match(ARRIVE_OBSTACLES, /#map-pins \.opin-label/);
+    const label = {
+      getBoundingClientRect: () => ({ x: 216, y: 250, width: 52, height: 18 }),
+    };
+    const empty = { getBoundingClientRect: () => ({ x: 0, y: 0, width: 0, height: 0 }) };
+    const boxes = elementBoxes([label, empty]);
+    assert.deepEqual(boxes, [{ x: 216, y: 250, w: 52, h: 18 }]);
+    const bounds = { left: 72, top: 188, right: 318, bottom: 347 };
+    const placed = firstClearChip({ x: 220, y: 270 }, [{ w: 126, h: 59 }, { w: 102, h: 76 }], bounds, boxes);
+    assert.ok(placed);
+    assert.equal(overlaps(placed, boxes[0]), false);
   });
 
   it("keeps the desktop leg camera tilted and the phone leg camera flat", () => {

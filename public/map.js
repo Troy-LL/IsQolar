@@ -1,7 +1,7 @@
 import { planCampusRoute, campusStarts, GATE_START, allRooms, roomName, roomCode, roomDisplay, roomListed, parseRoomQuery, searchRooms, wingName, floorShort, SEARCH_LIMIT } from "./route.js";
 import { projectFloor, unprojectFloor } from "./floor-geo.js";
 import { drawMapPins, namesLayer, wingsLayer } from "./map-pins.js";
-import { firstClearChip, framePad, freeRect, isStacked, legCamera, routeFrame, strokeBoxes } from "./map-frame.js";
+import { ARRIVE_OBSTACLES, elementBoxes, firstClearChip, framePad, freeRect, isStacked, legCamera, routeFrame, strokeBoxes } from "./map-frame.js";
 
 const $ = (id) => document.getElementById(id);
 const NS = "http://www.w3.org/2000/svg";
@@ -794,6 +794,8 @@ function syncOutdoorPins() {
   }
   document.querySelectorAll(".pin-mk").forEach((el) => el.classList.toggle("pin-replaced", pins.some((p) => p.kind === "gate")));
   drawMapPins($("outdoor"), { zoom, pins });
+  // Labels are on screen now, so the chip can sit clear of them.
+  placeArriveChip();
 }
 
 function buildingLabel(f) {
@@ -1136,10 +1138,7 @@ function positionArrive(screen, text, extra = []) {
   const freeW = Math.max(96, bounds.right - bounds.left);
   arr.style.transform = "translate(0px, 0px)";
   const avoid = extra.slice();
-  for (const el of document.querySelectorAll("#map-pins .opin, #compass, .zoomctl button, #floors button, .dpin .drop, .dpin .ring")) {
-    const b = el.getBoundingClientRect();
-    if (b.width > 1 && b.height > 1) avoid.push({ x: b.x, y: b.y, w: b.width, h: b.height });
-  }
+  avoid.push(...elementBoxes(document.querySelectorAll(ARRIVE_OBSTACLES)));
   const sizes = [];
   const seen = new Set();
   for (let w = Math.floor(freeW); w >= 96; w -= 12) {

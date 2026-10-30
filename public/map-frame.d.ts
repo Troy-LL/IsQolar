@@ -42,6 +42,12 @@ export function overlaps(
   b: { x: number; y: number; w: number; h: number },
 ): boolean;
 
+export const ARRIVE_OBSTACLES: string;
+
+export function elementBoxes(
+  nodes: ArrayLike<{ getBoundingClientRect(): { x: number; y: number; width: number; height: number } }>,
+): { x: number; y: number; w: number; h: number }[];
+
 export function strokeBoxes(
   points: { x: number; y: number }[],
   thickness?: number,
