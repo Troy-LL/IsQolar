@@ -1,4 +1,4 @@
-import { framePad, freeRect } from "./map-frame.js";
+import { framePad, freeRect, isStacked } from "./map-frame.js";
 
 const SVG_NS = "http://www.w3.org/2000/svg";
 const PAD = 8;
@@ -159,10 +159,9 @@ export const wingsLayer = {
 function viewBounds() {
   const desk = innerWidth >= 900;
   const sheet = document.getElementById("sheet");
-  const floors = document.getElementById("floors");
   const open = !!(sheet && !sheet.hidden);
   const rect = open ? sheet.getBoundingClientRect() : null;
-  const stacked = document.body.classList.contains("inside") || !!(floors && !floors.hidden);
+  const stacked = isStacked(document);
   const pad = framePad({
     width: innerWidth,
     height: innerHeight,

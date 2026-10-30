@@ -1,7 +1,7 @@
 import { planCampusRoute, campusStarts, GATE_START, allRooms, roomName, roomCode, roomDisplay, roomListed, parseRoomQuery, searchRooms, wingName, floorShort, SEARCH_LIMIT } from "./route.js";
 import { projectFloor, unprojectFloor } from "./floor-geo.js";
 import { drawMapPins, namesLayer, wingsLayer } from "./map-pins.js";
-import { framePad, freeRect, placeChip, routeFrame } from "./map-frame.js";
+import { firstClearChip, framePad, freeRect, isStacked, legCamera, routeFrame, strokeBoxes } from "./map-frame.js";
 
 const $ = (id) => document.getElementById(id);
 const NS = "http://www.w3.org/2000/svg";
@@ -61,7 +61,7 @@ function frameNow() {
   const sheet = $("sheet");
   const open = !!(sheet && !sheet.hidden);
   const rect = open ? sheet.getBoundingClientRect() : null;
-  const stacked = !!(S.inside || S.overlay);
+  const stacked = isStacked(document);
   const panelRight = desk && rect && rect.width > 0 ? rect.right : 0;
   const sheetCover = !desk && rect && rect.top > 0 ? Math.max(0, height - rect.top) : 0;
   return framePad({ width, height, desk, stacked, panelRight, sheetCover });
@@ -185,22 +185,25 @@ async function fitLeg(coords, kind = "indoor") {
   }
   const padding = legPad();
   const bearing = map.getBearing();
-  // Phone may zoom past the usual leg cap so the short lobby walk is a line, not a dot.
-  const legZoom = innerWidth >= 900 ? 20.5 : 21.4;
-  // Flat, with the same padding the camera was solved for, so a short lobby leg sits in the free area.
+  // Phone stays flat and close, and ease uses the padding the camera was solved for.
+  // Desktop keeps the tilted leg camera (pitch 30, max zoom 18.4).
+  const camSpec = legCamera(innerWidth >= 900);
+  const legZoom = camSpec.maxZoom;
   let cam = map.cameraForBounds(box, { padding, bearing, maxZoom: legZoom });
   // Fallback: object padding can fail after overlay focus; uniform pad still works.
   if (!cam) cam = map.cameraForBounds(box, { padding: LEG_PAD, bearing, maxZoom: legZoom });
+  const easePad = camSpec.usePadding ? padding : { top: 0, left: 0, right: 0, bottom: 0 };
   if (!cam) {
     const done = moveDone(600);
-    if (RM) map.fitBounds(box, { padding, bearing, pitch: 0, maxZoom: legZoom, duration: 0 });
-    else map.fitBounds(box, { padding, bearing, pitch: 0, maxZoom: legZoom, duration: flyDur(600), easing: EASE_IO });
+    const fitPad = camSpec.usePadding ? padding : LEG_PAD;
+    if (RM) map.fitBounds(box, { padding: fitPad, bearing, pitch: camSpec.pitch, maxZoom: legZoom, duration: 0 });
+    else map.fitBounds(box, { padding: fitPad, bearing, pitch: camSpec.pitch, maxZoom: legZoom, duration: flyDur(600), easing: EASE_IO });
     await done;
     placeArriveChip();
     return;
   }
   const done = moveDone(600);
-  const opts = { center: cam.center, zoom: cam.zoom, pitch: 0, bearing, padding };
+  const opts = { center: cam.center, zoom: cam.zoom - camSpec.zoomTrim, pitch: camSpec.pitch, bearing, padding: easePad };
   if (RM) map.jumpTo(opts);
   else map.easeTo({ ...opts, duration: flyDur(600), easing: EASE_IO });
   await done;
@@ -1125,24 +1128,33 @@ async function showFloor(floorId) {
   await enterBuilding(floorId);
   focusIndoor();
 }
-function positionArrive(screen, text) {
+function positionArrive(screen, text, extra = []) {
   const arr = $("arrive");
   arr.hidden = false;
   arr.querySelector("span").textContent = text;
   const bounds = freeRect(frameNow(), innerWidth, innerHeight);
   const freeW = Math.max(96, bounds.right - bounds.left);
-  arr.style.maxWidth = `${freeW}px`;
   arr.style.transform = "translate(0px, 0px)";
-  const r = arr.getBoundingClientRect();
-  const size = { w: Math.min(r.width || 200, freeW), h: Math.max(28, r.height || 28) };
-  const avoid = [];
-  for (const el of document.querySelectorAll("#map-pins .opin, #compass, .zoomctl button, #floors button")) {
+  const avoid = extra.slice();
+  for (const el of document.querySelectorAll("#map-pins .opin, #compass, .zoomctl button, #floors button, .dpin .drop, .dpin .ring")) {
     const b = el.getBoundingClientRect();
     if (b.width > 1 && b.height > 1) avoid.push({ x: b.x, y: b.y, w: b.width, h: b.height });
   }
-  const at = placeChip(screen, size, bounds, avoid);
-  arr.style.transform = `translate(${Math.round(at.x)}px, ${Math.round(at.y)}px)`;
-  return { x: at.x, y: at.y, w: size.w, h: size.h };
+  const sizes = [];
+  const seen = new Set();
+  for (let w = Math.floor(freeW); w >= 96; w -= 12) {
+    arr.style.maxWidth = `${w}px`;
+    const r = arr.getBoundingClientRect();
+    const size = { w: Math.min(r.width || w, w), h: Math.max(28, r.height || 28) };
+    const key = `${Math.round(size.w)}x${Math.round(size.h)}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    sizes.push(size);
+  }
+  const placed = firstClearChip(screen, sizes, bounds, avoid) || { x: bounds.left, y: bounds.top, ...sizes[sizes.length - 1] };
+  arr.style.maxWidth = `${placed.w}px`;
+  arr.style.transform = `translate(${Math.round(placed.x)}px, ${Math.round(placed.y)}px)`;
+  return { x: placed.x, y: placed.y, w: placed.w, h: placed.h };
 }
 function placeArriveChip() {
   const arr = $("arrive");
@@ -1174,7 +1186,16 @@ function placeArriveChip() {
     return;
   }
   if (!scr || !Number.isFinite(scr.x) || !Number.isFinite(scr.y)) return;
-  positionArrive({ x: scr.x, y: scr.y }, `Arrive ${floorShort(floor)} · ${leg.arrive}`);
+  const line = [];
+  for (const q of leg.points) {
+    try {
+      const at = map.project(projectFloor(corners, q.x, q.y));
+      if (at && Number.isFinite(at.x) && Number.isFinite(at.y)) line.push({ x: at.x, y: at.y });
+    } catch {
+      /* skip a point the camera cannot project */
+    }
+  }
+  positionArrive({ x: scr.x, y: scr.y }, `Arrive ${floorShort(floor)} · ${leg.arrive}`, strokeBoxes(line, 18, 10));
 }
 function focusOverlay() {
   const corners = floorCorners(S.floorId);
