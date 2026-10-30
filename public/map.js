@@ -1,6 +1,7 @@
 import { planCampusRoute, campusStarts, GATE_START, allRooms, roomName, roomCode, roomDisplay, roomListed, parseRoomQuery, searchRooms, wingName, floorShort, SEARCH_LIMIT } from "./route.js";
 import { projectFloor, unprojectFloor } from "./floor-geo.js";
 import { drawMapPins, namesLayer, wingsLayer } from "./map-pins.js";
+import { ARRIVE_OBSTACLES, elementBoxes, firstClearChip, framePad, freeRect, isStacked, legCamera, routeFrame, strokeBoxes } from "./map-frame.js";
 
 const $ = (id) => document.getElementById(id);
 const NS = "http://www.w3.org/2000/svg";
@@ -25,18 +26,9 @@ const LEG_PAD = 48;
 // Phone legs stop at 20 so a short lobby leg still shows the dome and part of a wing (RT23).
 const LEG_MAX_ZOOM = innerWidth >= 900 ? 19.5 : 20;
 const GOAL_ZOOM = innerWidth >= 900 ? 19.5 : 20.5;
-// Every leg clears the floor chip (top), the floor stack (right) and the sheet (bottom).
+// Every leg clears the top controls, the floor tabs, the zoom buttons, and the live sheet.
 function legPad() {
-  const desk = innerWidth >= 900;
-  const open = !$("sheet").hidden;
-  // Clear location chip, floor tabs, zoom, and the live sheet height (RT19 F2/F4/D1–D3).
-  const sheetBottom = !desk && open ? snapPx() + 28 : desk ? 48 : 24;
-  return {
-    top: desk ? 96 : 168,
-    bottom: sheetBottom,
-    left: (desk && open ? 420 : 0) + (desk ? 28 : 72),
-    right: desk ? 96 : 100,
-  };
+  return frameNow();
 }
 const S = { floors: [], paths: null, stairs: null, campus: null, rooms: [], inside: false, overlay: false, floorId: null, sel: null, route: null, step: -1, cam: {} };
 
@@ -62,18 +54,21 @@ function setCam(name, c) {
   layerOf(name).setAttribute("viewBox", `${c.x} ${c.y} ${c.w} ${c.h}`);
   if (name === "indoor") queueLabels();
 }
-function insets() {
-  const W = innerWidth;
-  const H = innerHeight;
-  const desk = W >= 900;
+function frameNow() {
+  const width = innerWidth;
+  const height = innerHeight;
+  const desk = width >= 900;
   const sheet = $("sheet");
-  const open = !sheet.hidden;
-  // Phone: the chip and floor tabs sit at the top, so the plan uses the full width below them.
-  const top = desk ? 72 : S.inside ? 140 : 88;
-  const left = desk && open ? 420 : 12;
-  const right = S.inside && desk ? 88 : 12;
-  const bottom = !desk && open ? snapPx() + 20 : 16;
-  return { W, H, top, left, right, bottom };
+  const open = !!(sheet && !sheet.hidden);
+  const rect = open ? sheet.getBoundingClientRect() : null;
+  const stacked = isStacked(document);
+  const panelRight = desk && rect && rect.width > 0 ? rect.right : 0;
+  const sheetCover = !desk && rect && rect.top > 0 ? Math.max(0, height - rect.top) : 0;
+  return framePad({ width, height, desk, stacked, panelRight, sheetCover });
+}
+function insets() {
+  const pad = frameNow();
+  return { W: innerWidth, H: innerHeight, top: pad.top, left: pad.left, right: pad.right, bottom: pad.bottom };
 }
 function fitCam(box, padPx = 0, bottomPx) {
   const ins = insets();
@@ -190,21 +185,29 @@ async function fitLeg(coords, kind = "indoor") {
   }
   const padding = legPad();
   const bearing = map.getBearing();
-  let cam = map.cameraForBounds(box, { padding, bearing, maxZoom: 18.4 });
+  // Phone stays flat and close, and ease uses the padding the camera was solved for.
+  // Desktop keeps the tilted leg camera (pitch 30, max zoom 18.4).
+  const camSpec = legCamera(innerWidth >= 900);
+  const legZoom = camSpec.maxZoom;
+  let cam = map.cameraForBounds(box, { padding, bearing, maxZoom: legZoom });
   // Fallback: object padding can fail after overlay focus; uniform pad still works.
-  if (!cam) cam = map.cameraForBounds(box, { padding: 48, bearing, maxZoom: 18.4 });
+  if (!cam) cam = map.cameraForBounds(box, { padding: LEG_PAD, bearing, maxZoom: legZoom });
+  const easePad = camSpec.usePadding ? padding : { top: 0, left: 0, right: 0, bottom: 0 };
   if (!cam) {
     const done = moveDone(600);
-    if (RM) map.fitBounds(box, { padding: 48, bearing, pitch: 30, maxZoom: 18.4, duration: 0 });
-    else map.fitBounds(box, { padding: 48, bearing, pitch: 30, maxZoom: 18.4, duration: flyDur(600), easing: EASE_IO });
+    const fitPad = camSpec.usePadding ? padding : LEG_PAD;
+    if (RM) map.fitBounds(box, { padding: fitPad, bearing, pitch: camSpec.pitch, maxZoom: legZoom, duration: 0 });
+    else map.fitBounds(box, { padding: fitPad, bearing, pitch: camSpec.pitch, maxZoom: legZoom, duration: flyDur(600), easing: EASE_IO });
     await done;
+    placeArriveChip();
     return;
   }
   const done = moveDone(600);
-  const opts = { center: cam.center, zoom: cam.zoom - 0.2, pitch: 30, bearing, padding: { top: 0, left: 0, right: 0, bottom: 0 } };
+  const opts = { center: cam.center, zoom: cam.zoom - camSpec.zoomTrim, pitch: camSpec.pitch, bearing, padding: easePad };
   if (RM) map.jumpTo(opts);
   else map.easeTo({ ...opts, duration: flyDur(600), easing: EASE_IO });
   await done;
+  placeArriveChip();
 }
 async function fitTo(coords, extra = {}) {
   // Fit flat first, then tilt: fitBounds with pitch and a tall phone sheet often refuses to fit.
@@ -302,6 +305,7 @@ function initMap() {
       attributionControl: false,
       fadeDuration: 0,
     });
+    map.on("move", placeArriveChip);
     map.addControl(new maplibregl.AttributionControl({ compact: false, customAttribution: "Campus data © OpenStreetMap contributors (ODbL)" }), "bottom-left");
     let settled = false;
     const fail = () => {
@@ -662,36 +666,8 @@ function drawLabels() {
     taken.push({ x: d.x - 14, y: d.y - 40, w: 28, h: 40 });
   }
   const arr = $("arrive");
-  arr.hidden = !(S.inside && ix.arrive);
-  if (ix.arrive) {
-    const a = scr(ix.arrive.p);
-    arr.querySelector("span").textContent = ix.arrive.text;
-    const desk = innerWidth >= 900;
-    const open = !$("sheet").hidden;
-    const panelL = desk && open ? $("sheet").getBoundingClientRect().right + 12 : 12;
-    const sheetTop = !desk && open ? innerHeight - snapPx() : innerHeight;
-    // Measure after a probe place, then clamp into the free map (RT19 F3)
-    arr.style.transform = `translate(${a.x + 8}px, ${a.y + 8}px)`;
-    const r = arr.getBoundingClientRect();
-    const cw = r.width || 200;
-    const ch = r.height || 28;
-    const maxX = innerWidth - cw - (S.inside ? 92 : 16);
-    const maxY = sheetTop - ch - 10;
-    const minX = panelL;
-    const minY = desk ? 24 : 150;
-    const x = Math.min(Math.max(a.x + 8, minX), Math.max(minX, maxX));
-    // Keep the chip clear of the goal pin and route stairs: try below, above, then further below (RT23).
-    const clamp = (v) => Math.min(Math.max(v, minY), Math.max(minY, maxY));
-    const near = [];
-    if (ix.dest) { const d = scr(ix.dest); near.push({ x: d.x - 22, y: d.y - 48, w: 44, h: 60 }); }
-    const hit = (yy) => near.some((o) => x < o.x + o.w && o.x < x + cw && yy < o.y + o.h && o.y < yy + ch);
-    let y = clamp(a.y + 8);
-    for (const c of [a.y + 8, a.y - ch - 16, a.y + 44, a.y - ch - 52, a.y + 80]) {
-      if (!hit(clamp(c))) { y = clamp(c); break; }
-    }
-    arr.style.transform = `translate(${x}px, ${y}px)`;
-    taken.push({ x, y, w: cw, h: ch });
-  }
+  if (!(S.inside && ix.arrive)) arr.hidden = true;
+  else taken.push(positionArrive(scr(ix.arrive.p), ix.arrive.text));
   // Stairs: 24px maroon icon + "Stairs" caption, always drawn on every floor.
   // At fit zoom during a route, stairs off the route drop to 55%.
   const over = document.getElementById("over");
@@ -818,6 +794,8 @@ function syncOutdoorPins() {
   }
   document.querySelectorAll(".pin-mk").forEach((el) => el.classList.toggle("pin-replaced", pins.some((p) => p.kind === "gate")));
   drawMapPins($("outdoor"), { zoom, pins });
+  // Labels are on screen now, so the chip can sit clear of them.
+  placeArriveChip();
 }
 
 function buildingLabel(f) {
@@ -1152,6 +1130,72 @@ async function showFloor(floorId) {
   await enterBuilding(floorId);
   focusIndoor();
 }
+function positionArrive(screen, text, extra = []) {
+  const arr = $("arrive");
+  arr.hidden = false;
+  arr.querySelector("span").textContent = text;
+  const bounds = freeRect(frameNow(), innerWidth, innerHeight);
+  const freeW = Math.max(96, bounds.right - bounds.left);
+  arr.style.transform = "translate(0px, 0px)";
+  const avoid = extra.slice();
+  avoid.push(...elementBoxes(document.querySelectorAll(ARRIVE_OBSTACLES)));
+  const sizes = [];
+  const seen = new Set();
+  for (let w = Math.floor(freeW); w >= 96; w -= 12) {
+    arr.style.maxWidth = `${w}px`;
+    const r = arr.getBoundingClientRect();
+    const size = { w: Math.min(r.width || w, w), h: Math.max(28, r.height || 28) };
+    const key = `${Math.round(size.w)}x${Math.round(size.h)}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    sizes.push(size);
+  }
+  const placed = firstClearChip(screen, sizes, bounds, avoid) || { x: bounds.left, y: bounds.top, ...sizes[sizes.length - 1] };
+  arr.style.maxWidth = `${placed.w}px`;
+  arr.style.transform = `translate(${Math.round(placed.x)}px, ${Math.round(placed.y)}px)`;
+  return { x: placed.x, y: placed.y, w: placed.w, h: placed.h };
+}
+function placeArriveChip() {
+  const arr = $("arrive");
+  if (!arr) return;
+  if (S.inside || !S.overlay || !map || !S.route || !S.floorId) {
+    if (!S.inside) arr.hidden = true;
+    return;
+  }
+  const floorId = S.floorId;
+  const step = S.route.steps[S.step];
+  if (!step || !/^Go (up|down) /.test(step.text)) {
+    arr.hidden = true;
+    return;
+  }
+  const leg = S.route.legs.find((l) => l.floorId === floorId);
+  const indoor = S.route.legs.filter((l) => l.floorId !== "outdoor");
+  const startFloor = indoor.length ? indoor[0].floorId : "";
+  const corners = floorCorners(floorId);
+  if (!leg || !leg.arrive || !leg.points.length || floorId === startFloor || !corners) {
+    arr.hidden = true;
+    return;
+  }
+  const floor = S.floors.find((x) => x.id === floorId);
+  const p = projectFloor(corners, leg.points[0].x, leg.points[0].y);
+  let scr;
+  try {
+    scr = map.project(p);
+  } catch {
+    return;
+  }
+  if (!scr || !Number.isFinite(scr.x) || !Number.isFinite(scr.y)) return;
+  const line = [];
+  for (const q of leg.points) {
+    try {
+      const at = map.project(projectFloor(corners, q.x, q.y));
+      if (at && Number.isFinite(at.x) && Number.isFinite(at.y)) line.push({ x: at.x, y: at.y });
+    } catch {
+      /* skip a point the camera cannot project */
+    }
+  }
+  positionArrive({ x: scr.x, y: scr.y }, `Arrive ${floorShort(floor)} · ${leg.arrive}`, strokeBoxes(line, 18, 10));
+}
 function focusOverlay() {
   const corners = floorCorners(S.floorId);
   if (!corners || !map) return;
@@ -1160,9 +1204,13 @@ function focusOverlay() {
   if (leg && leg.points.length) {
     const last = S.route.steps.length - 1;
     if (S.step === last && S.floorId === S.route.legs.at(-1).floorId && S.sel && S.sel.room) {
-      return flyTo({ center: xy(S.sel.room.x, S.sel.room.y), zoom: 19, pitch: map.getPitch(), bearing: map.getBearing(), duration: 600 });
+      const room = S.sel.room;
+      const prev = leg.points[leg.points.length - 1];
+      const frame = routeFrame([prev, { x: room.x, y: room.y }]);
+      return fitLeg(frame.map((q) => xy(q.x, q.y))).then(() => placeArriveChip());
     }
-    return fitLeg(leg.points.map((q) => xy(q.x, q.y)));
+    const frame = routeFrame(leg.points);
+    return fitLeg(frame.map((q) => xy(q.x, q.y)));
   }
   if (S.sel && S.sel.room && S.sel.room.floorId === S.floorId) {
     return flyTo({ center: xy(S.sel.room.x, S.sel.room.y), zoom: 18.8, pitch: map.getPitch(), bearing: map.getBearing(), duration: 500 });
