@@ -34,7 +34,7 @@ IsQolar does not add interviewers or make the office faster. It removes the gues
 | **Per-course stall tickets** | Each freshman checks in and gets a ticket for their course stall, on their phone or printed with a QR code. |
 | **Live board** | A TV-ready board shows every stall's queue so the whole room knows who is up next. |
 | **Staff "Call next"** | Stall staff call the next student, mark them done, skip, look up by permit number, and undo a wrong tap. The board and phones update within seconds. |
-| **Campus map** | A 3D MapLibre map of PUP Sta. Mesa with step-by-step walking directions from campus landmarks to the exact room and floor (for example, Gym to S508 on the 5th floor). |
+| **Campus map** | A 3D MapLibre map of PUP Sta. Mesa with step-by-step walking directions from campus landmarks to rooms and floors in the map data (for example, Gym to S508 on the 5th floor). Some room labels are still being confirmed; see [data gaps](docs/data-gaps.md). |
 | **FAQ chatbot** | Ask in English or Taglish ("saan po yung S508?") and get an answer with a button that opens the room on the map. |
 | **LAN or online** | Runs on one laptop over the venue Wi-Fi with no internet, or online on Render for anyone with a link. Same code either way. |
 
